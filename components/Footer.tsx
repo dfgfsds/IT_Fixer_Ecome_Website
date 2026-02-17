@@ -1,12 +1,12 @@
-export default function FooterPage() {
+export default function Footer() {
     return (
-        <footer className="gt-footer-section bg-cover" style={{ backgroundImage: "url('assets/img/home-2/footer/footer-bg.jpg')" }}>
+        <footer className="gt-footer-section bg-cover" style={{ backgroundImage: "url('/assets/img/home-2/footer/footer-bg.jpg')" }}>
             <div className="footer-main-bg">
                 <div className="left-shape float-bob-y">
-                    <img src="assets/img/home-2/footer/left-shape.png" alt="img" />
+                    <img src="/assets/img/home-2/footer/left-shape.png" alt="img" />
                 </div>
                 <div className="right-shape float-bob-y">
-                    <img src="assets/img/home-2/footer/right-shape.png" alt="img" />
+                    <img src="/assets/img/home-2/footer/right-shape.png" alt="img" />
                 </div>
                 <div className="container">
                     <div className="gt-footer-widget-wrapper">
@@ -14,17 +14,19 @@ export default function FooterPage() {
                             <div className="col-xl-4 col-lg-6 col-md-12 wow fadeInUp" data-wow-delay=".2s">
                                 <div className="gt-footer-widget-items">
                                     <div className="gt-widget-head">
-                                        <a href="index.html" className="gt-footer-logo">
-                                            <img src="assets/img/logo/white-logo-2.svg" alt="img" />
-                                        </a>
+                                        <div className="logo">
+                                            <a href="/" className="header-logo">
+                                                <img src="/assets/img/logo.png" alt="logo-img" style={{ width: "170px", height: "50px" }} />
+                                            </a>
+                                        </div>
                                     </div>
                                     <div className="gt-footer-content">
                                         <p>
                                             A game studio crafting exciting, high-quality video games, prioritizing immersive gameplay and mechanics. Hac habitasse platea
                                         </p>
                                         <div className="gt-social-icon d-flex align-items-center">
-                                            <a href="#"><i className="fab fa-facebook-f"></i></a>
-                                            <a href="#"><i className="fab fa-twitter"></i></a>
+                                            <a href="#"><i className="fa-brands fa-facebook-f"></i></a>
+                                            <a href="#"><i className="fa-brands fa-twitter"></i></a>
                                             <a href="#"><i className="fa-brands fa-linkedin-in"></i></a>
                                             <a href="#"><i className="fa-brands fa-instagram"></i></a>
                                         </div>
@@ -34,66 +36,62 @@ export default function FooterPage() {
                             <div className="col-xl-2 col-lg-3 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
                                 <div className="gt-footer-widget-items">
                                     <div className="gt-widget-head">
-                                        <h5>Our Studio</h5>
+                                        <h5>Quick Links</h5>
                                     </div>
                                     <ul className="gt-list-area">
                                         <li>
-                                            <a href="about.html">
+                                            <a href="/about">
                                                 About Us
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="team.html">
-                                                our team
+                                            <a href="/shop">
+                                                Shop
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="service-details.html">
-                                                Advertising
+                                            <a href="/blog">
+                                                Blog
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="service-details.html">
-                                                Legal Notices
+                                            <a href="/contact">
+                                                Contact Us
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="service-details.html">
-                                                Partnership
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
                             <div className="col-xl-2 ps-lg-3 col-lg-3 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
                                 <div className="gt-footer-widget-items">
                                     <div className="gt-widget-head">
-                                        <h5>Utility Pages</h5>
+                                        <h5>Information</h5>
                                     </div>
                                     <ul className="gt-list-area">
                                         <li>
-                                            <a href="service-details.html">
-                                                Terms of Service
+                                            <a href="#">
+                                                Terms & Conditions
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="contact.html">
-                                                Privacy/Terms
+                                            <a href="#">
+                                                Privacy Policy
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="service-details.html">
-                                                Gift Cards
+                                            <a href="#">
+                                                Refund Policy
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="game-details.html">
-                                                Game Reviews
+                                            <a href="#">
+                                                Shipping Policy
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="contact.html">
-                                                Subscriptions
+                                            <a href="#">
+                                                Delivery Policy
                                             </a>
                                         </li>
                                     </ul>
@@ -106,10 +104,10 @@ export default function FooterPage() {
                                     </div>
                                     <div className="gt-footer-app">
                                         <div className="app-image">
-                                            <img src="assets/img/home-2/footer/app-1.jpg" alt="img" />
+                                            <img src="/assets/img/home-2/footer/app-1.jpg" alt="img" />
                                         </div>
                                         <div className="app-image">
-                                            <img src="assets/img/home-2/footer/app-2.jpg" alt="img" />
+                                            <img src="/assets/img/home-2/footer/app-2.jpg" alt="img" />
                                         </div>
                                     </div>
                                 </div>

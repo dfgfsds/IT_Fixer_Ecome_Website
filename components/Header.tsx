@@ -61,7 +61,7 @@ export default function Header() {
                             <div className="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
                                 <div className="offcanvas__logo">
                                     <a href="/">
-                                        <img src="/assets/img/logo.png" alt="logo-img" />
+                                        <img src="/assets/img/logo.png" alt="logo-img" style={{ width: "150px", height: "34px" }} />
                                     </a>
                                 </div>
                                 <div className="offcanvas__close">
@@ -161,7 +161,7 @@ export default function Header() {
                                                 <li>
                                                     <a href="/about">About Us</a>
                                                 </li>
-                                                <li>
+                                                {/* <li>
                                                     <a href="match-details.html">
                                                         matches
                                                     </a>
@@ -169,7 +169,7 @@ export default function Header() {
                                                         <li><a href="match.html">matches Page</a></li>
                                                         <li><a href="match-details.html">matches Details</a></li>
                                                     </ul>
-                                                </li>
+                                                </li> */}
                                                 <li className="has-dropdown">
                                                     <a href="/shop">
                                                         Shop
