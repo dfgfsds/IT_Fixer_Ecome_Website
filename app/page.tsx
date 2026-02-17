@@ -13,7 +13,7 @@ import NewsSection from "@/components/NewsSection";
 export default function Home() {
     return (
         <div>
-
+            {/* 
             <div id="preloader" className="preloader">
                 <div className="animation-preloader">
                     <div className="spinner">
@@ -53,8 +53,8 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-            </div>
-
+            </div> 
+            */}
 
             <div id="smooth-content">
                 <HeroSection />

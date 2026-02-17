@@ -192,6 +192,16 @@ export default function Header() {
                                         <Search size={20} className="text-white cursor-pointer" />
                                     </a>
                                     <div className="header-button">
+                                        <a href="/login" className="theme-btn style-2">
+                                            <span className="left-line"></span>
+                                            Login
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    {/* 
+                                    <div className="header-button">
                                         <a href="/contact" className="theme-btn style-2">
                                             <span className="left-line"></span>
                                             get in touch
@@ -199,7 +209,7 @@ export default function Header() {
                                                 <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
                                             </svg>
                                         </a>
-                                    </div>
+                                    </div> */}
                                     <div className="header__hamburger d-xl-none d-xl-block my-auto">
                                         <div className="sidebar__toggle">
                                             <img src="/assets/img/logo/dot-ber.svg" alt="" />
