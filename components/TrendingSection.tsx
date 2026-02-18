@@ -1,3 +1,4 @@
+import { ShoppingCart, Settings, Phone, MessageCircle } from "lucide-react";
 export default function TrendingSection() {
     return (
         <section className="trending-match-section gt-project-area fix section-padding pt-0">
@@ -9,9 +10,9 @@ export default function TrendingSection() {
             </div>
             <div className="container">
                 <div className="section-title-2 text-center">
-                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">top trending matches</h6>
+                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Top Trending Gaming Builds</h6>
                     <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
-                        Upcoming Trending Matches
+                        Upcoming Gaming Offers
                     </h2>
                 </div>
                 <div className="trending-match-wrapper">
@@ -27,105 +28,87 @@ export default function TrendingSection() {
                     <div className="trending-match-items gt-project-panel">
                         <div className="trending-match-left">
                             <div className="gt-match-logo">
-                                <img src="assets/img/home-2/match/match-01.jpg" alt="img" className="gt-match-thumb" />
+                                <img src="/assets/img/Trending/1.png" alt="img" className="gt-match-thumb" />
                                 <img src="assets/img/home-2/match/vs.png" alt="img" />
-                                <img src="assets/img/home-2/match/match-02.jpg" alt="img" className="gt-match-thumb" />
+                                <img src="/assets/img/Trending/2.png" alt="img" className="gt-match-thumb" />
                             </div>
                             <div className="gt-watch-now-items">
                                 <span>Watch live on</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
                                         <a href="#">
-                                            <i className="fa-brands fa-youtube"></i> you tube
+                                            <ShoppingCart size={18} className="fa-brands" /> Buy Now
                                         </a>
+
                                         <a href="#">
-                                            <i className="fa-brands fa-discord"></i>
-                                            discord
+                                            <Settings size={18} className="fa-brands" /> Customize
                                         </a>
                                     </li>
+
                                     <li>
                                         <a href="#">
-                                            <i className="fa-brands fa-twitch"></i>
-                                            twitch
+                                            <MessageCircle size={18} className="fa-brands" /> WhatsApp
                                         </a>
+
                                         <a href="#">
-                                            <i className="fa-solid fa-eyes"></i>
-                                            GeForce
+                                            <Phone size={18} className="fa-brands" /> Call Us
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div className="trending-match-content">
-                            <ul className="gt-date-list">
-                                <li>
-                                    <i className="fa-light fa-calendar"></i>
-                                    30 May, 2025
-                                </li>
-                                <li>
-                                    <i className="fa-regular fa-clock"></i>
-                                    10:00 am - 12:30 pm
-                                </li>
-                            </ul>
+
                             <h3>
-                                <a href="match-details.html">
-                                    Aggressive & War-Themed
+                                <a href="#">
+                                    Aggressive Gaming Performance
                                 </a>
                             </h3>
                             <p>
-                                A game studio crafting exciting, high-quality video
-                                immersive gameplay and mechanics.
+                                High-end gaming laptops & custom PCs built for ultra FPS, smooth streaming, and hardcore performance.
+                                Perfect for gamers, creators & esports players.
                             </p>
                         </div>
                     </div>
                     <div className="trending-match-items gt-project-panel">
                         <div className="trending-match-content">
-                            <ul className="gt-date-list">
-                                <li>
-                                    <i className="fa-light fa-calendar"></i>
-                                    30 May, 2025
-                                </li>
-                                <li>
-                                    <i className="fa-regular fa-clock"></i>
-                                    10:00 am - 12:30 pm
-                                </li>
-                            </ul>
+
                             <h3>
-                                <a href="match-details.html">
-                                    The Cognitive Crusade
+                                <a href="#">
+                                    Gaming Laptop VS Gaming Desktop
                                 </a>
                             </h3>
                             <p>
-                                A game studio crafting exciting, high-quality video
-                                immersive gameplay and mechanics.
+                                Choose between powerful gaming laptops or custom-built desktops.
+                                Performance, cooling & budget — everything built your way.
                             </p>
                         </div>
                         <div className="trending-match-left">
                             <div className="gt-match-logo">
-                                <img src="assets/img/home-2/match/match-03.jpg" alt="img" className="gt-match-thumb" />
+                                <img src="/assets/img/Trending/3.png" alt="img" className="gt-match-thumb" />
                                 <img src="assets/img/home-2/match/vs.png" alt="img" />
-                                <img src="assets/img/home-2/match/match-04.jpg" alt="img" className="gt-match-thumb" />
+                                <img src="/assets/img/Trending/4.png" alt="img" className="gt-match-thumb" />
                             </div>
                             <div className="gt-watch-now-items">
                                 <span>Watch live on</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
                                         <a href="#">
-                                            <i className="fa-brands fa-youtube"></i> you tube
+                                            <ShoppingCart size={18} /> Buy Now
                                         </a>
+
                                         <a href="#">
-                                            <i className="fa-brands fa-discord"></i>
-                                            discord
+                                            <Settings size={18} /> Customize
                                         </a>
                                     </li>
+
                                     <li>
                                         <a href="#">
-                                            <i className="fa-brands fa-twitch"></i>
-                                            twitch
+                                            <MessageCircle size={18} /> WhatsApp
                                         </a>
+
                                         <a href="#">
-                                            <i className="fa-solid fa-eyes"></i>
-                                            GeForce
+                                            <Phone size={18} /> Call Us
                                         </a>
                                     </li>
                                 </ul>
@@ -135,54 +118,44 @@ export default function TrendingSection() {
                     <div className="trending-match-items bb-none gt-project-panel">
                         <div className="trending-match-left">
                             <div className="gt-match-logo">
-                                <img src="assets/img/home-2/match/match-01.jpg" alt="img" className="gt-match-thumb" />
+                                <img src="/assets/img/Trending/5.png" alt="img" className="gt-match-thumb" />
                                 <img src="assets/img/home-2/match/vs.png" alt="img" />
-                                <img src="assets/img/home-2/match/match-02.jpg" alt="img" className="gt-match-thumb" />
+                                <img src="/assets/img/Trending/6.png" alt="img" className="gt-match-thumb" />
                             </div>
                             <div className="gt-watch-now-items">
                                 <span>Watch live on</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
                                         <a href="#">
-                                            <i className="fa-brands fa-youtube"></i> you tube
+                                            <ShoppingCart size={18} /> Buy Now
                                         </a>
+
                                         <a href="#">
-                                            <i className="fa-brands fa-discord"></i>
-                                            discord
+                                            <Settings size={18} /> Customize
                                         </a>
                                     </li>
+
                                     <li>
                                         <a href="#">
-                                            <i className="fa-brands fa-twitch"></i>
-                                            twitch
+                                            <MessageCircle size={18} /> WhatsApp
                                         </a>
+
                                         <a href="#">
-                                            <i className="fa-solid fa-eyes"></i>
-                                            GeForce
+                                            <Phone size={18} /> Call Us
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div className="trending-match-content">
-                            <ul className="gt-date-list">
-                                <li>
-                                    <i className="fa-light fa-calendar"></i>
-                                    30 May, 2025
-                                </li>
-                                <li>
-                                    <i className="fa-regular fa-clock"></i>
-                                    10:00 am - 12:30 pm
-                                </li>
-                            </ul>
+
                             <h3>
-                                <a href="match-details.html">
-                                    The Machine Uprising
+                                <a href="#">
+                                    The Ultimate Gaming Rig
                                 </a>
                             </h3>
                             <p>
-                                A game studio crafting exciting, high-quality video
-                                immersive gameplay and mechanics.
+                                Extreme performance gaming PCs & laptops designed for AAA games, competitive esports, and nonstop power.
                             </p>
                         </div>
                     </div>

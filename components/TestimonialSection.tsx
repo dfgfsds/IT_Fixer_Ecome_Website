@@ -16,16 +16,16 @@ export default function TestimonialSection() {
                                                 <img src="assets/img/home-2/quote.png" alt="img" />
                                             </div>
                                             <p>
-                                                This digital agency completely transformed our online presence. Their expertise, creativity, and attention to detail exceeded all our expectations. We highly rtheir...
+                                                “IT Fixer build pannina gaming PC performance next level 🔥
+                                                High FPS, zero lag, super cooling. Competitive matches-la
+                                                romba huge difference feel aagudhu!”
                                             </p>
                                             <div className="client-info-items">
                                                 <div className="client-info">
-                                                    <img src="assets/img/home-2/client1.png" alt="img" />
+                                                    <img src="https://www.google.com/favicon.ico" alt="Google Icon" />
                                                     <div className="content">
-                                                        <h4>Daniel Smith</h4>
-                                                        <span>
-                                                            Senior engineer
-                                                        </span>
+                                                        <h4>Arjun K</h4>
+                                                        <span>Competitive Gamer</span>
                                                     </div>
                                                 </div>
                                                 <div className="star">
@@ -44,16 +44,17 @@ export default function TestimonialSection() {
                                                 <img src="assets/img/home-2/quote.png" alt="img" />
                                             </div>
                                             <p>
-                                                This digital agency completely transformed our online presence. Their expertise, creativity, and attention to detail exceeded all our expectations. We highly rtheir...
+                                                “Streaming & editing-ku perfect setup kuduthanga.
+                                                Rendering speed romba fast, system stable-a irukku.
+                                                Definitely worth the investment.”
+
                                             </p>
                                             <div className="client-info-items">
                                                 <div className="client-info">
-                                                    <img src="assets/img/home-2/client1.png" alt="img" />
+                                                    <img src="https://www.google.com/favicon.ico" alt="img" />
                                                     <div className="content">
-                                                        <h4>Daniel Smith</h4>
-                                                        <span>
-                                                            Senior engineer
-                                                        </span>
+                                                        <h4>Priya S</h4>
+                                                        <span>Content Creator</span>
                                                     </div>
                                                 </div>
                                                 <div className="star">
@@ -72,16 +73,17 @@ export default function TestimonialSection() {
                                                 <img src="assets/img/home-2/quote.png" alt="img" />
                                             </div>
                                             <p>
-                                                This digital agency completely transformed our online presence. Their expertise, creativity, and attention to detail exceeded all our expectations. We highly rtheir...
+                                                “Budget-ku best gaming laptop recommend pannanga.
+                                                Performance super smooth and support team
+                                                romba helpful. College gaming-ku perfect!”
+
                                             </p>
                                             <div className="client-info-items">
                                                 <div className="client-info">
-                                                    <img src="assets/img/home-2/client1.png" alt="img" />
+                                                    <img src="https://www.google.com/favicon.ico" alt="Google Icon" />
                                                     <div className="content">
-                                                        <h4>Daniel Smith</h4>
-                                                        <span>
-                                                            Senior engineer
-                                                        </span>
+                                                        <h4>Rahul M</h4>
+                                                        <span>College Gamer</span>
                                                     </div>
                                                 </div>
                                                 <div className="star">
@@ -134,7 +136,7 @@ export default function TestimonialSection() {
                             <div className="section-title mb-4">
                                 <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">our testimonials</h6>
                                 <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
-                                    Peoples Talk About Us
+                                    Gamers Talk About IT Fixer
                                 </h2>
                             </div>
                             <div className="row g-4 mt-3">

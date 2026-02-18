@@ -195,6 +195,27 @@ export default function ShopPage() {
                                         img: "https://i.ibb.co/0fVfF0d/ps5.png",
                                         price: "$75.00",
                                         old: "$85.00"
+                                    },
+                                    {
+                                        id: 4,
+                                        name: "PS5 Controller",
+                                        img: "https://i.ibb.co/0fVfF0d/ps5.png",
+                                        price: "$75.00",
+                                        old: "$85.00"
+                                    },
+                                    {
+                                        id: 5,
+                                        name: "Controller",
+                                        img: "https://i.ibb.co/HqL3Pnx/controller-red.png",
+                                        price: "$100.00",
+                                        old: "$125.00"
+                                    },
+                                    {
+                                        id: 6,
+                                        name: "PS5 Controller",
+                                        img: "https://i.ibb.co/0fVfF0d/ps5.png",
+                                        price: "$75.00",
+                                        old: "$85.00"
                                     }
                                 ].map((item, index) => (
                                     <div className="col-md-6 col-xl-4" key={index}>
