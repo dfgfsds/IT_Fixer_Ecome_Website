@@ -1,3 +1,5 @@
+import { Home } from "lucide-react";
+
 export default function Signup() {
     return (
         <div id="smooth-content">
@@ -24,10 +26,10 @@ export default function Signup() {
                         <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                             <li>
                                 <a
-                                    href="index.html"
+                                    href="/"
                                     className="d-inline-flex align-items-center gap-1"
                                 >
-                                    {/* <Home size={16} className="mb-[1px]" /> */}
+                                    <Home size={16} className="mb-[1px]" />
                                     home :
                                 </a>
                             </li>
@@ -42,7 +44,7 @@ export default function Signup() {
                     <h1>Create Account</h1>
                     <p>Join with us today</p>
 
-                    <form>
+                    <form className="auth-form">
                         <div className="mb-3">
                             <input className="form-control" placeholder="Full Name" />
                         </div>

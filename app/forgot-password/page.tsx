@@ -1,3 +1,5 @@
+import { Home } from "lucide-react";
+
 export default function ForgotPassword() {
     return (
         <div id="smooth-content">
@@ -24,10 +26,10 @@ export default function ForgotPassword() {
                         <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                             <li>
                                 <a
-                                    href="index.html"
+                                    href="/"
                                     className="d-inline-flex align-items-center gap-1"
                                 >
-                                    {/* <Home size={16} className="mb-[1px]" /> */}
+                                    <Home size={16} className="mb-[1px]" />
                                     home :
                                 </a>
                             </li>
@@ -42,7 +44,7 @@ export default function ForgotPassword() {
                     <h1>Reset Password</h1>
                     <p>We’ll send you reset link</p>
 
-                    <form>
+                    <form className="auth-form">
                         <div className="mb-3">
                             <input
                                 type="email"
@@ -53,7 +55,7 @@ export default function ForgotPassword() {
 
                         <button className="vs-btn cart-animation-item">Send Link</button>
 
-                        <p className="mt-4">
+                        <p className="auth-other">
                             Back to{" "}
                             <a href="/login" className="auth-link">Login</a>
                         </p>
