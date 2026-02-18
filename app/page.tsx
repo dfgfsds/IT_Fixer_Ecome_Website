@@ -13,8 +13,8 @@ import NewsSection from "@/components/NewsSection";
 export default function Home() {
     return (
         <div>
-            {/* 
-            <div id="preloader" className="preloader">
+
+            {/* <div id="preloader" className="preloader">
                 <div className="animation-preloader">
                     <div className="spinner">
                     </div>
@@ -53,19 +53,19 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-            </div> 
-            */}
+            </div> */}
+
 
             <div id="smooth-content">
                 <HeroSection />
                 <BrandSection />
                 <AboutSection />
-                <VideoSection />
+                {/* <VideoSection /> */}
                 <BestGameSection />
                 <TrendingSection />
                 <TestimonialSection />
-                <SponsorSection />
-                <TeamMemberSection />
+                {/* <SponsorSection /> */}
+                {/* <TeamMemberSection /> */}
                 <NewsSection />
             </div>
 
