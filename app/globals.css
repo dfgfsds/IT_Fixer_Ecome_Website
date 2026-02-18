@@ -6,9 +6,9 @@ body {
 
 /* FULL SCREEN AUTH */
 .auth-wrapper {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
-  margin-top: 25px;
+  margin: 80px 0px;
   align-items: center;
   justify-content: center;
   /* background: radial-gradient(circle at top, #1f2937, #0b0f19); */
@@ -17,11 +17,11 @@ body {
 /* CARD */
 .auth-card {
   width: 100%;
-  max-width: 420px;
+  max-width: 480px;
   background: rgba(20, 22, 34, 0.95);
   border: 1px solid #2a2d3a;
   border-radius: 14px;
-  padding: 40px;
+  padding: 35px 30px;
   color: #fff;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
 }
@@ -37,7 +37,7 @@ body {
 .auth-card p {
   text-align: center;
   color: #9ca3af;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   font-size: 16px;
 }
 
@@ -46,6 +46,7 @@ body {
   background: transparent;
   border: 1px solid #2a2d3a;
   color: #fff;
+  font-size: 16px;
   height: 48px;
 }
 
@@ -56,9 +57,9 @@ body {
 
 /* BUTTON */
 .auth-card button {
-
   border: none;
   height: 48px;
+  font-size: 16px;
   font-weight: 600;
   margin: 0 auto;
 }
@@ -66,13 +67,123 @@ body {
 /* LINKS */
 .auth-link {
   color: #a6d719;
-  font-size: 14px;
+  font-size: 16px;
 }
 
-.game-section-10 {
-  padding-top: 0 !important;
+/* TABS */
+.auth-tabs {
+  display: flex;
+  margin: 30px 0px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px;
+  border-radius: 8px;
 }
 
-.about-section-21 {
-  padding-bottom: 60px !important;
+.auth-form {
+  margin: 30px 0px 0px;
+}
+
+.auth-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.auth-tab.active {
+  background: #a6d719;
+  color: #141622;
+  font-weight: 600;
+}
+
+.auth-tab:hover:not(.active) {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.auth-other {
+  margin-top: 25px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .auth-wrapper {
+    margin: 60px 12px;
+  }
+
+  .auth-card {
+    padding: 25px 20px;
+  }
+
+  .auth-card h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .auth-card p {
+    font-size: 14px;
+  }
+
+  .auth-card input {
+    font-size: 14px;
+    height: 44px;
+  }
+
+  .auth-card button {
+    height: 44px;
+    font-size: 14px;
+  }
+
+  .auth-link {
+    font-size: 14px;
+  }
+
+  .auth-tabs {
+    margin: 20px 0px;
+  }
+
+  .auth-form {
+    margin: 20px 0px 0px;
+  }
+
+  .auth-tab {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .auth-other {
+    margin-top: 15px;
+  }
+}
+
+
+
+.policy-section {
+  background-color: #0B0E13;
+  color: #fff;
+  padding: 40px 0 50px;
+}
+
+.content-area h3 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #a6d719;
+}
+
+.content-area p {
+  line-height: 1.8;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .policy-section {
+    padding: 30px 0 40px;
+  }
 }

@@ -70,28 +70,23 @@ export default function Footer() {
                                     </div>
                                     <ul className="gt-list-area">
                                         <li>
-                                            <a href="#">
+                                            <a href="/policy/terms-and-conditions">
                                                 Terms & Conditions
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="/policy/privacy-policy">
                                                 Privacy Policy
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="/policy/refund-policy">
                                                 Refund Policy
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="/policy/shipping-policy">
                                                 Shipping Policy
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Delivery Policy
                                             </a>
                                         </li>
                                     </ul>
@@ -117,7 +112,7 @@ export default function Footer() {
                     <div className="footer-bottom wow fadeInUp" data-wow-delay=".3s">
                         <div className="footer-wrapper">
                             <p>© 2025 Pubzi . All Rights Reserved.</p>
-                            <ul className="gt-footer-list wow fadeInUp" data-wow-delay=".3s">
+                            {/* <ul className="gt-footer-list wow fadeInUp" data-wow-delay=".3s">
                                 <li>
                                     <a href="contact.html">Cookies</a>
                                 </li>
@@ -127,7 +122,7 @@ export default function Footer() {
                                 <li>
                                     <a href="contact.html">Terms</a>
                                 </li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                 </div>

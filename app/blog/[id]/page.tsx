@@ -330,7 +330,7 @@ export default function BlogDetailsPage() {
                     </div>
                 </section>
 
-                <section className="cta-contact-section">
+                <section className="cta-contact-section blog-padding">
                     <div className="container">
                         <div className="cta-wrapper">
                             <div className="content wow fadeInUp" data-wow-delay=".3s">
