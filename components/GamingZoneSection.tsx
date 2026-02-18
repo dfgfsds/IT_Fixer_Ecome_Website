@@ -1,62 +1,72 @@
 export default function GamingZoneSection() {
     return (
-        <section className="about-section-2 section-padding fix">
+        <section className="about-section-2 section-padding pt-0 fix">
             <div className="about-shape-1">
-                <img src="/assets/img/home-2/about/about-shape-1.png" alt="img" />
+                <img src="assets/img/home-2/about/about-shape-1.png" alt="img" />
             </div>
             <div className="container">
                 <div className="about-wrapper-2">
                     <div className="row g-4 align-items-center">
                         <div className="col-lg-6">
                             <div className="about-iamge wow fadeInUp" data-wow-delay=".3s">
-                                <img src="/assets/img/home-2/about/aout-01.jpg" alt="img" />
+                                <img src="assets/img/home-2/about/aout-01.jpg" alt="img" />
                                 <div className="line-shape">
-                                    <img src="/assets/img/home-2/about/line-shape.png" alt="img" />
+                                    <img src="assets/img/home-2/about/line-shape.png" alt="img" />
                                 </div>
                                 <div className="text-shape float-bob-y">
-                                    <img src="/assets/img/home-2/about/text-shape.png" alt="img" />
+                                    <img src="assets/img/home-2/about/text-shape.png" alt="img" />
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <div className="about-content">
                                 <div className="section-title mb-0">
-                                    <h6 className="wow fadeInUp">about our gaming zone</h6>
-                                    <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                                        More Than Just a Game We Design the Moments That Matter
+                                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">About Our Gaming Zone</h6>
+                                    <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
+                                        More Than Just Gaming — We Build Performance That Wins
                                     </h2>
                                 </div>
                                 <p className="about-text wow fadeInUp" data-wow-delay=".5s">
-                                    Emerging trends in the esports industry include the growth of mobile esports, the integration of virtual reality in gaming experiences, and the increasing involvement of traditional sports.
+                                    At IT Fixer, gaming is not just entertainment — it’s power, precision, and passion.
+
                                 </p>
+                                <p className=" mt-2 wow fadeInUp" data-wow-delay=".5s">
+                                    We create high-performance Gaming PCs and Laptops that deliver smooth gameplay, ultra-fast speed, and unbeatable reliability.
+
+                                </p>
+                                <p className=" mt-2 wow fadeInUp" data-wow-delay=".5s">With the rapid growth of esports, next-gen graphics technology, AI-powered performance, and immersive gaming experiences, we stay ahead by building systems that are future-ready and competition-ready.</p>
                                 <div className="counter-wrap-2">
                                     <div className="counter-item-2 wow fadeInUp" data-wow-delay=".2s">
                                         <h2>
-                                            <span className="gt-count">320</span> +
+                                            <span className="gt-count">500</span> +
                                         </h2>
-                                        <p>GAME PLAYED</p>
+                                        <p> Builds</p>
                                     </div>
                                     <div className="counter-item-2 wow fadeInUp" data-wow-delay=".4s">
                                         <h2>
-                                            <span className="gt-count">175</span> +
+                                            <span className="gt-count">320</span> +
                                         </h2>
-                                        <p>FLAGS TAKEN</p>
+                                        <p>Systems</p>
                                     </div>
                                     <div className="counter-item-2 wow fadeInUp" data-wow-delay=".6s">
                                         <h2>
-                                            <span className="gt-count">79</span> +
+                                            <span className="gt-count">150</span> +
                                         </h2>
-                                        <p>DEATH MATCHES</p>
+                                        <p>Gamers </p>
                                     </div>
                                     <div className="counter-item-2 style-2 wow fadeInUp" data-wow-delay=".8s">
                                         <h2>
                                             <span className="gt-count">99</span> %
                                         </h2>
-                                        <p>DEATH MATCHES</p>
+                                        <p> Satisfaction</p>
                                     </div>
                                 </div>
-                                <a href="/about" className="theme-btn boder-10">
+                                <a href="about.html" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".9s">
+                                    <span className="left-line"></span>
                                     About More Us
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
+                                    </svg>
                                 </a>
                             </div>
                         </div>

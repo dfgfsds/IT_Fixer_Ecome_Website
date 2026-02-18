@@ -7,9 +7,9 @@ export default function NewsSection() {
                 </div>
                 <div className="container">
                     <div className="section-title">
-                        <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">latest news</h6>
+                        <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Latest Updates</h6>
                         <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
-                            our latest news & Blog Archive
+                            IT Fixer Gaming Laptop & Computer Service
                         </h2>
                     </div>
                     <div className="news-wrapper">
@@ -20,7 +20,7 @@ export default function NewsSection() {
                                         <div className="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                                             <div className="news-box-items mt-0">
                                                 <div className="content">
-                                                    <h3><a href="news-details.html">The Rise of Online Gaming in the Age of AI</a></h3>
+                                                    <h3><a href="#">Custom Gaming PC Builds for Ultimate Performance</a></h3>
                                                     <span className="gt-date">
                                                         <i className="fa-solid fa-calendar-days"></i> 11 March 2025
                                                     </span>
@@ -38,7 +38,7 @@ export default function NewsSection() {
                                                     <img src="assets/img/home-2/news/news-02.jpg" alt="img" />
                                                 </div>
                                                 <div className="content">
-                                                    <h3><a href="news-details.html">The evolution of online gaming and its rise</a></h3>
+                                                    <h3><a href="#">High-End Gaming Laptop Sales & Upgrades</a></h3>
                                                     <span className="gt-date">
                                                         <i className="fa-solid fa-calendar-days"></i> 11 March 2025
                                                     </span>
@@ -48,7 +48,7 @@ export default function NewsSection() {
                                         <div className="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                                             <div className="news-box-items mt-0">
                                                 <div className="content">
-                                                    <h3><a href="news-details.html">The Rise of Online Gaming in the Age of AI</a></h3>
+                                                    <h3><a href="#">Professional Computer Repair & Service</a></h3>
                                                     <span className="gt-date">
                                                         <i className="fa-solid fa-calendar-days"></i> 11 March 2025
                                                     </span>
@@ -66,7 +66,7 @@ export default function NewsSection() {
                                                     <img src="assets/img/home-2/news/news-04.jpg" alt="img" />
                                                 </div>
                                                 <div className="content">
-                                                    <h3><a href="news-details.html">The evolution of online gaming and its rise</a></h3>
+                                                    <h3><a href="#">SSD Upgrades & Performance Optimization</a></h3>
                                                     <span className="gt-date">
                                                         <i className="fa-solid fa-calendar-days"></i> 11 March 2025
                                                     </span>
