@@ -17,11 +17,11 @@ export default function TopFeaturesSection() {
                                 <div className="section-title mb-0">
                                     <h6 className="wow fadeInUp">top features</h6>
                                     <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                                        Powerful Features, Perfect Gameplay
+                                        Powerful Performance. Perfect Gameplay.
                                     </h2>
                                 </div>
                                 <p className="gt-feature-text">
-                                    We are specialized in developing out-of-the-box solutions using emerging technologies
+                                    At IT Fixer, we build high-performance Gaming PCs and Laptops designed for speed, power, and ultimate reliability.
                                 </p>
                                 <ul className="gt-feature-icon">
                                     <li>
@@ -31,7 +31,7 @@ export default function TopFeaturesSection() {
                                         <div className="gt-content">
                                             <h3>Graphics & Performance</h3>
                                             <p>
-                                                We’re passionate about what we do and always seek new opportunities. We are also flexible and proactive in business.
+                                                Dominate every match with next-gen RTX graphics, powerful Intel/Ryzen processors, and advanced cooling for smooth, high-FPS, lag-free gaming.
                                             </p>
                                         </div>
                                     </li>
@@ -40,9 +40,9 @@ export default function TopFeaturesSection() {
                                             <img src="/assets/img/home-3/icon/13.svg" alt="img" />
                                         </div>
                                         <div className="gt-content">
-                                            <h3>Audio & Sound Design</h3>
+                                            <h3>Speed & Storage</h3>
                                             <p>
-                                                We’re passionate about what we do and always seek new opportunities. We are also flexible and proactive in business.
+                                                Ultra-fast NVMe SSD storage and expandable high-speed RAM ensure faster boot times, quick game loading, seamless multitasking, and smooth streaming performance.
                                             </p>
                                         </div>
                                     </li>
@@ -51,9 +51,9 @@ export default function TopFeaturesSection() {
                                             <img src="/assets/img/home-3/icon/14.svg" alt="img" />
                                         </div>
                                         <div className="gt-content">
-                                            <h3>Story & World-Building</h3>
+                                            <h3> Custom Build & Reliability</h3>
                                             <p>
-                                                We’re passionate about what we do and always seek new opportunities. We are also flexible and proactive in business.
+                                                Custom-built systems with top-tier components ensure maximum performance and durability, delivering unmatched gaming experience.
                                             </p>
                                         </div>
                                     </li>

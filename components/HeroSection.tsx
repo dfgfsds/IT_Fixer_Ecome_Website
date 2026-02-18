@@ -35,15 +35,13 @@ export default function HeroSection() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="hero-content">
-                            <span className="sub-title subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">your future ultimate gaming world . .</span>
+                            <span className="sub-title subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">YOUR ULTIMATE GAMING FUTURE STARTS HERE . .</span>
                             <h1 className="hero_title tv_hero_title hero_title_1">
-                                gaming vibe <span>Legends</span>
+                                GAMING VIBE <span>LEGENDS</span>
                             </h1>
                             <div className="hero-sub-content">
                                 <p className="wow fadeInUp" data-wow-delay=".5s">
-                                    A game studio crafting exciting, high-quality
-                                    video games, prioritizing immersive
-                                    gameplay and mechanics.
+                                    High-performance Gaming PCs & Laptops for extreme gameplay, smooth streaming, and unstoppable performance — powered by IT Fixer.
                                 </p>
                                 <a href="contact.html" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
                                     <span className="left-line"></span>
@@ -58,7 +56,7 @@ export default function HeroSection() {
                 </div>
             </div>
             <div className="hero-image wow bounceInRight" data-wow-delay="700ms" data-wow-duration="1000ms">
-                <img src="assets/img/home-2/hero/hero1.png" alt="img" />
+                <img src="/assets/img/home-2/hero/heroman.webp" alt="img" />
             </div>
         </section>
     )

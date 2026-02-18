@@ -20,11 +20,11 @@ export default function AboutTestimonialSection() {
                                             <div className="gt-testimonial-card-item">
                                                 <div className="gt-client-info">
                                                     <div className="image">
-                                                        <img src="/assets/img/home-3/testimonial/client-1.png" alt="img" />
+                                                        <img src="https://www.google.com/favicon.ico" alt="Google Icon" />
                                                     </div>
                                                     <div className="text">
-                                                        <h6>Daniel Smith</h6>
-                                                        <p>Senior engineer</p>
+                                                        <h6>Arjun K</h6>
+                                                        <p>Competitive Gamer</p>
                                                     </div>
                                                 </div>
                                                 <div className="gt-testi-content">
@@ -32,7 +32,7 @@ export default function AboutTestimonialSection() {
                                                         <img src="/assets/img/home-3/icon/quate.svg" alt="img" />
                                                     </div>
                                                     <p>
-                                                        This digital agency completely transformed our online presence. Their expertise, creativity, and attention to detail exceeded all our expectations. We highly rtheir...
+                                                        IT Fixer has been a game-changer for my competitive gaming setup. Their custom-built systems with top-tier components have delivered unmatched performance and durability. Highly recommend for anyone looking to dominate their matches!
                                                     </p>
                                                 </div>
                                             </div>
@@ -41,11 +41,11 @@ export default function AboutTestimonialSection() {
                                             <div className="gt-testimonial-card-item">
                                                 <div className="gt-client-info">
                                                     <div className="image">
-                                                        <img src="/assets/img/home-3/testimonial/client-1.png" alt="img" />
+                                                        <img src="https://www.google.com/favicon.ico" alt="Google Icon" />
                                                     </div>
                                                     <div className="text">
-                                                        <h6>Daniel Smith</h6>
-                                                        <p>Senior engineer</p>
+                                                        <h6>Priya S</h6>
+                                                        <p>Competitive Gamer</p>
                                                     </div>
                                                 </div>
                                                 <div className="gt-testi-content">
@@ -53,7 +53,7 @@ export default function AboutTestimonialSection() {
                                                         <img src="/assets/img/home-3/icon/quate.svg" alt="img" />
                                                     </div>
                                                     <p>
-                                                        This digital agency completely transformed our online presence. Their expertise, creativity, and attention to detail exceeded all our expectations. We highly rtheir...
+                                                        IT Fixer has been a game-changer for my competitive gaming setup. Their custom-built systems with top-tier components have delivered unmatched performance and durability. Highly recommend for anyone looking to dominate their matches!
                                                     </p>
                                                 </div>
                                             </div>
@@ -62,11 +62,11 @@ export default function AboutTestimonialSection() {
                                             <div className="gt-testimonial-card-item">
                                                 <div className="gt-client-info">
                                                     <div className="image">
-                                                        <img src="/assets/img/home-3/testimonial/client-1.png" alt="img" />
+                                                        <img src="https://www.google.com/favicon.ico" alt="Google Icon" />
                                                     </div>
                                                     <div className="text">
-                                                        <h6>Daniel Smith</h6>
-                                                        <p>Senior engineer</p>
+                                                        <h6>Rahul M </h6>
+                                                        <p>College Gamer</p>
                                                     </div>
                                                 </div>
                                                 <div className="gt-testi-content">
@@ -74,7 +74,7 @@ export default function AboutTestimonialSection() {
                                                         <img src="/assets/img/home-3/icon/quate.svg" alt="img" />
                                                     </div>
                                                     <p>
-                                                        This digital agency completely transformed our online presence. Their expertise, creativity, and attention to detail exceeded all our expectations. We highly rtheir...
+                                                        IT Fixer has been a game-changer for my competitive gaming setup. Their custom-built systems with top-tier components have delivered unmatched performance and durability. Highly recommend for anyone looking to dominate their matches!
                                                     </p>
                                                 </div>
                                             </div>

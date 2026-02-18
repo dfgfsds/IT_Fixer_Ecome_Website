@@ -1,6 +1,6 @@
 export default function AboutSection() {
     return (
-        <section className="about-section-2 section-padding pt-0 fix">
+        <section className="about-section-2 about-section-21 section-padding pt-0 fix">
             <div className="about-shape-1">
                 <img src="assets/img/home-2/about/about-shape-1.png" alt="img" />
             </div>
@@ -21,38 +21,44 @@ export default function AboutSection() {
                         <div className="col-lg-6">
                             <div className="about-content">
                                 <div className="section-title mb-0">
-                                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">about our gaming zone</h6>
+                                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">About Our Gaming Zone</h6>
                                     <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
-                                        More Than Just a Game We Design the Moments That Matter
+                                        More Than Just Gaming — We Build Performance That Wins
                                     </h2>
                                 </div>
                                 <p className="about-text wow fadeInUp" data-wow-delay=".5s">
-                                    Emerging trends in the esports industry include the growth of mobile esports, the integration of virtual reality in gaming experiences, and the increasing involvement of traditional sports.
+                                    At IT Fixer, gaming is not just entertainment — it’s power, precision, and passion.
+
                                 </p>
+                                <p className=" mt-2 wow fadeInUp" data-wow-delay=".5s">
+                                    We create high-performance Gaming PCs and Laptops that deliver smooth gameplay, ultra-fast speed, and unbeatable reliability.
+
+                                </p>
+                                <p className=" mt-2 wow fadeInUp" data-wow-delay=".5s">With the rapid growth of esports, next-gen graphics technology, AI-powered performance, and immersive gaming experiences, we stay ahead by building systems that are future-ready and competition-ready.</p>
                                 <div className="counter-wrap-2">
                                     <div className="counter-item-2 wow fadeInUp" data-wow-delay=".2s">
                                         <h2>
-                                            <span className="gt-count">320</span> +
+                                            <span className="gt-count">500</span> +
                                         </h2>
-                                        <p>GAME PLAYED</p>
+                                        <p> Builds</p>
                                     </div>
                                     <div className="counter-item-2 wow fadeInUp" data-wow-delay=".4s">
                                         <h2>
-                                            <span className="gt-count">175</span> +
+                                            <span className="gt-count">320</span> +
                                         </h2>
-                                        <p>FLAGS TAKEN</p>
+                                        <p>Systems</p>
                                     </div>
                                     <div className="counter-item-2 wow fadeInUp" data-wow-delay=".6s">
                                         <h2>
-                                            <span className="gt-count">79</span> +
+                                            <span className="gt-count">150</span> +
                                         </h2>
-                                        <p>DEATH MATCHES</p>
+                                        <p>Gamers </p>
                                     </div>
                                     <div className="counter-item-2 style-2 wow fadeInUp" data-wow-delay=".8s">
                                         <h2>
                                             <span className="gt-count">99</span> %
                                         </h2>
-                                        <p>WINING GAME</p>
+                                        <p> Satisfaction</p>
                                     </div>
                                 </div>
                                 <a href="about.html" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".9s">
