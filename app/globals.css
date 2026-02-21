@@ -162,8 +162,6 @@ body {
   }
 }
 
-
-
 .policy-section {
   background-color: #0B0E13;
   color: #fff;
@@ -186,4 +184,88 @@ body {
   .policy-section {
     padding: 30px 0 40px;
   }
+}
+
+.game-section-10 {
+  padding-top: 0 !important;
+}
+
+.about-section-21 {
+  padding-bottom: 60px !important;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #a6d719;
+  color: #000;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* PROFILE PAGE STYLES */
+.active-tab {
+  box-shadow: 0 0 10px rgba(56, 229, 77, 0.2);
+}
+
+.animation-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.order-card:hover {
+  border-color: #a6d719 !important;
+  background-color: #1a1d2e !important;
+  transform: translateX(5px);
+}
+
+.btn.button-outline-primary {
+  color: #a6d719;
+  border-color: #a6d719;
+}
+
+.btn.button-outline-primary:hover {
+  background-color: #a6d719;
+  border-color: #a6d719;
+  color: #000;
+}
+
+.text-primary {
+  color: #a6d719 !important;
+}
+
+.orders-scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.orders-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.address-form-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.address-form-scroll::-webkit-scrollbar {
+  display: none;
 }

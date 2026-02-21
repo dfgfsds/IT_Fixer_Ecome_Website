@@ -19,6 +19,7 @@ import Header from '@/components/Header';
 import BootstrapClient from '@/components/BootstrapClient';
 import Scripts from '@/components/Scripts';
 import FooterPage from '@/components/Footer';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: 'IT Fixer - IT Services & Technology Next.js Template',
@@ -34,24 +35,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-
-        {/* Bootstrap JS (client side) */}
-        <BootstrapClient />
-
-        {/* Common Header */}
-        <Header />
-
-        {/* Page Content */}
-        <main>{children}</main>
-
-        {/* ✅ Footer – Correct Method */}
-        <FooterPage />
-
-        {/* External JS / jQuery / plugins */}
-        <Scripts />
-
+        <Providers>
+          <BootstrapClient />
+          <Header />
+          <main>{children}</main>
+          <FooterPage />
+          <Scripts />
+        </Providers>
       </body>
     </html>
   );
