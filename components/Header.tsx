@@ -1,6 +1,22 @@
-import { Search, ArrowUp, X, MapPin, Mail, Clock, Phone, Facebook, Twitter, Youtube, Linkedin, ChevronRight } from "lucide-react";
+"use client";
+import { Search, ArrowUp, X, MapPin, Mail, Clock, Phone, Facebook, Twitter, Youtube, Linkedin, ChevronRight, User, ShoppingCart } from "lucide-react";
+import { useUser } from "@/context/UserContext";
+import { useCartItem } from "@/context/CartItemContext";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+    const { user, isAuthenticated } = useUser();
+    const { cartItem } = useCartItem();
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        const items = cartItem?.data || [];
+        //setCartCount(items.length);
+        const total = items.reduce((acc: number, item: any) => acc + (item.quantity || 0), 0);
+        setCartCount(total);
+    }, [cartItem]);
+
     return (
         <>
             {/* 
@@ -187,29 +203,41 @@ export default function Header() {
                                         </nav>
                                     </div>
                                 </div>
-                                <div className="header-right-icon">
-                                    <a href="#" className="main-header__search search-toggler">
+                                <div className="header-right-icon bg-red-900">
+                                    <a href="#" className="main-header__search ms-3 search-toggler">
                                         <Search size={20} className="text-white cursor-pointer" />
                                     </a>
-                                    <div className="header-button">
-                                        <a href="/login" className="theme-btn style-2">
-                                            <span className="left-line"></span>
-                                            Login
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
-                                            </svg>
-                                        </a>
+
+                                    <div className="header-button ms-2 me-3" style={{ position: 'relative' }}>
+                                        <Link href={isAuthenticated ? "/cart" : "/login"} className="text-white">
+                                            <ShoppingCart size={20} />
+                                            {cartCount > 0 && (
+                                                <span className="cart-badge">
+                                                    {cartCount}
+                                                </span>
+                                            )}
+                                        </Link>
                                     </div>
-                                    {/* 
+
                                     <div className="header-button">
-                                        <a href="/contact" className="theme-btn style-2">
-                                            <span className="left-line"></span>
-                                            get in touch
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
-                                            </svg>
-                                        </a>
-                                    </div> */}
+                                        {!isAuthenticated ? (
+                                            <Link href="/login" className="theme-btn style-2">
+                                                <span className="left-line"></span>
+                                                Login
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
+                                                </svg>
+                                            </Link>
+                                        ) : (
+                                            <Link href="/profile" className="theme-btn style-2">
+                                                <span className="left-line"></span>
+                                                Profile
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
+                                                </svg>
+                                            </Link>
+                                        )}
+                                    </div>
                                     <div className="header__hamburger d-xl-none d-xl-block my-auto">
                                         <div className="sidebar__toggle">
                                             <img src="/assets/img/logo/dot-ber.svg" alt="" />
