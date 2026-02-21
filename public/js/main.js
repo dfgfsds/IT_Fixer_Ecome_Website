@@ -146,6 +146,8 @@
         //>> Game Slider Start <<//
         if ($('.game-slider-2').length > 0) {
             const gameSlider2 = new Swiper(".game-slider-2", {
+                observer: true,
+                observeParents: true,
                 spaceBetween: 30,
                 speed: 1300,
                 loop: true,
@@ -248,18 +250,23 @@
                 on: {
                     init: function () {
                         let total = this.slides.length - this.loopedSlides * 2;
-                        document.querySelector(".testimonial-pagination .total").textContent =
-                            String(total).padStart(2, "0");
-                        document.querySelector(".testimonial-pagination .current").textContent =
-                            String(this.realIndex + 1).padStart(2, "0");
+                        const totalEl = document.querySelector(".testimonial-pagination .total");
+                        const currentEl = document.querySelector(".testimonial-pagination .current");
 
-                        document.querySelector(".testimonial-pagination .current").classList.add("active");
+                        if (totalEl) {
+                            totalEl.textContent = String(total).padStart(2, "0");
+                        }
+                        if (currentEl) {
+                            currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
+                            currentEl.classList.add("active");
+                        }
                     },
                     slideChange: function () {
-                        let currentEl = document.querySelector(".testimonial-pagination .current");
-                        currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
-
-                        currentEl.classList.add("active");
+                        const currentEl = document.querySelector(".testimonial-pagination .current");
+                        if (currentEl) {
+                            currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
+                            currentEl.classList.add("active");
+                        }
                     }
                 }
             });
@@ -733,18 +740,23 @@
                 on: {
                     init: function () {
                         let total = this.slides.length - this.loopedSlides * 2;
-                        document.querySelector(".testimonial-pagination .total").textContent =
-                            String(total).padStart(2, "0");
-                        document.querySelector(".testimonial-pagination .current").textContent =
-                            String(this.realIndex + 1).padStart(2, "0");
+                        const totalEl = document.querySelector(".testimonial-pagination .total");
+                        const currentEl = document.querySelector(".testimonial-pagination .current");
 
-                        document.querySelector(".testimonial-pagination .current").classList.add("active");
+                        if (totalEl) {
+                            totalEl.textContent = String(total).padStart(2, "0");
+                        }
+                        if (currentEl) {
+                            currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
+                            currentEl.classList.add("active");
+                        }
                     },
                     slideChange: function () {
-                        let currentEl = document.querySelector(".testimonial-pagination .current");
-                        currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
-
-                        currentEl.classList.add("active");
+                        const currentEl = document.querySelector(".testimonial-pagination .current");
+                        if (currentEl) {
+                            currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
+                            currentEl.classList.add("active");
+                        }
                     }
                 }
             });

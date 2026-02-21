@@ -43,7 +43,7 @@ export default function HeroSection() {
                                 <p className="wow fadeInUp" data-wow-delay=".5s">
                                     High-performance Gaming PCs & Laptops for extreme gameplay, smooth streaming, and unstoppable performance — powered by IT Fixer.
                                 </p>
-                                <a href="contact.html" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
+                                <a href="/contact" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
                                     <span className="left-line"></span>
                                     know more
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

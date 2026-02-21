@@ -15,11 +15,11 @@ export default function AboutPage() {
                 <AboutHeroSection />
                 <GamingZoneSection />
                 <TopFeaturesSection />
-                {/* <GameplaySection /> */}
+                <GameplaySection />
                 <AboutTestimonialSection />
-                {/* <ImageSliderSection /> */}
-                {/* <AboutBrandSection />
-                <TriggerSection /> */}
+                <ImageSliderSection />
+                <AboutBrandSection />
+                <TriggerSection />
             </div>
 
         </div>
