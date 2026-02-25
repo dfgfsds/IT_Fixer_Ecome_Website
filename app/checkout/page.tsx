@@ -271,7 +271,7 @@ export default function CheckoutPage() {
 
                     {/* ── Payment & Total ── */}
                     <div className="col-lg-5">
-                        <div className="sticky-top" style={{ top: '100px' }}>
+                        <div className="sticky-top" style={{ top: '140px', position: 'sticky', zIndex: 10 }}>
                             <div className="checkout-box p-4" style={{ backgroundColor: '#141622', border: '1px solid #323441', borderRadius: '12px' }}>
                                 <h4 className="mb-4 text-uppercase fw-bold" style={{ fontSize: '18px', letterSpacing: '1px' }}>Order Total</h4>
 
