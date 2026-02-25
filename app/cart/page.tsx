@@ -3,26 +3,21 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Home, Minus, Plus, Trash2, Loader2, X } from "lucide-react";
+import { Home, Minus, Plus, Trash2, Loader2, X, CreditCard, Banknote, MapPin, Check } from "lucide-react";
 import ShopWithSideCart from "@/components/ShopWithSideCart";
 import { useCartItem } from "@/context/CartItemContext";
 import { useProducts } from "@/context/ProductsContext";
 import { useVendor } from "@/context/VendorContext";
 import { useUser } from "@/context/UserContext";
-import {
-    updateCartitemsApi,
-    deleteCartitemsApi,
-    postApplyCouponApi,
-    getAppliedCouponDataApi,
-    deleteCouponApi
-} from "@/api-endpoints/CartsApi";
-import { getDeliveryChargeApi } from "@/api-endpoints/authendication";
+import { updateCartitemsApi, deleteCartitemsApi, postApplyCouponApi, getAppliedCouponDataApi, deleteCouponApi, getAllCouponsApi, getAddressApi } from "@/api-endpoints/CartsApi";
+import { getDeliveryChargeApi, patchUserSelectAddressAPi } from "@/api-endpoints/authendication";
 import { useQueryClient, InvalidateQueryFilters, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export default function CartPage() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [couponCode, setCouponCode] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState('PAY ON');
     const { cartItem, isLoading: isCartLoading }: any = useCartItem();
     const { products: apiProducts, isLoading: isProductsLoading }: any = useProducts();
     const { vendorId }: any = useVendor();
@@ -38,12 +33,33 @@ export default function CartPage() {
         enabled: !!userId
     });
 
+    // Fetch Addresses
+    const { data: addressData, isLoading: addressLoading } = useQuery({
+        queryKey: ["getAddressData", userId],
+        queryFn: () => getAddressApi(`user/${userId}`),
+        enabled: !!userId,
+    });
+    const addresses = addressData?.data?.data || addressData?.data || [];
+    const selectedAddress = addresses.find((addr: any) => addr.selected_address);
+    const selectedAddressId = selectedAddress?.id;
+
+    const handleSelectAddress = async (address: any) => {
+        try {
+            await patchUserSelectAddressAPi(`user/${userId}/address/${address.id}`, { updated_by: user?.data?.name });
+            queryClient.invalidateQueries(["getAddressData"] as InvalidateQueryFilters);
+            queryClient.invalidateQueries(["getDeliveryCharge"] as InvalidateQueryFilters);
+            toast.success("Shipping address updated");
+        } catch {
+            toast.error("Failed to select address");
+        }
+    };
+
     const { data: deliveryResponseRaw, isLoading: isBreakdownLoading } = useQuery({
-        queryKey: ["getDeliveryCharge", userId, vendorId],
+        queryKey: ["getDeliveryCharge", userId, vendorId, paymentMethod, selectedAddressId],
         queryFn: () => getDeliveryChargeApi("", {
             user_id: userId,
             vendor_id: vendorId,
-            payment_mode: "",
+            payment_mode: paymentMethod === "PAY ON" ? "Prepaid" : "COD",
             customer_phone: user?.data?.contact_number || "",
             total_amount: subtotal,
             cart_id: cartId
@@ -54,8 +70,15 @@ export default function CartPage() {
     const breakdownData = deliveryResponseRaw?.data?.data || deliveryResponseRaw?.data || {};
     const appliedCoupons = breakdownRaw?.data?.applied_coupons || breakdownRaw?.data?.data || breakdownRaw?.data || deliveryResponseRaw?.data?.data?.applied_coupons || deliveryResponseRaw?.data?.applied_coupons || [];
 
-    // Normalize appliedCoupons if it's an object instead of array
     const normalizedAppliedCoupons = Array.isArray(appliedCoupons) ? appliedCoupons : (appliedCoupons ? [appliedCoupons] : []);
+
+    const { data: allCouponsRaw } = useQuery({
+        queryKey: ["getAllCouponsData", vendorId],
+        queryFn: () => getAllCouponsApi(`?vendor_id=${vendorId}`),
+        enabled: !!vendorId
+    });
+    const availableCoupons: any[] = allCouponsRaw?.data?.data || allCouponsRaw?.data || [];
+    const appliedCouponIds = normalizedAppliedCoupons.map((c: any) => c.coupon_id || c.id);
 
     const cartData = (cartItem?.data || []).map((item: any) => {
         const productDetails = apiProducts?.data?.find((p: any) => Number(p.id) === Number(item.product));
@@ -131,13 +154,13 @@ export default function CartPage() {
     };
 
     const formatPrice = (price: any) => {
-        return `₹${Number(price || 0).toFixed(2)}`;
+        return `₹${Number(price || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     };
 
     if (isCartLoading || isProductsLoading) {
         return (
             <div className="d-flex flex-column align-items-center justify-content-center" style={{ minHeight: "60vh" }}>
-                <Loader2 className="animate-spin text-success mb-3" size={50} />
+                <Loader2 className="animate-spin mb-3" style={{ color: "#a6d719" }} size={50} />
                 <p className="text-white">LOADING YOUR CART...</p>
             </div>
         );
@@ -222,7 +245,7 @@ export default function CartPage() {
                                                 </Link>
                                             </td>
 
-                                            <td>₹{item.price}</td>
+                                            <td>{formatPrice(item.price)}</td>
 
                                             {/* Quantity */}
                                             <td>
@@ -249,7 +272,7 @@ export default function CartPage() {
                                                 </div>
                                             </td>
 
-                                            <td>₹{Number(item.price) * item.cartQty}</td>
+                                            <td>{formatPrice(Number(item.price) * item.cartQty)}</td>
 
                                             <td>
                                                 <button
@@ -277,18 +300,10 @@ export default function CartPage() {
                         </table>
                     </div>
 
-                    <div className="row gy-3 align-items-start mt-4">
+                    <div className="row g-5 align-items-start mt-4">
+                        {/* LEFT — Coupon section */}
 
-                        <div className="col-lg-6 col-md-12 d-flex align-items-start justify-content-start">
-                            <div className="d-flex flex-column flex-sm-row gap-2 mt-2 mt-sm-0">
-                                <Link href="/shop" className="vs-btn vs-btn--style3 cart-animation-item">
-                                    CONTINUE SHOPPING
-                                </Link>
-                            </div>
-                        </div>
-
-                        {/* Coupon */}
-                        <div className="col-lg-6 col-md-12">
+                        <div className="col-lg-7 col-md-12">
                             <style>{`
                             .coupon-input::placeholder {
                                 color: white !important;
@@ -300,78 +315,296 @@ export default function CartPage() {
                                 outline: none !important;
                             }
                         `}</style>
-                            <div className="d-flex flex-column flex-sm-row gap-2 justify-content-lg-end">
-                                <input
-                                    type="text"
-                                    className="form-control coupon-input"
-                                    placeholder="ENTER YOUR COUPON CODE"
-                                    value={couponCode}
-                                    onChange={(e) => setCouponCode(e.target.value)}
-                                    style={{
-                                        background: '#1e232d',
-                                        color: '#fff',
-                                        border: '1px solid #323441',
-                                        borderRadius: '0',
-                                        height: '54px'
-                                    }}
-                                />
-                                <button
-                                    className="vs-btn cart-animation-item"
-                                    style={{ whiteSpace: 'nowrap' }}
-                                    onClick={handleApplyCoupon}
-                                >
-                                    APPLY COUPON
-                                </button>
+                            {(() => {
+                                const isCouponApplied = normalizedAppliedCoupons.length > 0;
+                                const firstCoupon = normalizedAppliedCoupons[0];
+
+                                // Look up the coupon code from the master list if we only have an ID
+                                const couponLookup = firstCoupon?.coupon_id
+                                    ? availableCoupons.find((c: any) => Number(c.id) === Number(firstCoupon.coupon_id))
+                                    : null;
+
+                                const appliedCouponName = isCouponApplied
+                                    ? (typeof firstCoupon === 'string'
+                                        ? firstCoupon
+                                        : (firstCoupon.coupon_code || firstCoupon.code || couponLookup?.code || firstCoupon.coupon?.code || firstCoupon.title || 'APPLIED'))
+                                    : '';
+                                return (
+                                    <div className="d-flex flex-column flex-sm-row gap-2">
+                                        <input
+                                            type="text"
+                                            className="form-control coupon-input"
+                                            placeholder="ENTER YOUR COUPON CODE"
+                                            value={isCouponApplied ? appliedCouponName : couponCode}
+                                            onChange={(e) => { if (!isCouponApplied) setCouponCode(e.target.value); }}
+                                            readOnly={isCouponApplied}
+                                            style={{
+                                                background: isCouponApplied ? 'rgba(166, 215, 25, 0.08)' : '#1e232d',
+                                                color: isCouponApplied ? '#a6d719' : '#fff',
+                                                border: isCouponApplied ? '1px solid rgba(166,215,25,0.4)' : '1px solid #323441',
+                                                borderRadius: '0',
+                                                height: '54px',
+                                                fontWeight: isCouponApplied ? '700' : '400',
+                                                letterSpacing: isCouponApplied ? '1px' : 'normal',
+                                                cursor: isCouponApplied ? 'default' : 'text'
+                                            }}
+                                        />
+                                        <button
+                                            className="vs-btn cart-animation-item"
+                                            style={{
+                                                whiteSpace: 'nowrap'
+                                            }}
+                                            onClick={isCouponApplied
+                                                ? () => handleRemoveCoupon(normalizedAppliedCoupons[0].id || normalizedAppliedCoupons[0].coupon_id)
+                                                : handleApplyCoupon
+                                            }
+                                        >
+                                            {isCouponApplied ? 'REMOVE COUPON' : 'APPLY COUPON'}
+                                        </button>
+                                    </div>
+                                );
+                            })()}
+
+                            <div className="p-4 rounded mt-3" style={{ backgroundColor: '#141622', border: '1px solid #323441', borderRadius: '12px' }}>
+
+                                {normalizedAppliedCoupons?.length > 0 && (
+                                    <div className="p-3 rounded text-start w-100" style={{ backgroundColor: 'rgba(166, 215, 25, 0.05)', border: '1px dashed rgba(166, 215, 25, 0.3)' }}>
+                                        <p className="small text-uppercase fw-bold mb-2" style={{ color: '#a6d719', letterSpacing: '1px' }}>Applied Coupons</p>
+                                        <div className="d-flex flex-wrap gap-2">
+                                            {normalizedAppliedCoupons.map((coupon: any, index: number) => (
+                                                <div
+                                                    key={`applied-pill-${coupon.id || coupon.code || index}`}
+                                                    className="d-flex align-items-center gap-2 px-3 py-1 rounded"
+                                                    style={{
+                                                        backgroundColor: 'rgba(166, 215, 25, 0.1)',
+                                                        color: '#a6d719',
+                                                        border: '1px solid rgba(166, 215, 25, 0.3)',
+                                                        fontSize: '12px'
+                                                    }}
+                                                >
+                                                    <span className="fw-bold">
+                                                        {(() => {
+                                                            const couponLookup = coupon?.coupon_id
+                                                                ? availableCoupons.find((c: any) => Number(c.id) === Number(coupon.coupon_id))
+                                                                : null;
+                                                            return typeof coupon === 'string'
+                                                                ? coupon
+                                                                : (coupon.coupon_code || coupon.code || couponLookup?.code || coupon.coupon?.code || coupon.title || coupon.name || 'VALID');
+                                                        })()}
+                                                    </span>
+                                                    <button
+                                                        onClick={() => handleRemoveCoupon(coupon.id || coupon.coupon_id)}
+                                                        className="border-0 bg-transparent p-0 d-flex align-items-center text-success hover:text-white transition-all"
+                                                    >
+                                                        <X size={14} />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {normalizedAppliedCoupons.length === 0 && (() => {
+                                    const cartProductIds = cartData.map((item: any) => Number(item.id));
+                                    const todayDayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+                                    const eligibleCoupons = availableCoupons
+                                        ?.filter((c: any) => c.is_active && c.visibility)
+                                        ?.filter((c: any) => !c.auto_apply)
+                                        ?.filter((c: any) => !appliedCouponIds.includes(c.id))
+                                        ?.filter((c: any) => !c.allowed_users?.length || c.allowed_users.includes(userId))
+                                        ?.filter((c: any) => !c.valid_days?.length || c.valid_days.includes(todayDayName))
+                                        ?.filter((c: any) => subtotal >= Number(c.min_purchase_amount || 0))
+                                        ?.filter((c: any) => !c.required_products?.length || c.required_products.every((id: number) => cartProductIds.includes(id)))
+                                        ?.filter((c: any) => {
+                                            const now = new Date();
+                                            const start = c.start_date ? new Date(c.start_date) : null;
+                                            const expiry = c.expiry_date ? new Date(c.expiry_date) : null;
+                                            if (start && now < start) return false;
+                                            if (expiry && now > expiry) return false;
+                                            return true;
+                                        }) || [];
+                                    return (
+                                        <div className="w-100">
+                                            <style>{`
+                                            .coupon-scroll::-webkit-scrollbar { width: 4px; }
+                                            .coupon-scroll::-webkit-scrollbar-track { background: #0b0e13; border-radius: 4px; }
+                                            .coupon-scroll::-webkit-scrollbar-thumb { background: #a6d719; border-radius: 4px; }
+                                            .coupon-scroll::-webkit-scrollbar-thumb:hover { background: #c8ff1e; }
+                                        `}</style>
+                                            <div className="d-flex align-items-center justify-content-between mb-2">
+                                                <p className="small text-uppercase fw-bold mb-0 text-white" style={{ letterSpacing: '1px' }}>
+                                                    Available Coupons - <span style={{ color: '#a6d719' }}>click to apply</span>
+                                                </p>
+                                                {eligibleCoupons.length > 0 && (
+                                                    <span
+                                                        className="fw-bold"
+                                                        style={{
+                                                            fontSize: '10px',
+                                                            background: 'rgba(166,215,25,0.12)',
+                                                            color: '#a6d719',
+                                                            border: '1px solid rgba(166,215,25,0.3)',
+                                                            borderRadius: '20px',
+                                                            padding: '2px 10px',
+                                                            letterSpacing: '0.5px'
+                                                        }}
+                                                    >
+                                                        {eligibleCoupons.length} AVAILABLE
+                                                    </span>
+                                                )}
+                                            </div>
+                                            {eligibleCoupons.length === 0 ? (
+                                                <div
+                                                    className="p-3 rounded text-center"
+                                                    style={{ backgroundColor: '#0b0e13', border: '1px dashed #323441' }}
+                                                >
+                                                    <span style={{ fontSize: '20px' }}>🏷️</span>
+                                                    <p className="mb-1 mt-2 text-secondary small fw-bold text-uppercase" style={{ letterSpacing: '1px' }}>
+                                                        No Coupons Available
+                                                    </p>
+                                                    <p className="mb-0 text-secondary" style={{ fontSize: '11px' }}>
+                                                        No eligible coupons for your current cart. Try adding more items!
+                                                    </p>
+                                                </div>
+                                            ) : (
+                                                <div style={{ position: 'relative' }}>
+                                                    <div
+                                                        className="coupon-scroll d-flex flex-column gap-2"
+                                                        style={{
+                                                            maxHeight: '280px',
+                                                            overflowY: 'auto',
+                                                            paddingRight: '4px',
+                                                            scrollbarWidth: 'thin',
+                                                            scrollbarColor: '#a6d719 #0b0e13'
+                                                        }}
+                                                    >
+                                                        {eligibleCoupons.map((coupon: any) => (
+                                                            <div
+                                                                key={coupon.id}
+                                                                onClick={() => setCouponCode(coupon.code)}
+                                                                className="p-3 rounded"
+                                                                style={{
+                                                                    backgroundColor: '#0b0e13',
+                                                                    border: '1px dashed #323441',
+                                                                    cursor: 'pointer',
+                                                                    transition: 'border-color 0.2s'
+                                                                }}
+                                                                onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#a6d719')}
+                                                                onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#323441')}
+                                                            >
+                                                                <div className="d-flex justify-content-between align-items-center">
+                                                                    <span className="fw-bold" style={{ color: '#a6d719', fontSize: '13px', letterSpacing: '1px' }}>
+                                                                        {coupon.code}
+                                                                    </span>
+                                                                    <span className="small text-secondary">
+                                                                        {coupon.discount_type === 'delivery'
+                                                                            ? `₹${coupon.delivery_discount} delivery OFF`
+                                                                            : coupon.discount_type === 'percentage'
+                                                                                ? `${coupon.discount_value}% OFF`
+                                                                                : `₹${coupon.flat_discount} OFF`}
+                                                                    </span>
+                                                                </div>
+                                                                {coupon.description && (
+                                                                    <p className="mb-1 mt-1 text-secondary" style={{ fontSize: '11px' }}>
+                                                                        {coupon.description}
+                                                                    </p>
+                                                                )}
+                                                                <div className="d-flex flex-wrap gap-1 mt-1">
+                                                                    {Number(coupon.min_purchase_amount) > 0 && (
+                                                                        <span style={{ fontSize: '10px', color: '#888', background: '#1a1d27', padding: '2px 7px', borderRadius: '4px' }}>
+                                                                            Min ₹{coupon.min_purchase_amount}
+                                                                        </span>
+                                                                    )}
+                                                                    {coupon.valid_days?.length > 0 && (
+                                                                        <span style={{ fontSize: '10px', color: '#888', background: '#1a1d27', padding: '2px 7px', borderRadius: '4px' }}>
+                                                                            {coupon.valid_days.join(', ')}
+                                                                        </span>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })()}
+                            </div>
+                        </div>
+
+                        {/* RIGHT — Continue Shopping + Price Details */}
+                        <div className="col-lg-5 col-md-12">
+                            <div className="mb-3 d-none d-lg-flex justify-content-end">
+                                <Link href="/shop" className="vs-btn cart-animation-item">
+                                    CONTINUE SHOPPING
+                                </Link>
                             </div>
 
-                            {normalizedAppliedCoupons?.length > 0 && (
-                                <div className="mt-4 p-3 rounded text-start ms-lg-auto w-100" style={{ backgroundColor: 'rgba(166, 215, 25, 0.05)', border: '1px dashed rgba(166, 215, 25, 0.3)' }}>
-                                    <p className="small text-uppercase fw-bold mb-2" style={{ color: '#a6d719', letterSpacing: '1px' }}>Applied Coupons</p>
-                                    <div className="d-flex flex-wrap gap-2">
-                                        {normalizedAppliedCoupons.map((coupon: any, index: number) => (
+                            <div className="mb-4 p-4 rounded" style={{ backgroundColor: '#141622', border: '1px solid #323441', borderRadius: '12px' }}>
+                                <div className="d-flex justify-content-between align-items-center mb-4">
+                                    <h4 className="text-uppercase m-0 fw-bold" style={{ fontSize: '18px', letterSpacing: '1px' }}>Shipping Address</h4>
+                                    <Link href="/profile" className="btn btn-sm text-white d-flex align-items-center gap-1 hover:underline p-0 border-0 bg-transparent opacity-80 hover:opacity-100 transition-opacity">
+                                        <Plus size={16} /> Manage
+                                    </Link>
+                                </div>
+
+                                {addresses.length > 0 ? (
+                                    <div className="d-flex flex-column gap-3">
+                                        {addresses.map((addr: any) => (
                                             <div
-                                                key={`applied-pill-${coupon.id || coupon.code || index}`}
-                                                className="d-flex align-items-center gap-2 px-3 py-1 rounded"
-                                                style={{
-                                                    backgroundColor: 'rgba(166, 215, 25, 0.1)',
-                                                    color: '#a6d719',
-                                                    border: '1px solid rgba(166, 215, 25, 0.3)',
-                                                    fontSize: '12px'
-                                                }}
+                                                key={addr.id}
+                                                onClick={() => handleSelectAddress(addr)}
+                                                className={`p-3 rounded border cursor-pointer transition-all duration-300 d-flex align-items-center gap-3 ${addr.selected_address ? 'border-[#a6d719] bg-[#a6d719]/5' : 'border-[#323441] bg-[#0b0e13]'}`}
                                             >
-                                                <span className="fw-bold">
-                                                    {typeof coupon === 'string' ? coupon : (coupon.code || coupon.coupon_code || coupon.coupon?.code || coupon.title || coupon.name || 'VALID COUPON')}
-                                                </span>
-                                                <button
-                                                    onClick={() => handleRemoveCoupon(coupon.id || coupon.coupon_id)}
-                                                    className="border-0 bg-transparent p-0 d-flex align-items-center text-success hover:text-white transition-all"
-                                                >
-                                                    <X size={14} />
-                                                </button>
+                                                {/* Radio indicator */}
+                                                <div className="rounded-circle border d-flex align-items-center justify-content-center"
+                                                    style={{
+                                                        minWidth: '20px',
+                                                        width: '20px',
+                                                        height: '20px',
+                                                        borderColor: addr.selected_address ? '#a6d719' : '#555',
+                                                        borderWidth: '2px'
+                                                    }}>
+                                                    {addr.selected_address && <div className="rounded-circle" style={{ width: '10px', height: '10px', background: '#a6d719' }} />}
+                                                </div>
+
+                                                {/* Address Details */}
+                                                <div className="flex-grow-1">
+                                                    <div className="d-flex align-items-center gap-2 mb-1">
+                                                        <span className="small text-uppercase fw-bold text-secondary" style={{ fontSize: '10px', letterSpacing: '0.5px' }}>{addr.address_type}</span>
+                                                    </div>
+                                                    <p className="small text-white mb-1 fw-bold" style={{ fontSize: '13px' }}>
+                                                        {addr.customer_name}{addr.phone_number && `, +91${addr.phone_number}`}
+                                                    </p>
+                                                    <p className="small text-secondary m-0" style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                                                        {addr.address_line1}, {addr.city}
+                                                        {addr.state && `, ${addr.state}`} {addr.pincode && `- ${addr.pincode}`}
+                                                    </p>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                                ) : (
+                                    <div className="text-center py-4 bg-[#0b0e13] rounded border border-dashed border-[#323441]">
+                                        <MapPin size={30} className="text-secondary mb-2 mx-auto" />
+                                        <p className="text-secondary small mb-3">No addresses found</p>
+                                        <Link href="/profile" className="vs-btn vs-btn-sm" style={{ fontSize: '12px', padding: '8px 15px' }}>Add Address</Link>
+                                    </div>
+                                )}
+                            </div>
 
-                    {/* CART TOTALS */}
-                    <div className="row justify-content-end mt-4">
-                        <div className="col-lg-6 col-md-12">
-                            <div className="checkout-box p-4 rounded" style={{ backgroundColor: '#141622', border: '1px solid #323441' }}>
+                            <div className="p-4 rounded" style={{ backgroundColor: '#141622', border: '1px solid #323441', borderRadius: '12px' }}>
                                 <h4 className="mb-4 text-uppercase fw-bold" style={{ fontSize: '18px', letterSpacing: '1px', borderBottom: '1px solid #323441', paddingBottom: '15px' }}>
                                     Price Details
                                 </h4>
 
                                 <div className="space-y-4">
                                     <div className="d-flex justify-content-between align-items-center py-1">
-                                        <span className="text-secondary small fw-bold text-uppercase">Subtotal</span>
+                                        <span className="text-white small fw-bold text-uppercase">Subtotal</span>
                                         <span className="fw-bold text-white">{formatPrice(breakdownData.product_total || subtotal)}</span>
                                     </div>
 
                                     <div className="d-flex justify-content-between align-items-center py-1">
-                                        <span className="text-secondary small fw-bold text-uppercase">Delivery Charge</span>
+                                        <span className="text-white small fw-bold text-uppercase">Delivery Charge</span>
                                         {breakdownData.final_delivery_charge > 0 ? (
                                             <div className="text-end fw-bold">
                                                 {breakdownData.delivery_charge > breakdownData.final_delivery_charge && (
@@ -397,7 +630,16 @@ export default function CartPage() {
 
                                     {normalizedAppliedCoupons?.map((coupon: any, index: number) => (
                                         <div key={`breakdown-row-${coupon.id || coupon.code || index}`} className="d-flex justify-content-between align-items-center py-1 text-success fw-bold">
-                                            <span className="small text-uppercase">Coupon Discount ({coupon.coupon_code || coupon.code || coupon.title || coupon.coupon?.code || 'VALID'})</span>
+                                            <span className="small text-uppercase">
+                                                Coupon Discount (
+                                                {(() => {
+                                                    const couponLookup = coupon?.coupon_id
+                                                        ? availableCoupons.find((c: any) => Number(c.id) === Number(coupon.coupon_id))
+                                                        : null;
+                                                    return coupon.coupon_code || coupon.code || couponLookup?.code || coupon.title || coupon.coupon?.code || 'VALID';
+                                                })()}
+                                                )
+                                            </span>
                                             <span>- {formatPrice(coupon.discount_value || coupon.amount || coupon.discount || 0)}</span>
                                         </div>
                                     ))}
@@ -411,13 +653,50 @@ export default function CartPage() {
                                         </h5>
                                     </div>
 
-                                    {normalizedAppliedCoupons?.length > 0 && (
-                                        <div className="mt-2 text-end">
-                                            <span className="small text-success fw-bold" style={{ fontSize: '11px', letterSpacing: '0.5px' }}>
-                                                YAY! YOU SAVED {formatPrice(normalizedAppliedCoupons.reduce((acc: number, c: any) => acc + Number(c.discount_value || c.amount || 0), 0))} ON THIS ORDER
-                                            </span>
+                                    <div className="mt-5">
+                                        <h4 className="mb-3 text-uppercase fw-bold" style={{ fontSize: '16px', letterSpacing: '1px' }}>Payment Method</h4>
+                                        <div className="space-y-3">
+                                            <div
+                                                onClick={() => setPaymentMethod('PAY ON')}
+                                                className={`p-3 rounded border cursor-pointer transition-all d-flex align-items-center gap-3 ${paymentMethod === 'PAY ON' ? 'border-[#a6d719] bg-[#a6d719]/5' : 'border-[#323441]'}`}
+                                                style={{
+                                                    borderColor: paymentMethod === 'PAY ON' ? '#a6d719' : '#323441',
+                                                    background: paymentMethod === 'PAY ON' ? '' : 'transparent'
+                                                }}
+                                            >
+                                                <div className={`rounded-circle border d-flex align-items-center justify-content-center`}
+                                                    style={{
+                                                        width: '20px',
+                                                        height: '20px',
+                                                        borderColor: paymentMethod === 'PAY ON' ? '#a6d719' : '#555'
+                                                    }}>
+                                                    {paymentMethod === 'PAY ON' && <div className="rounded-circle" style={{ width: '10px', height: '10px', background: '#a6d719' }} />}
+                                                </div>
+                                                <CreditCard size={18} style={{ color: paymentMethod === 'PAY ON' ? '#a6d719' : '#888' }} />
+                                                <span className={`small fw-bold ${paymentMethod === 'PAY ON' ? 'text-white' : 'text-secondary'}`}>PREPAID (UPI / CARDS)</span>
+                                            </div>
+
+                                            <div
+                                                onClick={() => setPaymentMethod('cod')}
+                                                className={`p-3 rounded border cursor-pointer transition-all d-flex align-items-center gap-3 mt-2 ${paymentMethod === 'cod' ? 'border-[#a6d719] bg-[#a6d719]/5' : 'border-[#323441]'}`}
+                                                style={{
+                                                    borderColor: paymentMethod === 'cod' ? '#a6d719' : '#323441',
+                                                    background: paymentMethod === 'cod' ? '' : 'transparent'
+                                                }}
+                                            >
+                                                <div className={`rounded-circle border d-flex align-items-center justify-content-center`}
+                                                    style={{
+                                                        width: '20px',
+                                                        height: '20px',
+                                                        borderColor: paymentMethod === 'cod' ? '#a6d719' : '#555'
+                                                    }}>
+                                                    {paymentMethod === 'cod' && <div className="rounded-circle" style={{ width: '10px', height: '10px', background: '#a6d719' }} />}
+                                                </div>
+                                                <Banknote size={18} style={{ color: paymentMethod === 'cod' ? '#a6d719' : '#888' }} />
+                                                <span className={`small fw-bold ${paymentMethod === 'cod' ? 'text-white' : 'text-secondary'}`}>CASH ON DELIVERY</span>
+                                            </div>
                                         </div>
-                                    )}
+                                    </div>
                                 </div>
 
                                 <Link href="/checkout" className="vs-btn cart-animation-item w-100 mt-4 text-center d-block">

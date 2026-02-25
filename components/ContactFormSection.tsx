@@ -48,7 +48,7 @@ export default function ConatctFormSection() {
                                         </div>
                                         <ul className="gt-list">
                                             <li><span>Call Us:</span></li>
-                                            <li><a href="tel:+0094382229540">+009 438 222 9540</a></li>
+                                            <li><a href="tel:+0094382229540">+0 1234567899</a></li>
                                         </ul>
                                     </div>
                                     <div className="gt-contact-item">
@@ -58,7 +58,7 @@ export default function ConatctFormSection() {
                                         <ul className="gt-list">
                                             <li><span>Mail Us</span></li>
                                             <li><a href="infor@xridergamil.com">
-                                                infor@xridergamil.com
+                                                mail@gmail.com
                                             </a></li>
                                         </ul>
                                     </div>
@@ -68,7 +68,7 @@ export default function ConatctFormSection() {
                                         </div>
                                         <ul className="gt-list">
                                             <li><span>Location:</span></li>
-                                            <li>Toronto, Montreal, City</li>
+                                            <li>Chennai, Tamil Nadu, India</li>
                                         </ul>
                                     </div>
                                 </div>
