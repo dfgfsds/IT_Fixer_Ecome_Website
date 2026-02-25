@@ -111,7 +111,7 @@ export default function Footer() {
                     </div>
                     <div className="footer-bottom wow fadeInUp" data-wow-delay=".3s">
                         <div className="footer-wrapper">
-                            <p>© 2025 Pubzi . All Rights Reserved.</p>
+                            <p>© 2026 FT Digital Solutions (Agency). All rights reserved.</p>
                             {/* <ul className="gt-footer-list wow fadeInUp" data-wow-delay=".3s">
                                 <li>
                                     <a href="contact.html">Cookies</a>
