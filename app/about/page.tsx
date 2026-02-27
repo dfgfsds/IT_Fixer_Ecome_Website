@@ -6,6 +6,7 @@ import AboutTestimonialSection from "@/components/AboutTestimonialSection";
 import ImageSliderSection from "@/components/ImageSliderSection";
 import AboutBrandSection from "@/components/AboutBrandSection";
 import TriggerSection from "@/components/TriggerSection";
+import BrandSection from "@/components/BrandSection";
 
 export default function AboutPage() {
     return (
@@ -15,10 +16,11 @@ export default function AboutPage() {
                 <AboutHeroSection />
                 <GamingZoneSection />
                 <TopFeaturesSection />
-                <GameplaySection />
+                {/* <GameplaySection /> */}
                 <AboutTestimonialSection />
-                <ImageSliderSection />
+                {/* <ImageSliderSection /> */}
                 <AboutBrandSection />
+              
                 <TriggerSection />
             </div>
 

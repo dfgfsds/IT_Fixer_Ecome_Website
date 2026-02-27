@@ -1,6 +1,6 @@
 export default function GamingZoneSection() {
     return (
-        <section className="about-section-2 section-padding pt-0 fix">
+        <section className="about-section-2 section-padding fix">
             <div className="about-shape-1">
                 <img src="assets/img/home-2/about/about-shape-1.png" alt="img" />
             </div>
