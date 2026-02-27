@@ -87,29 +87,22 @@ export default function Header() {
                                 </div>
                             </div>
                             <p className="text d-none d-xl-block">
-                                Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a feugiat leo urna eget eros. Duis Aenean a imperdiet risus.
+                                ITFixer is the Best Gaming & Editing PC Shop in Chennai, offering custom Gaming PCs, Editing Workstations, and high-performance Laptops with expert support and unbeatable prices.
                             </p>
                             <div className="mobile-menu fix mb-3"></div>
                             <div className="sideber-image">
-                                <img src="/assets/img/header/sideber.jpg" alt="img" />
+                                <img src="https://acemagic.com/cdn/shop/collections/TANK_03-_2.jpg?v=1725597557" alt="img" />
                             </div>
                             <div className="offcanvas__contact">
                                 <h4>Contact Info</h4>
                                 <ul>
-                                    <li className="d-flex align-items-center">
-                                        <div className="offcanvas__contact-icon">
-                                            <MapPin size={18} />
-                                        </div>
-                                        <div className="offcanvas__contact-text">
-                                            <a target="_blank" href="#">Main Street, Melbourne, Australia</a>
-                                        </div>
-                                    </li>
+                                   
                                     <li className="d-flex align-items-center">
                                         <div className="offcanvas__contact-icon mr-15">
                                             <Mail size={18} />
                                         </div>
                                         <div className="offcanvas__contact-text">
-                                            <a href="mailto:info@example.com"><span className="mailto:info@example.com">info@example.com</span></a>
+                                            <a href="mailto:Info@itfixer.in"><span className="mailto:Info@itfixer.in">Info@itfixer.in</span></a>
                                         </div>
                                     </li>
                                     <li className="d-flex align-items-center">
@@ -117,7 +110,7 @@ export default function Header() {
                                             <Clock size={18} />
                                         </div>
                                         <div className="offcanvas__contact-text">
-                                            <a target="_blank" href="#">Mod-friday, 09am -05pm</a>
+                                            <a target="_blank" href="#">Mon – Sunday, 09:00 AM – 09:00 PM</a>
                                         </div>
                                     </li>
                                     <li className="d-flex align-items-center">
@@ -125,16 +118,19 @@ export default function Header() {
                                             <Phone size={18} />
                                         </div>
                                         <div className="offcanvas__contact-text">
-                                            <a href="tel:+11002345909">+11002345909</a>
+                                            <a href="tel:+11002345909">+91 8585858768</a>
+                                        </div>
+                                    </li>
+                                     <li className="d-flex align-items-center">
+                                        <div className="offcanvas__contact-icon">
+                                            <MapPin size={18} />
+                                        </div>
+                                        <div className="offcanvas__contact-text">
+                                            <a target="_blank" href="#">New No 29, Old No 31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp to Kasi Theatre), Ashok Nagar, Chennai 600083.</a>
                                         </div>
                                     </li>
                                 </ul>
-                                <div className="social-icon d-flex align-items-center">
-                                    <a href="#"><Facebook size={16} /></a>
-                                    <a href="#"><Twitter size={16} /></a>
-                                    <a href="#"><Youtube size={16} /></a>
-                                    <a href="#"><Linkedin size={16} /></a>
-                                </div>
+
                             </div>
                         </div>
                     </div>

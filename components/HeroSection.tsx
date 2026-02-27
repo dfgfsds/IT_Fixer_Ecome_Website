@@ -35,13 +35,13 @@ export default function HeroSection() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="hero-content">
-                            <span className="sub-title subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">YOUR ULTIMATE GAMING FUTURE STARTS HERE . .</span>
+                            <span className="sub-title subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">BEST GAMING & EDITING PC SHOP IN CHENNAI . . .</span>
                             <h1 className="hero_title tv_hero_title hero_title_1">
-                                GAMING VIBE <span>LEGENDS</span>
+                                GAMING & EDITING<span> HIGH-PERFORMANCE <br/> PCs & LAPTOPS</span>
                             </h1>
                             <div className="hero-sub-content">
                                 <p className="wow fadeInUp" data-wow-delay=".5s">
-                                    High-performance Gaming PCs & Laptops for extreme gameplay, smooth streaming, and unstoppable performance — powered by IT Fixer.
+                                    ITFixer is the Best Gaming & Editing PC Shop in Chennai, offering custom Gaming PCs, Editing Workstations, and high-performance Laptops with expert support and unbeatable prices.
                                 </p>
                                 <a href="/contact" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
                                     <span className="left-line"></span>

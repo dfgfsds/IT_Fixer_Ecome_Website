@@ -10765,32 +10765,33 @@ span {
   .hero-2 .hero-content .sub-title {
     font-size: 14px;
     letter-spacing: 1.2px;
+      line-height: 1.5;
   }
 }
 
 .hero-2 .hero-content h1 {
   line-height: 100%;
   text-transform: uppercase;
-  font-size: 170px;
+  font-size: 74px !important;
   color: #CBFE1C;
 }
 
 @media (max-width: 1600px) {
   .hero-2 .hero-content h1 {
-    font-size: 130px;
+      font-size: 68px !important;
   }
 }
 
 @media (max-width: 1399px) {
   .hero-2 .hero-content h1 {
-    font-size: 105px;
+     font-size: 68px !important;
   }
 }
 
 @media (max-width: 1199px) {
   .hero-2 .hero-content h1 {
     line-height: 130%;
-    font-size: 94px;
+     font-size: 68px !important;
   }
 }
 
@@ -10808,13 +10809,13 @@ span {
 
 @media (max-width: 575px) {
   .hero-2 .hero-content h1 {
-    font-size: 55px;
+    font-size: 44px;
   }
 }
 
 @media (max-width: 470px) {
   .hero-2 .hero-content h1 {
-    font-size: 45px;
+    font-size: 26x;
     line-height: 108%;
   }
 }
@@ -10848,7 +10849,7 @@ span {
 }
 
 .hero-2 .hero-content .hero-sub-content p {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 400;
   color: #fff;
   margin-bottom: 40px;
@@ -10856,14 +10857,14 @@ span {
 
 @media (max-width: 1399px) {
   .hero-2 .hero-content .hero-sub-content p {
-    font-size: 16px;
+    font-size: 15px;
     max-width: 435px;
   }
 }
 
 @media (max-width: 991px) {
   .hero-2 .hero-content .hero-sub-content p {
-    font-size: 16px;
+    font-size: 15px;
     margin-bottom: 30px;
   }
 }
