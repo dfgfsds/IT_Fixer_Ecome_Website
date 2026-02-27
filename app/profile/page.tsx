@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import { User, ShoppingBag, LogOut, Package, ShoppingCart, ExternalLink, MapPin, Plus, Pencil, Trash, Loader } from "lucide-react";
 import { useQueryClient, useQuery, InvalidateQueryFilters } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import { useVendor } from "@/context/VendorContext";
 import { toast } from "sonner";
 import Link from "next/link";
 import AddressForm from "@/components/AddressForm";
+import { formatPrice } from "@/lib/utils";
 
 export default function AccountPage() {
     const { user } = useUser();
@@ -17,6 +18,16 @@ export default function AccountPage() {
     const [activeTab, setActiveTab] = useState("profile");
     const { vendorId } = useVendor();
     const queryClient = useQueryClient();
+    const searchParams = useSearchParams();
+    const tab = searchParams.get("tab");
+
+    useEffect(() => {
+        if (tab === "addresses" || tab === "address") {
+            setActiveTab("addresses");
+        } else if (tab === "orders") {
+            setActiveTab("orders");
+        }
+    }, [tab]);
 
     const [formData, setFormData] = useState({
         name: user?.data?.name || '',
@@ -72,7 +83,7 @@ export default function AccountPage() {
         queryFn: () => getOrdersAndOrdersItemsApi(`?user_id=${user?.data?.id}&vendor_id=${vendorId}`),
         enabled: !!user?.data?.id && !!vendorId
     });
-    const orders = userOrders?.data?.data || [];
+    const orders = userOrders?.data?.data || userOrders?.data || [];
 
 
     const [addressModal, setAddressModal] = useState(false);
@@ -234,7 +245,7 @@ export default function AccountPage() {
                                                                 </div>
                                                                 <div className="col-md-3 col-6 mb-2 mb-md-0 text-center">
                                                                     <div className="small text-white mb-1">Total Amount</div>
-                                                                    <div className="text-white fw-bold">${order.total_amount}</div>
+                                                                    <div className="text-white fw-bold">{formatPrice(order.total_amount)}</div>
                                                                 </div>
                                                                 <div className="col-md-2 text-center mt-2 mt-md-0">
                                                                     <Link href={`/order/${order.id}`}>
@@ -282,89 +293,92 @@ export default function AccountPage() {
                                             </div>
                                         </div>
                                     ) : addresses.length > 0 ? (
-                                        <div className="row g-3">
-                                            {addresses.map((address: any) => (
-                                                <div key={address.id} className="col-md-6 col-12">
-                                                    <div style={{
-                                                        backgroundColor: "#0b0e13",
-                                                        border: `1px solid ${address.selected_address ? "#a6d719" : "#2a2d3a"}`,
-                                                        borderRadius: "10px",
-                                                        padding: "20px",
-                                                        position: "relative",
-                                                        transition: "border-color 0.3s",
-                                                        height: "100%",
-                                                    }}>
-                                                        {address.selected_address && (
-                                                            <span style={{
-                                                                position: "absolute", top: "12px", right: "12px",
-                                                                backgroundColor: "rgba(166, 215, 25, 0.12)",
-                                                                color: "#a6d719",
-                                                                border: "1px solid rgba(166, 215, 25, 0.3)",
-                                                                borderRadius: "20px",
-                                                                padding: "3px 12px",
-                                                                fontSize: "11px",
-                                                                fontWeight: 600,
-                                                                letterSpacing: "0.5px",
-                                                                textTransform: "uppercase",
-                                                            }}>Default</span>
-                                                        )}
-
-                                                        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-                                                            <div style={{ width: "34px", height: "34px", borderRadius: "50%", backgroundColor: "#2a2d3a", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                                <MapPin size={16} color="#a6d719" />
-                                                            </div>
-                                                            <span style={{ color: "#a6d719", fontWeight: 700, fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px", fontFamily: "'Days One', sans-serif" }}>
-                                                                {address.address_type}
-                                                            </span>
-                                                        </div>
-
-                                                        <div style={{ color: "#9ca3af", fontSize: "13px", lineHeight: "1.8" }}>
-                                                            <span style={{ color: "#fff", fontWeight: 600, display: "block", marginBottom: "2px" }}>{address.customer_name}</span>
-                                                            {address.contact_number && <span style={{ display: "block" }}>{address.contact_number}</span>}
-                                                            {address.email_address && <span style={{ display: "block" }}>{address.email_address}</span>}
-                                                            <span style={{ display: "block" }}>{address.address_line1}</span>
-                                                            {address.address_line2 && <span style={{ display: "block" }}>{address.address_line2}</span>}
-                                                            <span style={{ display: "block" }}>{address.city}, {address.state} {address.postal_code}</span>
-                                                            <span style={{ display: "block" }}>{address.country}</span>
-                                                        </div>
-
-                                                        <div style={{ borderTop: "1px solid #1e2538", margin: "16px 0" }} />
-
-
-                                                        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
-                                                            <button
-                                                                onClick={() => { setEditData(address); setAddressModal(true); }}
-                                                                style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#ccc", borderRadius: "6px", cursor: "pointer", fontSize: "13px", transition: "all 0.2s" }}
-                                                                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#a6d719"; (e.currentTarget as HTMLButtonElement).style.color = "#a6d719"; }}
-                                                                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#2a2d3a"; (e.currentTarget as HTMLButtonElement).style.color = "#ccc"; }}
-                                                            >
-                                                                <Pencil size={13} /> Edit
-                                                            </button>
-
-                                                            <button
-                                                                onClick={() => { setDeleteId(address.id); setDeleteModal(true); }}
-                                                                style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#ccc", borderRadius: "6px", cursor: "pointer", fontSize: "13px", transition: "all 0.2s" }}
-                                                                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#ef4444"; (e.currentTarget as HTMLButtonElement).style.color = "#ef4444"; }}
-                                                                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#2a2d3a"; (e.currentTarget as HTMLButtonElement).style.color = "#ccc"; }}
-                                                            >
-                                                                <Trash size={13} /> Remove
-                                                            </button>
-
-                                                            {!address.selected_address && (
-                                                                <button
-                                                                    onClick={() => handleSelectDefault(address)}
-                                                                    style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "", border: "1px solid rgba(166,215,25,0.3)", color: "#a6d719", borderRadius: "6px", cursor: "pointer", fontSize: "13px", marginLeft: "auto", transition: "all 0.2s" }}
-                                                                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(166,215,25,0.18)"; }}
-                                                                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(166,215,25,0.08)"; }}
-                                                                >
-                                                                    Set as Default
-                                                                </button>
+                                        <div className="orders-scroll-container px-2" style={{ maxHeight: "350px", overflowY: "auto" }}>
+                                            <div className="row g-3">
+                                                {addresses.map((address: any) => (
+                                                    <div key={address.id} className="col-md-6 col-12">
+                                                        <div style={{
+                                                            backgroundColor: "#0b0e13",
+                                                            border: `1px solid ${address.selected_address ? "#a6d719" : "#2a2d3a"}`,
+                                                            borderRadius: "10px",
+                                                            padding: "20px",
+                                                            position: "relative",
+                                                            transition: "border-color 0.3s",
+                                                            height: "100%",
+                                                        }}>
+                                                            {address.selected_address && (
+                                                                <span style={{
+                                                                    position: "absolute", top: "12px", right: "12px",
+                                                                    backgroundColor: "rgba(166, 215, 25, 0.12)",
+                                                                    color: "#a6d719",
+                                                                    border: "1px solid rgba(166, 215, 25, 0.3)",
+                                                                    borderRadius: "20px",
+                                                                    padding: "3px 12px",
+                                                                    fontSize: "11px",
+                                                                    fontWeight: 600,
+                                                                    letterSpacing: "0.5px",
+                                                                    textTransform: "uppercase",
+                                                                }}>Default</span>
                                                             )}
+
+                                                            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+                                                                <div style={{ width: "34px", height: "34px", borderRadius: "50%", backgroundColor: "#2a2d3a", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                    <MapPin size={16} color="#a6d719" />
+                                                                </div>
+                                                                <span style={{ color: "#a6d719", fontWeight: 700, fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px", fontFamily: "'Days One', sans-serif" }}>
+                                                                    {address.address_type}
+                                                                </span>
+                                                            </div>
+
+                                                            <div style={{ color: "#9ca3af", fontSize: "13px", lineHeight: "1.8" }}>
+                                                                <span style={{ color: "#fff", fontWeight: 600, display: "block", marginBottom: "2px" }}>{address.customer_name}</span>
+                                                                {address.contact_number && <span style={{ display: "block" }}>{address.contact_number}</span>}
+                                                                {address.email_address && <span style={{ display: "block" }}>{address.email_address}</span>}
+                                                                <span style={{ display: "block" }}>{address.address_line1}</span>
+                                                                {address.address_line2 && <span style={{ display: "block" }}>{address.address_line2}</span>}
+                                                                <span style={{ display: "block" }}>{address.city}, {address.state} {address.postal_code}</span>
+                                                                <span style={{ display: "block" }}>{address.country}</span>
+                                                            </div>
+
+                                                            <div style={{ borderTop: "1px solid #1e2538", margin: "16px 0" }} />
+
+
+                                                            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
+                                                                <button
+                                                                    onClick={() => { setEditData(address); setAddressModal(true); }}
+                                                                    style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#ccc", borderRadius: "6px", cursor: "pointer", fontSize: "13px", transition: "all 0.2s" }}
+                                                                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#a6d719"; (e.currentTarget as HTMLButtonElement).style.color = "#a6d719"; }}
+                                                                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#2a2d3a"; (e.currentTarget as HTMLButtonElement).style.color = "#ccc"; }}
+                                                                >
+                                                                    <Pencil size={13} /> Edit
+                                                                </button>
+
+                                                                <button
+                                                                    onClick={() => { setDeleteId(address.id); setDeleteModal(true); }}
+                                                                    style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#ccc", borderRadius: "6px", cursor: "pointer", fontSize: "13px", transition: "all 0.2s" }}
+                                                                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#ef4444"; (e.currentTarget as HTMLButtonElement).style.color = "#ef4444"; }}
+                                                                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#2a2d3a"; (e.currentTarget as HTMLButtonElement).style.color = "#ccc"; }}
+                                                                >
+                                                                    <Trash size={13} /> Remove
+                                                                </button>
+
+                                                                {!address.selected_address && (
+                                                                    <button
+                                                                        onClick={() => handleSelectDefault(address)}
+                                                                        style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "", border: "1px solid rgba(166,215,25,0.3)", color: "#a6d719", borderRadius: "6px", cursor: "pointer", fontSize: "13px", marginLeft: "auto", transition: "all 0.2s" }}
+                                                                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(166,215,25,0.18)"; }}
+                                                                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(166,215,25,0.08)"; }}
+                                                                    >
+                                                                        Set as Default
+                                                                    </button>
+                                                                )}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            ))}
+                                                ))}
+                                            </div>
                                         </div>
+
                                     ) : (
                                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flex: 1, minHeight: "280px", textAlign: "center" }}>
                                             <div style={{ width: "70px", height: "70px", borderRadius: "50%", backgroundColor: "#2a2d3a", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>

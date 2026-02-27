@@ -13,6 +13,7 @@ import { useVendor } from "@/context/VendorContext";
 import { useCartItem } from "@/context/CartItemContext";
 import { InvalidateQueryFilters, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { formatPrice } from "@/lib/utils";
 
 
 export default function ShopPage() {
@@ -45,6 +46,7 @@ export default function ShopPage() {
         try {
             await getProductVariantCartItemUpdate('', payload);
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
+            queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
             setIsCartOpen(true);
         } catch (e) { toast.error("Error adding to cart"); }
     };
@@ -57,6 +59,7 @@ export default function ShopPage() {
                 await updateCartitemsApi(`${cartId}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
+            queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
         } catch (e) { console.error(e); }
     };
 
@@ -152,7 +155,7 @@ export default function ShopPage() {
                                     <input
                                         type="range"
                                         min={0}
-                                        max={10000}
+                                        max={200000}
                                         value={minPrice}
                                         onChange={(e) => { setMinPrice(Number(e.target.value)); setCurrentPage(1); }}
                                         className="w-100"
@@ -161,7 +164,7 @@ export default function ShopPage() {
                                     <input
                                         type="range"
                                         min={0}
-                                        max={10000}
+                                        max={200000}
                                         value={maxPrice}
                                         onChange={(e) => { setMaxPrice(Number(e.target.value)); setCurrentPage(1); }}
                                         className="w-100"
@@ -171,7 +174,7 @@ export default function ShopPage() {
 
                                 <div className="d-flex justify-content-between align-items-center">
                                     <span className="price-label text-uppercase">
-                                        Price: ₹{minPrice} — ₹{maxPrice}
+                                        Price: {formatPrice(minPrice)} — {formatPrice(maxPrice)}
                                     </span>
                                     <button
                                         className="filter-btn text-uppercase"
@@ -203,8 +206,8 @@ export default function ShopPage() {
                                                     {product.name}
                                                 </div>
                                                 <div className="d-flex gap-2">
-                                                    <span className="price-new text-success" style={{ fontSize: "14px" }}>₹{product.discount}</span>
-                                                    <span className="price-old text-secondary text-decoration-line-through" style={{ fontSize: "12px" }}>₹{product.price}</span>
+                                                    <span className="price-new text-success" style={{ fontSize: "14px" }}>{formatPrice(product.discount)}</span>
+                                                    <span className="price-old text-secondary text-decoration-line-through" style={{ fontSize: "12px" }}>{formatPrice(product.price)}</span>
                                                 </div>
                                             </div>
                                         </Link>
@@ -247,9 +250,10 @@ export default function ShopPage() {
 
                             <div className="row g-4">
                                 {isLoading ? (
-                                    <div className="col-12 text-center py-5">
-                                        <Loader2 className="animate-spin mx-auto text-success" size={40} />
-                                        <p className="mt-2 text-white">Loading latest products...</p>
+                                    <div className="col-12 d-flex align-items-center justify-content-center" style={{ minHeight: '60vh' }}>
+                                        <div className="spinner-border" role="status" style={{ color: '#a6d719', width: '3.5rem', height: '3.5rem', borderWidth: '0.3em' }}>
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
                                     </div>
                                 ) : currentProducts.length > 0 ? (
                                     currentProducts.map((item: any) => {
@@ -258,8 +262,8 @@ export default function ShopPage() {
                                         const cartId = foundInCart?.id || null;
 
                                         return (
-                                            <div className="col-md-6 col-xl-4" key={item.id}>
-                                                <div className="product-card">
+                                            <div className="col-md-6 col-xl-4 d-flex" key={item.id}>
+                                                <div className="product-card d-flex flex-column h-100 w-100">
                                                     <div className="img-wrapper">
                                                         <img
                                                             src={item.image_urls?.[0] || 'https://via.placeholder.com/300'}
@@ -289,15 +293,15 @@ export default function ShopPage() {
                                                         )}
                                                     </div>
 
-                                                    <div className="product-info" onClick={() => router.push(`/shop/${item.id}`)} style={{ cursor: 'pointer' }}>
-                                                        <h3 className="product-name d-flex align-items-center justify-content-between">
-                                                            {item.name}
-                                                            <Heart size={18} className="wishlist-btn mt-[1px]" />
+                                                    <div className="product-info d-flex flex-column flex-grow-1" onClick={() => router.push(`/shop/${item.id}`)} style={{ cursor: 'pointer' }}>
+                                                        <h3 className="product-name d-flex align-items-center justify-content-between mb-1">
+                                                            <span className="line-clamp-2" title={item.name}>{item.name}</span>
+                                                            {/* <Heart size={18} className="wishlist-btn mt-[1px]" /> */}
                                                         </h3>
-                                                        <span className="product-cat">{item.category_name || 'Electronics'}</span>
-                                                        <div>
-                                                            <span className="price-new">₹{item.price}</span>
-                                                            {item.discount > 0 && <span className="price-old">₹{item.discount}</span>}
+                                                        <span className="product-cat mb-2">{item.category_name || 'Electronics'}</span>
+                                                        <div className="mt-auto">
+                                                            <span className="price-new">{formatPrice(item.price)}</span>
+                                                            {item.discount > 0 && <span className="price-old">{formatPrice(item.discount)}</span>}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -319,7 +323,7 @@ export default function ShopPage() {
                                                     onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
                                                     style={{
                                                         cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                                                        opacity: currentPage === 1 ? 0.5 : 1
+                                                        opacity: currentPage === 1 ? 1 : 1
                                                     }}
                                                 >
                                                     <ChevronsLeft size={16} />
@@ -367,7 +371,7 @@ export default function ShopPage() {
                                                     onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
                                                     style={{
                                                         cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-                                                        opacity: currentPage === totalPages ? 0.5 : 1
+                                                        opacity: currentPage === totalPages ? 1 : 1
                                                     }}
                                                 >
                                                     <ChevronsRight size={16} />

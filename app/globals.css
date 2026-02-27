@@ -269,3 +269,67 @@ body {
 .address-form-scroll::-webkit-scrollbar {
   display: none;
 }
+/* Variant and Size selection */
+.variant-card {
+  width: 100px;
+  background: #141622;
+  border: 2px solid #2a2d3a;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.variant-card:hover {
+  border-color: #a6d719;
+}
+.variant-card.active {
+  border-color: #a6d719;
+  background: rgba(166, 215, 25, 0.05);
+}
+.variant-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.variant-card span {
+  font-size: 11px;
+  color: #fff;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.size-pill {
+  background: transparent;
+  border: 1px solid #2a2d3a;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.size-pill:hover {
+  border-color: #a6d719;
+  color: #a6d719;
+}
+.size-pill.active {
+  background: #a6d719;
+  border-color: #a6d719;
+  color: #141622;
+  font-weight: 700;
+}
+
+.add-to-cart-btn-dark:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(1);
+  background: #2a2d3a !important;
+  color: #9ca3af !important;
+}
