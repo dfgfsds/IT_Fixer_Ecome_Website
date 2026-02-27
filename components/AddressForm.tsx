@@ -62,11 +62,23 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
     if (!open) return null;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        if (name === "contact_number") {
+            const onlyNums = value.replace(/[^0-9]/g, "");
+            if (onlyNums.length <= 10) {
+                setForm({ ...form, [name]: onlyNums });
+            }
+        } else {
+            setForm({ ...form, [name]: value });
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (form.contact_number.length !== 10) {
+            toast.error("Phone number must be exactly 10 digits.");
+            return;
+        }
         setSaving(true);
         try {
             const payload = {
@@ -134,7 +146,22 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
                         {/* Address Type */}
                         <div style={{ gridColumn: "1 / -1" }}>
                             <label style={labelStyle}>Address Type</label>
-                            <select name="address_type" value={form.address_type} onChange={handleChange} required style={{ ...inputStyle, cursor: "pointer" }}>
+                            <select
+                                name="address_type"
+                                value={form.address_type}
+                                onChange={handleChange}
+                                required
+                                style={{
+                                    ...inputStyle,
+                                    appearance: "none",
+                                    backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a6d719' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "right 15px center",
+                                    backgroundSize: "16px",
+                                    paddingRight: "40px",
+                                    cursor: "pointer",
+                                }}
+                            >
                                 <option value="">Select type</option>
                                 <option value="Home">Home</option>
                                 <option value="Work">Work</option>
@@ -151,7 +178,7 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
                         {/* Phone */}
                         <div>
                             <label style={labelStyle}>Phone Number</label>
-                            <input name="contact_number" value={form.contact_number} onChange={handleChange} required placeholder="+91 00000 00000" style={inputStyle} />
+                            <input name="contact_number" value={form.contact_number} onChange={handleChange} required placeholder="10-digit number" pattern="[0-9]{10}" title="Ten digits code" style={inputStyle} />
                         </div>
 
                         {/* Email */}

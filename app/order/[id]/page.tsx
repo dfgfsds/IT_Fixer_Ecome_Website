@@ -18,7 +18,7 @@ export default function OrderDetailsPage() {
         return null;
     });
     const { vendorId: contextVendorId } = useVendor();
-    const vendorId = contextVendorId || '66'; // Fallback to '66' if context hasn't initialized yet
+    const vendorId = contextVendorId || '157'; // Fallback to '157' if context hasn't initialized yet
 
 
     const { data: orderResponse, isLoading } = useQuery({
@@ -28,7 +28,7 @@ export default function OrderDetailsPage() {
         refetchOnWindowFocus: false
     });
 
-    const order = orderResponse?.data?.data;
+    const order = orderResponse?.data?.data || orderResponse?.data || [];
 
     if (isLoading || !userId || !vendorId) {
         return (
@@ -45,7 +45,7 @@ export default function OrderDetailsPage() {
             <div className="container">
                 {/* Back Button */}
                 <button
-                    onClick={() => router.back()}
+                    onClick={() => router.push('/profile?tab=orders')}
                     className="btn btn-link text-white p-0 d-flex align-items-center mb-4"
                     style={{ textDecoration: "none", opacity: 1, fontFamily: "'Chakra Petch', sans-serif" }}
                 >
@@ -119,9 +119,9 @@ export default function OrderDetailsPage() {
                                         <div className="col-auto">
                                             <div className="product-image-container">
                                                 <img
-                                                    src={item?.product?.image_urls?.[0] || "https://cdn.shopify.com/s/files/1/2303/2711/files/2_e822dae0-14df-4cb8-b145-ea4dc0966b34.jpg?v=1617059123"}
+                                                    src={item?.product_details?.image_urls?.[0] || item?.product_variant?.product_variant_image_urls?.[0] || item?.product?.image_urls?.[0] || "/img/placeholder.jpg"}
                                                     className="w-100 h-100 object-fit-cover"
-                                                    alt={item?.product?.name}
+                                                    alt={item?.product_details?.name || item?.product_variant?.product_variant_title || item?.product_name || item?.product?.name}
                                                 />
                                             </div>
                                         </div>
@@ -129,8 +129,25 @@ export default function OrderDetailsPage() {
                                         <div className="col">
                                             <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center h-100 gap-2">
                                                 <div className="d-flex flex-column justify-content-center">
-                                                    <h5 className="mb-1 text-white fw-bold order-item-name">{item?.product?.name}</h5>
-                                                    <p className="small mb-0" style={{ opacity: 1 }}>Quantity: <span className="text-primary fw-bold">{item?.quantity}</span></p>
+                                                    <h5 className="mb-1 text-white fw-bold order-item-name">{item?.product_details?.name || item?.product_variant?.product_variant_title || item?.product_name || item?.product?.name}</h5>
+
+                                                    {/* NEW: Color and Size badges */}
+                                                    <div className="d-flex gap-2 mb-2">
+                                                        {item?.product_variant_name && (
+                                                            <span className="badge bg-secondary opacity-75" style={{ fontSize: '10px', textTransform: 'uppercase' }}>
+                                                                {item.product_variant_name}
+                                                            </span>
+                                                        )}
+                                                        {item?.product_size && (
+                                                            <span className="badge bg-success opacity-75" style={{ fontSize: '10px', textTransform: 'uppercase' }}>
+                                                                Size: {item.product_size}
+                                                            </span>
+                                                        )}
+                                                    </div>
+
+                                                    <p className="small mb-0" style={{ opacity: 1 }}>
+                                                        Quantity: <span className="text-primary fw-bold">{item?.quantity}</span>
+                                                    </p>
                                                 </div>
 
                                                 <div className="mt-md-0">
