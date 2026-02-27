@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import { User, ShoppingBag, LogOut, Package, ShoppingCart, ExternalLink, MapPin, Plus, Pencil, Trash, Loader } from "lucide-react";
 import { useQueryClient, useQuery, InvalidateQueryFilters } from "@tanstack/react-query";
@@ -11,15 +11,21 @@ import { toast } from "sonner";
 import Link from "next/link";
 import AddressForm from "@/components/AddressForm";
 import { formatPrice } from "@/lib/utils";
+import { Suspense } from "react";
 
-export default function AccountPage() {
+function ProfileContent() {
     const { user } = useUser();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState("profile");
     const { vendorId } = useVendor();
     const queryClient = useQueryClient();
-    const searchParams = useSearchParams();
-    const tab = searchParams.get("tab");
+    const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
+
+    useEffect(() => {
+        setSearchParams(new URLSearchParams(window.location.search));
+    }, []);
+
+    const tab = searchParams?.get("tab");
 
     useEffect(() => {
         if (tab === "addresses" || tab === "address") {
@@ -441,5 +447,19 @@ export default function AccountPage() {
                 onSuccess={() => queryClient.invalidateQueries(["getAddressData"] as InvalidateQueryFilters)}
             />
         </div>
+    );
+}
+
+export default function AccountPage() {
+    return (
+        <Suspense fallback={
+            <div style={{ backgroundColor: "#0b0e13", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        }>
+            <ProfileContent />
+        </Suspense>
     );
 }
