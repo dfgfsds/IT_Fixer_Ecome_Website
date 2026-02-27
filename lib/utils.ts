@@ -5,12 +5,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatPrice(price: number): string {
+export function formatPrice(price: any): string {
+  const amount = typeof price === 'number' ? price : Number(price || 0);
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency: 'INR',
     minimumFractionDigits: 2,
-  }).format(price);
+    maximumFractionDigits: 2,
+  }).format(amount);
 }
 
 

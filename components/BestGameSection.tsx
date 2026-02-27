@@ -13,6 +13,7 @@ import { useQueryClient, InvalidateQueryFilters } from "@tanstack/react-query";
 import { getProductVariantCartItemUpdate } from "@/api-endpoints/products";
 import { updateCartitemsApi, deleteCartitemsApi } from "@/api-endpoints/CartsApi";
 import { toast } from "sonner";
+import { formatPrice } from "@/lib/utils";
 
 export default function BestGameSection() {
     const { isAuthenticated } = useUser();
@@ -125,13 +126,14 @@ export default function BestGameSection() {
                                 const cartId = foundInCart?.id || null;
 
                                 return (
-                                    <div className="swiper-slide" key={item.id}>
+                                    <div className="swiper-slide d-flex" key={item.id}>
                                         {/* ✅ SHOP PAGE CARD */}
                                         <Link
                                             href={`/shop/${item.id}`}
+                                            className="d-flex flex-column h-100 w-100"
                                             style={{ textDecoration: "none", color: "inherit" }}
                                         >
-                                            <div className="product-card">
+                                            <div className="product-card d-flex flex-column h-100 w-100">
                                                 <div className="img-wrapper">
                                                     <img src={item.image_urls?.[0] || 'https://via.placeholder.com/300'} alt={item.name} />
 
@@ -161,18 +163,17 @@ export default function BestGameSection() {
                                                     )}
                                                 </div>
 
-                                                <div className="product-info">
-                                                    <h3 className="product-name d-flex justify-content-between">
-                                                        {item.name}
-                                                        <Heart size={18} />
+                                                <div className="product-info d-flex flex-column flex-grow-1">
+                                                    <h3 className="product-name mb-1">
+                                                        <span className="line-clamp-2" title={item.name}>{item.name}</span>
                                                     </h3>
 
-                                                    <span className="product-cat">{item.category_name || 'Controller'}</span>
+                                                    <span className="product-cat mb-2">{item.category_name || 'Controller'}</span>
 
-                                                    <div>
-                                                        <span className="price-new">₹{item.price}</span>
+                                                    <div className="mt-auto">
+                                                        <span className="price-new">{formatPrice(item.price)}</span>
                                                         {item.discount > 0 && (
-                                                            <span className="price-old">₹{item.discount}</span>
+                                                            <span className="price-old">{formatPrice(item.discount)}</span>
                                                         )}
                                                     </div>
                                                 </div>

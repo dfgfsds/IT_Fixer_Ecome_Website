@@ -1,17 +1,17 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import { Home, Heart, Facebook, Twitter, Instagram, Linkedin, Star, Check, Loader2, Minus, Plus } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import { Home, Facebook, Twitter, Instagram, Linkedin, Star, Check, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useProducts } from "@/context/ProductsContext";
 import ShopWithSideCart from "@/components/ShopWithSideCart";
 import { useUser } from "@/context/UserContext";
-import { useRouter } from "next/navigation";
 import { getProductVariantCartItemUpdate } from "@/api-endpoints/products";
 import { updateCartitemsApi, deleteCartitemsApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
 import { useCartItem } from "@/context/CartItemContext";
-import { useQueryClient, InvalidateQueryFilters } from "@tanstack/react-query";
+import { useQuery, useQueryClient, InvalidateQueryFilters } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { getProductWithVariantSizeApi } from "@/api-endpoints/products";
 
 export default function ProductDetails() {
     const { isAuthenticated } = useUser();
@@ -20,29 +20,103 @@ export default function ProductDetails() {
     const { products: apiData, isLoading }: any = useProducts();
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { vendorId } = useVendor();
+    const { cartItem }: any = useCartItem();
     const queryClient = useQueryClient();
 
-    const { cartItem }: any = useCartItem();
+    const [selectedVariant, setSelectedVariant] = useState<any | null>(null);
+    const [selectedSize, setSelectedSize] = useState<any | null>(null);
+    const [activeImgIndex, setActiveImgIndex] = useState(0);
+    const [activeTab, setActiveTab] = useState<"description" | "additional" | "reviews">("description");
+    const [saveInfo, setSaveInfo] = useState(false);
 
-    const foundInCart = cartItem?.data?.find((c: any) => Number(c.product) === Number(id));
-    const cartQty = foundInCart?.quantity || 0;
-    const cartId = foundInCart?.id || null;
+    const { data: singleProductData, isLoading: isProductLoading } = useQuery({
+        queryKey: ['getProductDetails', id],
+        queryFn: () => getProductWithVariantSizeApi(`${id}/`),
+        enabled: !!id
+    });
+
+    const product = singleProductData?.data;
+    const images = product?.image_urls || [];
+
+    const hasVariants = product?.variants?.length > 0;
+    const hasSizes = selectedVariant?.sizes?.length > 0;
+
+    const isSelectionComplete = () => {
+        if (hasVariants && !selectedVariant) return false;
+        if (hasVariants && hasSizes && !selectedSize) return false;
+        return true;
+    };
+
+    const getDisplayPricing = () => {
+        if (selectedSize) {
+            return {
+                price: Number(selectedSize.product_size_price),
+                discount: Number(selectedSize.product_size_discount),
+            };
+        }
+        if (selectedVariant) {
+            return {
+                price: Number(selectedVariant.product_variant_price),
+                discount: Number(selectedVariant.product_variant_discount),
+            };
+        }
+        return {
+            price: Number(product?.price),
+            discount: Number(product?.discount),
+        };
+    };
+
+    const { price, discount } = getDisplayPricing();
+
+    const getMatchingCartItem = () => {
+        if (!cartItem?.data) return null;
+        if (selectedSize) {
+            return cartItem.data.find((item: any) => item.product_size === selectedSize.id);
+        }
+        if (selectedVariant) {
+            return cartItem.data.find((item: any) => item.product_variant === selectedVariant.id);
+        }
+        return cartItem.data.find((item: any) =>
+            !item.product_variant &&
+            !item.product_size &&
+            Number(item.product) === Number(id)
+        );
+    };
+
+    const matchedCartItem = getMatchingCartItem();
+    const cartQty = matchedCartItem?.quantity || 0;
+    const cartId = matchedCartItem?.id || null;
 
     const handleAddToCart = async () => {
         if (!isAuthenticated) return router.push("/login");
+
+        let productPayload = {};
+        if (selectedSize?.id) {
+            productPayload = { product_size: selectedSize.id };
+        } else if (selectedVariant?.id) {
+            productPayload = { product_variant: selectedVariant.id };
+        } else {
+            productPayload = { product: product?.id };
+        }
+
         const payload = {
-            product: Number(id),
             cart: localStorage.getItem('cartId'),
             user: localStorage.getItem('userId'),
             vendor: vendorId,
-            quantity: quantity,
-            created_by: 'user'
+            quantity: 1,
+            created_by: 'user',
+            ...productPayload
         };
+
         try {
             await getProductVariantCartItemUpdate('', payload);
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
+            queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
             setIsCartOpen(true);
-        } catch (e) { toast.error("Error adding to cart"); }
+            toast.success("Added to cart");
+        } catch (e) {
+            toast.error("Error adding to cart");
+        }
     };
 
     const handleUpdateQty = async (id: any, type: 'increase' | 'decrease', currentQty: number) => {
@@ -53,27 +127,16 @@ export default function ProductDetails() {
                 await updateCartitemsApi(`${id}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
+            queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
         } catch (e) { console.error(e); }
     };
 
-    const [activeTab, setActiveTab] = useState<"description" | "additional" | "reviews">("description");
-    const [saveInfo, setSaveInfo] = useState(false);
-    const [quantity, setQuantity] = useState(1);
-    const [activeImgIndex, setActiveImgIndex] = useState(0);
-
-    const product = apiData?.data?.find((p: any) => String(p.id) === String(id));
-    const images = product?.image_urls || [];
-
-    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(e.target.value);
-        if (!isNaN(value) && value >= 1) setQuantity(value);
-    };
-
-    if (isLoading) {
+    if (isLoading || isProductLoading) {
         return (
-            <div className="d-flex flex-column align-items-center justify-content-center" style={{ minHeight: "100vh", backgroundColor: "#0b0e13" }}>
-                <Loader2 className="animate-spin text-success mb-3" size={50} />
-                <p className="text-white">Fetching product details...</p>
+            <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh', backgroundColor: '#0b0e13' }}>
+                <div className="spinner-border" role="status" style={{ color: '#a6d719', width: '3.5rem', height: '3.5rem', borderWidth: '0.3em' }}>
+                    <span className="visually-hidden">Loading...</span>
+                </div>
             </div>
         );
     }
@@ -113,7 +176,7 @@ export default function ProductDetails() {
 
                 <div className="container product-wrapper">
                     <div className="row gx-5">
-                        {/* Images */}
+                        {/* Image Gallery */}
                         <div className="col-lg-6">
                             <div className="product-image-box-dark">
                                 <img src={images[activeImgIndex] || '/assets/img/offcanvas-image.png'} alt={product.name} />
@@ -143,44 +206,73 @@ export default function ProductDetails() {
                                 Category – <span className="reviews-count">{product.category_name}</span>
                             </p>
 
-                            {/* 
-                            <div
-                                className="desc-dark mb-4"
-                                dangerouslySetInnerHTML={{ __html: product.description.substring(0, 150) + "..." }}
-                            /> 
-                            */}
-
-                            <div className="price-row-dark">
+                            <div className="price-row-dark mb-4">
                                 <div>
-                                    <span className="price-dark">₹{product.price}</span>
-                                    {product.discount > 0 && <del className="price-old-dark ms-2">₹{product.discount}</del>}
+                                    <span className="price-dark">₹{price}</span>
+                                    {discount > 0 && price !== discount && (
+                                        <del className="price-old-dark ms-2">₹{discount}</del>
+                                    )}
                                 </div>
-                                <button className="wishlist-btn-dark">
-                                    WISHLIST <Heart size={16} />
-                                </button>
                             </div>
 
+                            {/* --- VARIANTS SECTION --- */}
+                            {hasVariants && (
+                                <div className="variant-selection-section mb-4">
+                                    <h6 className="text-white mb-3 text-uppercase small fw-bold">Select Variant:</h6>
+                                    <div className="d-flex flex-wrap gap-3">
+                                        {product.variants
+                                            .filter((v: any) => v.product_variant_status === true)
+                                            .map((v: any) => (
+                                                <div
+                                                    key={v.id}
+                                                    className={`variant-card ${selectedVariant?.id === v.id ? 'active' : ''}`}
+                                                    onClick={() => {
+                                                        setSelectedVariant(v);
+                                                        setSelectedSize(null);
+                                                        // Optional: If variant has its own gallery, you'd update index here
+                                                    }}
+                                                >
+                                                    <img src={v.product_variant_image_urls?.[0] || images[0]} alt={v.product_variant_title} />
+                                                    <span title={v.product_variant_title}>{v.product_variant_title}</span>
+                                                </div>
+                                            ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* --- SIZES SECTION --- */}
+                            {hasSizes && (
+                                <div className="size-selection-section mb-4">
+                                    <h6 className="text-white mb-3 text-uppercase small fw-bold">Select Size:</h6>
+                                    <div className="d-flex flex-wrap gap-2">
+                                        {selectedVariant.sizes
+                                            .filter((s: any) => s.product_size_status === true)
+                                            .map((s: any) => (
+                                                <button
+                                                    key={s.id}
+                                                    className={`size-pill ${selectedSize?.id === s.id ? 'active' : ''}`}
+                                                    onClick={() => setSelectedSize(s)}
+                                                >
+                                                    {s.product_size}
+                                                </button>
+                                            ))}
+                                    </div>
+                                </div>
+                            )}
+
                             <div className="cart-row-dark">
-                                {!foundInCart ? (
-                                    <>
-                                        {/* <div className="quantity-box-dark">
-                                            <input
-                                                type="number"
-                                                min="1"
-                                                value={quantity}
-                                                onChange={handleQuantityChange}
-                                                onBlur={() => { if (quantity < 1) setQuantity(1); }}
-                                            />
-                                        </div> */}
-                                        <button
-                                            className="add-to-cart-btn-dark"
-                                            onClick={handleAddToCart}
-                                        >
-                                            ADD TO CART
-                                        </button>
-                                    </>
+                                {cartQty === 0 ? (
+                                    <button
+                                        className="add-to-cart-btn-dark"
+                                        onClick={handleAddToCart}
+                                        disabled={!isSelectionComplete()}
+                                    >
+                                        {isSelectionComplete() ? (
+                                            <><ShoppingBag size={18} className="me-2" /> ADD TO CART</>
+                                        ) : "SELECT OPTIONS"}
+                                    </button>
                                 ) : (
-                                    <div className="d-flex align-items-center gap-3 bg-dark p-2 rounded border border-secondary" style={{ minWidth: '150px', justifyContent: 'center' }}>
+                                    <div className="d-flex align-items-center gap-3 bg-dark p-2 rounded border border-secondary" style={{ maxWidth: '180px', justifyContent: 'center' }}>
                                         <button
                                             className="btn btn-sm text-white p-0 d-flex align-items-center"
                                             onClick={() => handleUpdateQty(cartId, 'decrease', cartQty)}
@@ -200,7 +292,7 @@ export default function ProductDetails() {
                                 )}
                             </div>
 
-                            <div className="meta-dark">
+                            <div className="meta-dark mt-4 border-top border-secondary pt-4">
                                 <p><span>SKU</span> {product.product_code || `PRD-${product.id}`}</p>
                                 <p><span>CATEGORY</span> {product.category_name.toUpperCase()}</p>
                                 <p><span>STOCK</span> {product.stock_quantity > 0 ? 'IN STOCK' : 'OUT OF STOCK'}</p>
@@ -218,8 +310,8 @@ export default function ProductDetails() {
                         </div>
                     </div>
 
-                    {/* TABS */}
-                    <div className="product-tabs-dark">
+                    {/* Tabs */}
+                    <div className="product-tabs-dark mt-5">
                         <div className="tab-head-dark">
                             <button className={`tab-btn-dark ${activeTab === "description" ? "active" : ""}`} onClick={() => setActiveTab("description")}>DESCRIPTION</button>
                             <button className={`tab-btn-dark ${activeTab === "additional" ? "active" : ""}`} onClick={() => setActiveTab("additional")}>ADDITIONAL INFO</button>
@@ -251,10 +343,9 @@ export default function ProductDetails() {
                             )}
 
                             {activeTab === "reviews" && (
-                                <div className="reviews-content-dark">
-                                    <h4 className="reviews-title">REVIEWS FOR {product.name.toUpperCase()}</h4>
-                                    <p className="text-secondary mb-4">No reviews yet. Be the first to review!</p>
-
+                                <div className="reviews-content-dark text-secondary">
+                                    <h4 className="reviews-title text-white">REVIEWS FOR {product.name.toUpperCase()}</h4>
+                                    <p className="mb-4">No reviews yet. Be the first to review!</p>
                                     <div className="add-review-section">
                                         <h4 className="add-review-title">ADD A REVIEW</h4>
                                         <p className="add-review-note">Your Email Address Will Not Be Published. Required Fields Are Marked *</p>
