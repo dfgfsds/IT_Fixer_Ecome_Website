@@ -22,7 +22,7 @@ export default function Footer() {
                                     </div>
                                     <div className="gt-footer-content">
                                         <p>
-                                            A game studio crafting exciting, high-quality video games, prioritizing immersive gameplay and mechanics. Hac habitasse platea
+                                            ITFixer offers premium Gaming and Editing PCs & Laptops, engineered for extreme performance, seamless multitasking, and professional-grade results — available at competitive prices.
                                         </p>
                                         <div className="gt-social-icon d-flex align-items-center">
                                             <a href="#"><i className="fa-brands fa-facebook-f"></i></a>
@@ -111,7 +111,7 @@ export default function Footer() {
                     </div>
                     <div className="footer-bottom wow fadeInUp" data-wow-delay=".3s">
                         <div className="footer-wrapper">
-                            <p>© 2026 FT Digital Solutions (Agency). All rights reserved.</p>
+                            <p> © 2026 <a href="https://www.ftdigitalsolutions.in/"> FT Digital Solutions (Agency)</a>. All rights reserved.</p>
                             {/* <ul className="gt-footer-list wow fadeInUp" data-wow-delay=".3s">
                                 <li>
                                     <a href="contact.html">Cookies</a>
