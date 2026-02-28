@@ -41,7 +41,7 @@ export default function ConatctFormSection() {
                             <div className="gt-contact-bg" style={{ backgroundColor: "#1C1D20", padding: "0px", borderRadius: "10px" }}>
                                 <div className="gt-contact-content">
                                     <h3>Need Any Help</h3>
-                                    <p>Need Any Help, Call Us 24/7 Full Support</p>
+                                    <p>Call Us 24/7 Full Support</p>
 
                                     <div className="gt-contact-item" style={{ display: "flex", gap: "25px", alignItems: "center", marginBottom: "30px" }}>
                                         <div className="gt-icon" style={{ width: "50px", height: "50px", display: "flex", alignItems: "center", justifyContent: "center", minWidth: "50px" }}>
@@ -57,7 +57,7 @@ export default function ConatctFormSection() {
                                             <i className="fa-regular fa-envelope"></i>
                                         </div>
                                         <ul className="gt-list" style={{ margin: 0, padding: 0, listStyle: "none" }}>
-                                            <li><a href="mailto:info@itfixer.in" style={{ fontSize: "18px", fontWeight: "700", textTransform: "uppercase" }}>info@itfixer.in</a></li>
+                                            <li><a href="mailto:info@itfixer.in" style={{ fontSize: "18px", fontWeight: "700", textTransform: "lowercase" }}>info@itfixer.in</a></li>
                                         </ul>
                                     </div>
 
