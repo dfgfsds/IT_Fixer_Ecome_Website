@@ -19,7 +19,7 @@ export default function ContactHeroSection() {
                     </div>
                     <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                         <li>
-                            <Home size={16} />
+                            <i className="fa-solid fa-house"></i>
                         </li>
                         <li>
                             <a href="/">

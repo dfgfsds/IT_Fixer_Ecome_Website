@@ -53,9 +53,17 @@ export default function BlogDetailsPage({ params: paramsPromise }: { params: Pro
                                 <h1 className="wow fadeInUp" data-wow-delay=".3s">{post.title}</h1>
                             </div>
                             <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
-                                <li><Home size={16} /></li>
-                                <li><Link href="/">home :</Link></li>
-                                <li className="color">Blog Details</li>
+                                <li>
+                                    <i className="fa-solid fa-house"></i>
+                                </li>
+                                <li>
+                                    <a href="/">
+                                        home :
+                                    </a>
+                                </li>
+                                <li className="color">
+                                    Blog Details
+                                </li>
                             </ul>
                         </div>
                     </div>
