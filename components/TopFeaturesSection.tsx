@@ -16,7 +16,7 @@ export default function TopFeaturesSection() {
                             <div className="gt-top-feature-content">
                                 <div className="section-title mb-0">
                                     <h6 className="wow fadeInUp">top features</h6>
-                                    <h2 className="wow fadeInUp" data-wow-delay=".3s">
+                                    <h2 className="wow fadeInUp text-uppercase" data-wow-delay=".3s">
                                         Powerful Performance. Perfect Gameplay.
                                     </h2>
                                 </div>

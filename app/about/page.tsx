@@ -11,7 +11,6 @@ import BrandSection from "@/components/BrandSection";
 export default function AboutPage() {
     return (
         <div>
-
             <div id="smooth-content">
                 <AboutHeroSection />
                 <GamingZoneSection />
@@ -20,10 +19,8 @@ export default function AboutPage() {
                 <AboutTestimonialSection />
                 {/* <ImageSliderSection /> */}
                 <AboutBrandSection />
-              
                 <TriggerSection />
             </div>
-
         </div>
     );
 }

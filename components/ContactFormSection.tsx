@@ -1,4 +1,44 @@
+"use client";
+import { useState } from "react";
+import axios from "axios";
+import ApiUrls from "@/api-endpoints/ApiUrls";
+//import toast from "react-hot-toast";
+import { useVendor } from "@/context/VendorContext";
+
 export default function ConatctFormSection() {
+    const { vendorId } = useVendor();
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        contact_number: "",
+        description: "",
+    });
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        if (name === "contact_number") {
+            const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+            setForm({ ...form, contact_number: digitsOnly });
+        } else {
+            setForm({ ...form, [name]: value });
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            await axios.post(ApiUrls?.sendQuoteRequest, { ...form, vendor_id: vendorId });
+            //toast.success("Message sent successfully ✅");
+            setForm({ name: "", email: "", contact_number: "", description: "" });
+        } catch (err: any) {
+            //toast.error(err?.response?.data?.message || "Something went wrong, try again later");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <section className="gt-contact-us-section section-padding fix">
             <div className="container">
@@ -8,29 +48,69 @@ export default function ConatctFormSection() {
                             <div className="gt-comment-form-wrap">
                                 <h4>We're Here to Help!</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
-                                <form action="contact.php" id="contact-form" method="POST">
+                                <form id="contact-form" onSubmit={handleSubmit}>
                                     <div className="row g-4">
-                                        <div className="col-lg-6">
+                                        <div className="col-lg-12">
                                             <div className="form-clt">
                                                 <span>Your Name</span>
-                                                <input type="text" name="name" id="name" placeholder="Your Name" />
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    id="name"
+                                                    placeholder="Your Name"
+                                                    value={form.name}
+                                                    onChange={handleChange}
+                                                />
                                             </div>
                                         </div>
-                                        <div className="col-lg-6">
+                                        <div className="col-lg-12">
                                             <div className="form-clt">
                                                 <span>Your Email</span>
-                                                <input type="text" name="email" id="email6" placeholder="Your Email" />
+                                                <input
+                                                    type="text"
+                                                    name="email"
+                                                    id="email6"
+                                                    placeholder="Your Email"
+                                                    value={form.email}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-12">
+                                            <div className="form-clt">
+                                                <span>Mobile Number</span>
+                                                <input
+                                                    type="tel"
+                                                    name="contact_number"
+                                                    id="contact_number"
+                                                    placeholder="Your Mobile Number"
+                                                    value={form.contact_number}
+                                                    onChange={handleChange}
+                                                    maxLength={10}
+                                                    inputMode="numeric"
+                                                    pattern="[0-9]{10}"
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-lg-12">
                                             <div className="form-clt">
                                                 <span>write message</span>
-                                                <textarea name="message" id="message" placeholder="Type your message"></textarea>
+                                                <textarea
+                                                    name="description"
+                                                    id="message"
+                                                    placeholder="Type your message"
+                                                    value={form.description}
+                                                    onChange={handleChange}
+                                                ></textarea>
                                             </div>
                                         </div>
                                         <div className="col-lg-6">
-                                            <button type="submit" className="theme-btn boder-10">
-                                                Send Message
+                                            <button
+                                                type="submit"
+                                                className="theme-btn boder-10"
+                                                disabled={loading}
+                                            >
+                                                {loading ? "Sending..." : "Send Message"}
                                             </button>
                                         </div>
                                     </div>

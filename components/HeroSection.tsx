@@ -35,9 +35,11 @@ export default function HeroSection() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="hero-content">
-                            <span className="sub-title subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">BEST GAMING & EDITING PC SHOP IN CHENNAI . . .</span>
+                            <span className="sub-title subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">BEST GAMING & EDITING PC SHOP IN CHENNAI</span>
                             <h1 className="hero_title tv_hero_title hero_title_1">
-                                GAMING & EDITING<span> HIGH-PERFORMANCE <br/> PCs & LAPTOPS</span>
+                                <span style={{ display: "block", color: "#cbfe1c" }}>GAMING &amp; EDITING</span>
+                                <span style={{ display: "block" }}>HIGH-PERFORMANCE</span>
+                                <span style={{ display: "block" }}>PCs &amp; LAPTOPS</span>
                             </h1>
                             <div className="hero-sub-content">
                                 <p className="wow fadeInUp" data-wow-delay=".5s">

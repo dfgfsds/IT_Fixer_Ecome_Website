@@ -33,24 +33,26 @@ export default function TrendingSection() {
                                 <img src="/assets/img/Trending/2.png" alt="img" className="gt-match-thumb" />
                             </div>
                             <div className="gt-watch-now-items">
-                                <span>Watch live on</span>
+                                <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="#">
+                                        <a href="/shop">
                                             <ShoppingCart size={18} className="fa-brands" /> Buy Now
                                         </a>
 
+                                        {/* 
                                         <a href="#">
                                             <Settings size={18} className="fa-brands" /> Customize
-                                        </a>
+                                        </a> 
+                                        */}
                                     </li>
 
                                     <li>
-                                        <a href="#">
+                                        <a href="https://wa.me/918585858768?text=Hello%20IT%20Fixer!%20I%20am%20interested%20in%20your%20IT%20services." target="_blank" rel="noopener noreferrer">
                                             <MessageCircle size={18} className="fa-brands" /> WhatsApp
                                         </a>
 
-                                        <a href="#">
+                                        <a href="tel:+918585858768">
                                             <Phone size={18} className="fa-brands" /> Call Us
                                         </a>
                                     </li>
@@ -90,24 +92,26 @@ export default function TrendingSection() {
                                 <img src="/assets/img/Trending/4.png" alt="img" className="gt-match-thumb" />
                             </div>
                             <div className="gt-watch-now-items">
-                                <span>Watch live on</span>
+                                <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="#">
+                                        <a href="/shop">
                                             <ShoppingCart size={18} /> Buy Now
                                         </a>
 
+                                        {/* 
                                         <a href="#">
                                             <Settings size={18} /> Customize
-                                        </a>
+                                        </a> 
+                                        */}
                                     </li>
 
                                     <li>
-                                        <a href="#">
+                                        <a href="https://wa.me/918585858768?text=Hello%20IT%20Fixer!%20I%20am%20interested%20in%20your%20IT%20services." target="_blank" rel="noopener noreferrer">
                                             <MessageCircle size={18} /> WhatsApp
                                         </a>
 
-                                        <a href="#">
+                                        <a href="tel:+918585858768">
                                             <Phone size={18} /> Call Us
                                         </a>
                                     </li>
@@ -123,24 +127,26 @@ export default function TrendingSection() {
                                 <img src="/assets/img/Trending/6.png" alt="img" className="gt-match-thumb" />
                             </div>
                             <div className="gt-watch-now-items">
-                                <span>Watch live on</span>
+                                <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="#">
+                                        <a href="/shop">
                                             <ShoppingCart size={18} /> Buy Now
                                         </a>
 
+                                        {/* 
                                         <a href="#">
                                             <Settings size={18} /> Customize
-                                        </a>
+                                        </a> 
+                                        */}
                                     </li>
 
                                     <li>
-                                        <a href="#">
+                                        <a href="https://wa.me/918585858768?text=Hello%20IT%20Fixer!%20I%20am%20interested%20in%20your%20IT%20services." target="_blank" rel="noopener noreferrer">
                                             <MessageCircle size={18} /> WhatsApp
                                         </a>
 
-                                        <a href="#">
+                                        <a href="tel:+918585858768">
                                             <Phone size={18} /> Call Us
                                         </a>
                                     </li>
