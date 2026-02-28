@@ -167,8 +167,17 @@ export default function ProductDetails() {
                                 <h1 className="wow fadeInUp" data-wow-delay=".3s">{product.name}</h1>
                             </div>
                             <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
-                                <li><a href="/" className="d-inline-flex align-items-center gap-1"><Home size={16} /> home :</a></li>
-                                <li className="color">Shop Details</li>
+                                <li>
+                                    <i className="fa-solid fa-house"></i>
+                                </li>
+                                <li>
+                                    <a href="/">
+                                        home :
+                                    </a>
+                                </li>
+                                <li className="color">
+                                    Shop Details
+                                </li>
                             </ul>
                         </div>
                     </div>
