@@ -204,7 +204,7 @@ export default function Header() {
                                         <Search size={20} className="text-white cursor-pointer" />
                                     </a>
 
-                                    <div className="header-button header-cart-btn ms-2 me-3" style={{ position: 'relative' }}>
+                                    <div className="header-button header-cart-btn ms-2 me-2 me-sm-3" style={{ position: 'relative' }}>
                                         <Link href={isAuthenticated ? "/cart" : "/login"} className="text-white">
                                             <ShoppingCart size={20} />
                                             {cartCount > 0 && (
