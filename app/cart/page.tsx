@@ -60,7 +60,7 @@ export default function CartPage() {
     const handleSelectAddress = async (address: any) => {
         try {
             await patchUserSelectAddressAPi(`user/${userId}/address/${address.id}`, {
-                updated_by: user?.data?.name,
+                updated_by: user?.data?.name ? user?.data?.name : "user",
                 vendor_id: vendorId
             });
             queryClient.invalidateQueries(["getAddressData"] as InvalidateQueryFilters);

@@ -8813,9 +8813,35 @@ span {
   background: linear-gradient(90deg, #CBFE1C 0%, #5A7501 100%);
 }
 
+.header-2 .header-main .header-right .header-right-icon .header-user-icon-mobile {
+  display: none;
+  align-items: center;
+}
+
 @media (max-width: 1199px) {
   .header-2 .header-main .header-right .header-right-icon .header-button {
     display: none;
+  }
+
+  .header-2 .header-main .header-right .header-right-icon .header-cart-btn {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-2 .header-main .header-right .header-right-icon .header-login-btn {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-2 .header-main .header-right .header-right-icon .header-login-btn {
+    display: none !important;
+  }
+
+  .header-2 .header-main .header-right .header-right-icon .header-user-icon-mobile {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -10765,12 +10791,13 @@ span {
   .hero-2 .hero-content .sub-title {
     font-size: 14px;
     letter-spacing: 1.2px;
-      line-height: 1.5;
+    line-height: 1.5;
   }
 }
 
 .hero-2 .hero-content h1 {
   line-height: 100%;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
   font-size: 74px !important;
   color: #CBFE1C;
@@ -10778,44 +10805,45 @@ span {
 
 @media (max-width: 1600px) {
   .hero-2 .hero-content h1 {
-      font-size: 68px !important;
+    font-size: 68px !important;
   }
 }
 
 @media (max-width: 1399px) {
   .hero-2 .hero-content h1 {
-     font-size: 68px !important;
+    font-size: 68px !important;
   }
 }
 
 @media (max-width: 1199px) {
   .hero-2 .hero-content h1 {
     line-height: 130%;
-     font-size: 68px !important;
+    font-size: 68px !important;
   }
 }
 
 @media (max-width: 991px) {
   .hero-2 .hero-content h1 {
-    font-size: 60px;
+    font-size: 60px !important;
   }
 }
 
 @media (max-width: 767px) {
   .hero-2 .hero-content h1 {
-    font-size: 69px;
+    font-size: 69px !important;
   }
 }
 
 @media (max-width: 575px) {
   .hero-2 .hero-content h1 {
-    font-size: 44px;
+    font-size: 44px !important;
   }
 }
 
 @media (max-width: 470px) {
   .hero-2 .hero-content h1 {
-    font-size: 26x;
+    font-size: 32px !important;
+
     line-height: 108%;
   }
 }
