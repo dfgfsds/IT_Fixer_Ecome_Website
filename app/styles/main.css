@@ -8785,6 +8785,12 @@ span {
   }
 }
 
+@media (max-width: 600px) {
+  .header-2 .header-main .header-right .header-right-icon {
+    gap: 20px;
+  }
+}
+
 .header-2 .header-main .header-right .header-right-icon .header-button .theme-btn.style-2 {
   background: #fff;
   padding-left: 15px;
@@ -9416,6 +9422,7 @@ span {
   z-index: 9;
   font-weight: 400;
   text-transform: capitalize;
+  letter-spacing: 0.6px !important;
 }
 
 @media (max-width: 1199px) {
