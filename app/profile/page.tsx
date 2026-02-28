@@ -280,7 +280,7 @@ function ProfileContent() {
                             {/* Addresses Tab */}
                             {activeTab === "addresses" && (
                                 <div className="animation-fade-in">
-                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "28px" }}>
+                                    <div className="d-flex flex-row flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 mb-4">
                                         <h3 style={{ color: "#a6d719", margin: 0 }}>My Addresses</h3>
                                         <button
                                             onClick={() => { setEditData(null); setAddressModal(true); }}
@@ -288,7 +288,7 @@ function ProfileContent() {
                                             style={{ padding: "10px 22px", fontSize: "13px", display: "flex", alignItems: "center", gap: "8px" }}
                                         >
                                             <Plus size={16} />
-                                            Add New Address
+                                            Add Address
                                         </button>
                                     </div>
 
@@ -349,31 +349,34 @@ function ProfileContent() {
                                                             <div style={{ borderTop: "1px solid #1e2538", margin: "16px 0" }} />
 
 
-                                                            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
-                                                                <button
-                                                                    onClick={() => { setEditData(address); setAddressModal(true); }}
-                                                                    style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#ccc", borderRadius: "6px", cursor: "pointer", fontSize: "13px", transition: "all 0.2s" }}
-                                                                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#a6d719"; (e.currentTarget as HTMLButtonElement).style.color = "#a6d719"; }}
-                                                                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#2a2d3a"; (e.currentTarget as HTMLButtonElement).style.color = "#ccc"; }}
-                                                                >
-                                                                    <Pencil size={13} /> Edit
-                                                                </button>
+                                                            <div className="d-flex flex-wrap align-items-center gap-2">
+                                                                <div className="d-flex gap-2 w-100 w-md-auto">
+                                                                    <button
+                                                                        onClick={() => { setEditData(address); setAddressModal(true); }}
+                                                                        style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#ccc", borderRadius: "6px", cursor: "pointer", fontSize: "13px", transition: "all 0.2s" }}
+                                                                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#a6d719"; (e.currentTarget as HTMLButtonElement).style.color = "#a6d719"; }}
+                                                                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#2a2d3a"; (e.currentTarget as HTMLButtonElement).style.color = "#ccc"; }}
+                                                                    >
+                                                                        <Pencil size={13} /> Edit
+                                                                    </button>
 
-                                                                <button
-                                                                    onClick={() => { setDeleteId(address.id); setDeleteModal(true); }}
-                                                                    style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#ccc", borderRadius: "6px", cursor: "pointer", fontSize: "13px", transition: "all 0.2s" }}
-                                                                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#ef4444"; (e.currentTarget as HTMLButtonElement).style.color = "#ef4444"; }}
-                                                                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#2a2d3a"; (e.currentTarget as HTMLButtonElement).style.color = "#ccc"; }}
-                                                                >
-                                                                    <Trash size={13} /> Remove
-                                                                </button>
+                                                                    <button
+                                                                        onClick={() => { setDeleteId(address.id); setDeleteModal(true); }}
+                                                                        style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#ccc", borderRadius: "6px", cursor: "pointer", fontSize: "13px", transition: "all 0.2s" }}
+                                                                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#ef4444"; (e.currentTarget as HTMLButtonElement).style.color = "#ef4444"; }}
+                                                                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#2a2d3a"; (e.currentTarget as HTMLButtonElement).style.color = "#ccc"; }}
+                                                                    >
+                                                                        <Trash size={13} /> Remove
+                                                                    </button>
+                                                                </div>
 
                                                                 {!address.selected_address && (
                                                                     <button
                                                                         onClick={() => handleSelectDefault(address)}
-                                                                        style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "", border: "1px solid rgba(166,215,25,0.3)", color: "#a6d719", borderRadius: "6px", cursor: "pointer", fontSize: "13px", marginLeft: "auto", transition: "all 0.2s" }}
+                                                                        className="ms-auto"
+                                                                        style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid rgba(166,215,25,0.3)", color: "#a6d719", borderRadius: "6px", cursor: "pointer", fontSize: "13px", marginLeft: "auto", transition: "all 0.2s" }}
                                                                         onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(166,215,25,0.18)"; }}
-                                                                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(166,215,25,0.08)"; }}
+                                                                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; }}
                                                                     >
                                                                         Set as Default
                                                                     </button>
