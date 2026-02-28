@@ -111,8 +111,17 @@ export default function ShopPage() {
                                 <h1 className="wow fadeInUp" data-wow-delay=".3s">Shop</h1>
                             </div>
                             <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
-                                <li><a href="/" className="d-inline-flex align-items-center gap-1"><Home size={16} className="mb-[1px]" />home :</a></li>
-                                <li className="color">Shop</li>
+                                <li>
+                                    <i className="fa-solid fa-house"></i>
+                                </li>
+                                <li>
+                                    <a href="/">
+                                        home :
+                                    </a>
+                                </li>
+                                <li className="color">
+                                    Shop
+                                </li>
                             </ul>
                         </div>
                     </div>
