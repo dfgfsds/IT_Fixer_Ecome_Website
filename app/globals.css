@@ -269,6 +269,7 @@ body {
 .address-form-scroll::-webkit-scrollbar {
   display: none;
 }
+
 /* Variant and Size selection */
 .variant-card {
   width: 100px;
@@ -280,13 +281,16 @@ body {
   transition: all 0.3s ease;
   text-align: center;
 }
+
 .variant-card:hover {
   border-color: #a6d719;
 }
+
 .variant-card.active {
   border-color: #a6d719;
   background: rgba(166, 215, 25, 0.05);
 }
+
 .variant-card img {
   width: 100%;
   aspect-ratio: 1;
@@ -294,6 +298,7 @@ body {
   border-radius: 4px;
   margin-bottom: 8px;
 }
+
 .variant-card span {
   font-size: 11px;
   color: #fff;
@@ -315,10 +320,12 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
 .size-pill:hover {
   border-color: #a6d719;
   color: #a6d719;
 }
+
 .size-pill.active {
   background: #a6d719;
   border-color: #a6d719;
@@ -332,4 +339,60 @@ body {
   filter: grayscale(1);
   background: #2a2d3a !important;
   color: #9ca3af !important;
+}
+
+.floating-whatsapp {
+  position: fixed;
+  bottom: 90px;
+  right: 28px;
+  z-index: 9999;
+  background-color: #1DA851 !important;
+  color: white !important;
+  padding: 12px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+  width: 50px;
+  height: 50px;
+}
+
+.floating-whatsapp:hover {
+  background-color: #1ebd59 !important;
+  transform: scale(1.1);
+}
+
+.floating-call {
+  position: fixed;
+  bottom: 155px;
+  right: 28px;
+  z-index: 9999;
+  background-color: #007bff !important;
+  color: white !important;
+  padding: 12px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+  width: 50px;
+  height: 50px;
+}
+
+.floating-call:hover {
+  background-color: #0056b3 !important;
+  transform: scale(1.1);
+}
+
+.floating-whatsapp.shift-up {
+  bottom: 80px;
+}
+
+.floating-call.shift-up {
+  bottom: 145px;
 }

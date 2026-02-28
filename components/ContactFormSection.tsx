@@ -38,43 +38,47 @@ export default function ConatctFormSection() {
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <div className="gt-contact-bg bg-cover" style={{ backgroundImage: "url(assets/img/inner-page/match-details/bg.jpg)" }}>
+                            <div className="gt-contact-bg" style={{ backgroundColor: "#1C1D20", padding: "0px", borderRadius: "10px" }}>
                                 <div className="gt-contact-content">
                                     <h3>Need Any Help</h3>
-                                    <p>Nees Any Help, Call Us  24/7 Full Support</p>
-                                    <div className="gt-contact-item">
-                                        <div className="gt-icon">
+                                    <p>Call Us 24/7 Full Support</p>
+
+                                    <div className="gt-contact-item" style={{ display: "flex", gap: "25px", alignItems: "center", marginBottom: "30px" }}>
+                                        <div className="gt-icon" style={{ width: "50px", height: "50px", display: "flex", alignItems: "center", justifyContent: "center", minWidth: "50px" }}>
                                             <i className="fa-solid fa-phone"></i>
                                         </div>
-                                        <ul className="gt-list">
-                                            <li><span>Call Us:</span></li>
-                                            <li><a href="tel:+0094382229540">+0 1234567899</a></li>
+                                        <ul className="gt-list" style={{ margin: 0, padding: 0, listStyle: "none" }}>
+                                            <li><a href="tel:+918585858768" style={{ fontSize: "18px", fontWeight: "700" }}>+91 8585858768</a></li>
                                         </ul>
                                     </div>
-                                    <div className="gt-contact-item">
-                                        <div className="gt-icon">
+
+                                    <div className="gt-contact-item" style={{ display: "flex", gap: "25px", alignItems: "center", marginBottom: "30px" }}>
+                                        <div className="gt-icon" style={{ width: "50px", height: "50px", display: "flex", alignItems: "center", justifyContent: "center", minWidth: "50px" }}>
                                             <i className="fa-regular fa-envelope"></i>
                                         </div>
-                                        <ul className="gt-list">
-                                            <li><span>Mail Us</span></li>
-                                            <li><a href="infor@xridergamil.com">
-                                                mail@gmail.com
-                                            </a></li>
+                                        <ul className="gt-list" style={{ margin: 0, padding: 0, listStyle: "none" }}>
+                                            <li><a href="mailto:info@itfixer.in" style={{ fontSize: "18px", fontWeight: "700", textTransform: "lowercase" }}>info@itfixer.in</a></li>
                                         </ul>
                                     </div>
-                                    <div className="gt-contact-item mb-0">
-                                        <div className="gt-icon">
+
+                                    <div className="gt-contact-item mb-0" style={{ display: "flex", gap: "25px", alignItems: "start" }}>
+                                        <div className="gt-icon" style={{ width: "50px", height: "50px", display: "flex", alignItems: "center", justifyContent: "center", minWidth: "50px" }}>
                                             <i className="fa-solid fa-location-dot"></i>
                                         </div>
-                                        <ul className="gt-list">
-                                            <li><span>Location:</span></li>
-                                            <li>Chennai, Tamil Nadu, India</li>
+                                        <ul className="gt-list" style={{ margin: 0, padding: 0, listStyle: "none" }}>
+                                            <li>
+                                                <a
+                                                    href="https://www.google.com/maps/search/?api=1&query=Chennai,+Tamil+Nadu,+India"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.5", display: "block" }}
+                                                >
+                                                    New No 29, Old No 31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp to Kasi Theatre), Ashok Nagar, Chennai 600083
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="gt-bg-image">
-                                <img src="assets/img/inner-page/contact-bg.jpg" alt="img" />
                             </div>
                         </div>
                     </div>

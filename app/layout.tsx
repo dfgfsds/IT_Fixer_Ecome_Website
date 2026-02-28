@@ -20,6 +20,8 @@ import BootstrapClient from '@/components/BootstrapClient';
 import Scripts from '@/components/Scripts';
 import FooterPage from '@/components/Footer';
 import Providers from './providers';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import FloatingCallButton from '@/components/FloatingCallButton';
 
 export const metadata: Metadata = {
   title: 'IT Fixer - IT Services & Technology Next.js Template',
@@ -39,6 +41,8 @@ export default function RootLayout({
       <body>
         <Providers>
           <BootstrapClient />
+          <FloatingWhatsApp />
+          <FloatingCallButton />
           <Header />
           <main>{children}</main>
           <FooterPage />
