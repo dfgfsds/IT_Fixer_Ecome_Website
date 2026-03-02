@@ -1,9 +1,16 @@
+html,
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  max-width: 100%;
   overflow-x: hidden;
 }
 
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden !important;
+  }
+}
 
 /* FULL SCREEN AUTH */
 .auth-wrapper {
