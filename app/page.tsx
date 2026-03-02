@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+
 import HeroSection from "@/components/HeroSection";
 import BrandSection from "@/components/BrandSection";
 import AboutSection from "@/components/AboutSection";
@@ -60,6 +61,7 @@ export default function Home() {
                 <HeroSection />
                 <BrandSection />
                 <AboutSection />
+
                 {/* <VideoSection /> */}
                 <BestGameSection />
                 <TrendingSection />

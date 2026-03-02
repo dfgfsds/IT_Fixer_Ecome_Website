@@ -1,6 +1,9 @@
+html,
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 
@@ -395,4 +398,10 @@ body {
 
 .floating-call.shift-up {
   bottom: 145px;
+}
+
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden !important;
+  }
 }
