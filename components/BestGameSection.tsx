@@ -74,8 +74,10 @@ export default function BestGameSection() {
                                 type: "progressbar"
                             },
                             navigation: {
-                                nextEl: ".array-next",
-                                prevEl: ".array-prev",
+                                // nextEl: ".array-next",
+                                // prevEl: ".array-prev",
+                                nextEl: ".game-slider-pagination .array-next",
+                                prevEl: ".game-slider-pagination .array-prev",
                             },
                             breakpoints: {
                                 1199: { slidesPerView: 3.9 },
