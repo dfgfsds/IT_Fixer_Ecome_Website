@@ -10,8 +10,7 @@ export default function TrendingSection() {
             </div>
             <div className="container">
                 <div className="section-title-2 text-center">
-                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Top Trending Gaming Builds
-                    </h6>
+                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Top Trending Gaming Builds</h6>
                     <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
                         Upcoming Gaming Offers
                     </h2>
@@ -34,7 +33,7 @@ export default function TrendingSection() {
                                 <img src="/assets/img/Trending/2.png" alt="img" className="gt-match-thumb" />
                             </div>
                             <div className="gt-watch-now-items">
-                                <span>Visit It Fixer Today</span>
+                                <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
                                         <a href="/shop">
@@ -74,7 +73,7 @@ export default function TrendingSection() {
                         </div>
                     </div>
                     <div className="trending-match-items gt-project-panel">
-                        <div className="trending-match-content">
+                        <div className="trending-match-content order-2 order-md-1">
 
                             <h3>
                                 <a href="#">
@@ -86,35 +85,34 @@ export default function TrendingSection() {
                                 Performance, cooling & budget — everything built your way.
                             </p>
                         </div>
-                        <div className="trending-match-left">
+                        <div className="trending-match-left order-1 order-md-2">
                             <div className="gt-match-logo">
                                 <img src="/assets/img/Trending/3.png" alt="img" className="gt-match-thumb" />
                                 <img src="assets/img/home-2/match/vs.png" alt="img" />
                                 <img src="/assets/img/Trending/4.png" alt="img" className="gt-match-thumb" />
-
                             </div>
                             <div className="gt-watch-now-items">
-                                <span>Visit It Fixer Today</span>
+                                <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
                                         <a href="/shop">
-                                            <ShoppingCart size={18} className="fa-brands" /> Buy Now
+                                            <ShoppingCart size={18} /> Buy Now
                                         </a>
 
 
                                         <a href="/categories">
-                                            <LayoutGrid size={18} className="fa-brands" /> Categories
+                                            <LayoutGrid size={18} /> Categories
                                         </a>
 
                                     </li>
 
                                     <li>
                                         <a href="https://wa.me/918585858768?text=Hello%20IT%20Fixer!%20I%20am%20interested%20in%20your%20IT%20services." target="_blank" rel="noopener noreferrer">
-                                            <MessageCircle size={18} className="fa-brands" /> WhatsApp
+                                            <MessageCircle size={18} /> WhatsApp
                                         </a>
 
                                         <a href="tel:+918585858768">
-                                            <Phone size={18} className="fa-brands" /> Call Us
+                                            <Phone size={18} /> Call Us
                                         </a>
                                     </li>
                                 </ul>
@@ -127,30 +125,29 @@ export default function TrendingSection() {
                                 <img src="/assets/img/Trending/5.png" alt="img" className="gt-match-thumb" />
                                 <img src="assets/img/home-2/match/vs.png" alt="img" />
                                 <img src="/assets/img/Trending/6.png" alt="img" className="gt-match-thumb" />
-
                             </div>
                             <div className="gt-watch-now-items">
-                                <span>Visit It Fixer Today</span>
+                                <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
                                         <a href="/shop">
-                                            <ShoppingCart size={18} className="fa-brands" /> Buy Now
+                                            <ShoppingCart size={18} /> Buy Now
                                         </a>
 
 
                                         <a href="/categories">
-                                            <LayoutGrid size={18} className="fa-brands" /> Categories
+                                            <LayoutGrid size={18} /> Categories
                                         </a>
 
                                     </li>
 
                                     <li>
                                         <a href="https://wa.me/918585858768?text=Hello%20IT%20Fixer!%20I%20am%20interested%20in%20your%20IT%20services." target="_blank" rel="noopener noreferrer">
-                                            <MessageCircle size={18} className="fa-brands" /> WhatsApp
+                                            <MessageCircle size={18} /> WhatsApp
                                         </a>
 
                                         <a href="tel:+918585858768">
-                                            <Phone size={18} className="fa-brands" /> Call Us
+                                            <Phone size={18} /> Call Us
                                         </a>
                                     </li>
                                 </ul>
