@@ -163,8 +163,10 @@
                 },
 
                 navigation: {
-                    nextEl: ".array-prev",
-                    prevEl: ".array-next",
+                    // nextEl: ".array-prev",
+                    // prevEl: ".array-next",
+                    nextEl: ".game-slider-pagination .array-next",
+                    prevEl: ".game-slider-pagination .array-prev",
                 },
 
                 breakpoints: {
@@ -233,7 +235,7 @@
                 effect: "cube",
                 grabCursor: true,
                 cubeEffect: {
-                    shadow: true,
+                    shadow: false,
                     slideShadows: true,
                     shadowOffset: 20,
                     shadowScale: 0.94,
@@ -243,8 +245,10 @@
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: ".array-prev",
-                    prevEl: ".array-next",
+                    // nextEl: ".array-prev",
+                    // prevEl: ".array-next",
+                    nextEl: ".testi-pagi .array-next",
+                    prevEl: ".testi-pagi .array-prev",
                 },
 
                 on: {
@@ -709,56 +713,6 @@
                         slidesPerView: 1,
                     },
                 },
-            });
-        }
-
-        //>>  Testimonial Slider Start <<//
-        //>>  Testimonial Slider Start <<//
-        if ($('.tetsimonial-slider-2').length > 0) {
-            const tetsimonialSlider2 = new Swiper(".tetsimonial-slider-2", {
-                spaceBetween: 30,
-                speed: 1500,
-                loop: true,
-                slidesPerView: 1,
-                effect: "cube",
-                grabCursor: true,
-                cubeEffect: {
-                    shadow: true,
-                    slideShadows: true,
-                    shadowOffset: 20,
-                    shadowScale: 0.94,
-                },
-                autoplay: {
-                    delay: 2000,
-                    disableOnInteraction: false,
-                },
-                navigation: {
-                    nextEl: ".array-prev",
-                    prevEl: ".array-next",
-                },
-
-                on: {
-                    init: function () {
-                        let total = this.slides.length - this.loopedSlides * 2;
-                        const totalEl = document.querySelector(".testimonial-pagination .total");
-                        const currentEl = document.querySelector(".testimonial-pagination .current");
-
-                        if (totalEl) {
-                            totalEl.textContent = String(total).padStart(2, "0");
-                        }
-                        if (currentEl) {
-                            currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
-                            currentEl.classList.add("active");
-                        }
-                    },
-                    slideChange: function () {
-                        const currentEl = document.querySelector(".testimonial-pagination .current");
-                        if (currentEl) {
-                            currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
-                            currentEl.classList.add("active");
-                        }
-                    }
-                }
             });
         }
 

@@ -9158,6 +9158,7 @@ span {
   overflow-y: scroll;
   overscroll-behavior-y: contain;
   scrollbar-width: none;
+  visibility: hidden;
 }
 
 .offcanvas__info::-webkit-scrollbar {
@@ -9185,6 +9186,7 @@ span {
   -ms-transform: translateX(0);
   -o-transform: translateX(0);
   transform: translateX(0);
+  visibility: visible;
 }
 
 .offcanvas__wrapper {
@@ -18975,6 +18977,10 @@ span {
   .testimonial-box-items-2 .border-shape {
     display: none;
   }
+}
+
+.testimonial-box-items-2 .testimonial-box-slider {
+  background-color: #0B0E13;
 }
 
 .testimonial-box-items-2 .testimonial-box-slider .quote-icon {

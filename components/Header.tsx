@@ -157,7 +157,7 @@ export default function Header() {
                             </div>
                             <div className="header-right d-flex justify-content-end align-items-center mt-0">
                                 <div className="mean__menu-wrapper">
-                                    <div className="main-menu">
+                                    <div className="main-menu d-none d-xl-block">
                                         <nav id="mobile-menu">
                                             <ul>
                                                 <li className="has-dropdown active menu-thumb">
@@ -245,7 +245,7 @@ export default function Header() {
                                             <User size={22} />
                                         </Link>
                                     </div>
-                                    <div className="header__hamburger d-xl-none d-xl-block my-auto">
+                                    <div className="header__hamburger d-block d-xl-none my-auto">
                                         <div className="sidebar__toggle">
                                             <img src="/assets/img/logo/dot-ber.svg" alt="" />
                                         </div>
