@@ -16,7 +16,7 @@ export default function TriggerSection() {
                     <div className="contact-right wow fadeInUp" data-wow-delay=".7s">
                         <div className="contact-info">
                             <h3>call us</h3>
-                            <p><a href="tel:+91032145609870">+91 0321 4560 9870</a></p>
+                            <p><a href="tel:+918585858768">+91 8585858768</a></p>
                         </div>
                         <a href="/contact" className="theme-btn">
                             get started

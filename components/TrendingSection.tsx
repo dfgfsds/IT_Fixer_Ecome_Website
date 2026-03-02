@@ -1,4 +1,4 @@
-import { ShoppingCart, Settings, Phone, MessageCircle } from "lucide-react";
+import { ShoppingCart, LayoutGrid, Phone, MessageCircle } from "lucide-react";
 export default function TrendingSection() {
     return (
         <section className="trending-match-section gt-project-area fix section-padding pt-0">
@@ -37,21 +37,23 @@ export default function TrendingSection() {
                                 <span>Visit It Fixer Today</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="#">
+                                        <a href="/shop">
                                             <ShoppingCart size={18} className="fa-brands" /> Buy Now
                                         </a>
 
-                                        <a href="#">
-                                            <Settings size={18} className="fa-brands" /> Customize
+
+                                        <a href="/categories">
+                                            <LayoutGrid size={18} className="fa-brands" /> Categories
                                         </a>
+
                                     </li>
 
                                     <li>
-                                        <a href="#">
+                                        <a href="https://wa.me/918585858768?text=Hello%20IT%20Fixer!%20I%20am%20interested%20in%20your%20IT%20services." target="_blank" rel="noopener noreferrer">
                                             <MessageCircle size={18} className="fa-brands" /> WhatsApp
                                         </a>
 
-                                        <a href="#">
+                                        <a href="tel:+918585858768">
                                             <Phone size={18} className="fa-brands" /> Call Us
                                         </a>
                                     </li>
@@ -95,21 +97,23 @@ export default function TrendingSection() {
                                 <span>Visit It Fixer Today</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="#">
+                                        <a href="/shop">
                                             <ShoppingCart size={18} className="fa-brands" /> Buy Now
                                         </a>
 
-                                        <a href="#">
-                                            <Settings size={18} className="fa-brands" /> Customize
+
+                                        <a href="/categories">
+                                            <LayoutGrid size={18} className="fa-brands" /> Categories
                                         </a>
+
                                     </li>
 
                                     <li>
-                                        <a href="#">
+                                        <a href="https://wa.me/918585858768?text=Hello%20IT%20Fixer!%20I%20am%20interested%20in%20your%20IT%20services." target="_blank" rel="noopener noreferrer">
                                             <MessageCircle size={18} className="fa-brands" /> WhatsApp
                                         </a>
 
-                                        <a href="#">
+                                        <a href="tel:+918585858768">
                                             <Phone size={18} className="fa-brands" /> Call Us
                                         </a>
                                     </li>
@@ -129,21 +133,23 @@ export default function TrendingSection() {
                                 <span>Visit It Fixer Today</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="#">
+                                        <a href="/shop">
                                             <ShoppingCart size={18} className="fa-brands" /> Buy Now
                                         </a>
 
-                                        <a href="#">
-                                            <Settings size={18} className="fa-brands" /> Customize
+
+                                        <a href="/categories">
+                                            <LayoutGrid size={18} className="fa-brands" /> Categories
                                         </a>
+
                                     </li>
 
                                     <li>
-                                        <a href="#">
+                                        <a href="https://wa.me/918585858768?text=Hello%20IT%20Fixer!%20I%20am%20interested%20in%20your%20IT%20services." target="_blank" rel="noopener noreferrer">
                                             <MessageCircle size={18} className="fa-brands" /> WhatsApp
                                         </a>
 
-                                        <a href="#">
+                                        <a href="tel:+918585858768">
                                             <Phone size={18} className="fa-brands" /> Call Us
                                         </a>
                                     </li>

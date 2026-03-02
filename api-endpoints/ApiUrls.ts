@@ -1,6 +1,6 @@
 export const baseUrl = 'https://ecomapi.ftdigitalsolutions.org';
 // const baseUrl ='http://82.29.161.36'
-// export const baseUrl = 'https://test-ecomapi.justvy.in'
+//export const baseUrl = 'https://test-ecomapi.justvy.in'
 
 
 const cartCreate = `${baseUrl}/api/carts/`;
@@ -45,6 +45,7 @@ const getCoupons = `${baseUrl}/get-coupons-by-vendor/`;
 const removeCoupon = `${baseUrl}/cart/`;
 const testimonial = `${baseUrl}/testimonial/`;
 const cartItemProductSizeVariants = `${baseUrl}/cart_with_cart_items_product_or_variant_refined/`;
+const sendQuoteRequest = `${baseUrl}/send_quote_request_api/`;
 
 export default {
   cartCreate,
@@ -89,4 +90,5 @@ export default {
   removeCoupon,
   testimonial,
   cartItemProductSizeVariants,
+  sendQuoteRequest,
 };

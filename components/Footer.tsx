@@ -46,6 +46,11 @@ export default function Footer() {
                                             </a>
                                         </li>
                                         <li>
+                                            <a href="/categories">
+                                                Categories
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a href="/shop">
                                                 Shop
                                             </a>
@@ -155,7 +160,7 @@ export default function Footer() {
                     </div >
                     <div className="footer-bottom wow fadeInUp" data-wow-delay=".3s">
                         <div className="footer-wrapper">
-                            <p> © 2026 <a href="https://www.ftdigitalsolutions.in/"> FT Digital Solutions (Agency)</a>. All rights reserved.</p>
+                            <p> © 2026 <a href="https://www.ftdigitalsolutions.in/" target="_blank"> FTDS</a>. All rights reserved.</p>
                             {/* <ul className="gt-footer-list wow fadeInUp" data-wow-delay=".3s">
                                 <li>
                                     <a href="contact.html">Cookies</a>

@@ -6,6 +6,11 @@ body {
   overflow-x: hidden;
 }
 
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden !important;
+  }
+}
 
 /* FULL SCREEN AUTH */
 .auth-wrapper {

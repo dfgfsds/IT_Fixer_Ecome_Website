@@ -162,8 +162,8 @@ function ProfileContent() {
                                 <div style={{ width: "80px", height: "80px", borderRadius: "50%", backgroundColor: "#2a2d3a", margin: "0 auto 15px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                                     <User size={40} color="#a6d719" />
                                 </div>
-                                <h5 className="mb-1 text-white">{user?.data?.name || "Gamer"}</h5>
-                                <p className="text-white small">{user?.data?.email || "gamer@example.com"}</p>
+                                <h5 className="mb-1 text-white">{user?.data?.name || ""}</h5>
+                                <p className="text-white small">{user?.data?.email || user?.data?.contact_number || ""}</p>
                             </div>
 
                             <div className="nav flex-column nav-pills">
@@ -202,7 +202,8 @@ function ProfileContent() {
                                             <label className="form-label text-white">Email Address</label>
                                             <input type="email" className="form-control" value={formData.email}
                                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                readOnly style={{ backgroundColor: "#0b0e13", border: "1px solid #2a2d3a", color: "#fff", padding: "12px" }} />
+                                                readOnly={!!user?.data?.email}
+                                                style={{ backgroundColor: "#0b0e13", border: "1px solid #2a2d3a", color: "#fff", padding: "12px" }} />
                                         </div>
                                         <div className="mb-4">
                                             <label className="form-label text-white">Phone Number</label>

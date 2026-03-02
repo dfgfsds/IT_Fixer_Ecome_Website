@@ -93,10 +93,10 @@ export default function Header() {
                             <div className="sideber-image">
                                 <img src="https://acemagic.com/cdn/shop/collections/TANK_03-_2.jpg?v=1725597557" alt="img" />
                             </div>
-                            <div className="offcanvas__contact">
+                            {/* <div className="offcanvas__contact">
                                 <h4>Contact Info</h4>
                                 <ul>
-                                   
+
                                     <li className="d-flex align-items-center">
                                         <div className="offcanvas__contact-icon mr-15">
                                             <Mail size={18} />
@@ -121,7 +121,7 @@ export default function Header() {
                                             <a href="tel:+11002345909">+91 8585858768</a>
                                         </div>
                                     </li>
-                                     <li className="d-flex align-items-center">
+                                    <li className="d-flex align-items-center">
                                         <div className="offcanvas__contact-icon">
                                             <MapPin size={18} />
                                         </div>
@@ -131,7 +131,7 @@ export default function Header() {
                                     </li>
                                 </ul>
 
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -173,6 +173,9 @@ export default function Header() {
                                                 <li>
                                                     <a href="/about">About Us</a>
                                                 </li>
+                                                <li>
+                                                    <a href="/categories">Categories</a>
+                                                </li>
                                                 {/* <li>
                                                     <a href="match-details.html">
                                                         matches
@@ -204,7 +207,7 @@ export default function Header() {
                                         <Search size={20} className="text-white cursor-pointer" />
                                     </a>
 
-                                    <div className="header-button ms-2 me-3" style={{ position: 'relative' }}>
+                                    <div className="header-button header-cart-btn ms-2 me-2 me-sm-3" style={{ position: 'relative' }}>
                                         <Link href={isAuthenticated ? "/cart" : "/login"} className="text-white">
                                             <ShoppingCart size={20} />
                                             {cartCount > 0 && (
@@ -215,7 +218,8 @@ export default function Header() {
                                         </Link>
                                     </div>
 
-                                    <div className="header-button">
+                                    {/* Login/Profile button */}
+                                    <div className="header-button header-login-btn">
                                         {!isAuthenticated ? (
                                             <Link href="/login" className="theme-btn style-2">
                                                 <span className="left-line"></span>
@@ -233,6 +237,13 @@ export default function Header() {
                                                 </svg>
                                             </Link>
                                         )}
+                                    </div>
+
+                                    {/* User icon */}
+                                    <div className="header-user-icon-mobile">
+                                        <Link href={isAuthenticated ? "/profile" : "/login"} className="text-white">
+                                            <User size={22} />
+                                        </Link>
                                     </div>
                                     <div className="header__hamburger d-xl-none d-xl-block my-auto">
                                         <div className="sidebar__toggle">

@@ -19,7 +19,7 @@ export default function BlogHeroSection() {
                     </div>
                     <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                         <li>
-                            <Home size={16} />
+                            <i className="fa-solid fa-house"></i>
                         </li>
                         <li>
                             <a href="/">
@@ -27,7 +27,7 @@ export default function BlogHeroSection() {
                             </a>
                         </li>
                         <li className="color">
-                            Our Blog
+                            about us
                         </li>
                     </ul>
                 </div>
