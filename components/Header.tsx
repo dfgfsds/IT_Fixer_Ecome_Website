@@ -93,7 +93,7 @@ export default function Header() {
                             <div className="sideber-image">
                                 <img src="https://acemagic.com/cdn/shop/collections/TANK_03-_2.jpg?v=1725597557" alt="img" />
                             </div>
-                            <div className="offcanvas__contact">
+                            {/* <div className="offcanvas__contact">
                                 <h4>Contact Info</h4>
                                 <ul>
 
@@ -131,7 +131,7 @@ export default function Header() {
                                     </li>
                                 </ul>
 
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -172,6 +172,9 @@ export default function Header() {
                                                 </li>
                                                 <li>
                                                     <a href="/about">About Us</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/categories">Categories</a>
                                                 </li>
                                                 {/* <li>
                                                     <a href="match-details.html">
