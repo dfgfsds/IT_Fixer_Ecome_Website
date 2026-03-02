@@ -8224,6 +8224,15 @@ span {
   clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 80% 100%, 0% 100%, 0% 20%);
 }
 
+.gt-gaming-card-item-5 .gt-gaming-image .icon.icon-permanent {
+  background-color: #CBFE1C;
+  border: 1px solid #CBFE1C;
+}
+
+.gt-gaming-card-item-5 .gt-gaming-image .icon.icon-permanent i {
+  color: #0B0E13;
+}
+
 .gt-gaming-card-item-5 .gt-gaming-image .icon::before {
   content: "";
   position: absolute;
@@ -8237,6 +8246,10 @@ span {
   left: 3px;
   transform: rotate(45deg);
   transition: all 0.4s ease-in-out;
+}
+
+.gt-gaming-card-item-5 .gt-gaming-image .icon.icon-permanent::before {
+  border: 1px solid #CBFE1C;
 }
 
 .gt-gaming-card-item-5 .gt-gaming-image .icon i {
@@ -8290,6 +8303,35 @@ span {
   }
 }
 
+.gt-gaming-card-item-5 .gt-gaming-image .gt-gaming-content.content-visible {
+  opacity: 1;
+  visibility: visible;
+  bottom: 30px;
+}
+
+.gt-gaming-card-item-5 {
+  margin-top: 30px;
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 75% 100%, 0 100%, 0 18%);
+  position: relative;
+}
+
+.gt-gaming-card-item-5 .gt-gaming-image .gt-gaming-content h3 .category-tag {
+  color: #0B0E13;
+  background-color: #CBFE1C;
+  padding: 6px 20px;
+  display: inline-block;
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 22%);
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 18px;
+  transition: all 0.4s ease-in-out;
+}
+
+.gt-gaming-card-item-5:hover .gt-gaming-content h3 .category-tag {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
 .gt-gaming-card-item-5 .gt-gaming-image .gt-gaming-content h3 a {
   color: #fff;
   background-position: 0 95%;
@@ -8298,11 +8340,13 @@ span {
   display: inline;
 }
 
+/* 
 .gt-gaming-card-item-5 .gt-gaming-image .gt-gaming-content h3 a:hover {
   color: #fff;
   background-size: 100% 2px;
   background-image: linear-gradient(180deg, #fff 0%, #fff 100%);
-}
+} 
+*/
 
 .gt-gaming-card-item-5:hover .gt-gaming-image::before {
   transform: scale(1, 1);
@@ -16556,6 +16600,23 @@ span {
     padding: 0 0 80px;
   }
 }
+
+.category-padding {
+  padding: 0 0 100px;
+}
+
+@media (max-width: 1199px) {
+  .category-padding {
+    padding: 0 0 90px;
+  }
+}
+
+@media (max-width: 991px) {
+  .category-padding {
+    padding: 0 0 80px;
+  }
+}
+
 
 .service-section-7 {
   position: relative;
