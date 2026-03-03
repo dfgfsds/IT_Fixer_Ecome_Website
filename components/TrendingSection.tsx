@@ -25,7 +25,7 @@ export default function TrendingSection() {
                     <div className="linear-shape-2">
                         <img src="assets/img/home-2/match/linear-bg-2.png" alt="img" />
                     </div>
-                    <div className="trending-match-items gt-project-panel">
+                    <div className="trending-match-items gt-project-panel" style={{ transitionDelay: '0.2s' }}>
                         <div className="trending-match-left">
                             <div className="gt-match-logo">
                                 <img src="/assets/img/Trending/1.png" alt="img" className="gt-match-thumb" />
