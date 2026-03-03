@@ -4949,7 +4949,7 @@ span {
 
 @media (max-width: 991px) {
   .gt-footer-widget-wrapper {
-    padding: 50px 0 80px;
+    padding: 40px 0 60px;
   }
 }
 
@@ -5065,7 +5065,7 @@ span {
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 40px 0;
+  padding: 25px 0;
 }
 
 @media (max-width: 767px) {
@@ -5077,7 +5077,7 @@ span {
 .footer-bottom .footer-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 @media (max-width: 1199px) {

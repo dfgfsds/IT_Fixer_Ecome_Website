@@ -11,6 +11,7 @@ import { ProductsProvider } from '@/context/ProductsContext';
 import { PolicyProvider } from '@/context/PolicyContext';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { Toaster } from '@/components/ui/toaster';
+import { Toaster as SonnerToaster } from '@/components/ui/sonner';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
@@ -31,6 +32,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                     >
                       {children}
                       <Toaster />
+                      <SonnerToaster position="top-right" richColors />
                     </ThemeProvider>
                   </PolicyProvider>
                 </ProductsProvider>
