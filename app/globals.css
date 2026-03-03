@@ -405,20 +405,8 @@ body {
   bottom: 145px;
 }
 
-/* Optimized Scroll Animations */
-.tz-itm-anim, 
-.tz-sub-anim,
-.gt-project-panel {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-}
-
-.tz-itm-anim .split-line,
-.tz-sub-anim .split-line {
-  overflow: hidden;
-}
-
-.trending-match-items.gt-project-panel {
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden !important;
+  }
 }
