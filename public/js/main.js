@@ -1022,24 +1022,25 @@
                 if ($(el).hasClass('tz-sub-anim')) {
                     gsap.set(el.split.chars, {
                         opacity: 0,
-                        x: "7",
+                        y: "20",
                     });
                 }
 
                 el.anim = gsap.to(el.split.chars, {
                     scrollTrigger: {
                         trigger: el,
-                        start: "top 90%",
-                        end: "top 60%",
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                        once: true,
                         markers: false,
-                        scrub: 1,
                     },
 
                     x: "0",
                     y: "0",
                     opacity: 1,
-                    duration: .7,
-                    stagger: 0.2,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power2.out",
                 });
 
             });
@@ -1057,24 +1058,25 @@
 
                 if ($(el).hasClass('tz-itm-anim')) {
                     gsap.set(el.split.chars, {
-                        opacity: .3,
-                        x: "-7",
+                        opacity: 0,
+                        y: "30",
                     });
                 }
                 el.anim = gsap.to(el.split.chars, {
                     scrollTrigger: {
                         trigger: el,
-                        start: "top 92%",
-                        end: "top 60%",
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                        once: true,
                         markers: false,
-                        scrub: 1,
                     },
 
                     x: "0",
                     y: "0",
                     opacity: 1,
-                    duration: .7,
-                    stagger: 0.2,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power2.out",
                 });
 
             });
@@ -1177,53 +1179,43 @@
 
         }
 
-        let tl = gsap.timeline();
         const project_panel = gsap.matchMedia();
         project_panel.add("(min-width: 767px)", () => {
-            let otherSections = document.querySelectorAll('.gt-project-panel')
-            otherSections.forEach((section, index) => {
-                gsap.set(otherSections, {
-                    scale: 1,
-                });
-                tl.to(section, {
-                    scale: 1,
+            document.querySelectorAll('.gt-project-panel').forEach((section) => {
+                gsap.set(section, { opacity: 0, y: 50 });
+                gsap.to(section, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: section,
-                        pin: section,
-                        scrub: 1,
-                        start: 'top 100px',
-                        end: "bottom 82%",
-                        endTrigger: '.gt-project-area',
-                        pinSpacing: false,
-                        markers: false,
-                    },
-                })
-            })
+                        start: "top 85%",
+                        toggleActions: "play none none none",
+                        once: true,
+                    }
+                });
+            });
         });
 
 
-        let tl2 = gsap.timeline();
         const project_panel2 = gsap.matchMedia();
         project_panel2.add("(min-width: 767px)", () => {
-            let otherSections = document.querySelectorAll('.gt-project-panel2')
-            otherSections.forEach((section, index) => {
-                gsap.set(otherSections, {
-                    scale: 1,
-                });
-                tl.to(section, {
-                    scale: 1,
+            document.querySelectorAll('.gt-project-panel2').forEach((section) => {
+                gsap.set(section, { opacity: 0, y: 50 });
+                gsap.to(section, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: section,
-                        pin: section,
-                        scrub: 1,
-                        start: 'top 100px',
-                        end: "bottom 60%",
-                        endTrigger: '.gt-project-area2',
-                        pinSpacing: false,
-                        markers: false,
-                    },
-                })
-            })
+                        start: "top 85%",
+                        toggleActions: "play none none none",
+                        once: true,
+                    }
+                });
+            });
         });
 
         // For each images with class "animate-image" on page
