@@ -423,6 +423,12 @@ body {
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden !important;
+  }
+}
+
 @media (min-width: 425px) {
   .set-default-btn-responsive {
     display: block !important;
