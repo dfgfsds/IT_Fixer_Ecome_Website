@@ -369,12 +369,24 @@ function ProfileContent() {
                                                                     >
                                                                         <Trash size={13} /> Remove
                                                                     </button>
+
+                                                                    {!address.selected_address && (
+                                                                        <button
+                                                                            onClick={() => handleSelectDefault(address)}
+                                                                            className="ms-auto set-default-btn-responsive"
+                                                                            style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid rgba(166,215,25,0.3)", color: "#a6d719", borderRadius: "6px", cursor: "pointer", fontSize: "13px", marginLeft: "auto", transition: "all 0.2s" }}
+                                                                            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(166,215,25,0.18)"; }}
+                                                                            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; }}
+                                                                        >
+                                                                            Set as Default
+                                                                        </button>
+                                                                    )}
                                                                 </div>
 
                                                                 {!address.selected_address && (
                                                                     <button
                                                                         onClick={() => handleSelectDefault(address)}
-                                                                        className="ms-auto"
+                                                                        className="ms-auto default-btn-responsive"
                                                                         style={{ display: "flex", alignItems: "center", gap: "6px", padding: "7px 14px", backgroundColor: "transparent", border: "1px solid rgba(166,215,25,0.3)", color: "#a6d719", borderRadius: "6px", cursor: "pointer", fontSize: "13px", marginLeft: "auto", transition: "all 0.2s" }}
                                                                         onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(166,215,25,0.18)"; }}
                                                                         onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; }}
