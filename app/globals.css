@@ -406,7 +406,7 @@ body {
 }
 
 /* Optimized Scroll Animations */
-.tz-itm-anim, 
+.tz-itm-anim,
 .tz-sub-anim,
 .gt-project-panel {
   will-change: transform, opacity;
@@ -421,4 +421,24 @@ body {
 
 .trending-match-items.gt-project-panel {
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (min-width: 425px) {
+  .set-default-btn-responsive {
+    display: block !important;
+  }
+
+  .default-btn-responsive {
+    display: none !important;
+  }
+}
+
+@media (max-width: 424px) {
+  .default-btn-responsive {
+    display: block !important;
+  }
+
+  .set-default-btn-responsive {
+    display: none !important;
+  }
 }

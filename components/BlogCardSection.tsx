@@ -90,7 +90,7 @@ export default function BlogCardSection() {
                                                 ? `${stripHtml(post.content).slice(0, 100)}...`
                                                 : "Read more about this story..."}
                                         </p>
-                                        <Link href={`/blog/${post.id}`} className="icon mt-auto">
+                                        <Link href={`/blog/${post.id}`} className="icon">
                                             <ArrowRight size={18} />
                                         </Link>
                                     </div>
