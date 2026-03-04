@@ -7,6 +7,7 @@ import { deleteCartitemsApi, updateCartitemsApi, getCartItemsProductSizesWithVar
 import { InvalidateQueryFilters, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useVendor } from "@/context/VendorContext";
 import { formatPrice } from "@/lib/utils";
+import { toast } from "sonner";
 
 export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
     const queryClient = useQueryClient();
@@ -25,6 +26,8 @@ export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
 
     const cartData = detailedCart?.data?.cart_items || [];
 
+    const totalQuantity = cartData.reduce((acc: number, item: any) => acc + (item.quantity || 0), 0);
+
     const subtotal = cartData.reduce((acc: number, item: any) => {
         return acc + (Number(item?.product_details?.price || 0) * item.quantity);
     }, 0);
@@ -33,12 +36,16 @@ export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${cartId}/`);
+                toast.success("Item removed from cart");
             } else {
                 await updateCartitemsApi(`${cartId}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
-        } catch (error) { console.error(error); }
+        } catch (error) {
+            toast.error("Failed to update quantity");
+            console.error(error);
+        }
     };
 
     return (
@@ -47,7 +54,7 @@ export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
             <div className={`side-cart ${isCartOpen ? "open" : ""}`} style={{ display: 'flex', flexDirection: 'column' }}>
 
                 <div className="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3">
-                    <h4 className="fw-bold text-uppercase text-light m-0">Cart ({cartData.length})</h4>
+                    <h4 className="fw-bold text-uppercase text-light m-0">Cart ({totalQuantity})</h4>
                     <button className="btn-close btn-close-white" onClick={() => setIsCartOpen(false)}></button>
                 </div>
 
@@ -81,7 +88,7 @@ export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
                                     <div className="d-flex align-items-center gap-2">
                                         <div className="d-flex align-items-center border border-secondary rounded overflow-hidden" style={{ height: '30px' }}>
                                             <button className="btn btn-sm text-white px-2 h-100" onClick={() => handleUpdateQuantity(item.id, 'decrease', item.quantity)}>-</button>
-                                            <span className="small px-2 border-start border-end border-secondary h-100 d-flex align-items-center">{item.quantity}</span>
+                                            <span className="small px-2 border-start border-end border-secondary text-white h-100 d-flex align-items-center">{item.quantity}</span>
                                             <button className="btn btn-sm text-white px-2 h-100" onClick={() => handleUpdateQuantity(item.id, 'increase', item.quantity)}>+</button>
                                         </div>
                                         <span className="text-success fw-bold">
@@ -91,7 +98,7 @@ export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
                                 </div>
 
                                 <button
-                                    className="btn btn-sm text-danger"
+                                    className="btn btn-sm text-white"
                                     onClick={() => handleUpdateQuantity(item.id, 'decrease', 1)}
                                 >
                                     <X size={18} />

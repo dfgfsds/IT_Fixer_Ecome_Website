@@ -123,12 +123,16 @@ export default function ProductDetails() {
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${id}/`);
+                toast.success("Item removed from cart");
             } else {
                 await updateCartitemsApi(`${id}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
-        } catch (e) { console.error(e); }
+        } catch (e) {
+            toast.error("Failed to update quantity");
+            console.error(e);
+        }
     };
 
     if (isLoading || isProductLoading) {
