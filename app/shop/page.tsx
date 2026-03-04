@@ -14,6 +14,8 @@ import { useCartItem } from "@/context/CartItemContext";
 import { InvalidateQueryFilters, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { formatPrice } from "@/lib/utils";
+import CategoryFilter from "@/components/CategoryFilter";
+
 
 
 export default function ShopPage() {
@@ -48,6 +50,7 @@ export default function ShopPage() {
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
             setIsCartOpen(true);
+            toast.success("Added to cart");
         } catch (e) { toast.error("Error adding to cart"); }
     };
 
@@ -55,12 +58,16 @@ export default function ShopPage() {
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${cartId}`);
+                toast.success("Item removed from cart");
             } else {
                 await updateCartitemsApi(`${cartId}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
-        } catch (e) { console.error(e); }
+        } catch (e) {
+            toast.error("Failed to update quantity");
+            console.error(e);
+        }
     };
 
     const filtered = (apiData?.data || []).filter((p: any) =>
@@ -133,29 +140,13 @@ export default function ShopPage() {
 
                         {/* Sidebar */}
                         <div className="col-lg-3">
-                            <div className="widget">
-                                <h2 className="widget-title">Categories</h2>
-                                <ul className="category-list">
-                                    <li
-                                        onClick={() => { setSelectedCategory(null); setCurrentPage(1); }}
-                                        style={{ cursor: 'pointer', fontWeight: !selectedCategory ? 'bold' : 'normal' }}
-                                    >
-                                        All {/*<span>({apiData?.data?.length || 0})</span> */}
-                                    </li>
-                                    {catData?.data?.map((cat: any) => {
-                                        const count = (apiData?.data || []).filter((p: any) => p.category === cat.id).length;
-                                        return (
-                                            <li
-                                                key={cat.id}
-                                                onClick={() => { setSelectedCategory(cat.id); setCurrentPage(1); }}
-                                                style={{ cursor: 'pointer', fontWeight: selectedCategory === cat.id ? 'bold' : 'normal' }}
-                                            >
-                                                {cat.name} {/*<span>({count})</span>*/}
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            </div>
+                            <CategoryFilter
+                                categories={catData?.data}
+                                selectedCategory={selectedCategory}
+                                onSelectCategory={(id) => { setSelectedCategory(id); setCurrentPage(1); }}
+                                products={apiData?.data}
+                            />
+
 
                             <div className="widget">
                                 <h2 className="widget-title">Filter by price</h2>
@@ -187,19 +178,20 @@ export default function ShopPage() {
                                     </span>
                                     <button
                                         className="filter-btn text-uppercase"
-                                        onClick={() => { setMinPrice(0); setMaxPrice(10000); setCurrentPage(1); }}
+                                        onClick={() => { setMinPrice(0); setMaxPrice(200000); setCurrentPage(1); }}
                                     >
                                         Reset
                                     </button>
                                 </div>
                             </div>
 
+                            {/* 
                             <div className="widget">
                                 <h2 className="widget-title">Top Deals</h2>
                                 {(apiData?.data || [])
                                     .filter((p: any) => p.discount > 0)
                                     .sort((a: any, b: any) => (b.price - b.discount) - (a.price - a.discount))
-                                    .slice(0, 5)
+                                    .slice(0, 4)
                                     .map((product: any) => (
                                         <Link href={`/shop/${product.id}`} key={product.id} className="d-flex align-items-center mb-3 text-decoration-none">
                                             <div className="me-3 bg-dark p-1 rounded" style={{ width: "60px", height: "60px", flexShrink: 0 }}>
@@ -215,13 +207,14 @@ export default function ShopPage() {
                                                     {product.name}
                                                 </div>
                                                 <div className="d-flex gap-2">
-                                                    <span className="price-new text-success" style={{ fontSize: "14px" }}>{formatPrice(product.discount)}</span>
-                                                    <span className="price-old text-secondary text-decoration-line-through" style={{ fontSize: "12px" }}>{formatPrice(product.price)}</span>
+                                                    <span className="price-new text-success" style={{ fontSize: "14px" }}>{formatPrice(product.price)}</span>
+                                                    <span className="price-old text-secondary text-decoration-line-through" style={{ fontSize: "12px" }}>{formatPrice(product.discount)}</span>
                                                 </div>
                                             </div>
                                         </Link>
                                     ))}
-                            </div>
+                            </div> 
+                            */}
 
                             {/* 
                             <div className="play-earn-banner-wrapper mt-4">
@@ -237,7 +230,7 @@ export default function ShopPage() {
 
                         {/* Products */}
                         <div className="col-lg-9">
-                            <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
+                            <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary gap-3">
                                 <div className="col-3.5">
                                     <select
                                         className="form-select bg-transparent text-white border-secondary small text-uppercase"

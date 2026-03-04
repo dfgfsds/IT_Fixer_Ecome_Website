@@ -163,8 +163,10 @@
                 },
 
                 navigation: {
-                    nextEl: ".array-prev",
-                    prevEl: ".array-next",
+                    // nextEl: ".array-prev",
+                    // prevEl: ".array-next",
+                    nextEl: ".game-slider-pagination .array-next",
+                    prevEl: ".game-slider-pagination .array-prev",
                 },
 
                 breakpoints: {
@@ -233,7 +235,7 @@
                 effect: "cube",
                 grabCursor: true,
                 cubeEffect: {
-                    shadow: true,
+                    shadow: false,
                     slideShadows: true,
                     shadowOffset: 20,
                     shadowScale: 0.94,
@@ -243,8 +245,10 @@
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: ".array-prev",
-                    prevEl: ".array-next",
+                    // nextEl: ".array-prev",
+                    // prevEl: ".array-next",
+                    nextEl: ".testi-pagi .array-next",
+                    prevEl: ".testi-pagi .array-prev",
                 },
 
                 on: {
@@ -712,56 +716,6 @@
             });
         }
 
-        //>>  Testimonial Slider Start <<//
-        //>>  Testimonial Slider Start <<//
-        if ($('.tetsimonial-slider-2').length > 0) {
-            const tetsimonialSlider2 = new Swiper(".tetsimonial-slider-2", {
-                spaceBetween: 30,
-                speed: 1500,
-                loop: true,
-                slidesPerView: 1,
-                effect: "cube",
-                grabCursor: true,
-                cubeEffect: {
-                    shadow: true,
-                    slideShadows: true,
-                    shadowOffset: 20,
-                    shadowScale: 0.94,
-                },
-                autoplay: {
-                    delay: 2000,
-                    disableOnInteraction: false,
-                },
-                navigation: {
-                    nextEl: ".array-prev",
-                    prevEl: ".array-next",
-                },
-
-                on: {
-                    init: function () {
-                        let total = this.slides.length - this.loopedSlides * 2;
-                        const totalEl = document.querySelector(".testimonial-pagination .total");
-                        const currentEl = document.querySelector(".testimonial-pagination .current");
-
-                        if (totalEl) {
-                            totalEl.textContent = String(total).padStart(2, "0");
-                        }
-                        if (currentEl) {
-                            currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
-                            currentEl.classList.add("active");
-                        }
-                    },
-                    slideChange: function () {
-                        const currentEl = document.querySelector(".testimonial-pagination .current");
-                        if (currentEl) {
-                            currentEl.textContent = String(this.realIndex + 1).padStart(2, "0");
-                            currentEl.classList.add("active");
-                        }
-                    }
-                }
-            });
-        }
-
         //>> Player Slider Start <<//
         if ($('.player-slider').length > 0) {
             const PlayerSlider = new Swiper(".player-slider", {
@@ -1055,6 +1009,7 @@
             }
         });
 
+<<<<<<< HEAD
         /*
                 if ($('.tz-sub-tilte').length) {
                     var agtsub = $(".tz-sub-tilte");
@@ -1127,6 +1082,80 @@
                     });
                 }
                 */
+=======
+        if ($('.tz-sub-tilte').length) {
+            var agtsub = $(".tz-sub-tilte");
+
+            if (agtsub.length == 0) return; gsap.registerPlugin(SplitText); agtsub.each(function (index, el) {
+
+                el.split = new SplitText(el, {
+                    type: "lines,words,chars",
+                    linesClass: "split-line"
+                });
+
+                if ($(el).hasClass('tz-sub-anim')) {
+                    gsap.set(el.split.chars, {
+                        opacity: 0,
+                        y: "20",
+                    });
+                }
+
+                el.anim = gsap.to(el.split.chars, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                        once: true,
+                        markers: false,
+                    },
+
+                    x: "0",
+                    y: "0",
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                });
+
+            });
+        }
+
+        if ($('.tz-itm-title').length) {
+            var txtheading = $(".tz-itm-title");
+
+            if (txtheading.length == 0) return; gsap.registerPlugin(SplitText); txtheading.each(function (index, el) {
+
+                el.split = new SplitText(el, {
+                    type: "lines,words,chars",
+                    linesClass: "split-line"
+                });
+
+                if ($(el).hasClass('tz-itm-anim')) {
+                    gsap.set(el.split.chars, {
+                        opacity: 0,
+                        y: "30",
+                    });
+                }
+                el.anim = gsap.to(el.split.chars, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                        once: true,
+                        markers: false,
+                    },
+
+                    x: "0",
+                    y: "0",
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                });
+
+            });
+        }
+>>>>>>> 95f7b65835b268334c65e91e41fede4caf311a13
 
         if ($(".tv_hero_title").length) {
             gsap.registerPlugin(SplitText);
@@ -1225,6 +1254,7 @@
 
         }
 
+<<<<<<< HEAD
         /*
                 let tl = gsap.timeline();
                 const project_panel = gsap.matchMedia();
@@ -1250,30 +1280,45 @@
                     })
                 });
                 */
-
-
-        let tl2 = gsap.timeline();
-        const project_panel2 = gsap.matchMedia();
-        project_panel2.add("(min-width: 767px)", () => {
-            let otherSections = document.querySelectorAll('.gt-project-panel2')
-            otherSections.forEach((section, index) => {
-                gsap.set(otherSections, {
-                    scale: 1,
-                });
-                tl.to(section, {
-                    scale: 1,
+=======
+        const project_panel = gsap.matchMedia();
+        project_panel.add("(min-width: 767px)", () => {
+            document.querySelectorAll('.gt-project-panel').forEach((section) => {
+                gsap.set(section, { opacity: 0, y: 50 });
+                gsap.to(section, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: section,
-                        pin: section,
-                        scrub: 1,
-                        start: 'top 100px',
-                        end: "bottom 60%",
-                        endTrigger: '.gt-project-area2',
-                        pinSpacing: false,
-                        markers: false,
-                    },
-                })
-            })
+                        start: "top 85%",
+                        toggleActions: "play none none none",
+                        once: true,
+                    }
+                });
+            });
+        });
+>>>>>>> 95f7b65835b268334c65e91e41fede4caf311a13
+
+
+        const project_panel2 = gsap.matchMedia();
+        project_panel2.add("(min-width: 767px)", () => {
+            document.querySelectorAll('.gt-project-panel2').forEach((section) => {
+                gsap.set(section, { opacity: 0, y: 50 });
+                gsap.to(section, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%",
+                        toggleActions: "play none none none",
+                        once: true,
+                    }
+                });
+            });
         });
 
         // For each images with class "animate-image" on page

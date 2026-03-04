@@ -123,12 +123,16 @@ export default function ProductDetails() {
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${id}/`);
+                toast.success("Item removed from cart");
             } else {
                 await updateCartitemsApi(`${id}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
-        } catch (e) { console.error(e); }
+        } catch (e) {
+            toast.error("Failed to update quantity");
+            console.error(e);
+        }
     };
 
     if (isLoading || isProductLoading) {
@@ -272,16 +276,16 @@ export default function ProductDetails() {
                             <div className="cart-row-dark">
                                 {cartQty === 0 ? (
                                     <button
-                                        className="add-to-cart-btn-dark"
+                                        className="vs-btn cart-animation-item"
                                         onClick={handleAddToCart}
                                         disabled={!isSelectionComplete()}
                                     >
                                         {isSelectionComplete() ? (
-                                            <><ShoppingBag size={18} className="me-2" /> ADD TO CART</>
-                                        ) : "SELECT OPTIONS"}
+                                            <><ShoppingBag size={14} className="me-1" /> ADD TO CART</>
+                                        ) : "SELECT VARIANT"}
                                     </button>
                                 ) : (
-                                    <div className="d-flex align-items-center gap-3 bg-dark p-2 rounded border border-secondary" style={{ maxWidth: '180px', justifyContent: 'center' }}>
+                                    <div className="d-flex align-items-center gap-3 bg-dark p-2 rounded border border-secondary" style={{ maxWidth: '140px', justifyContent: 'center' }}>
                                         <button
                                             className="btn btn-sm text-white p-0 d-flex align-items-center"
                                             onClick={() => handleUpdateQty(cartId, 'decrease', cartQty)}

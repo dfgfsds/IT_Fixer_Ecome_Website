@@ -2,9 +2,11 @@
 import { postSendSmsOtpUserApi, postVerifySmsOtpApi, postSignInAPi } from "@/api-endpoints/authendication";
 import { getCartApi, postCartCreateApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
-import { Home } from "lucide-react";
+import { useUser } from "@/context/UserContext";
+import { Home, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Login() {
     const [loginMethod, setLoginMethod] = useState<'email' | 'mobile'>('mobile');
@@ -15,10 +17,11 @@ export default function Login() {
     const [otp, setOtp] = useState('');
     const [sessionToken, setSessionToken] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const { vendorId } = useVendor();
     const router = useRouter();
+    const { refreshUser } = useUser();
 
     const handleKeyDown = (e: React.KeyboardEvent, action: () => void) => {
         if (e.key === 'Enter') {
@@ -29,17 +32,15 @@ export default function Login() {
     const handleLoginMethodChange = (method: 'email' | 'mobile') => {
         setLoginMethod(method);
         setStep('PHONE_INPUT');
-        setError('');
     };
 
     const handleEmailLogin = async () => {
         if (!email || !password) {
-            setError('Please enter both email and password.');
+            toast.error('Please enter both email and password.');
             return;
         }
 
         setLoading(true);
-        setError('');
         try {
             const response = await postSignInAPi({
                 email: email,
@@ -66,15 +67,17 @@ export default function Login() {
                             if (newCart?.data?.id) localStorage.setItem('cartId', String(newCart.data.id));
                         }
                     } catch (e) { console.error("Identity restore failed", e); }
-                    window.location.href = '/shop';
+                    refreshUser();
+                    toast.success('Logged in successfully!');
+                    router.push('/shop');
                 } else {
-                    setError('User ID not found in response.');
+                    toast.error('User ID not found in response.');
                 }
             } else {
-                setError(response.data?.message || 'Invalid email or password. Please try again.');
+                toast.error(response.data?.message || 'Invalid email or password. Please try again.');
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error logging in. Please try again.');
+            toast.error(err.response?.data?.message || 'Error logging in. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -82,11 +85,10 @@ export default function Login() {
 
     const handleSendOtp = async () => {
         if (!mobile || mobile.length !== 10) {
-            setError('Please enter a valid 10-digit mobile number.');
+            toast.error('Please enter a valid 10-digit mobile number.');
             return;
         }
         setLoading(true);
-        setError('');
         try {
             const response = await postSendSmsOtpUserApi({
                 contact_number: mobile,
@@ -95,11 +97,12 @@ export default function Login() {
             if (response.data?.status === 'success' || response.data?.token) {
                 setSessionToken(response.data.token);
                 setStep('OTP_INPUT');
+                toast.success('OTP sent successfully!');
             } else {
-                setError(response.data?.message || 'Failed to send OTP. Please try again.');
+                toast.error(response.data?.message || 'Failed to send OTP. Please try again.');
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error sending OTP. Please try again.');
+            toast.error(err.response?.data?.message || 'Error sending OTP. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -107,12 +110,11 @@ export default function Login() {
 
     const handleVerifyOtp = async () => {
         if (!otp || otp.length < 4) {
-            setError('Please enter a valid OTP.');
+            toast.error('Please enter a valid OTP.');
             return;
         }
 
         setLoading(true);
-        setError('');
         try {
             const response = await postVerifySmsOtpApi({
                 otp: otp,
@@ -140,15 +142,17 @@ export default function Login() {
                             if (newCart?.data?.id) localStorage.setItem('cartId', String(newCart.data.id));
                         }
                     } catch (e) { console.error("Identity restore failed", e); }
-                    window.location.href = '/shop';
+                    refreshUser();
+                    toast.success('Verification successful!');
+                    router.push('/shop');
                 } else {
-                    setError('User ID not found in response.');
+                    toast.error('User ID not found in response.');
                 }
             } else {
-                setError(response.data?.message || 'Invalid OTP. Please try again.');
+                toast.error(response.data?.message || 'Invalid OTP. Please try again.');
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error verifying OTP. Please try again.');
+            toast.error(err.response?.data?.message || 'Error verifying OTP. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -219,7 +223,6 @@ export default function Login() {
                     }}>
                         {loginMethod === 'email' ? (
                             <>
-                                {error && <div className="alert alert-danger py-2 mb-3" style={{ fontSize: '14px' }}>{error}</div>}
                                 <div className="mb-3">
                                     <input
                                         key="email-input"
@@ -231,16 +234,24 @@ export default function Login() {
                                         disabled={loading}
                                     />
                                 </div>
-                                <div className="mb-3">
+                                <div className="mb-3 position-relative">
                                     <input
                                         key="password-input"
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         className="form-control"
                                         placeholder="Password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         disabled={loading}
                                     />
+                                    <button
+                                        type="button"
+                                        className="position-absolute border-0 bg-transparent p-0"
+                                        style={{ right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#fff', zIndex: 10 }}
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </button>
                                 </div>
                                 <div className="d-flex justify-content-between mb-3">
                                     <a href="/forgot-password" className="auth-link">
@@ -257,7 +268,6 @@ export default function Login() {
                             </>
                         ) : (
                             <>
-                                {error && <div className="alert alert-danger py-2 mb-3" style={{ fontSize: '14px' }}>{error}</div>}
                                 <div className="mb-3">
                                     <input
                                         key="mobile-input"
@@ -295,7 +305,6 @@ export default function Login() {
                                             onClick={() => {
                                                 setStep('PHONE_INPUT');
                                                 setOtp('');
-                                                setError('');
                                             }}
                                             disabled={loading}
                                         >
