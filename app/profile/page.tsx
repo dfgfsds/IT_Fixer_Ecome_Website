@@ -81,6 +81,7 @@ function ProfileContent() {
         localStorage.removeItem("userName");
         localStorage.removeItem("email");
         localStorage.removeItem("cartId");
+        toast.success('Logged out successfully!');
         window.location.href = "/";
     };
 
@@ -95,6 +96,7 @@ function ProfileContent() {
     const [addressModal, setAddressModal] = useState(false);
     const [editData, setEditData] = useState<any>(null);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [logoutModal, setLogoutModal] = useState(false);
     const [deleteId, setDeleteId] = useState<any>(null);
     const [deleting, setDeleting] = useState(false);
 
@@ -176,7 +178,7 @@ function ProfileContent() {
                                 <button onClick={() => setActiveTab("addresses")} className={activeTab === "addresses" ? "active-tab" : ""} style={tabBtnStyle("addresses")}>
                                     <MapPin size={18} style={{ marginRight: "12px" }} /> Addresses
                                 </button>
-                                <button onClick={handleLogout} style={{ ...tabBtnStyle("logout"), color: "#ef4444", border: "none", marginTop: "16px" }}>
+                                <button onClick={() => setLogoutModal(true)} style={{ ...tabBtnStyle("logout"), color: "#ef4444", border: "none", marginTop: "16px" }}>
                                     <LogOut size={18} style={{ marginRight: "12px" }} /> Logout
                                 </button>
                             </div>
@@ -448,6 +450,41 @@ function ProfileContent() {
                             >
                                 {deleting && <Loader size={14} className="animate-spin" />}
                                 Confirm Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {logoutModal && (
+                <div
+                    style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}
+                    onClick={() => setLogoutModal(false)}
+                >
+                    <div
+                        style={{ backgroundColor: "#141622", border: "1px solid #2a2d3a", borderRadius: "12px", padding: "32px", maxWidth: "420px", width: "100%" }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                            <div style={{ width: "60px", height: "60px", borderRadius: "50%", backgroundColor: "rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+                                <LogOut size={24} color="#ef4444" />
+                            </div>
+                            <h4 style={{ color: "#fff", marginBottom: "8px", fontFamily: "'Days One', sans-serif" }}>Confirm Logout</h4>
+                            <p style={{ color: "#9ca3af", fontSize: "14px", margin: 0 }}>Are you sure you want to log out of your account?</p>
+                        </div>
+
+                        <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+                            <button
+                                onClick={() => setLogoutModal(false)}
+                                style={{ padding: "10px 24px", backgroundColor: "transparent", border: "1px solid #2a2d3a", color: "#9ca3af", borderRadius: "6px", cursor: "pointer", fontSize: "14px" }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleLogout}
+                                style={{ padding: "10px 24px", backgroundColor: "#ef4444", border: "none", color: "#fff", borderRadius: "6px", cursor: "pointer", fontSize: "14px" }}
+                            >
+                                Logout
                             </button>
                         </div>
                     </div>

@@ -2,8 +2,10 @@
 import { postCreateUserAPi } from "@/api-endpoints/authendication";
 import { postCartCreateApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
-import { Home } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Home, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Signup() {
     const [name, setName] = useState('');
@@ -11,24 +13,24 @@ export default function Signup() {
     const [password, setPassword] = useState('');
     const [mobile, setMobile] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const { vendorId } = useVendor();
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!name || !email || !password || !mobile) {
-            setError('Please fill in all fields.');
+            toast.error('Please fill in all fields.');
             return;
         }
 
         if (mobile.length !== 10) {
-            setError('Mobile number must be exactly 10 digits.');
+            toast.error('Mobile number must be exactly 10 digits.');
             return;
         }
 
         setLoading(true);
-        setError('');
 
         try {
             const userResponse = await postCreateUserAPi({
@@ -57,12 +59,13 @@ export default function Signup() {
                     console.error("Failed to create cart:", cartErr);
                 }
 
-                window.location.href = '/';
+                toast.success('Account created successfully!');
+                router.push('/');
             } else {
-                setError(userResponse.data?.message || 'Failed to create account. Please try again.');
+                toast.error(userResponse.data?.message || 'Failed to create account. Please try again.');
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error creating account. Please check your details.');
+            toast.error(err.response?.data?.message || 'Error creating account. Please check your details.');
         } finally {
             setLoading(false);
         }
@@ -111,7 +114,6 @@ export default function Signup() {
                     <p>Join with us today</p>
 
                     <form className="auth-form" onSubmit={handleSubmit}>
-                        {error && <div className="alert alert-danger py-2 mb-3" style={{ fontSize: '14px' }}>{error}</div>}
 
                         <div className="mb-3">
                             <input
@@ -146,15 +148,23 @@ export default function Signup() {
                             />
                         </div>
 
-                        <div className="mb-3">
+                        <div className="mb-3 position-relative">
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 className="form-control"
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 disabled={loading}
                             />
+                            <button
+                                type="button"
+                                className="position-absolute border-0 bg-transparent p-0"
+                                style={{ right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#fff', zIndex: 10 }}
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
                         </div>
 
                         <button

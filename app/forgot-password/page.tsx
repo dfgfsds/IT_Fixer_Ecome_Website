@@ -1,8 +1,10 @@
 "use client";
 import { getCheckEmailApi, postSendOtpAPi, postSendOtpVerifyAPi, updateUserAPi } from "@/api-endpoints/authendication";
 import { useVendor } from "@/context/VendorContext";
-import { Home, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Home, Loader2, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ForgotPassword() {
     const [phase, setPhase] = useState<'EMAIL' | 'OTP' | 'RESET'>('EMAIL');
@@ -13,19 +15,20 @@ export default function ForgotPassword() {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const { vendorId } = useVendor();
+    const router = useRouter();
 
     const handleCheckEmailAndSendOtp = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!email) {
-            setError('Please enter your email address.');
+            toast.error('Please enter your email address.');
             return;
         }
 
         setLoading(true);
-        setError('');
         try {
             // Step 1: Check Email
             const checkResponse = await getCheckEmailApi(`?email=${encodeURIComponent(email)}&vendor_id=${vendorId}`);
@@ -40,14 +43,15 @@ export default function ForgotPassword() {
                 if (otpResponse.data?.status === 'success' || otpResponse.data?.token) {
                     setToken(otpResponse.data.token);
                     setPhase('OTP');
+                    toast.success('OTP sent to your email.');
                 } else {
-                    setError(otpResponse.data?.message || 'Failed to send OTP. Please try again.');
+                    toast.error(otpResponse.data?.message || 'Failed to send OTP. Please try again.');
                 }
             } else {
-                setError("You're not a registered user, please create an account.");
+                toast.warning("You're not a registered user, please create an account.");
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || "You're not a registered user, please create an account.");
+            toast.error(err.response?.data?.message || "You're not a registered user, please create an account.");
         } finally {
             setLoading(false);
         }
@@ -56,12 +60,11 @@ export default function ForgotPassword() {
     const handleVerifyOtp = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!otp || otp.length < 6) {
-            setError('Please enter a valid 6-digit OTP.');
+            toast.error('Please enter a valid 6-digit OTP.');
             return;
         }
 
         setLoading(true);
-        setError('');
         try {
             const response = await postSendOtpVerifyAPi({
                 token: token,
@@ -73,11 +76,12 @@ export default function ForgotPassword() {
             if (response.data?.status === 'success' || response.data?.user_id) {
                 setCurrentUserId(response.data.user_id || response.data.id);
                 setPhase('RESET');
+                toast.success('OTP verified!');
             } else {
-                setError(response.data?.message || 'Invalid OTP. Please try again.');
+                toast.error(response.data?.message || 'Invalid OTP. Please try again.');
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error verifying OTP. Please try again.');
+            toast.error(err.response?.data?.message || 'Error verifying OTP. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -86,16 +90,15 @@ export default function ForgotPassword() {
     const handleResetPassword = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!newPassword || !confirmPassword) {
-            setError('Please fill in both password fields.');
+            toast.error('Please fill in both password fields.');
             return;
         }
         if (newPassword !== confirmPassword) {
-            setError('Passwords do not match.');
+            toast.error('Passwords do not match.');
             return;
         }
 
         setLoading(true);
-        setError('');
         try {
             const response = await updateUserAPi(`/${currentUserId}`, {
                 password: newPassword,
@@ -105,13 +108,13 @@ export default function ForgotPassword() {
             });
 
             if (response.status === 200 || response.status === 201 || response.data?.status === 'success') {
-                alert('Password reset successfully!');
-                window.location.href = '/login';
+                toast.success('Password reset successfully!');
+                router.push('/login');
             } else {
-                setError(response.data?.message || 'Failed to reset password.');
+                toast.error(response.data?.message || 'Failed to reset password.');
             }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error updating password. Please try again.');
+            toast.error(err.response?.data?.message || 'Error updating password. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -162,7 +165,6 @@ export default function ForgotPassword() {
                             <h1>Reset Password</h1>
                             <p>Enter your email to receive an OTP</p>
                             <form className="auth-form" onSubmit={handleCheckEmailAndSendOtp}>
-                                {error && <div className="alert alert-danger py-2 mb-3" style={{ fontSize: '14px' }}>{error}</div>}
                                 <div className="mb-3">
                                     <input
                                         type="email"
@@ -193,7 +195,6 @@ export default function ForgotPassword() {
                             <h1>Verify OTP</h1>
                             <p>Enter the 6-digit code sent to {email}</p>
                             <form className="auth-form" onSubmit={handleVerifyOtp}>
-                                {error && <div className="alert alert-danger py-2 mb-3" style={{ fontSize: '14px' }}>{error}</div>}
                                 <div className="mb-3">
                                     <input
                                         type="text"
@@ -225,26 +226,41 @@ export default function ForgotPassword() {
                             <h1>New Password</h1>
                             <p>Create a strong new password</p>
                             <form className="auth-form" onSubmit={handleResetPassword}>
-                                {error && <div className="alert alert-danger py-2 mb-3" style={{ fontSize: '14px' }}>{error}</div>}
-                                <div className="mb-3">
+                                <div className="mb-3 position-relative">
                                     <input
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         className="form-control"
                                         placeholder="New Password"
                                         value={newPassword}
                                         onChange={(e) => setNewPassword(e.target.value)}
                                         disabled={loading}
                                     />
+                                    <button
+                                        type="button"
+                                        className="position-absolute border-0 bg-transparent p-0"
+                                        style={{ right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#fff', zIndex: 10 }}
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </button>
                                 </div>
-                                <div className="mb-3">
+                                <div className="mb-3 position-relative">
                                     <input
-                                        type="password"
+                                        type={showConfirmPassword ? "text" : "password"}
                                         className="form-control"
                                         placeholder="Confirm Password"
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                         disabled={loading}
                                     />
+                                    <button
+                                        type="button"
+                                        className="position-absolute border-0 bg-transparent p-0"
+                                        style={{ right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#fff', zIndex: 10 }}
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    >
+                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </button>
                                 </div>
                                 <button type="submit" className="vs-btn cart-animation-item w-100" disabled={loading}>
                                     {loading ? (
