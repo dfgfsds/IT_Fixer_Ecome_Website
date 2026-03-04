@@ -2,6 +2,7 @@
 import { getCheckEmailApi, postSendOtpAPi, postSendOtpVerifyAPi, updateUserAPi } from "@/api-endpoints/authendication";
 import { useVendor } from "@/context/VendorContext";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Home, Loader2, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -144,13 +145,13 @@ export default function ForgotPassword() {
 
                         <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                             <li>
-                                <a
+                                <Link
                                     href="/"
                                     className="d-inline-flex align-items-center gap-1"
                                 >
                                     <Home size={16} className="mb-[1px]" />
                                     home :
-                                </a>
+                                </Link>
                             </li>
                             <li className="color">Forgot Password</li>
                         </ul>
@@ -184,7 +185,7 @@ export default function ForgotPassword() {
                                     ) : 'Send OTP'}
                                 </button>
                                 <p className="auth-other">
-                                    Back to <a href="/login" className="auth-link">Login</a>
+                                    Back to <Link href="/login" className="auth-link">Login</Link>
                                 </p>
                             </form>
                         </>

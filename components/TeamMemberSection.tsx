@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import Link from 'next/link';
 
 export default function TeamMemberSection() {
     return (
@@ -29,7 +30,7 @@ export default function TeamMemberSection() {
                                 <div className="thumb">
                                     <img src="/assets/img/home-2/team/team-01.png" alt="img" />
                                     <div className="team-content">
-                                        <h3><a href="team-details.html">Jammey hanson</a></h3>
+                                        <h3><Link href="#">Jammey hanson</Link></h3>
                                         <p>
                                             Game artist
                                         </p>
@@ -51,7 +52,7 @@ export default function TeamMemberSection() {
                                 <div className="thumb">
                                     <img src="/assets/img/home-2/team/team-02.png" alt="img" />
                                     <div className="team-content">
-                                        <h3><a href="team-details.html">Jammey hanson</a></h3>
+                                        <h3><Link href="#">Jammey hanson</Link></h3>
                                         <p>
                                             Game artist
                                         </p>
@@ -73,7 +74,7 @@ export default function TeamMemberSection() {
                                 <div className="thumb">
                                     <img src="/assets/img/home-2/team/team-03.png" alt="img" />
                                     <div className="team-content">
-                                        <h3><a href="team-details.html">Jammey hanson</a></h3>
+                                        <h3><Link href="#">Jammey hanson</Link></h3>
                                         <p>
                                             Game artist
                                         </p>
@@ -95,7 +96,7 @@ export default function TeamMemberSection() {
                                 <div className="thumb">
                                     <img src="/assets/img/home-2/team/team-04.png" alt="img" />
                                     <div className="team-content">
-                                        <h3><a href="team-details.html">Jammey hanson</a></h3>
+                                        <h3><Link href="#">Jammey hanson</Link></h3>
                                         <p>
                                             Game artist
                                         </p>

@@ -3,11 +3,13 @@ import { Search, ArrowUp, X, MapPin, Mail, Clock, Phone, Facebook, Twitter, Yout
 import { useUser } from "@/context/UserContext";
 import { useCartItem } from "@/context/CartItemContext";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Header() {
     const { user, isAuthenticated } = useUser();
     const { cartItem } = useCartItem();
+    const pathname = usePathname();
     const [cartCount, setCartCount] = useState(0);
 
     useEffect(() => {
@@ -76,9 +78,9 @@ export default function Header() {
                         <div className="offcanvas__content">
                             <div className="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
                                 <div className="offcanvas__logo">
-                                    <a href="/">
+                                    <Link href="/">
                                         <img src="/assets/img/logo.png" alt="logo-img" style={{ width: "150px", height: "34px" }} />
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="offcanvas__close">
                                     <button>
@@ -150,9 +152,9 @@ export default function Header() {
                                     </div>
                                 </div>
                                 <div className="logo">
-                                    <a href="/" className="header-logo">
+                                    <Link href="/" className="header-logo">
                                         <img src="/assets/img/logo.png" alt="logo-img" />
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="header-right d-flex justify-content-end align-items-center mt-0">
@@ -160,43 +162,34 @@ export default function Header() {
                                     <div className="main-menu d-none d-xl-block">
                                         <nav id="mobile-menu">
                                             <ul>
-                                                <li className="has-dropdown active menu-thumb">
-                                                    <a href="/">
+                                                <li className={`has-dropdown menu-thumb ${pathname === "/" ? "active" : ""}`}>
+                                                    <Link href="/" style={{ color: pathname === "/" ? "#CBFE1C" : "#ffffff" }}>
                                                         Home
-                                                    </a>
+                                                    </Link>
                                                 </li>
-                                                <li className="has-dropdown active d-xl-none">
-                                                    <a href="/" className="border-none">
+                                                <li className={`has-dropdown d-xl-none ${pathname === "/" ? "active" : ""}`}>
+                                                    <Link href="/" className="border-none" style={{ color: pathname === "/" ? "#CBFE1C" : "#ffffff" }}>
                                                         Home
-                                                    </a>
+                                                    </Link>
                                                 </li>
-                                                <li>
-                                                    <a href="/about">About Us</a>
+                                                <li className={pathname === "/about" ? "active" : ""}>
+                                                    <Link href="/about" style={{ color: pathname === "/about" ? "#CBFE1C" : "#ffffff" }}>About Us</Link>
                                                 </li>
-                                                <li>
-                                                    <a href="/categories">Categories</a>
+                                                <li className={pathname === "/categories" ? "active" : ""}>
+                                                    <Link href="/categories" style={{ color: pathname === "/categories" ? "#CBFE1C" : "#ffffff" }}>Categories</Link>
                                                 </li>
-                                                {/* <li>
-                                                    <a href="match-details.html">
-                                                        matches
-                                                    </a>
-                                                    <ul className="submenu">
-                                                        <li><a href="match.html">matches Page</a></li>
-                                                        <li><a href="match-details.html">matches Details</a></li>
-                                                    </ul>
-                                                </li> */}
-                                                <li className="has-dropdown">
-                                                    <a href="/shop">
+                                                <li className={`has-dropdown ${pathname === "/shop" ? "active" : ""}`}>
+                                                    <Link href="/shop" style={{ color: pathname === "/shop" ? "#CBFE1C" : "#ffffff" }}>
                                                         Shop
-                                                    </a>
+                                                    </Link>
                                                 </li>
-                                                <li>
-                                                    <a href="/blog">
+                                                <li className={pathname === "/blog" ? "active" : ""}>
+                                                    <Link href="/blog" style={{ color: pathname === "/blog" ? "#CBFE1C" : "#ffffff" }}>
                                                         Blog
-                                                    </a>
+                                                    </Link>
                                                 </li>
-                                                <li>
-                                                    <a href="/contact">Contact Us</a>
+                                                <li className={pathname === "/contact" ? "active" : ""}>
+                                                    <Link href="/contact" style={{ color: pathname === "/contact" ? "#CBFE1C" : "#ffffff" }}>Contact Us</Link>
                                                 </li>
                                             </ul>
                                         </nav>
