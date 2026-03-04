@@ -121,7 +121,7 @@ export default function CartPage() {
             queryClient.invalidateQueries({ queryKey: ["getCartitemsData"] });
             queryClient.invalidateQueries({ queryKey: ["getCartItemsDetailed"] });
         } catch (e: any) {
-            toast.error(e.response?.data?.message || "FAILED TO APPLY COUPON");
+            toast.error(e.response?.data?.message || "Failed to apply coupon");
         }
     };
 
@@ -133,13 +133,13 @@ export default function CartPage() {
                 updated_by: "user"
             };
             await deleteCouponApi(`${cartId}/coupon/${couponId}/remove/`, payload);
-            toast.success("COUPON REMOVED");
+            toast.success("Coupon removed from cart");
             queryClient.invalidateQueries({ queryKey: ["getAppliedCouponDataData"] });
             queryClient.invalidateQueries({ queryKey: ["getDeliveryCharge"] });
             queryClient.invalidateQueries({ queryKey: ["getCartitemsData"] });
             queryClient.invalidateQueries({ queryKey: ["getCartItemsDetailed"] });
         } catch (e) {
-            toast.error("FAILED TO REMOVE COUPON");
+            toast.error("Failed to remove coupon");
         }
     };
 
@@ -147,12 +147,16 @@ export default function CartPage() {
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${id}/`);
+                toast.success("Item removed from cart");
             } else {
                 await updateCartitemsApi(`${id}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
-        } catch (e) { console.error(e); }
+        } catch (e) {
+            toast.error("Failed to update quantity");
+            console.error(e);
+        }
     };
 
     const handleRemoveItem = async (id: any) => {
@@ -165,6 +169,7 @@ export default function CartPage() {
     };
 
     const handleCheckout = async () => {
+        if (cartData.length === 0) return toast.error("Your cart is empty");
         if (!selectedAddressId) return toast.error("Please select a shipping address");
         setIsProcessing(true);
         try {

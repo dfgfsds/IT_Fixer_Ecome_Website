@@ -1,13 +1,14 @@
-"use client"; 
-import  { createContext, useContext, ReactNode, useState, useEffect } from "react";
+"use client";
+import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getUserAPi } from "@/api-endpoints/authendication";
 
 interface UserContextType {
-  user: any; 
-  isAuthenticated: boolean; 
-  isLoading: boolean; 
-  error: any; 
+  user: any;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: any;
+  refreshUser: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -15,21 +16,25 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export function UserProvider({ children }: { children: ReactNode }) {
   const [userId, setUserId] = useState<string | null>(null);
 
-  useEffect(() => {
+  const refreshUser = () => {
     const storedUserId = localStorage.getItem('userId');
     setUserId(storedUserId);
+  };
+
+  useEffect(() => {
+    refreshUser();
   }, []);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["gerUserData",userId],
+    queryKey: ["gerUserData", userId],
     queryFn: () => getUserAPi(`${userId}`),
-    enabled:!!userId
+    enabled: !!userId
   });
 
-  if(data){
+  if (data) {
     if (typeof window !== 'undefined') {
-        localStorage.setItem('userName', data?.data?.name);
-        localStorage.setItem('email', data?.data?.email);
+      localStorage.setItem('userName', data?.data?.name);
+      localStorage.setItem('email', data?.data?.email);
     }
   }
 
@@ -40,6 +45,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         isAuthenticated: !!data,
         isLoading,
         error,
+        refreshUser
       }}
     >
       {children}

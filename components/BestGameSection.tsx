@@ -38,6 +38,7 @@ export default function BestGameSection() {
             await getProductVariantCartItemUpdate('', payload);
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             setIsCartOpen(true);
+            toast.success("Added to cart");
         } catch (e) { toast.error("Error adding to cart"); }
     };
 
@@ -45,11 +46,15 @@ export default function BestGameSection() {
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${cartId}/`);
+                toast.success("Item removed from cart");
             } else {
                 await updateCartitemsApi(`${cartId}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
-        } catch (e) { console.error(e); }
+        } catch (e) {
+            toast.error("Failed to update quantity");
+            console.error(e);
+        }
     };
 
     useEffect(() => {

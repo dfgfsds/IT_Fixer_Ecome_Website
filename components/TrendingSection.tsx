@@ -62,9 +62,7 @@ export default function TrendingSection() {
                         <div className="trending-match-content">
 
                             <h3>
-                                <a href="#">
-                                    Aggressive Gaming Performance
-                                </a>
+                                Aggressive Gaming Performance
                             </h3>
                             <p>
                                 High-end gaming laptops & custom PCs built for ultra FPS, smooth streaming, and hardcore performance.
@@ -76,9 +74,7 @@ export default function TrendingSection() {
                         <div className="trending-match-content order-2 order-md-1">
 
                             <h3>
-                                <a href="#">
-                                    Gaming Laptop VS Gaming Desktop
-                                </a>
+                                Gaming Laptop VS Gaming Desktop
                             </h3>
                             <p>
                                 Choose between powerful gaming laptops or custom-built desktops.
@@ -156,9 +152,7 @@ export default function TrendingSection() {
                         <div className="trending-match-content">
 
                             <h3>
-                                <a href="#">
-                                    The Ultimate Gaming Rig
-                                </a>
+                                The Ultimate Gaming Rig
                             </h3>
                             <p>
                                 Extreme performance gaming PCs & laptops designed for AAA games, competitive esports, and nonstop power.

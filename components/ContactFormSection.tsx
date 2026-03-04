@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import ApiUrls from "@/api-endpoints/ApiUrls";
-//import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useVendor } from "@/context/VendorContext";
 
 export default function ConatctFormSection() {
@@ -27,13 +27,19 @@ export default function ConatctFormSection() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!form.name || !form.email || !form.contact_number || !form.description) {
+            toast.error("Please fill in all required fields.");
+            return;
+        }
+
         setLoading(true);
         try {
             await axios.post(ApiUrls?.sendQuoteRequest, { ...form, vendor_id: vendorId });
-            //toast.success("Message sent successfully ✅");
+            toast.success("Message sent successfully");
             setForm({ name: "", email: "", contact_number: "", description: "" });
         } catch (err: any) {
-            //toast.error(err?.response?.data?.message || "Something went wrong, try again later");
+            toast.error(err?.response?.data?.message || "Something went wrong, try again later");
         } finally {
             setLoading(false);
         }
@@ -104,10 +110,10 @@ export default function ConatctFormSection() {
                                                 ></textarea>
                                             </div>
                                         </div>
-                                        <div className="col-lg-6">
+                                        <div className="col-lg-12">
                                             <button
                                                 type="submit"
-                                                className="theme-btn boder-10"
+                                                className="vs-btn cart-animation-item"
                                                 disabled={loading}
                                             >
                                                 {loading ? "Sending..." : "Send Message"}

@@ -50,6 +50,7 @@ export default function ShopPage() {
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
             setIsCartOpen(true);
+            toast.success("Added to cart");
         } catch (e) { toast.error("Error adding to cart"); }
     };
 
@@ -57,12 +58,16 @@ export default function ShopPage() {
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${cartId}`);
+                toast.success("Item removed from cart");
             } else {
                 await updateCartitemsApi(`${cartId}/${type}/`);
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
-        } catch (e) { console.error(e); }
+        } catch (e) {
+            toast.error("Failed to update quantity");
+            console.error(e);
+        }
     };
 
     const filtered = (apiData?.data || []).filter((p: any) =>
@@ -173,7 +178,7 @@ export default function ShopPage() {
                                     </span>
                                     <button
                                         className="filter-btn text-uppercase"
-                                        onClick={() => { setMinPrice(0); setMaxPrice(10000); setCurrentPage(1); }}
+                                        onClick={() => { setMinPrice(0); setMaxPrice(200000); setCurrentPage(1); }}
                                     >
                                         Reset
                                     </button>
