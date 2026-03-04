@@ -1,7 +1,118 @@
+"use client";
+import { useEffect, useRef } from "react";
 import { ShoppingCart, LayoutGrid, Phone, MessageCircle } from "lucide-react";
+
 export default function TrendingSection() {
+    const sectionRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        let ctx: any;
+        let checkGsap: any;
+
+        const initAnimations = () => {
+            const gsap = (window as any).gsap;
+            const ScrollTrigger = (window as any).ScrollTrigger;
+            const SplitText = (window as any).SplitText;
+
+            if (!gsap || !ScrollTrigger || !sectionRef.current) return false;
+
+            gsap.registerPlugin(ScrollTrigger, SplitText);
+
+            ctx = gsap.context(() => {
+                // Section Title Animation
+                const subTitle = sectionRef.current?.querySelector('.tz-sub-tilte');
+                if (subTitle && SplitText) {
+                    const split = new SplitText(subTitle, { type: "lines,words,chars", linesClass: "split-line" });
+                    gsap.set(split.chars, { opacity: 0, x: "7" });
+                    gsap.to(split.chars, {
+                        scrollTrigger: {
+                            trigger: subTitle,
+                            start: "top 90%",
+                            end: "top 60%",
+                            scrub: 1,
+                        },
+                        x: "0",
+                        opacity: 1,
+                        stagger: 0.2,
+                    });
+                }
+
+                const mainTitle = sectionRef.current?.querySelector('.tz-itm-title');
+                if (mainTitle && SplitText) {
+                    const split = new SplitText(mainTitle, { type: "lines,words,chars", linesClass: "split-line" });
+                    gsap.set(split.chars, { opacity: 0.3, x: "-7" });
+                    gsap.to(split.chars, {
+                        scrollTrigger: {
+                            trigger: mainTitle,
+                            start: "top 92%",
+                            end: "top 60%",
+                            scrub: 1,
+                        },
+                        x: "0",
+                        opacity: 1,
+                        stagger: 0.2,
+                    });
+                }
+
+                // Pinning Effect for Project Panels
+                const mm = gsap.matchMedia();
+                mm.add("(min-width: 768px)", () => {
+                    const panels = gsap.utils.toArray(".gt-project-panel") as HTMLElement[];
+
+                    panels.forEach((panel) => {
+                        gsap.to(panel, {
+                            scrollTrigger: {
+                                trigger: panel,
+                                pin: true,
+                                scrub: 1,
+                                start: 'top 100px',
+                                end: "bottom 82%",
+                                endTrigger: '.gt-project-area',
+                                pinSpacing: false,
+                                anticipatePin: 1,
+                                markers: false,
+                            },
+                        });
+                    });
+                });
+
+                // Refresh ScrollTrigger after a short delay to account for layout shifts
+                setTimeout(() => {
+                    ScrollTrigger.refresh();
+                }, 500);
+
+            }, sectionRef.current);
+
+            return true;
+        }
+
+        // Poll for GSAP availability
+        if (!initAnimations()) {
+            checkGsap = setInterval(() => {
+                if (initAnimations()) {
+                    clearInterval(checkGsap);
+                }
+            }, 100);
+        }
+
+        // Safety cleanup for the interval
+        const timeout = setTimeout(() => {
+            if (checkGsap) clearInterval(checkGsap);
+        }, 5000);
+
+        return () => {
+            if (checkGsap) clearInterval(checkGsap);
+            if (timeout) clearTimeout(timeout);
+            if (ctx) ctx.revert();
+            const ScrollTrigger = (window as any).ScrollTrigger;
+            if (ScrollTrigger) {
+                ScrollTrigger.getAll().forEach((st: any) => st.kill());
+            }
+        };
+    }, []);
+
     return (
-        <section className="trending-match-section gt-project-area fix section-padding pt-0">
+        <section ref={sectionRef} className="trending-match-section gt-project-area fix section-padding pt-0">
             <div className="left-shape float-bob-y1">
                 <img src="assets/img/home-2/match/left-shape.png" alt="img" />
             </div>
@@ -171,5 +282,6 @@ export default function TrendingSection() {
                 </div>
             </div>
         </section>
-    )
+    );
 }
+

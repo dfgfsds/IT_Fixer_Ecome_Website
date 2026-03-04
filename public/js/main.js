@@ -1055,76 +1055,78 @@
             }
         });
 
-        if ($('.tz-sub-tilte').length) {
-            var agtsub = $(".tz-sub-tilte");
-
-            if (agtsub.length == 0) return; gsap.registerPlugin(SplitText); agtsub.each(function (index, el) {
-
-                el.split = new SplitText(el, {
-                    type: "lines,words,chars",
-                    linesClass: "split-line"
-                });
-
-                if ($(el).hasClass('tz-sub-anim')) {
-                    gsap.set(el.split.chars, {
-                        opacity: 0,
-                        x: "7",
+        /*
+                if ($('.tz-sub-tilte').length) {
+                    var agtsub = $(".tz-sub-tilte");
+        
+                    if (agtsub.length == 0) return; gsap.registerPlugin(SplitText); agtsub.each(function (index, el) {
+        
+                        el.split = new SplitText(el, {
+                            type: "lines,words,chars",
+                            linesClass: "split-line"
+                        });
+        
+                        if ($(el).hasClass('tz-sub-anim')) {
+                            gsap.set(el.split.chars, {
+                                opacity: 0,
+                                x: "7",
+                            });
+                        }
+        
+                        el.anim = gsap.to(el.split.chars, {
+                            scrollTrigger: {
+                                trigger: el,
+                                start: "top 90%",
+                                end: "top 60%",
+                                markers: false,
+                                scrub: 1,
+                            },
+        
+                            x: "0",
+                            y: "0",
+                            opacity: 1,
+                            duration: .7,
+                            stagger: 0.2,
+                        });
+        
                     });
                 }
-
-                el.anim = gsap.to(el.split.chars, {
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 90%",
-                        end: "top 60%",
-                        markers: false,
-                        scrub: 1,
-                    },
-
-                    x: "0",
-                    y: "0",
-                    opacity: 1,
-                    duration: .7,
-                    stagger: 0.2,
-                });
-
-            });
-        }
-
-        if ($('.tz-itm-title').length) {
-            var txtheading = $(".tz-itm-title");
-
-            if (txtheading.length == 0) return; gsap.registerPlugin(SplitText); txtheading.each(function (index, el) {
-
-                el.split = new SplitText(el, {
-                    type: "lines,words,chars",
-                    linesClass: "split-line"
-                });
-
-                if ($(el).hasClass('tz-itm-anim')) {
-                    gsap.set(el.split.chars, {
-                        opacity: .3,
-                        x: "-7",
+        
+                if ($('.tz-itm-title').length) {
+                    var txtheading = $(".tz-itm-title");
+        
+                    if (txtheading.length == 0) return; gsap.registerPlugin(SplitText); txtheading.each(function (index, el) {
+        
+                        el.split = new SplitText(el, {
+                            type: "lines,words,chars",
+                            linesClass: "split-line"
+                        });
+        
+                        if ($(el).hasClass('tz-itm-anim')) {
+                            gsap.set(el.split.chars, {
+                                opacity: .3,
+                                x: "-7",
+                            });
+                        }
+                        el.anim = gsap.to(el.split.chars, {
+                            scrollTrigger: {
+                                trigger: el,
+                                start: "top 92%",
+                                end: "top 60%",
+                                markers: false,
+                                scrub: 1,
+                            },
+        
+                            x: "0",
+                            y: "0",
+                            opacity: 1,
+                            duration: .7,
+                            stagger: 0.2,
+                        });
+        
                     });
                 }
-                el.anim = gsap.to(el.split.chars, {
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 92%",
-                        end: "top 60%",
-                        markers: false,
-                        scrub: 1,
-                    },
-
-                    x: "0",
-                    y: "0",
-                    opacity: 1,
-                    duration: .7,
-                    stagger: 0.2,
-                });
-
-            });
-        }
+                */
 
         if ($(".tv_hero_title").length) {
             gsap.registerPlugin(SplitText);
@@ -1223,29 +1225,31 @@
 
         }
 
-        let tl = gsap.timeline();
-        const project_panel = gsap.matchMedia();
-        project_panel.add("(min-width: 767px)", () => {
-            let otherSections = document.querySelectorAll('.gt-project-panel')
-            otherSections.forEach((section, index) => {
-                gsap.set(otherSections, {
-                    scale: 1,
+        /*
+                let tl = gsap.timeline();
+                const project_panel = gsap.matchMedia();
+                project_panel.add("(min-width: 767px)", () => {
+                    let otherSections = document.querySelectorAll('.gt-project-panel')
+                    otherSections.forEach((section, index) => {
+                        gsap.set(otherSections, {
+                            scale: 1,
+                        });
+                        tl.to(section, {
+                            scale: 1,
+                            scrollTrigger: {
+                                trigger: section,
+                                pin: section,
+                                scrub: 1,
+                                start: 'top 100px',
+                                end: "bottom 82%",
+                                endTrigger: '.gt-project-area',
+                                pinSpacing: false,
+                                markers: false,
+                            },
+                        })
+                    })
                 });
-                tl.to(section, {
-                    scale: 1,
-                    scrollTrigger: {
-                        trigger: section,
-                        pin: section,
-                        scrub: 1,
-                        start: 'top 100px',
-                        end: "bottom 82%",
-                        endTrigger: '.gt-project-area',
-                        pinSpacing: false,
-                        markers: false,
-                    },
-                })
-            })
-        });
+                */
 
 
         let tl2 = gsap.timeline();
