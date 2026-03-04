@@ -1,4 +1,5 @@
 import { ShoppingCart, LayoutGrid, Phone, MessageCircle } from "lucide-react";
+import Link from "next/link";
 export default function TrendingSection() {
     return (
         <section className="trending-match-section gt-project-area fix section-padding pt-0">
@@ -36,14 +37,14 @@ export default function TrendingSection() {
                                 <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="/shop">
+                                        <Link href="/shop">
                                             <ShoppingCart size={18} className="fa-brands" /> Buy Now
-                                        </a>
+                                        </Link>
 
 
-                                        <a href="/categories">
+                                        <Link href="/categories">
                                             <LayoutGrid size={18} className="fa-brands" /> Categories
-                                        </a>
+                                        </Link>
 
                                     </li>
 
@@ -91,14 +92,14 @@ export default function TrendingSection() {
                                 <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="/shop">
+                                        <Link href="/shop">
                                             <ShoppingCart size={18} /> Buy Now
-                                        </a>
+                                        </Link>
 
 
-                                        <a href="/categories">
+                                        <Link href="/categories">
                                             <LayoutGrid size={18} /> Categories
-                                        </a>
+                                        </Link>
 
                                     </li>
 
@@ -126,14 +127,14 @@ export default function TrendingSection() {
                                 <span>VISIT IT FIXER TODAY</span>
                                 <ul className="gt-watch-now-list">
                                     <li>
-                                        <a href="/shop">
+                                        <Link href="/shop">
                                             <ShoppingCart size={18} /> Buy Now
-                                        </a>
+                                        </Link>
 
 
-                                        <a href="/categories">
+                                        <Link href="/categories">
                                             <LayoutGrid size={18} /> Categories
-                                        </a>
+                                        </Link>
 
                                     </li>
 

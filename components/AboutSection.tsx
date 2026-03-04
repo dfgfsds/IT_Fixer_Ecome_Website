@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function AboutSection() {
     return (
         <section className="about-section-2 about-section-21 section-padding pt-0 fix">
@@ -61,13 +62,13 @@ export default function AboutSection() {
                                         <p> Satisfaction</p>
                                     </div>
                                 </div>
-                                <a href="/about" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".9s">
+                                <Link href="/about" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".9s">
                                     <span className="left-line"></span>
                                     About More Us
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
                                     </svg>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

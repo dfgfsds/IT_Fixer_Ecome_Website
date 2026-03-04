@@ -122,9 +122,9 @@ export default function ShopPage() {
                                     <i className="fa-solid fa-house"></i>
                                 </li>
                                 <li>
-                                    <a href="/">
+                                    <Link href="/">
                                         home :
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="color">
                                     Shop
