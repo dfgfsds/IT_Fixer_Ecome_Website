@@ -1,4 +1,9 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 export default function Footer() {
+    const pathname = usePathname();
     return (
         <footer className="gt-footer-section bg-cover" style={{ backgroundImage: "url('/assets/img/home-2/footer/footer-bg.jpg')" }}>
             <div className="footer-main-bg">
@@ -15,9 +20,9 @@ export default function Footer() {
                                 <div className="gt-footer-widget-items">
                                     <div className="gt-widget-head">
                                         <div className="logo">
-                                            <a href="/" className="header-logo">
+                                            <Link href="/" className="header-logo">
                                                 <img src="/assets/img/logo.png" alt="logo-img" style={{ width: "170px", height: "50px" }} />
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                     <div className="gt-footer-content">
@@ -41,29 +46,29 @@ export default function Footer() {
                                     </div>
                                     <ul className="gt-list-area">
                                         <li>
-                                            <a href="/about">
+                                            <Link href="/about" style={pathname === "/about" ? { color: "#CBFE1C" } : {}}>
                                                 About Us
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="/categories">
+                                            <Link href="/categories" style={pathname === "/categories" ? { color: "#CBFE1C" } : {}}>
                                                 Categories
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="/shop">
+                                            <Link href="/shop" style={pathname === "/shop" ? { color: "#CBFE1C" } : {}}>
                                                 Shop
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="/blog">
+                                            <Link href="/blog" style={pathname === "/blog" ? { color: "#CBFE1C" } : {}}>
                                                 Blog
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="/contact">
+                                            <Link href="/contact" style={pathname === "/contact" ? { color: "#CBFE1C" } : {}}>
                                                 Contact Us
-                                            </a>
+                                            </Link>
                                         </li>
 
                                     </ul>
@@ -76,24 +81,24 @@ export default function Footer() {
                                     </div>
                                     <ul className="gt-list-area">
                                         <li>
-                                            <a href="/policy/terms-and-conditions">
+                                            <Link href="/policy/terms-and-conditions" style={pathname === "/policy/terms-and-conditions" ? { color: "#CBFE1C" } : {}}>
                                                 Terms & Conditions
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="/policy/privacy-policy">
+                                            <Link href="/policy/privacy-policy" style={pathname === "/policy/privacy-policy" ? { color: "#CBFE1C" } : {}}>
                                                 Privacy Policy
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="/policy/refund-policy">
+                                            <Link href="/policy/refund-policy" style={pathname === "/policy/refund-policy" ? { color: "#CBFE1C" } : {}}>
                                                 Refund Policy
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="/policy/shipping-policy">
+                                            <Link href="/policy/shipping-policy" style={pathname === "/policy/shipping-policy" ? { color: "#CBFE1C" } : {}}>
                                                 Shipping Policy
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>

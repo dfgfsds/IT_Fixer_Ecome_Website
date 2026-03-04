@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function TriggerSection() {
     return (
         <section className="cta-contact-section section-padding pb-40">
@@ -18,9 +20,9 @@ export default function TriggerSection() {
                             <h3>call us</h3>
                             <p><a href="tel:+918585858768">+91 8585858768</a></p>
                         </div>
-                        <a href="/contact" className="theme-btn">
+                        <Link href="/contact" className="theme-btn">
                             get started
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

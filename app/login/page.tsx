@@ -3,6 +3,7 @@ import { postSendSmsOtpUserApi, postVerifySmsOtpApi, postSignInAPi } from "@/api
 import { getCartApi, postCartCreateApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
 import { useUser } from "@/context/UserContext";
+import Link from "next/link";
 import { Home, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -182,13 +183,13 @@ export default function Login() {
 
                         <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                             <li>
-                                <a
+                                <Link
                                     href="/"
                                     className="d-inline-flex align-items-center gap-1"
                                 >
                                     <Home size={16} className="mb-[1px]" />
                                     home :
-                                </a>
+                                </Link>
                             </li>
                             <li className="color">Login</li>
                         </ul>
@@ -254,9 +255,9 @@ export default function Login() {
                                     </button>
                                 </div>
                                 <div className="d-flex justify-content-between mb-3">
-                                    <a href="/forgot-password" className="auth-link">
+                                    <Link href="/forgot-password" className="auth-link">
                                         Forgot password?
-                                    </a>
+                                    </Link>
                                 </div>
                                 <button
                                     type="submit"
@@ -337,7 +338,7 @@ export default function Login() {
 
                         <p className="auth-other">
                             Don’t have an account?{" "}
-                            <a href="/signup" className="auth-link">Sign up</a>
+                            <Link href="/signup" className="auth-link">Sign up</Link>
                         </p>
                     </form>
                 </div>
