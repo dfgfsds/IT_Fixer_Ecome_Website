@@ -1,6 +1,6 @@
 export default function BrandSection() {
     return (
-        <div className="brand-section-2 section-padding fix">
+        <div className="brand-section-2 brand-padding fix">
             <div className="container">
                 <div className="swiper brand-slider-2">
                     <div className="swiper-wrapper">

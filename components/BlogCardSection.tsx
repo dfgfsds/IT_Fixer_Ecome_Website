@@ -3,23 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Calendar, ArrowRight, ChevronsLeft, ChevronsRight } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { getBlogsApi } from "@/api-endpoints/authendication";
-import { useVendor } from "@/context/VendorContext";
 import { formatDate, generatePagination } from "@/lib/utils";
 
-export default function BlogCardSection() {
-    const { vendorId } = useVendor();
+interface BlogCardSectionProps {
+    blogs: any[];
+}
+
+export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 9;
-
-    const { data: blogData, isLoading } = useQuery({
-        queryKey: ['blogs', vendorId],
-        queryFn: () => getBlogsApi(`?vendor_id=${vendorId}`),
-        enabled: !!vendorId
-    });
-
-    const blogs = blogData?.data?.blogs || [];
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -36,16 +28,6 @@ export default function BlogCardSection() {
     const stripHtml = (html: string) => {
         return html?.replace(/<[^>]*>?/gm, "") || "";
     };
-
-    if (isLoading) {
-        return (
-            <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: '60vh' }}>
-                <div className="spinner-border" role="status" style={{ color: '#a6d719', width: '3rem', height: '3rem', borderWidth: '0.25em' }}>
-                    <span className="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <section className="gt-news-section section-padding fix">
@@ -106,16 +88,17 @@ export default function BlogCardSection() {
                         <nav>
                             <ul className="pagination d-flex gap-2">
                                 <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                    <a
+                                    <button
                                         className="page-link pagination-box"
                                         onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                                        disabled={currentPage === 1}
                                         style={{
                                             cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                                            opacity: currentPage === 1 ? 1 : 1
+                                            opacity: 1
                                         }}
                                     >
                                         <ChevronsLeft size={16} />
-                                    </a>
+                                    </button>
                                 </li>
 
                                 {paginationRange.map((page, index) => {
@@ -132,28 +115,29 @@ export default function BlogCardSection() {
                                     const isActive = currentPage === page;
                                     return (
                                         <li className="page-item" key={page}>
-                                            <a
+                                            <button
                                                 className={`page-link pagination-box ${isActive ? 'active' : ''}`}
                                                 onClick={() => handlePageChange(page)}
                                                 style={{ cursor: 'pointer' }}
                                             >
                                                 {page}
-                                            </a>
+                                            </button>
                                         </li>
                                     );
                                 })}
 
                                 <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                                    <a
+                                    <button
                                         className="page-link pagination-box"
                                         onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                                        disabled={currentPage === totalPages}
                                         style={{
                                             cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-                                            opacity: currentPage === totalPages ? 1 : 1
+                                            opacity: 1
                                         }}
                                     >
                                         <ChevronsRight size={16} />
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                         </nav>

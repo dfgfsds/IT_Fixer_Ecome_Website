@@ -107,7 +107,7 @@ export default function BestGameSection() {
             />
             <div className="container">
                 <div className="section-title-area">
-                    <div className="section-title mb-0">
+                    <div className="section-title game-title mb-0">
                         <h6 className="subtitle text-uppercase">our best products</h6>
                         <h2 className="text-uppercase">
                             Our Best <br /> Gaming Products

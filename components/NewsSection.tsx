@@ -119,12 +119,12 @@ export default function NewsSection() {
 
     return (
         <>
-            <section className="news-section-2 section-padding">
+            <section className="news-section-2 section-padding pt-0">
                 <div className="game-controll-shape">
                     <img src="assets/img/home-2/news/game-controll-shape.png" alt="" />
                 </div>
                 <div className="container">
-                    <div className="section-title">
+                    <div className="section-title news-title">
                         <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Latest Blogs</h6>
                         <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
                             Our Latest Blogs Archive
