@@ -1,88 +1,44 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { Home, Calendar, Phone, Mail, MapPin } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import { Calendar } from "lucide-react";
 import { getBlogsApi } from "@/api-endpoints/authendication";
-import { useVendor } from "@/context/VendorContext";
 import { formatDate } from "@/lib/utils";
-import { useState } from "react";
-import axios from "axios";
-import ApiUrls from "@/api-endpoints/ApiUrls";
-import { toast } from "sonner";
+import BlogQuoteForm from "@/components/BlogQuoteForm";
+import { Metadata } from 'next';
 
-export default function BlogDetailsPage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
-    const params = React.use(paramsPromise);
-    const { vendorId } = useVendor();
+type Props = {
+    params: Promise<{ id: string }>;
+};
 
-    const { data: blogDetailData, isLoading: detailLoading } = useQuery({
-        queryKey: ["blog", params.id],
-        queryFn: () => getBlogsApi(params.id),
-    });
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { id } = await params;
+    const response = await getBlogsApi(id);
+    const post = response?.data?.blog;
 
-    const { data: allBlogsData } = useQuery({
-        queryKey: ["blogs", vendorId],
-        queryFn: () => getBlogsApi(`?vendor_id=${vendorId}`),
-        enabled: !!vendorId
-    });
-
-    const [form, setForm] = useState({
-        name: "",
-        email: "",
-        contact_number: "",
-        description: "",
-    });
-    const [loading, setLoading] = useState(false);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        if (name === "contact_number") {
-            const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
-            setForm({ ...form, contact_number: digitsOnly });
-        } else {
-            setForm({ ...form, [name]: value });
-        }
+    return {
+        title: post?.title || "Blog Details",
+        description: post?.subtitle || post?.content?.slice(0, 160) || "Read our latest blog post.",
     };
+}
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+export default async function BlogDetailsPage({ params: paramsPromise }: Props) {
+    const params = await paramsPromise;
+    const vendorId = "157";
 
-        if (!form.name || !form.email || !form.contact_number || !form.description) {
-            toast.error("Please fill in all required fields.");
-            return;
-        }
+    const [blogDetailResponse, allBlogsResponse] = await Promise.all([
+        getBlogsApi(params.id),
+        getBlogsApi(`?vendor_id=${vendorId}`)
+    ]);
 
-        setLoading(true);
-        try {
-            await axios.post(ApiUrls?.sendQuoteRequest, { ...form, vendor_id: vendorId });
-            toast.success("Message sent successfully");
-            setForm({ name: "", email: "", contact_number: "", description: "" });
-        } catch (err: any) {
-            toast.error(err?.response?.data?.message || "Something went wrong, try again later");
-        } finally {
-            setLoading(false);
-        }
-    };
+    const post = blogDetailResponse?.data?.blog;
+    const allBlogs = allBlogsResponse?.data?.blogs || [];
 
-    const post = blogDetailData?.data?.blog;
+    if (!post) return <div className="container py-20 text-center">Blog not found.</div>;
 
-    const recentPosts = (allBlogsData?.data?.blogs || [])
+    const recentPosts = allBlogs
         .filter((b: any) => String(b.id) !== String(params.id))
         .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
         .slice(0, 3);
-
-    if (detailLoading) {
-        return (
-            <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: '80vh' }}>
-                <div className="spinner-border" role="status" style={{ color: '#a6d719', width: '3rem', height: '3rem', borderWidth: '0.25em' }}>
-                    <span className="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        );
-    }
-
-    if (!post) return <div className="container py-20 text-center">Blog not found.</div>;
 
     return (
         <div>
@@ -148,43 +104,7 @@ export default function BlogDetailsPage({ params: paramsPromise }: { params: Pro
                                         </div>
 
                                         {/* Comment Form */}
-                                        <div className="gt-comment-form-wrap mt-5">
-                                            <h4>Leave a comments</h4>
-                                            <p>Your email address will not be published. Required fields are marked *</p>
-                                            <form id="contact-form" onSubmit={handleSubmit}>
-                                                <div className="row g-4">
-                                                    <div className="col-lg-12">
-                                                        <div className="form-clt">
-                                                            <span>Your Name</span>
-                                                            <input type="text" name="name" placeholder="Your Name" value={form.name} onChange={handleChange} />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <div className="form-clt">
-                                                            <span>Your Email</span>
-                                                            <input type="text" name="email" placeholder="Your Email" value={form.email} onChange={handleChange} />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <div className="form-clt">
-                                                            <span>Mobile Number</span>
-                                                            <input type="tel" name="contact_number" placeholder="Your Mobile Number" value={form.contact_number} onChange={handleChange} maxLength={10} inputMode="numeric" pattern="[0-9]{10}" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <div className="form-clt">
-                                                            <span>write message</span>
-                                                            <textarea name="description" placeholder="Type your message" value={form.description} onChange={handleChange}></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <button type="submit" className="vs-btn cart-animation-item" disabled={loading}>
-                                                            {loading ? "Sending..." : "Send Message"}
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <BlogQuoteForm vendorId={vendorId} />
                                     </div>
                                 </div>
 

@@ -1,16 +1,23 @@
 "use client";
-import { Search, ArrowUp, X, MapPin, Mail, Clock, Phone, Facebook, Twitter, Youtube, Linkedin, ChevronRight, User, ShoppingCart } from "lucide-react";
+import { Search, ArrowUp, X, MapPin, Mail, Clock, Phone, Facebook, Twitter, Youtube, Linkedin, ChevronRight, User, ShoppingCart, Loader2 } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 import { useCartItem } from "@/context/CartItemContext";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState, useRef } from "react";
+import { useProducts } from "@/context/ProductsContext";
+import { formatPrice } from "@/lib/utils";
 
 export default function Header() {
     const { user, isAuthenticated } = useUser();
     const { cartItem } = useCartItem();
+    const { products: apiData }: any = useProducts();
     const pathname = usePathname();
+    const router = useRouter();
     const [cartCount, setCartCount] = useState(0);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [isSearchActive, setIsSearchActive] = useState(false);
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const items = cartItem?.data || [];
@@ -18,6 +25,39 @@ export default function Header() {
         const total = items.reduce((acc: number, item: any) => acc + (item.quantity || 0), 0);
         setCartCount(total);
     }, [cartItem]);
+
+    const products = apiData?.data || [];
+    const filteredProducts = searchQuery.trim()
+        ? products.filter((p: any) => p.name.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 8)
+        : [];
+
+    const handleSearchToggle = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const popup = document.querySelector(".search-popup");
+        if (popup) {
+            const isActive = popup.classList.toggle("active");
+            setIsSearchActive(isActive);
+            if (isActive) {
+                document.body.style.overflow = "hidden";
+                document.documentElement.style.overflow = "hidden";
+                setTimeout(() => searchInputRef.current?.focus(), 100);
+            } else {
+                document.body.style.overflow = "";
+                document.documentElement.style.overflow = "";
+                setSearchQuery("");
+            }
+        }
+    };
+
+    const handleProductClick = (productId: number) => {
+        const popup = document.querySelector(".search-popup");
+        if (popup) {
+            popup.classList.remove("active");
+            document.body.classList.remove("locked");
+        }
+        setSearchQuery("");
+        router.push(`/shop/${productId}`);
+    };
 
     return (
         <>
@@ -73,6 +113,7 @@ export default function Header() {
             <div className="mouseCursor cursor-inner"></div>
 
             <div className="fix-area">
+                <div className="info-bar-overlay" onClick={handleSearchToggle}></div>
                 <div className="offcanvas__info style-2">
                     <div className="offcanvas__wrapper">
                         <div className="offcanvas__content">
@@ -83,8 +124,8 @@ export default function Header() {
                                     </Link>
                                 </div>
                                 <div className="offcanvas__close">
-                                    <button>
-                                        <X size={20} />
+                                    <button className="sidebar__toggle">
+                                        <X size={20} color="white" />
                                     </button>
                                 </div>
                             </div>
@@ -95,7 +136,8 @@ export default function Header() {
                             <div className="sideber-image">
                                 <img src="https://acemagic.com/cdn/shop/collections/TANK_03-_2.jpg?v=1725597557" alt="img" />
                             </div>
-                            {/* <div className="offcanvas__contact">
+                            {/* 
+                            <div className="offcanvas__contact">
                                 <h4>Contact Info</h4>
                                 <ul>
 
@@ -132,8 +174,8 @@ export default function Header() {
                                         </div>
                                     </li>
                                 </ul>
-
-                            </div> */}
+                            </div> 
+                            */}
                         </div>
                     </div>
                 </div>
@@ -196,9 +238,9 @@ export default function Header() {
                                     </div>
                                 </div>
                                 <div className="header-right-icon bg-red-900">
-                                    <a href="#" className="main-header__search ms-3 search-toggler">
+                                    <button onClick={handleSearchToggle} className="main-header__search ms-3 bg-transparent border-0 p-0">
                                         <Search size={20} className="text-white cursor-pointer" />
-                                    </a>
+                                    </button>
 
                                     <div className="header-button header-cart-btn ms-2 me-2 me-sm-3" style={{ position: 'relative' }}>
                                         <Link href={isAuthenticated ? "/cart" : "/login"} className="text-white">
@@ -252,14 +294,62 @@ export default function Header() {
 
 
             <div className="search-popup">
-                <div className="search-popup__overlay search-toggler"></div>
+                <div className="search-popup__overlay" onClick={handleSearchToggle}></div>
                 <div className="search-popup__content">
-                    <form role="search" method="get" className="search-popup__form" action="#">
-                        <input type="text" id="search" name="search" placeholder="Search Here..." />
-                        <button type="submit" aria-label="search submit" className="search-btn">
-                            <span> <Search size={20} className="text-black cursor-pointer" /></span>
-                        </button>
-                    </form>
+                    <div className="search-popup__form-wrapper">
+                        <form action="#" className="search-popup__form" onSubmit={(e) => e.preventDefault()}>
+                            <input
+                                type="text"
+                                id="search"
+                                name="search"
+                                placeholder="Search Here"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                ref={searchInputRef}
+                            />
+                            <button type="submit" aria-label="search submit" className="search-btn">
+                                <span> <Search size={20} className="text-black cursor-pointer" /></span>
+                            </button>
+                        </form>
+
+                        {searchQuery && (
+                            <div className="search-results-container bg-white mt-2 shadow-lg overflow-hidden" style={{ minWidth: '100%' }}>
+                                {/* 
+                                <div className="search-results-header px-3 py-2 border-bottom">
+                                    <span className="text-uppercase small fw-bold text-black">Products</span>
+                                </div> 
+                                */}
+                                <div className="search-results-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                                    {filteredProducts.length > 0 ? (
+                                        filteredProducts.map((p: any) => (
+                                            <div
+                                                key={p.id}
+                                                className="search-result-item d-flex align-items-center gap-3 p-3 border-bottom cursor-pointer hover-bg-light transition"
+                                                onMouseEnter={() => router.prefetch(`/shop/${p.id}`)}
+                                                onClick={() => handleProductClick(p.id)}
+                                            >
+                                                <div className="product-thumb bg-light rounded overflow-hidden" style={{ width: '60px', height: '60px', minWidth: '60px' }}>
+                                                    <img
+                                                        src={p.image_urls?.[0] || '/assets/img/placeholder.jpg'}
+                                                        className="w-100 h-100 object-fit-cover"
+                                                        alt={p.name}
+                                                    />
+                                                </div>
+                                                <div className="product-details flex-grow-1 overflow-hidden">
+                                                    <h6 className="text-dark mb-1 text-truncate fw-bold" style={{ fontSize: '15px' }}>{p.name}</h6>
+                                                    <span className="text-success fw-bold" style={{ fontSize: '14px' }}>{formatPrice(p.price)}</span>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="p-4 text-center text-black">
+                                            No products found matching "{searchQuery}"
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </>

@@ -71,9 +71,12 @@ export const getDeliveryChargeApi = async (id: any, payload: any) => {
 // GET BLOGS API
 export const getBlogsApi = async (query: any) => {
   const formattedQuery = query.endsWith('/') ? query : `${query}`;
-  return axios.get(
-    `${ApiUrls.blog}${formattedQuery}`
-  );
+  const response = await fetch(`${ApiUrls.blog}${formattedQuery}`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch blogs: ${response.statusText}`);
+  }
+  const data = await response.json();
+  return { data };
 }
 
 // GET SMS OTP API
