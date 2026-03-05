@@ -6,7 +6,6 @@ import TriggerSection from "@/components/TriggerSection";
 export default function ContactPage() {
     return (
         <div>
-
             <div id="smooth-content">
                 <ContactHeroSection />
                 <ContactFormSection />

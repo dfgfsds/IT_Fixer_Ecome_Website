@@ -2,7 +2,7 @@ import { ShoppingCart, LayoutGrid, Phone, MessageCircle } from "lucide-react";
 import Link from "next/link";
 export default function TrendingSection() {
     return (
-        <section className="trending-match-section gt-project-area fix section-padding pt-0">
+        <section className="trending-match-section gt-project-area fix section-padding pt-5">
             <div className="left-shape float-bob-y1">
                 <img src="assets/img/home-2/match/left-shape.png" alt="img" />
             </div>

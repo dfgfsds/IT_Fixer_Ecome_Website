@@ -5,7 +5,7 @@ import ApiUrls from "@/api-endpoints/ApiUrls";
 import { toast } from "sonner";
 import { useVendor } from "@/context/VendorContext";
 
-export default function ConatctFormSection() {
+export default function ContactFormSection() {
     const { vendorId } = useVendor();
     const [form, setForm] = useState({
         name: "",

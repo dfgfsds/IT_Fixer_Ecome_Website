@@ -1,13 +1,13 @@
 import Link from "next/link";
 export default function AboutSection() {
     return (
-        <section className="about-section-2 about-section-21 section-padding pt-0 fix">
+        <section className="about-section-2 about-section-21 fix">
             <div className="about-shape-1">
                 <img src="assets/img/home-2/about/about-shape-1.png" alt="img" />
             </div>
             <div className="container">
                 <div className="about-wrapper-2">
-                    <div className="row g-4 align-items-center">
+                    <div className="row g-lg-4 align-items-center">
                         <div className="col-lg-6">
                             <div className="about-iamge wow fadeInUp" data-wow-delay=".3s">
                                 <img src="assets/img/home-2/about/aout-01.jpg" alt="img" />

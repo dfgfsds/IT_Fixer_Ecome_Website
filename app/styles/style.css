@@ -2112,6 +2112,35 @@
     text-transform: uppercase;
 }
 
+.game-title {
+    margin: 60px 0 30px !important;
+    text-transform: uppercase;
+}
+
+@media(max-width:1279px) {
+    .game-title {
+        margin: 50px 0 30px !important;
+    }
+}
+
+@media(max-width:991px) {
+    .game-title {
+        margin: 40px 0 30px !important;
+    }
+}
+
+.news-title {
+    margin: 20px 0 30px !important;
+    text-transform: uppercase;
+}
+
+@media(max-width:991px) {
+    .news-title {
+        margin: 30px 0 30px !important;
+    }
+}
+
+
 .related-card {
     text-align: center;
 }

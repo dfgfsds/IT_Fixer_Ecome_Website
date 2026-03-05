@@ -2,7 +2,7 @@ import { Play, Star } from "lucide-react";
 
 export default function AboutTestimonialSection() {
     return (
-        <section className="gt-testimonial-section-3 fix section-padding pt-0">
+        <section className="gt-testimonial-section-3 fix section-padding">
             <div className="container">
                 <div className="gt-testimonial-wrapper-3">
                     <div className="row g-4 align-items-center">

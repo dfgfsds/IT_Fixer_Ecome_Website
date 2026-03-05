@@ -1,6 +1,6 @@
 export default function TestimonialSection() {
     return (
-        <section className="testimonial-section-2 section-padding pt-0">
+        <section className="testimonial-section-2 section-padding pt-2">
             <div className="container">
                 <div className="row g-4 align-items-center">
                     <div className="col-xl-6">
