@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export default async function BlogPage() {
     const vendorId = "157";
     const response = await getBlogsApi(`?vendor_id=${vendorId}`);
-    const blogs = response?.data?.blogs || [];
+    const blogs = response?.data?.blogs ?? [];
 
     return (
         <div>
