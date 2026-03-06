@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Script from "next/script";
 
 /* TEMPLATE CSS FILES */
 import './styles/all.min.css';
@@ -38,6 +39,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Google Analytics Script */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-J3ZCH2TFTE"
+          strategy="beforeInteractive"
+        />
+
+        <Script id="google-analytics" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-J3ZCH2TFTE');
+          `}
+        </Script>
+      </head>
+
       <body>
         <Providers>
           <BootstrapClient />

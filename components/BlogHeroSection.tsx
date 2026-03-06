@@ -28,7 +28,7 @@ export default function BlogHeroSection() {
                             </Link>
                         </li>
                         <li className="color">
-                            about us
+                            our blog
                         </li>
                     </ul>
                 </div>
