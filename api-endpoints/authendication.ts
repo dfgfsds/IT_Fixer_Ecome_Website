@@ -73,7 +73,7 @@ export const getBlogsApi = async (query: any) => {
   try {
     const formattedQuery = query.endsWith('/') ? query : `${query}`;
     // const response = await fetch(`${ApiUrls.blog}${formattedQuery}`);
-    const response = await fetch(` https://test-ecomapi.justvy.in/${formattedQuery}`);
+    const response = await fetch(` https://test-ecomapi.justvy.in/blog/${formattedQuery}`);
 
     if (!response.ok) {
       console.error(`Failed to fetch blogs: ${response.status} ${response.statusText}`);
