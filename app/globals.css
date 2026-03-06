@@ -490,3 +490,11 @@ body.locked {
     display: none !important;
   }
 }
+
+.gt-contact-us-section {
+  overflow: visible !important;
+}
+
+.blog-sticky-sidebar {
+  position: relative;
+}
