@@ -12,7 +12,6 @@ export default function ContactPage() {
                 <ContactMapSection />
                 <TriggerSection />
             </div>
-
         </div>
     );
 }
