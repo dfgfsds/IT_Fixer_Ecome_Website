@@ -70,13 +70,21 @@ export const getDeliveryChargeApi = async (id: any, payload: any) => {
 
 // GET BLOGS API
 export const getBlogsApi = async (query: any) => {
-  const formattedQuery = query.endsWith('/') ? query : `${query}`;
-  const response = await fetch(`${ApiUrls.blog}${formattedQuery}`);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch blogs: ${response.statusText}`);
+  try {
+    const formattedQuery = query.endsWith('/') ? query : `${query}`;
+    // const response = await fetch(`${ApiUrls.blog}${formattedQuery}`);
+    const response = await fetch(` https://test-ecomapi.justvy.in/${formattedQuery}`);
+
+    if (!response.ok) {
+      console.error(`Failed to fetch blogs: ${response.status} ${response.statusText}`);
+      return null;
+    }
+    const data = await response.json();
+    return { data };
+  } catch (error) {
+    console.error('getBlogsApi error:', error);
+    return null;
   }
-  const data = await response.json();
-  return { data };
 }
 
 // GET SMS OTP API
