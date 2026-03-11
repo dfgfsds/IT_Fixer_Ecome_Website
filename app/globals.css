@@ -290,6 +290,41 @@ body.locked {
   color: #a6d719;
 }
 
+/* Blog Content Styles */
+.prose ul {
+  margin-bottom: 20px;
+  padding-left: 20px;
+  list-style: disc !important;
+}
+
+.prose ul li {
+  margin-bottom: 0px !important;
+  line-height: 0.9 !important;
+  color: white;
+  display: list-item;
+  list-style-type: disc;
+}
+
+.prose h3 {
+  font-size: 24px !important;
+  margin-top: 20px;
+  margin-bottom: 20px !important;
+  color: white;
+  font-weight: 700;
+}
+
+.prose p {
+  margin-bottom: 0px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: white;
+}
+
+.prose strong {
+  color: white;
+  font-weight: 700;
+}
+
 @media (max-width: 768px) {
   .policy-section {
     padding: 50px 0;
