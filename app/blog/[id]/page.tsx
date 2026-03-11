@@ -93,8 +93,16 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                                             </div>
                                             <h3>{post.title || post.subtitle}</h3>
                                             <div
-                                                dangerouslySetInnerHTML={{ __html: post.content }}
+                                                dangerouslySetInnerHTML={{
+                                                    __html: post.content
+                                                        .replace(/&lt;/g, '<')
+                                                        .replace(/&gt;/g, '>')
+                                                        .replace(/&amp;/g, '&')
+                                                        .replace(/&quot;/g, '"')
+                                                        .replace(/&#039;/g, "'")
+                                                }}
                                                 className="prose max-w-none mt-2"
+                                                style={{ textTransform: 'none' }}
                                             />
 
                                             {/* Author Bio Box */}
