@@ -81,22 +81,22 @@ export default function Footer() {
                                     </div>
                                     <ul className="gt-list-area">
                                         <li>
-                                            <Link href="/policy/terms-and-conditions" style={pathname === "/policy/terms-and-conditions" ? { color: "#CBFE1C" } : {}}>
+                                            <Link href="/terms-and-conditions" style={pathname === "/terms-and-conditions" ? { color: "#CBFE1C" } : {}}>
                                                 Terms & Conditions
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/policy/privacy-policy" style={pathname === "/policy/privacy-policy" ? { color: "#CBFE1C" } : {}}>
+                                            <Link href="/privacy-policy" style={pathname === "/privacy-policy" ? { color: "#CBFE1C" } : {}}>
                                                 Privacy Policy
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/policy/refund-policy" style={pathname === "/policy/refund-policy" ? { color: "#CBFE1C" } : {}}>
+                                            <Link href="/refund-policy" style={pathname === "/refund-policy" ? { color: "#CBFE1C" } : {}}>
                                                 Refund Policy
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/policy/shipping-policy" style={pathname === "/policy/shipping-policy" ? { color: "#CBFE1C" } : {}}>
+                                            <Link href="/shipping-policy" style={pathname === "/shipping-policy" ? { color: "#CBFE1C" } : {}}>
                                                 Shipping Policy
                                             </Link>
                                         </li>
