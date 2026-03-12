@@ -91,19 +91,8 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                                                 <span className="d-flex align-items-center gap-1"><Calendar size={14} /> {formatDate(post.created_at)}</span>
                                                 <span>| By {post.author}</span>
                                             </div>
-                                            <h3>{post.title || post.subtitle}</h3>
-                                            <div
-                                                dangerouslySetInnerHTML={{
-                                                    __html: post.content
-                                                        .replace(/&lt;/g, '<')
-                                                        .replace(/&gt;/g, '>')
-                                                        .replace(/&amp;/g, '&')
-                                                        .replace(/&quot;/g, '"')
-                                                        .replace(/&#039;/g, "'")
-                                                }}
-                                                className="prose max-w-none mt-2"
-                                                style={{ textTransform: 'none' }}
-                                            />
+                                            <h3 className="mb-4">{post.title || post.subtitle}</h3>
+                                            <div dangerouslySetInnerHTML={{ __html: post?.content }} className="quill-content" />
 
                                             {/* Author Bio Box */}
                                             <div className="gt-sideber mt-5">
