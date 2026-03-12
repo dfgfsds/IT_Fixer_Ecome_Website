@@ -97,13 +97,13 @@ export default function CategoryDetailPage() {
                     <div className="container">
                         <div className="gt-page-heading">
                             <div className="gt-breadcrumb-sub-title">
-                                <h1 className="wow fadeInUp" data-wow-delay=".3s">{categoryName}</h1>
+                                <h1 className="wow fadeInUp text-uppercase" data-wow-delay=".3s">{categoryName}</h1>
                             </div>
                             <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                                 <li><i className="fa-solid fa-house"></i></li>
-                                <li><Link href="/">home :</Link></li>
-                                <li><Link href="/categories">categories :</Link></li>
-                                <li className="color">{categoryName}</li>
+                                <li><Link className="text-uppercase" href="/">home :</Link></li>
+                                <li><Link className="text-uppercase" href="/categories">categories :</Link></li>
+                                <li className="color text-uppercase">{categoryName}</li>
                             </ul>
                         </div>
                     </div>

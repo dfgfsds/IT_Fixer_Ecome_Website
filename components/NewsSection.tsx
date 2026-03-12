@@ -126,7 +126,7 @@ export default function NewsSection() {
                 <div className="container">
                     <div className="section-title news-title">
                         <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Latest Blogs</h6>
-                        <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
+                        <h2 className="tx-title sec_title text-uppercase tz-itm-title tz-itm-anim">
                             Our Latest Blogs Archive
                         </h2>
                     </div>

@@ -165,7 +165,7 @@ function ProfileContent() {
                                     <User size={40} color="#a6d719" />
                                 </div>
                                 <h5 className="mb-1 text-white">{user?.data?.name || ""}</h5>
-                                <p className="text-white small">{user?.data?.email || user?.data?.contact_number || ""}</p>
+                                <p className="text-white text-lowercase small">{user?.data?.email || user?.data?.contact_number || ""}</p>
                             </div>
 
                             <div className="nav flex-column nav-pills">

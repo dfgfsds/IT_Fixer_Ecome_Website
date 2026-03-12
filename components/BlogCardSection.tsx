@@ -46,7 +46,7 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
                                             <img
                                                 src={post.banner_url || "/assets/img/placeholder.jpg"}
                                                 alt={post.title}
-                                                style={{ height: '250px', width: '100%', objectFit: 'cover' }}
+                                                style={{ width: '100%', objectFit: 'cover' }}
                                                 onError={(e) => {
                                                     const target = e.target as HTMLImageElement;
                                                     target.src = "/assets/img/placeholder.jpg";
@@ -63,7 +63,7 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
                                             </li>
                                         </ul>
                                         <h4 className="line-clamp-2">
-                                            <Link href={`/blog/${post.id}`}>
+                                            <Link className="text-uppercase" href={`/blog/${post.id}`}>
                                                 {post.subtitle || post.title}
                                             </Link>
                                         </h4>

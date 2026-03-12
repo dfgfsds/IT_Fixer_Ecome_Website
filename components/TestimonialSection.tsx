@@ -135,7 +135,7 @@ export default function TestimonialSection() {
                         <div className="testimonial-right-items">
                             <div className="section-title mb-4">
                                 <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">our testimonials</h6>
-                                <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
+                                <h2 className="tx-title sec_title text-uppercase tz-itm-title tz-itm-anim">
                                     Gamers Talk About IT Fixer
                                 </h2>
                             </div>

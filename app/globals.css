@@ -292,9 +292,18 @@ body.locked {
 
 /* Blog Content Styles */
 .quill-content h1 {
-  font-size: 28px !important;
-  /* Tailwind: text-2xl */
-  font-weight: 700;
+  font-size: 24px !important;
+  /* Tailwind: text-xl */
+  font-weight: 600;
+  margin-top: 16px !important;
+  margin-bottom: 24px !important;
+}
+
+.quill-content h2 {
+  font-size: 24px !important;
+  /* Tailwind: text-xl */
+  font-weight: 600;
+  margin-top: 16px !important;
   margin-bottom: 24px !important;
 }
 
@@ -302,6 +311,7 @@ body.locked {
   font-size: 24px !important;
   /* Tailwind: text-xl */
   font-weight: 600;
+  margin-top: 16px !important;
   margin-bottom: 24px !important;
 }
 
@@ -430,6 +440,14 @@ body.locked {
 
 .address-form-scroll::-webkit-scrollbar {
   display: none;
+}
+
+/* Fix for uppercase labels and inputs */
+.form-label,
+.form-control,
+.form-select,
+.text-normal {
+  text-transform: none !important;
 }
 
 /* Variant and Size selection */

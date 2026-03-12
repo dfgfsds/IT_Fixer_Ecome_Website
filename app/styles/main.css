@@ -9463,7 +9463,7 @@ span {
 
 .gt-breadcrumb-wrapper .gt-page-heading h1 {
   color: #fff;
-  font-size: 66px;
+  font-size: 54px;
   position: relative;
   z-index: 9;
   font-weight: 400;
@@ -9473,25 +9473,25 @@ span {
 
 @media (max-width: 1199px) {
   .gt-breadcrumb-wrapper .gt-page-heading h1 {
-    font-size: 65px;
+    font-size: 48px;
   }
 }
 
 @media (max-width: 991px) {
   .gt-breadcrumb-wrapper .gt-page-heading h1 {
-    font-size: 45px;
+    font-size: 42px;
   }
 }
 
 @media (max-width: 767px) {
   .gt-breadcrumb-wrapper .gt-page-heading h1 {
-    font-size: 35px;
+    font-size: 42px;
   }
 }
 
 @media (max-width: 575px) {
   .gt-breadcrumb-wrapper .gt-page-heading h1 {
-    font-size: 28px;
+    font-size: 36px;
   }
 }
 
@@ -9499,7 +9499,7 @@ span {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 16px;
   gap: 10px;
 }
 
@@ -9511,7 +9511,7 @@ span {
 
 @media (max-width: 575px) {
   .gt-breadcrumb-wrapper .gt-page-heading .gt-breadcrumb-items {
-    margin-top: 15px;
+    margin-top: 16px;
   }
 }
 
@@ -15052,6 +15052,8 @@ span {
 
 .gt-news-details-wrapper .gt-news-details-content .gt-sideber .client-info-item .client-info .image {
   border-radius: 100%;
+  width: 60px;
+  height: 60px;
 }
 
 .gt-news-details-wrapper .gt-news-details-content .gt-sideber .client-info-item .client-info h4 {
