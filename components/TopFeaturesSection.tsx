@@ -29,7 +29,7 @@ export default function TopFeaturesSection() {
                                             <img src="/assets/img/home-3/icon/12.svg" alt="img" />
                                         </div>
                                         <div className="gt-content">
-                                            <h3>Graphics & Performance</h3>
+                                            <h3 className="text-uppercase">Graphics & Performance</h3>
                                             <p>
                                                 Dominate every match with next-gen RTX graphics, powerful Intel/Ryzen processors, and advanced cooling for smooth, high-FPS, lag-free gaming.
                                             </p>
@@ -40,7 +40,7 @@ export default function TopFeaturesSection() {
                                             <img src="/assets/img/home-3/icon/13.svg" alt="img" />
                                         </div>
                                         <div className="gt-content">
-                                            <h3>Speed & Storage</h3>
+                                            <h3 className="text-uppercase">Speed & Storage</h3>
                                             <p>
                                                 Ultra-fast NVMe SSD storage and expandable high-speed RAM ensure faster boot times, quick game loading, seamless multitasking, and smooth streaming performance.
                                             </p>
@@ -51,7 +51,7 @@ export default function TopFeaturesSection() {
                                             <img src="/assets/img/home-3/icon/14.svg" alt="img" />
                                         </div>
                                         <div className="gt-content">
-                                            <h3> Custom Build & Reliability</h3>
+                                            <h3 className="text-uppercase"> Custom Build & Reliability</h3>
                                             <p>
                                                 Custom-built systems with top-tier components ensure maximum performance and durability, delivering unmatched gaming experience.
                                             </p>

@@ -16,18 +16,18 @@ export default function BlogHeroSection() {
             <div className="container">
                 <div className="gt-page-heading">
                     <div className="gt-breadcrumb-sub-title">
-                        <h1 className="wow fadeInUp" data-wow-delay=".3s">Our Blog</h1>
+                        <h1 className="wow fadeInUp text-uppercase" data-wow-delay=".3s">Our Blog</h1>
                     </div>
                     <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                         <li>
                             <i className="fa-solid fa-house"></i>
                         </li>
                         <li>
-                            <Link href="/">
+                            <Link className="text-uppercase" href="/">
                                 home :
                             </Link>
                         </li>
-                        <li className="color">
+                        <li className="color text-uppercase">
                             our blog
                         </li>
                     </ul>
