@@ -21,7 +21,7 @@ export default function PolicyHero({ title, date }: PolicyHeroProps) {
             <div className="container">
                 <div className="gt-page-heading">
                     <div className="gt-breadcrumb-sub-title">
-                        <h1 className="wow fadeInUp" data-wow-delay=".3s">{title}</h1>
+                        <h1 className="wow fadeInUp text-uppercase" data-wow-delay=".3s">{title}</h1>
                         {date && <p className="wow fadeInUp mt-3 text-white" data-wow-delay=".4s">Effective Date: {date}</p>}
                     </div>
                     {/* <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">

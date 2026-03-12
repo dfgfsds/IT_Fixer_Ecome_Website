@@ -148,9 +148,17 @@ export default function ProductDetails() {
 
     if (!product) {
         return (
-            <div className="text-center py-5 text-white" style={{ backgroundColor: "#0b0e13", minHeight: "50vh" }}>
-                <h2>Product Not Found</h2>
-                <Link href="/shop" className="text-success">Return to Shop</Link>
+            <div className="d-flex align-items-center justify-content-center flex-column" style={{ minHeight: '100vh', backgroundColor: '#0b0e13', color: '#fff' }}>
+                <div className="mb-3">
+                    <ShoppingBag size={40} style={{ color: '#a6d719', opacity: 1 }} />
+                </div>
+                <h2 className="mb-2 text-uppercase" style={{ fontFamily: "'Days One', sans-serif", fontSize: '28px' }}>Product Not Found</h2>
+                <p className="text-secondary mb-4" style={{ fontSize: '16px' }}>The product you are looking for might have been removed or is temporarily unavailable.</p>
+                <Link href="/shop">
+                    <button className="vs-btn">
+                        RETURN TO SHOP
+                    </button>
+                </Link>
             </div>
         );
     }
@@ -169,18 +177,18 @@ export default function ProductDetails() {
                     <div className="container">
                         <div className="gt-page-heading">
                             <div className="gt-breadcrumb-sub-title">
-                                <h1 className="wow fadeInUp" data-wow-delay=".3s">{product.name}</h1>
+                                <h1 className="wow fadeInUp" style={{ lineHeight: "1.1" }} data-wow-delay=".3s">{product.name}</h1>
                             </div>
                             <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                                 <li>
                                     <i className="fa-solid fa-house"></i>
                                 </li>
                                 <li>
-                                    <Link href="/">
+                                    <Link className="text-uppercase" href="/">
                                         home :
                                     </Link>
                                 </li>
-                                <li className="color">
+                                <li className="color text-uppercase">
                                     Shop Details
                                 </li>
                             </ul>
@@ -212,11 +220,11 @@ export default function ProductDetails() {
 
                         {/* Product Info */}
                         <div className="col-lg-6 product-info-dark">
-                            <span className="product-badge-dark">{product.brand_name || 'Premium Gift'}</span>
+                            <span className="product-badge-dark text-white">{product.brand_name || 'Premium Gift'}</span>
 
                             <h1 className="product-title-dark">{product.name}</h1>
 
-                            <p className="rating-text-dark">
+                            <p className="rating-text-dark text-white">
                                 Category – <span className="reviews-count">{product.category_name}</span>
                             </p>
 
