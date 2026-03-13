@@ -23,6 +23,7 @@ import FooterPage from '@/components/Footer';
 import Providers from './providers';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import FloatingCallButton from '@/components/FloatingCallButton';
+import ScrollToTop from '@/components/ScrollToTop';
 
 export const metadata: Metadata = {
   title: 'IT Fixer - IT Services & Technology Next.js Template',
@@ -58,6 +59,7 @@ export default function RootLayout({
 
       <body>
         <Providers>
+          <ScrollToTop />
           <BootstrapClient />
           <FloatingWhatsApp />
           <FloatingCallButton />

@@ -163,7 +163,7 @@ export default function ForgotPassword() {
 
                     {phase === 'EMAIL' && (
                         <>
-                            <h1>Reset Password</h1>
+                            <h1 className="text-uppercase">Reset Password</h1>
                             <p>Enter your email to receive an OTP</p>
                             <form className="auth-form" onSubmit={handleCheckEmailAndSendOtp}>
                                 <div className="mb-3">
