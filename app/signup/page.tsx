@@ -111,7 +111,7 @@ export default function Signup() {
             <div className="auth-wrapper">
                 <div className="auth-card">
 
-                    <h1>Create Account</h1>
+                    <h1 className="text-uppercase">Create Account</h1>
                     <p>Join with us today</p>
 
                     <form className="auth-form" onSubmit={handleSubmit}>

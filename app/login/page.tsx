@@ -198,18 +198,18 @@ export default function Login() {
             </div>
             <div className="auth-wrapper">
                 <div className="auth-card">
-                    <h1>Welcome Back</h1>
+                    <h1 className="text-uppercase">Welcome Back</h1>
                     <p>Login to your account</p>
 
                     <div className="auth-tabs">
                         <button
-                            className={`auth-tab ${loginMethod === 'mobile' ? 'active' : ''}`}
+                            className={`text-uppercase auth-tab ${loginMethod === 'mobile' ? 'active' : ''}`}
                             onClick={() => handleLoginMethodChange('mobile')}
                         >
                             Mobile Login
                         </button>
                         <button
-                            className={`auth-tab ${loginMethod === 'email' ? 'active' : ''}`}
+                            className={`text-uppercase auth-tab ${loginMethod === 'email' ? 'active' : ''}`}
                             onClick={() => handleLoginMethodChange('email')}
                         >
                             Email Login
