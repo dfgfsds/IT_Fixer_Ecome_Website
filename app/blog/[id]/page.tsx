@@ -129,7 +129,7 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                                                     {recentPosts.map((rPost: any) => (
                                                         <div className="gt-recent-items d-flex align-items-center gap-3 mb-4" key={rPost.id}>
                                                             {/* Fixed size thumbnail with rounded corners */}
-                                                            <div className="gt-recent-thumb" style={{ width: '85px', height: '85px', minWidth: '85px', overflow: 'hidden', borderRadius: '12px' }}>
+                                                            <div className="gt-recent-thumb" style={{ width: '85px', height: '60px', minWidth: '85px', overflow: 'hidden', borderRadius: '0px' }}>
                                                                 <Link href={`/blog/${rPost.id}`}>
                                                                     <img
                                                                         src={rPost.banner_url || "/assets/img/placeholder.jpg"}
