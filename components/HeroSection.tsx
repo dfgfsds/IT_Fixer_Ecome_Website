@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function HeroSection() {
     return (
         <section className="hero-section hero-2 bg-cover" style={{ backgroundImage: "url('/assets/img/home-2/hero/hero-bg.jpg')" }}>
@@ -45,13 +46,13 @@ export default function HeroSection() {
                                 <p className="wow fadeInUp" data-wow-delay=".5s">
                                     ITFixer is the Best Gaming & Editing PC Shop in Chennai, offering custom Gaming PCs, Editing Workstations, and high-performance Laptops with expert support and unbeatable prices.
                                 </p>
-                                <a href="/contact" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
+                                <Link href="/contact" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
                                     <span className="left-line"></span>
                                     know more
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13" />
                                     </svg>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

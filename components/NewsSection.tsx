@@ -119,12 +119,12 @@ export default function NewsSection() {
 
     return (
         <>
-            <section className="news-section-2 section-padding">
+            <section className="news-section-2 section-padding pt-0">
                 <div className="game-controll-shape">
                     <img src="assets/img/home-2/news/game-controll-shape.png" alt="" />
                 </div>
                 <div className="container">
-                    <div className="section-title">
+                    <div className="section-title news-title">
                         <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Latest Blogs</h6>
                         <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
                             Our Latest Blogs Archive
@@ -215,13 +215,13 @@ export default function NewsSection() {
                                     <p className="news-text wow fadeInUp" data-wow-delay=".5s">
                                         Stay updated with the latest in PC repair, gaming laptop upgrades, SSD & RAM optimization, and pro-level custom build guides — straight from the IT Fixer team.
                                     </p>
-                                    <a href="/blog" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
+                                    <Link href="/blog" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
                                         <span className="left-line"></span>
                                         view all blogs
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                             <path d="M9.41099 8.46917L1.88219 16L0 14.1166L7.53013 6.58846L0.941096 0H16V15.0576L9.41099 8.46917Z" fill="#0B0E13"></path>
                                         </svg>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

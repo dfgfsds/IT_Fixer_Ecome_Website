@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function GameplaySection() {
     return (
         <div className="gt-video-section section-padding fix">
@@ -10,9 +11,9 @@ export default function GameplaySection() {
                             Gameplay
                         </h2>
                     </div>
-                    <a href="/" className="theme-btn boder-10 wow fadeInUp" data-wow-delay=".5s">
+                    <Link href="/" className="theme-btn boder-10 wow fadeInUp" data-wow-delay=".5s">
                         play now
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

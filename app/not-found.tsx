@@ -29,9 +29,9 @@ export default function NotFound() {
                                 <Home size={16} />
                             </li>
                             <li>
-                                <a href="/">
+                                <Link href="/">
                                     home :
-                                </a>
+                                </Link>
                             </li>
                             <li className="color">404 error</li>
                         </ul>

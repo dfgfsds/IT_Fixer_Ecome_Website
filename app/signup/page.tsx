@@ -3,6 +3,7 @@ import { postCreateUserAPi } from "@/api-endpoints/authendication";
 import { postCartCreateApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Home, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -94,13 +95,13 @@ export default function Signup() {
 
                         <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                             <li>
-                                <a
+                                <Link
                                     href="/"
                                     className="d-inline-flex align-items-center gap-1"
                                 >
                                     <Home size={16} className="mb-[1px]" />
                                     home :
-                                </a>
+                                </Link>
                             </li>
                             <li className="color">Signup</li>
                         </ul>
@@ -177,7 +178,7 @@ export default function Signup() {
 
                         <p className="mt-4">
                             Already have account?{" "}
-                            <a href="/login" className="auth-link">Login</a>
+                            <Link href="/login" className="auth-link">Login</Link>
                         </p>
                     </form>
 

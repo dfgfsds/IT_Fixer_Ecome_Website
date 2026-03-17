@@ -15598,13 +15598,14 @@ span {
   right: -1px;
   border-radius: 0;
   font-size: 20px;
-  color: #0B0E13;
+  color: black;
   background-color: #CBFE1C;
   transition: all 0.4s ease-in-out;
 }
 
 .search-popup__form .search-btn:hover {
-  background-color: #000;
+  background-color: #a6d719;
+  color: black;
 }
 
 .search-popup__form .eolexi-btn svg {
@@ -16584,6 +16585,62 @@ span {
 @media (max-width: 991px) {
   .section-padding {
     padding: 80px 0;
+  }
+}
+
+.brand-padding {
+  padding: 120px 0;
+}
+
+@media (max-width: 1439px) {
+  .brand-padding {
+    padding: 120px 0 60px;
+  }
+}
+
+@media (max-width: 1279px) {
+  .brand-padding {
+    padding: 100px 0 40px;
+  }
+}
+
+@media (max-width: 991px) {
+  .brand-padding {
+    padding: 90px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .brand-padding {
+    padding: 80px 0;
+  }
+}
+
+.about1-padding {
+  padding: 120px 0 100px;
+}
+
+@media (max-width: 1439px) {
+  .about1-padding {
+    padding: 60px 0 30px;
+  }
+}
+
+@media (max-width: 1279px) {
+  .about1-padding {
+    padding: 40px 0 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .about1-padding {
+    padding: 100px 0 80px;
+  }
+}
+
+@media (max-width: 767px) {
+  .about1-padding {
+    padding: 80px 0 60px;
   }
 }
 

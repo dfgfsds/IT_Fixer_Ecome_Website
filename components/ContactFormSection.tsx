@@ -4,8 +4,9 @@ import axios from "axios";
 import ApiUrls from "@/api-endpoints/ApiUrls";
 import { toast } from "sonner";
 import { useVendor } from "@/context/VendorContext";
+import ContactStickySidebar from "./ContactStickySidebar";
 
-export default function ConatctFormSection() {
+export default function ContactFormSection() {
     const { vendorId } = useVendor();
     const [form, setForm] = useState({
         name: "",
@@ -50,7 +51,7 @@ export default function ConatctFormSection() {
             <div className="container">
                 <div className="gt-contact-us-wrapper">
                     <div className="row g-4">
-                        <div className="col-lg-8">
+                        <div className="col-lg-8 contact-left-content">
                             <div className="gt-comment-form-wrap">
                                 <h4>We're Here to Help!</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
@@ -124,7 +125,8 @@ export default function ConatctFormSection() {
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <div className="gt-contact-bg" style={{ backgroundColor: "#1C1D20", padding: "0px", borderRadius: "10px" }}>
+                            <ContactStickySidebar />
+                            <div className="gt-contact-bg contact-sticky-sidebar" style={{ backgroundColor: "#1C1D20", padding: "0px", borderRadius: "10px" }}>
                                 <div className="gt-contact-content">
                                     <h3>Need Any Help</h3>
                                     <p>Call Us 24/7 Full Support</p>

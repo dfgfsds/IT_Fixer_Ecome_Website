@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Home } from "lucide-react";
 
 export default function BlogHeroSection() {
@@ -22,12 +23,12 @@ export default function BlogHeroSection() {
                             <i className="fa-solid fa-house"></i>
                         </li>
                         <li>
-                            <a href="/">
+                            <Link href="/">
                                 home :
-                            </a>
+                            </Link>
                         </li>
                         <li className="color">
-                            about us
+                            our blog
                         </li>
                     </ul>
                 </div>

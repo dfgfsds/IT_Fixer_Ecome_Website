@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { Home, Facebook, Twitter, Instagram, Linkedin, Star, Check, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useProducts } from "@/context/ProductsContext";
 import ShopWithSideCart from "@/components/ShopWithSideCart";
@@ -149,7 +150,7 @@ export default function ProductDetails() {
         return (
             <div className="text-center py-5 text-white" style={{ backgroundColor: "#0b0e13", minHeight: "50vh" }}>
                 <h2>Product Not Found</h2>
-                <a href="/shop" className="text-success">Return to Shop</a>
+                <Link href="/shop" className="text-success">Return to Shop</Link>
             </div>
         );
     }
@@ -175,9 +176,9 @@ export default function ProductDetails() {
                                     <i className="fa-solid fa-house"></i>
                                 </li>
                                 <li>
-                                    <a href="/">
+                                    <Link href="/">
                                         home :
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="color">
                                     Shop Details

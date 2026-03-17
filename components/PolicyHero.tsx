@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Home } from "lucide-react";
 
 interface PolicyHeroProps {
@@ -28,9 +29,9 @@ export default function PolicyHero({ title, date }: PolicyHeroProps) {
                             <Home size={16} />
                         </li>
                         <li>
-                            <a href="/">
+                            <Link href="/">
                                 home :
-                            </a>
+                            </Link>
                         </li>
                         <li className="color">
                             {title}

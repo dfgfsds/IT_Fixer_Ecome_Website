@@ -246,7 +246,7 @@ export default function CartPage() {
                         <div className="gt-page-heading">
                             <h1 className="wow fadeInUp">CART</h1>
                             <ul className="gt-breadcrumb-items">
-                                <li><a href="/" className="d-inline-flex align-items-center gap-1"><Home size={16} /> HOME :</a></li>
+                                <li><Link href="/" className="d-inline-flex align-items-center gap-1"><Home size={16} /> HOME :</Link></li>
                                 <li className="color">CART</li>
                             </ul>
                         </div>
