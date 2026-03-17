@@ -165,7 +165,7 @@ function ProfileContent() {
                                     <User size={40} color="#a6d719" />
                                 </div>
                                 <h5 className="mb-1 text-white">{user?.data?.name || ""}</h5>
-                                <p className="text-white small">{user?.data?.email || user?.data?.contact_number || ""}</p>
+                                <p className="text-white text-lowercase small">{user?.data?.email || user?.data?.contact_number || ""}</p>
                             </div>
 
                             <div className="nav flex-column nav-pills">
@@ -178,7 +178,7 @@ function ProfileContent() {
                                 <button onClick={() => setActiveTab("addresses")} className={activeTab === "addresses" ? "active-tab" : ""} style={tabBtnStyle("addresses")}>
                                     <MapPin size={18} style={{ marginRight: "12px" }} /> Addresses
                                 </button>
-                                <button onClick={() => setLogoutModal(true)} style={{ ...tabBtnStyle("logout"), color: "#ef4444", border: "none", marginTop: "16px" }}>
+                                <button onClick={() => setLogoutModal(true)} style={{ ...tabBtnStyle("logout"), fontSize: "16px", letterSpacing: "0.5px", color: "#ef4444", border: "none", marginTop: "16px" }}>
                                     <LogOut size={18} style={{ marginRight: "12px" }} /> Logout
                                 </button>
                             </div>
@@ -408,7 +408,7 @@ function ProfileContent() {
                                             <div style={{ width: "70px", height: "70px", borderRadius: "50%", backgroundColor: "#2a2d3a", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
                                                 <MapPin size={32} color="#a6d719" />
                                             </div>
-                                            <h4 className="text-white" style={{ fontSize: "20px" }}>No addresses</h4>
+                                            <h4 className="mb-1 text-white" style={{ fontSize: "20px" }}>No addresses</h4>
                                             <p style={{ color: "white", marginBottom: "0", fontSize: "14px" }}>Get started by adding a new address.</p>
                                         </div>
                                     )}

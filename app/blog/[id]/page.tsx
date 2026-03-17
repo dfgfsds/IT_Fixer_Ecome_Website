@@ -58,18 +58,18 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                     <div className="container">
                         <div className="gt-page-heading">
                             <div className="gt-breadcrumb-sub-title">
-                                <h1 className="wow fadeInUp" data-wow-delay=".3s">{post.subtitle}</h1>
+                                <h1 className="wow fadeInUp" style={{ lineHeight: "1.1" }} data-wow-delay=".3s">{post.subtitle}</h1>
                             </div>
                             <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                                 <li>
                                     <i className="fa-solid fa-house"></i>
                                 </li>
                                 <li>
-                                    <Link href="/">
+                                    <Link className="text-uppercase" href="/">
                                         home :
                                     </Link>
                                 </li>
-                                <li className="color">
+                                <li className="color text-uppercase">
                                     Blog Details
                                 </li>
                             </ul>
@@ -91,22 +91,19 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                                                 <span className="d-flex align-items-center gap-1"><Calendar size={14} /> {formatDate(post.created_at)}</span>
                                                 <span>| By {post.author}</span>
                                             </div>
-                                            <h3>{post.title || post.subtitle}</h3>
-                                            <div
-                                                dangerouslySetInnerHTML={{ __html: post.content }}
-                                                className="prose max-w-none mt-2"
-                                            />
+                                            <h3 className="mb-4">{post.title || post.subtitle}</h3>
+                                            <div dangerouslySetInnerHTML={{ __html: post?.content }} className="quill-content" />
 
                                             {/* Author Bio Box */}
                                             <div className="gt-sideber mt-5">
                                                 <h6>{post.subtitle}</h6>
                                                 <div className="client-info-item">
                                                     <div className="client-info">
-                                                        <div className="image" style={{ width: '60px', height: '60px', minWidth: '60px', overflow: 'hidden', borderRadius: '50%', border: '2px solid #a6d719' }}>
+                                                        <div className="image" style={{ overflow: 'hidden', }}>
                                                             <img
-                                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiYI-YYxBo63Rx-zut9g3nRQh6Imiyf_251w&s"
+                                                                src="https://i.ibb.co/Ngx7RNQn/images.webp"
                                                                 alt="author"
-                                                                className="w-[60px] h-[60px] object-contain"
+                                                                className="w-full h-full object-cover"
                                                             />
                                                         </div>
                                                         <h4>{post.author}</h4>
@@ -126,13 +123,13 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                                         <div className="gt-main-sideber sticky-style">
                                             <div className="gt-single-sideber-widget">
                                                 <div className="gt-widget-title">
-                                                    <h3>Recent Post</h3>
+                                                    <h3 className="text-uppercase">Recent Post</h3>
                                                 </div>
                                                 <div className="gt-recent-post-area">
                                                     {recentPosts.map((rPost: any) => (
                                                         <div className="gt-recent-items d-flex align-items-center gap-3 mb-4" key={rPost.id}>
                                                             {/* Fixed size thumbnail with rounded corners */}
-                                                            <div className="gt-recent-thumb" style={{ width: '85px', height: '85px', minWidth: '85px', overflow: 'hidden', borderRadius: '12px' }}>
+                                                            <div className="gt-recent-thumb" style={{ width: '85px', height: '60px', minWidth: '85px', overflow: 'hidden', borderRadius: '0px' }}>
                                                                 <Link href={`/blog/${rPost.id}`}>
                                                                     <img
                                                                         src={rPost.banner_url || "/assets/img/placeholder.jpg"}

@@ -10,7 +10,7 @@ export default function AboutTestimonialSection() {
                             <div className="testimonial-content">
                                 <div className="section-title-2">
                                     <h6 className="wow fadeInUp">Our Testimonials</h6>
-                                    <h2 className="wow fadeInUp" data-wow-delay=".3s">
+                                    <h2 className="wow fadeInUp text-uppercase" data-wow-delay=".3s">
                                         Our Testimonials
                                     </h2>
                                 </div>

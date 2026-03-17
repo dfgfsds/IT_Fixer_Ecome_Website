@@ -12,7 +12,7 @@ export default function TrendingSection() {
             <div className="container">
                 <div className="section-title-2 text-center">
                     <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Top Trending Gaming Builds</h6>
-                    <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
+                    <h2 className="tx-title sec_title  text-uppercase tz-itm-title tz-itm-anim">
                         Upcoming Gaming Offers
                     </h2>
                 </div>
@@ -62,7 +62,7 @@ export default function TrendingSection() {
                         </div>
                         <div className="trending-match-content">
 
-                            <h3>
+                            <h3 className="text-uppercase">
                                 Aggressive Gaming Performance
                             </h3>
                             <p>
@@ -74,7 +74,7 @@ export default function TrendingSection() {
                     <div className="trending-match-items gt-project-panel">
                         <div className="trending-match-content order-2 order-md-1">
 
-                            <h3>
+                            <h3 className="text-uppercase">
                                 Gaming Laptop VS Gaming Desktop
                             </h3>
                             <p>
@@ -151,8 +151,7 @@ export default function TrendingSection() {
                             </div>
                         </div>
                         <div className="trending-match-content">
-
-                            <h3>
+                            <h3 className="text-uppercase">
                                 The Ultimate Gaming Rig
                             </h3>
                             <p>
