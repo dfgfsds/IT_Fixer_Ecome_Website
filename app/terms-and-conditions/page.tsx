@@ -1,5 +1,41 @@
 import PolicyHero from "@/components/PolicyHero";
 import PolicyContent from "@/components/PolicyContent";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Refund Policy | IT Fixer",
+        description:
+            "Understand IT Fixer refund and return policies for PC parts and accessories.",
+        alternates: {
+            canonical: "https://www.itfixer.in/refund-policy",
+        },
+        openGraph: {
+            type: "website",
+            title: "Refund & Return Policy | IT Fixer",
+            description:
+                "Understand IT Fixer refund and return policies for PC parts, gaming products, and accessories.",
+            url: "https://www.itfixer.in/refund-policy",
+            siteName: "IT Fixer",
+            images: [
+                {
+                    url: "https://www.itfixer.in/assets/img/logo.png",
+                    width: 1200,
+                    height: 630,
+                    alt: "Refund Policy IT Fixer",
+                },
+            ],
+            locale: "en_IN",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: "Refund Policy | IT Fixer",
+            description:
+                "Read IT Fixer return and refund policies for gaming PCs and accessories.",
+            images: ["https://www.itfixer.in/assets/img/logo.png"],
+        },
+    };
+}
 
 export default function TermsAndConditionsPage() {
     return (

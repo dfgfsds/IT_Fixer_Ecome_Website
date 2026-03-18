@@ -1,5 +1,42 @@
 import PolicyHero from "@/components/PolicyHero";
 import PolicyContent from "@/components/PolicyContent";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Shipping Policy | IT Fixer",
+        description:
+            "Learn about IT Fixer shipping timelines, delivery process, and service areas across India.",
+        alternates: {
+            canonical: "https://www.itfixer.in/shipping-policy",
+        },
+        openGraph: {
+            type: "website",
+            title: "Shipping Policy | IT Fixer India",
+            description:
+                "Learn about IT Fixer shipping timelines, delivery process, and service areas across India.",
+            url: "https://www.itfixer.in/shipping-policy",
+            siteName: "IT Fixer",
+            images: [
+                {
+                    url: "https://www.itfixer.in/assets/img/logo.png",
+                    width: 1200,
+                    height: 630,
+                    alt: "Shipping Policy IT Fixer",
+                },
+            ],
+            locale: "en_IN",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: "Shipping Policy | IT Fixer",
+            description:
+                "Check delivery timelines, shipping process, and service availability across India.",
+            images: ["https://www.itfixer.in/assets/img/logo.png"],
+        },
+    };
+}
+
 
 export default function ShippingPolicyPage() {
     return (

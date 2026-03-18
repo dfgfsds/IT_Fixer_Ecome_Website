@@ -21,20 +21,20 @@ export default function GamingZoneSection() {
                         <div className="col-lg-7 col-xl-6">
                             <div className="about-content">
                                 <div className="section-title mb-0">
-                                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">About Our Gaming Zone</h6>
+                                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Who We Are</h6>
                                     <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
-                                        More Than Just Gaming — We Build Performance That Wins
+                                        Who We Are – IT Fixer
                                     </h2>
                                 </div>
                                 <p className="about-text wow fadeInUp" data-wow-delay=".5s">
-                                    At IT Fixer, gaming is not just entertainment — it’s power, precision, and passion.
-
+                                    IT Fixer is a next-generation technology brand built for serious gamers, content creators, and performance-driven users. We are not just a PC provider — we are an immersive experience center designed to help customers make the right choice before investing in high-performance systems.
                                 </p>
-                                <p className=" mt-2 wow fadeInUp" data-wow-delay=".5s">
-                                    We create high-performance Gaming PCs and Laptops that deliver smooth gameplay, ultra-fast speed, and unbeatable reliability.
-
+                                <p className=" mt-3 wow fadeInUp" data-wow-delay=".5s">
+                                    At IT Fixer, customers can experience gaming and editing PCs in real-time before purchase — a concept that brings clarity, confidence, and trust to every buying decision. This unique approach allows users to understand performance, speed, and capability firsthand, making IT Fixer one of the first experience-driven PC solution providers in India.
                                 </p>
-                                <p className=" mt-2 wow fadeInUp" data-wow-delay=".5s">With the rapid growth of esports, next-gen graphics technology, AI-powered performance, and immersive gaming experiences, we stay ahead by building systems that are future-ready and competition-ready.</p>
+                                <p className=" mt-3 wow fadeInUp" data-wow-delay=".5s">
+                                    Our systems are crafted using premium hardware components, ensuring power, speed, and long-term reliability. Whether you are a competitive gamer, streamer, or professional video editor, we deliver custom-built PCs tailored to your performance needs.
+                                </p>
                                 <div className="counter-wrap-2">
                                     <div className="counter-item-2 wow fadeInUp" data-wow-delay=".2s">
                                         <h2>

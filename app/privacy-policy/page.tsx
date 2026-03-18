@@ -1,5 +1,41 @@
 import PolicyHero from "@/components/PolicyHero";
 
+export async function generateMetadata() {
+    return {
+        title: "Privacy Policy | IT Fixer",
+        description:
+            "Read how IT Fixer protects your personal data and ensures secure transactions.",
+
+        alternates: {
+            canonical: "https://www.itfixer.in/privacy-policy",
+        },
+
+        openGraph: {
+            type: "website",
+            url: "https://www.itfixer.in/privacy-policy",
+            title: "Privacy Policy | IT Fixer Secure Shopping",
+            description:
+                "Learn how IT Fixer protects your personal data and ensures secure online transactions.",
+            siteName: "IT Fixer",
+            locale: "en_IN",
+            images: [
+                {
+                    url: "https://www.itfixer.in/assets/img/logo.png",
+                },
+            ],
+        },
+
+        twitter: {
+            card: "summary_large_image",
+            title: "Privacy Policy | IT Fixer",
+            description:
+                "Understand how your data is protected and securely handled by IT Fixer.",
+            images: ["https://www.itfixer.in/assets/img/logo.png"],
+        },
+    };
+}
+
+
 export default function PrivacyPolicyPage() {
     return (
         <div>

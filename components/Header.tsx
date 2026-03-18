@@ -220,16 +220,21 @@ export default function Header() {
                                                 <li className={pathname === "/categories" ? "active" : ""}>
                                                     <Link href="/categories" style={{ color: pathname === "/categories" ? "#CBFE1C" : "#ffffff" }}>Categories</Link>
                                                 </li>
+                                                <li className={pathname === "/custom-pc-build" ? "active" : ""}>
+                                                    <Link href="/custom-pc-build" style={{ color: pathname === "/custom-pc-build" ? "#CBFE1C" : "#ffffff" }}>Custom PC</Link>
+                                                </li>
+
+
                                                 <li className={`has-dropdown ${pathname === "/shop" ? "active" : ""}`}>
                                                     <Link href="/shop" style={{ color: pathname === "/shop" ? "#CBFE1C" : "#ffffff" }}>
                                                         Shop
                                                     </Link>
                                                 </li>
-                                                <li className={pathname === "/blog" ? "active" : ""}>
+                                                {/* <li className={pathname === "/blog" ? "active" : ""}>
                                                     <Link href="/blog" style={{ color: pathname === "/blog" ? "#CBFE1C" : "#ffffff" }}>
                                                         Blog
                                                     </Link>
-                                                </li>
+                                                </li> */}
                                                 <li className={pathname === "/contact" ? "active" : ""}>
                                                     <Link href="/contact" style={{ color: pathname === "/contact" ? "#CBFE1C" : "#ffffff" }}>Contact Us</Link>
                                                 </li>

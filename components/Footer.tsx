@@ -1,6 +1,20 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+    Instagram,
+    Facebook,
+    Youtube,
+    Linkedin,
+} from "lucide-react";
+
+import {
+    FaXTwitter,
+    FaRedditAlien,
+    FaQuora,
+    FaPinterestP,
+    FaThreads,
+} from "react-icons/fa6";
 
 export default function Footer() {
     const pathname = usePathname();
@@ -29,12 +43,44 @@ export default function Footer() {
                                         <p>
                                             ITFixer offers premium Gaming and Editing PCs & Laptops, engineered for extreme performance, seamless multitasking, and professional-grade results — available at competitive prices.
                                         </p>
-                                        <div className="gt-social-icon d-flex align-items-center">
-                                            {/* <a href="#"><i className="fa-brands fa-facebook-f"></i></a>
-                                            <a href="#"><i className="fa-brands fa-twitter"></i></a>
-                                            <a href="#"><i className="fa-brands fa-linkedin-in"></i></a> */}
-                                            <a href="https://www.instagram.com/it__fixer/" target="_blank"><i className="fa-brands fa-instagram"></i></a>
-                                            <a href="https://www.youtube.com/channel/UC5nBPrnHiRY8WOxsErazkdw" target="_blank"><i className="fa-brands fa-youtube"></i></a>
+                                        <div className="gt-social-icon d-flex align-items-center flex-wrap gap-2">
+
+                                            <a href="https://www.instagram.com/it__fixer/" target="_blank" rel="noopener noreferrer">
+                                                <Instagram size={18} />
+                                            </a>
+
+                                            <a href="https://www.facebook.com/itfixer7/" target="_blank" rel="noopener noreferrer">
+                                                <Facebook size={18} />
+                                            </a>
+
+                                            <a href="https://www.youtube.com/@Itfixer_fix-it-fast" target="_blank" rel="noopener noreferrer">
+                                                <Youtube size={18} />
+                                            </a>
+
+                                            <a href="https://x.com/itfixer7" target="_blank" rel="noopener noreferrer">
+                                                <FaXTwitter size={18} />
+                                            </a>
+
+                                            <a href="https://www.reddit.com/user/Itfixer_fix-it-fast/" target="_blank" rel="noopener noreferrer">
+                                                <FaRedditAlien size={18} />
+                                            </a>
+
+                                            <a href="https://www.quora.com/profile/It-Fixer-3" target="_blank" rel="noopener noreferrer">
+                                                <FaQuora size={18} />
+                                            </a>
+
+                                            <a href="https://www.threads.com/@it__fixer" target="_blank" rel="noopener noreferrer">
+                                                <FaThreads size={18} />
+                                            </a>
+
+                                            <a href="https://www.linkedin.com/in/it-fixer-/" target="_blank" rel="noopener noreferrer">
+                                                <Linkedin size={18} />
+                                            </a>
+
+                                            <a href="https://in.pinterest.com/itfixer7/" target="_blank" rel="noopener noreferrer">
+                                                <FaPinterestP size={18} />
+                                            </a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -56,6 +102,11 @@ export default function Footer() {
                                             </Link>
                                         </li>
                                         <li>
+                                            <Link href="/custom-pc-build" style={pathname === "/custom-pc-build" ? { color: "#CBFE1C" } : {}}>
+                                                Custom PC
+                                            </Link>
+                                        </li>
+                                        <li>
                                             <Link href="/shop" style={pathname === "/shop" ? { color: "#CBFE1C" } : {}}>
                                                 Shop
                                             </Link>
@@ -65,6 +116,7 @@ export default function Footer() {
                                                 Blog
                                             </Link>
                                         </li>
+
                                         <li>
                                             <Link href="/contact" style={pathname === "/contact" ? { color: "#CBFE1C" } : {}}>
                                                 Contact Us
@@ -166,17 +218,7 @@ export default function Footer() {
                     <div className="footer-bottom wow fadeInUp" data-wow-delay=".3s">
                         <div className="footer-wrapper">
                             <p> © 2026 FTDS. All rights reserved.</p>
-                            {/* <ul className="gt-footer-list wow fadeInUp" data-wow-delay=".3s">
-                                <li>
-                                    <a href="contact.html">Cookies</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Privacy</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Terms</a>
-                                </li>
-                            </ul> */}
+
                         </div>
                     </div>
                 </div >

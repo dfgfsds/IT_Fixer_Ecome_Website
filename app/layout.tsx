@@ -26,8 +26,7 @@ import FloatingCallButton from '@/components/FloatingCallButton';
 import ScrollToTop from '@/components/ScrollToTop';
 
 export const metadata: Metadata = {
-  title: 'IT Fixer - IT Services & Technology Next.js Template',
-  description: 'Professional IT Services and Technology Solutions',
+
   icons: {
     icon: '/favicon.ico',
   },
