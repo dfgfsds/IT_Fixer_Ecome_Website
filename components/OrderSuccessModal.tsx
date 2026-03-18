@@ -9,6 +9,7 @@ interface OrderSuccessModalProps {
     orderId?: string | number;
 }
 
+
 export default function OrderSuccessModal({ isOpen, onClose, orderId }: OrderSuccessModalProps) {
     useEffect(() => {
         if (isOpen) {

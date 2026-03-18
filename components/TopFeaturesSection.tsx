@@ -1,6 +1,8 @@
+import { Monitor, Video, Activity, Scale } from "lucide-react";
+
 export default function TopFeaturesSection() {
     return (
-        <section className="gt-top-feature-section fix">
+        <section className="gt-top-feature-section fix mb-4">
             <div className="container">
                 <div className="gt-top-feature-wrapper">
                     <div className="row g-4 align-items-center">
@@ -15,49 +17,53 @@ export default function TopFeaturesSection() {
                         <div className="col-lg-6">
                             <div className="gt-top-feature-content">
                                 <div className="section-title mb-0">
-                                    <h6 className="wow fadeInUp">top features</h6>
+                                    <h6 className="wow fadeInUp text-uppercase">Experience Zone</h6>
                                     <h2 className="wow fadeInUp text-uppercase" data-wow-delay=".3s">
-                                        Powerful Performance. Perfect Gameplay.
+                                        Experience the Future of Gaming & Editing
                                     </h2>
                                 </div>
                                 <p className="gt-feature-text">
-                                    At IT Fixer, we build high-performance Gaming PCs and Laptops designed for speed, power, and ultimate reliability.
+                                    The IT Fixer showroom is more than just a retail space — it is a fully interactive experience zone where customers can explore and test high-performance systems in a real-world environment.
                                 </p>
-                                <ul className="gt-feature-icon">
-                                    <li>
-                                        <div className="gt-icon">
-                                            <img src="/assets/img/home-3/icon/12.svg" alt="img" />
+                                <p className="gt-feature-text mt-3 mb-4">
+                                    At IT Fixer, customers can experience:
+                                </p>
+                                <div className="gt-features-grid mt-4">
+                                    <div className="row g-3">
+                                        <div className="col-md-6">
+                                            <div className="feature-card" style={{ padding: '24px', background: '#111520', border: '1px solid #1d2535', borderRadius: '16px', height: '100%', display: 'flex', flexDirection: 'column', gap: '15px', transition: 'all 0.3s ease' }}>
+                                                <div className="icon-box" style={{ width: '48px', height: '48px', background: 'rgba(203, 254, 28, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Monitor size={24} color="#cbfe1c" />
+                                                </div>
+                                                <h3 className="text-uppercase" style={{ fontSize: '16px', margin: 0, fontWeight: '700', letterSpacing: '0.5px', lineHeight: '1.4', color: '#fff' }}>Live high-end gaming PC setups</h3>
+                                            </div>
                                         </div>
-                                        <div className="gt-content">
-                                            <h3 className="text-uppercase">Graphics & Performance</h3>
-                                            <p>
-                                                Dominate every match with next-gen RTX graphics, powerful Intel/Ryzen processors, and advanced cooling for smooth, high-FPS, lag-free gaming.
-                                            </p>
+                                        <div className="col-md-6">
+                                            <div className="feature-card" style={{ padding: '24px', background: '#111520', border: '1px solid #1d2535', borderRadius: '16px', height: '100%', display: 'flex', flexDirection: 'column', gap: '15px', transition: 'all 0.3s ease' }}>
+                                                <div className="icon-box" style={{ width: '48px', height: '48px', background: 'rgba(203, 254, 28, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Video size={24} color="#cbfe1c" />
+                                                </div>
+                                                <h3 className="text-uppercase" style={{ fontSize: '16px', margin: 0, fontWeight: '700', letterSpacing: '0.5px', lineHeight: '1.4', color: '#fff' }}>High-performance editing PC demonstrations</h3>
+                                            </div>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div className="gt-icon">
-                                            <img src="/assets/img/home-3/icon/13.svg" alt="img" />
+                                        <div className="col-md-6">
+                                            <div className="feature-card" style={{ padding: '24px', background: '#111520', border: '1px solid #1d2535', borderRadius: '16px', height: '100%', display: 'flex', flexDirection: 'column', gap: '15px', transition: 'all 0.3s ease' }}>
+                                                <div className="icon-box" style={{ width: '48px', height: '48px', background: 'rgba(203, 254, 28, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Activity size={24} color="#cbfe1c" />
+                                                </div>
+                                                <h3 className="text-uppercase" style={{ fontSize: '16px', margin: 0, fontWeight: '700', letterSpacing: '0.5px', lineHeight: '1.4', color: '#fff' }}>Real-time gameplay and performance testing</h3>
+                                            </div>
                                         </div>
-                                        <div className="gt-content">
-                                            <h3 className="text-uppercase">Speed & Storage</h3>
-                                            <p>
-                                                Ultra-fast NVMe SSD storage and expandable high-speed RAM ensure faster boot times, quick game loading, seamless multitasking, and smooth streaming performance.
-                                            </p>
+                                        <div className="col-md-6">
+                                            <div className="feature-card" style={{ padding: '24px', background: '#111520', border: '1px solid #1d2535', borderRadius: '16px', height: '100%', display: 'flex', flexDirection: 'column', gap: '15px', transition: 'all 0.3s ease' }}>
+                                                <div className="icon-box" style={{ width: '48px', height: '48px', background: 'rgba(203, 254, 28, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Scale size={24} color="#cbfe1c" />
+                                                </div>
+                                                <h3 className="text-uppercase" style={{ fontSize: '16px', margin: 0, fontWeight: '700', letterSpacing: '0.5px', lineHeight: '1.4', color: '#fff' }}>Hands-on comparison before making a purchase</h3>
+                                            </div>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div className="gt-icon">
-                                            <img src="/assets/img/home-3/icon/14.svg" alt="img" />
-                                        </div>
-                                        <div className="gt-content">
-                                            <h3 className="text-uppercase"> Custom Build & Reliability</h3>
-                                            <p>
-                                                Custom-built systems with top-tier components ensure maximum performance and durability, delivering unmatched gaming experience.
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

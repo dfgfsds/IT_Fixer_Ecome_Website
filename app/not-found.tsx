@@ -78,7 +78,7 @@ export default function NotFound() {
                             <div className="contact-info">
                                 <h3>call us</h3>
                                 <p>
-                                    <a href="tel:+91032145609870">+91 0321 4560 9870</a>
+                                    <a href="tel:+918585858768">+91 8585858768</a>
                                 </p>
                             </div>
                             <Link href="/contact" className="theme-btn">
