@@ -1,90 +1,76 @@
-"use client";
-import React from "react";
-import Link from "next/link";
-import { useCategories } from "@/context/CategoriesContext";
-import { Loader2 } from "lucide-react";
+import { Metadata } from "next";
+import Categories from "./Client";
+import Script from "next/script";
 
-export default function Categories() {
-    const { categories: catData, isLoading }: any = useCategories();
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Explore PC Components & Gaming Categories | IT Fixer",
 
-    const categories = catData?.data || [];
+        description:
+            "Browse categories like gaming PCs, processors, GPUs, RAM, SSDs and more. Build powerful setups for gaming, editing & streaming.",
 
+        keywords: [
+            "pc components Chennai",
+            "gaming categories India",
+            "gpu Chennai",
+            "processor India",
+            "RAM SSD Chennai",
+            "IT Fixer categories",
+        ],
+
+        alternates: {
+            canonical: "https://www.itfixer.in/categories",
+        },
+
+        openGraph: {
+            type: "website",
+            title: "PC Components & Gaming Categories | IT Fixer",
+            description:
+                "Browse gaming PCs, GPUs, processors, RAM, SSDs and more. Build powerful setups.",
+            url: "https://www.itfixer.in/categories",
+            siteName: "IT Fixer",
+            locale: "en_IN",
+            images: [
+                {
+                    url: "https://www.itfixer.in/images/categories.jpg",
+                    width: 1200,
+                    height: 630,
+                    alt: "IT Fixer Categories",
+                },
+            ],
+        },
+
+        twitter: {
+            card: "summary_large_image",
+            title: "Gaming PC Categories | IT Fixer",
+            description:
+                "Explore GPUs, CPUs, RAM, SSDs and more for gaming and editing builds.",
+            images: ["https://www.itfixer.in/images/categories.jpg"],
+        },
+    };
+}
+
+export default function Page() {
     return (
-        <div>
-            <div id="smooth-content">
-                <div className="gt-breadcrumb-wrapper bg-cover" style={{ backgroundImage: "url('/assets/img/breadcrumb.png')" }}>
-                    <div className="gt-left-shape">
-                        <img src="/assets/img/shape-1.png" alt="img" />
-                    </div>
-                    <div className="gt-right-shape">
-                        <img src="/assets/img/shape-2.png" alt="img" />
-                    </div>
-                    <div className="gt-blur-shape">
-                        <img src="/assets/img/breadcrumb-shape.png" alt="img" />
-                    </div>
-                    <div className="container">
-                        <div className="gt-page-heading">
-                            <div className="gt-breadcrumb-sub-title">
-                                <h1 className="wow fadeInUp text-uppercase" data-wow-delay=".3s">Categories</h1>
-                            </div>
-                            <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
-                                <li>
-                                    <i className="fa-solid fa-house"></i>
-                                </li>
-                                <li>
-                                    <Link className="text-uppercase" href="/">
-                                        home :
-                                    </Link>
-                                </li>
-                                <li className="color text-uppercase">
-                                    Categories
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <section className="gt-game-section-5 section-padding fix">
-                    <div className="container-fluid">
-                        {isLoading ? (
-                            <div className="col-12 d-flex align-items-center justify-content-center" style={{ minHeight: '40vh' }}>
-                                <div className="spinner-border" role="status" style={{ color: '#a6d719', width: '3.5rem', height: '3.5rem' }}>
-                                    <span className="visually-hidden">Loading...</span>
-                                </div>
-                            </div>
-                        ) : categories.length > 0 ? (
-                            <div className="row g-4">
-                                {categories.map((cat: any, index: number) => (
-                                    <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay={`${0.2 + (index % 4) * 0.2}s`} key={cat.id}>
-                                        <Link href={`/categories/${cat.slug || cat.id}`} className="text-decoration-none">
-                                            <div className="gt-gaming-card-item-5 mt-0">
-                                                <div className="gt-gaming-image">
-                                                    <img
-                                                        src={cat.image || `/assets/img/home-2/game/game-0${(index % 5) + 1}.jpg`}
-                                                        alt={cat.name}
-                                                        style={{ height: '300px', width: '100%', objectFit: 'cover' }}
-                                                    />
-                                                    <div className="icon icon-permanent"><i className="fa-solid fa-arrow-right"></i></div>
-                                                    <div className="gt-gaming-content content-visible">
-                                                        {/* <h6>IT Fixer</h6> */}
-                                                        <h3>
-                                                            <span className="category-tag">{cat.name}</span>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="col-12 text-center py-5">
-                                <p className="text-white fs-4">No categories found.</p>
-                            </div>
-                        )}
-                    </div>
-                </section>
-                {/* <TriggerSection /> */}
-            </div>
-        </div>
+        <>
+            {/* OPTIONAL: Category Schema */}
+            <Script
+                id="category-schema"
+                type="application/ld+json"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "CollectionPage",
+                        name: "PC Components Categories",
+                        url: "https://www.itfixer.in/categories",
+                        description:
+                            "Browse gaming PCs, GPUs, processors, RAM, SSDs and more.",
+                    }),
+                }}
+            />
+
+            <Categories />
+        </>
     );
 }
