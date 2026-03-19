@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getBlogsApi } from "@/api-endpoints/authendication";
 import { useVendor } from "@/context/VendorContext";
 import { formatDate } from "@/lib/utils";
+import { slugify } from "@/lib/slugify";
 
 export default function NewsSection() {
     const { vendorId } = useVendor();
@@ -24,7 +25,7 @@ export default function NewsSection() {
 
         return (
             <div key={post.id} className="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay={delay}>
-                <Link href={`/blog/${post.id}`} className="text-decoration-none">
+                <Link href={`/blog/${slugify(post.title || post.subtitle)}`} className="text-decoration-none">
                     <div className="news-box-items mt-0" style={{ cursor: "pointer" }}>
                         {isStyleTwo ? (
                             <>
