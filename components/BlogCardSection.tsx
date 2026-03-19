@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Calendar, ArrowRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { formatDate, generatePagination } from "@/lib/utils";
+import { slugify } from "@/lib/slugify";
 
 interface BlogCardSectionProps {
     blogs: any[];
@@ -42,7 +43,7 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
                             <div key={post.id} className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp d-flex" data-wow-delay={`${0.3 + (index % 3) * 0.2}s`}>
                                 <div className="gt-news-card-item mt-0 h-100 d-flex flex-column w-100">
                                     <div className="gt-news-image">
-                                        <Link href={`/blog/${post.id}`}>
+                                        <Link href={`/blog/${slugify(post.title || post.subtitle)}`}>
                                             <img
                                                 src={post.banner_url || "/assets/img/placeholder.jpg"}
                                                 alt={post.title}
@@ -63,7 +64,7 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
                                             </li>
                                         </ul>
                                         <h4 className="line-clamp-2">
-                                            <Link className="text-uppercase" href={`/blog/${post.id}`}>
+                                            <Link className="text-uppercase" href={`/blog/${slugify(post.title || post.subtitle)}`}>
                                                 {post.subtitle || post.title}
                                             </Link>
                                         </h4>
@@ -72,7 +73,7 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
                                                 ? `${stripHtml(post.content).slice(0, 100)}...`
                                                 : "Read more about this story..."}
                                         </p>
-                                        <Link href={`/blog/${post.id}`} className="icon">
+                                        <Link href={`/blog/${slugify(post.title || post.subtitle)}`} className="icon">
                                             <ArrowRight size={18} />
                                         </Link>
                                     </div>

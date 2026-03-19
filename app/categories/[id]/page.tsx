@@ -14,6 +14,7 @@ import { formatPrice } from "@/lib/utils";
 import ShopWithSideCart from "@/components/ShopWithSideCart";
 import { getProductVariantCartItemUpdate } from "@/api-endpoints/products";
 import { updateCartitemsApi, deleteCartitemsApi } from "@/api-endpoints/CartsApi";
+import { slugify } from "@/lib/slugify";
 
 export default function CategoryDetailPage() {
     const { id } = useParams();
@@ -29,9 +30,11 @@ export default function CategoryDetailPage() {
 
     const pathId = Array.isArray(id) ? id[0] : id;
 
-    // Find category by slug OR ID
+    // Find category by slug OR Name Slug OR ID
     const currentCategory = catData?.data?.find((cat: any) =>
-        (cat.slug && cat.slug === pathId) || cat.id.toString() === pathId
+        (cat.slug && cat.slug === pathId) || 
+        slugify(cat.name) === pathId || 
+        cat.id.toString() === pathId
     );
 
     const actualCategoryId = currentCategory?.id;
@@ -119,7 +122,7 @@ export default function CategoryDetailPage() {
                             <div className="row g-4">
                                 {subCategories.map((sub: any, index: number) => (
                                     <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay={`${0.2 + index * 0.1}s`} key={sub.id}>
-                                        <Link href={`/categories/${sub.slug || sub.id}`} className="text-decoration-none">
+                                        <Link href={`/categories/${sub.slug || slugify(sub.name)}`} className="text-decoration-none">
                                             <div className="gt-gaming-card-item-5 mt-0">
                                                 <div className="gt-gaming-image">
                                                     <img

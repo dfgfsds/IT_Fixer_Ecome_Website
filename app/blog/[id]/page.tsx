@@ -4,6 +4,7 @@ import { Calendar } from "lucide-react";
 import { getBlogsApi } from "@/api-endpoints/authendication";
 import { formatDate } from "@/lib/utils";
 import BlogQuoteForm from "@/components/BlogQuoteForm";
+import { slugify } from "@/lib/slugify";
 import { Metadata } from 'next';
 import BlogStickySidebar from "@/components/BlogStickySidebar";
 
@@ -12,32 +13,50 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { id } = await params;
-    const response = await getBlogsApi(id);
+    const { id: pathId } = await params;
+    const vendorId = "157";
+    
+    // Fetch all blogs to find the one matching the slug
+    const allBlogsResponse = await getBlogsApi(`?vendor_id=${vendorId}`);
+    const allBlogs = allBlogsResponse?.data?.blogs || [];
+    
+    const blogMatch = allBlogs.find((b: any) => 
+        slugify(b.title || b.subtitle) === pathId || String(b.id) === pathId
+    );
+    
+    if (!blogMatch) {
+        return { title: "Blog Not Found" };
+    }
+
+    const response = await getBlogsApi(blogMatch.id);
     const post = response?.data?.blog;
 
     return {
-        title: post?.subtitle || "Blog Details",
+        title: post?.subtitle || post?.title || "Blog Details",
         description: post?.subtitle || post?.content?.slice(0, 160) || "Read our latest blog post.",
     };
 }
 
 export default async function BlogDetailsPage({ params: paramsPromise }: Props) {
-    const params = await paramsPromise;
+    const { id: pathId } = await paramsPromise;
     const vendorId = "157";
 
-    const [blogDetailResponse, allBlogsResponse] = await Promise.all([
-        getBlogsApi(params.id),
-        getBlogsApi(`?vendor_id=${vendorId}`)
-    ]);
-
-    const post = blogDetailResponse?.data?.blog;
+    const allBlogsResponse = await getBlogsApi(`?vendor_id=${vendorId}`);
     const allBlogs = allBlogsResponse?.data?.blogs || [];
 
-    if (!post) return <div className="container py-20 text-center">Blog not found.</div>;
+    const blogMatch = allBlogs.find((b: any) => 
+        slugify(b.title || b.subtitle) === pathId || String(b.id) === pathId
+    );
+
+    if (!blogMatch) return <div className="container py-20 text-center">Blog not found.</div>;
+
+    const blogDetailResponse = await getBlogsApi(blogMatch.id);
+    const post = blogDetailResponse?.data?.blog;
+
+    if (!post) return <div className="container py-20 text-center">Blog detail not found.</div>;
 
     const recentPosts = allBlogs
-        .filter((b: any) => String(b.id) !== String(params.id))
+        .filter((b: any) => String(b.id) !== String(blogMatch.id))
         .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
         .slice(0, 3);
 
@@ -130,7 +149,7 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                                                         <div className="gt-recent-items d-flex align-items-center gap-3 mb-4" key={rPost.id}>
                                                             {/* Fixed size thumbnail with rounded corners */}
                                                             <div className="gt-recent-thumb" style={{ width: '85px', height: '60px', minWidth: '85px', overflow: 'hidden', borderRadius: '0px' }}>
-                                                                <Link href={`/blog/${rPost.id}`}>
+                                                                <Link href={`/blog/${slugify(rPost.title || rPost.subtitle)}`}>
                                                                     <img
                                                                         src={rPost.banner_url || "/assets/img/placeholder.jpg"}
                                                                         alt="img"
@@ -141,7 +160,7 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
 
                                                             <div className="gt-recent-content">
                                                                 <h6 style={{ fontSize: '15px', lineHeight: '1.4', marginBottom: '5px' }}>
-                                                                    <Link href={`/blog/${rPost.id}`} className="text-white hover:text-success line-clamp-2">
+                                                                    <Link href={`/blog/${slugify(rPost.title || rPost.subtitle)}`} className="text-white hover:text-success line-clamp-2">
                                                                         {rPost.title}
                                                                     </Link>
                                                                 </h6>

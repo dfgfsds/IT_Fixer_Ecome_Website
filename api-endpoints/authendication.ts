@@ -71,7 +71,8 @@ export const getDeliveryChargeApi = async (id: any, payload: any) => {
 // GET BLOGS API
 export const getBlogsApi = async (query: any) => {
   try {
-    const formattedQuery = query.endsWith('/') ? query : `${query}`;
+    const queryStr = String(query);
+    const formattedQuery = queryStr.endsWith('/') ? queryStr : `${queryStr}`;
     // const response = await fetch(`${ApiUrls.blog}${formattedQuery}`);
     const response = await fetch(` https://test-ecomapi.justvy.in/blog/${formattedQuery}`);
 
