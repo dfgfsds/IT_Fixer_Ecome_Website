@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/media/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'test-ecomapi.justvy.in',
+        port: '',
+        pathname: '/media/**',
+      },
     ],
   },
 };

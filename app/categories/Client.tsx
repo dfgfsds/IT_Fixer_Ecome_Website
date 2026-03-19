@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { useCategories } from "@/context/CategoriesContext";
 import { Loader2 } from "lucide-react";
+import { slugify } from "@/lib/slugify";
 
 export default function Categories() {
     const { categories: catData, isLoading }: any = useCategories();
@@ -55,7 +56,7 @@ export default function Categories() {
                             <div className="row g-4">
                                 {categories.map((cat: any, index: number) => (
                                     <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay={`${0.2 + (index % 4) * 0.2}s`} key={cat.id}>
-                                        <Link href={`/categories/${cat.slug || cat.id}`} className="text-decoration-none">
+                                        <Link href={`/categories/${cat.slug || slugify(cat.name)}`} className="text-decoration-none">
                                             <div className="gt-gaming-card-item-5 mt-0">
                                                 <div className="gt-gaming-image">
                                                     <img
