@@ -6,24 +6,13 @@ export default function GamingZoneSection() {
             </div>
             <div className="container">
                 <div className="about-wrapper-2">
-                    <div className="row g-lg-4 align-items-center">
-                        <div className="col-lg-5 col-xl-6">
-                            <div className="about-iamge wow fadeInUp" data-wow-delay=".3s">
-                                <img src="assets/img/home-2/about/aout-01.jpg" alt="img" />
-                                <div className="line-shape">
-                                    <img src="assets/img/home-2/about/line-shape.png" alt="img" />
-                                </div>
-                                <div className="text-shape float-bob-y">
-                                    <img src="assets/img/home-2/about/text-shape.png" alt="img" />
-                                </div>
-                            </div>
-                        </div>
+                    <div className="row g-lg-4 align-items-center flex-column-reverse flex-lg-row">
                         <div className="col-lg-7 col-xl-6">
                             <div className="about-content">
                                 <div className="section-title mb-0">
                                     <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Who We Are</h6>
                                     <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
-                                        Who We Are – IT Fixer
+                                        Who We Are - IT Fixer
                                     </h2>
                                 </div>
                                 <p className="about-text wow fadeInUp" data-wow-delay=".5s">
@@ -70,6 +59,17 @@ export default function GamingZoneSection() {
                                     </svg>
                                 </a> 
                                 */}
+                            </div>
+                        </div>
+                        <div className="col-lg-5 col-xl-6">
+                            <div className="about-iamge wow fadeInUp" data-wow-delay=".3s">
+                                <img src="assets/img/home-2/about/aout-01.jpg" alt="img" />
+                                <div className="line-shape">
+                                    <img src="assets/img/home-2/about/line-shape.png" alt="img" />
+                                </div>
+                                <div className="text-shape float-bob-y">
+                                    <img src="assets/img/home-2/about/text-shape.png" alt="img" />
+                                </div>
                             </div>
                         </div>
                     </div>

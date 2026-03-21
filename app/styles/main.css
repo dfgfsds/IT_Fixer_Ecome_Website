@@ -99,7 +99,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
   padding-left: 40px;
   clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
 }
@@ -8667,7 +8667,7 @@ span {
 }
 
 .header-main .header-right {
-  gap: 80px;
+  gap: 22px;
 }
 
 @media (max-width: 1399px) {
@@ -16630,7 +16630,7 @@ span {
 
 @media (max-width: 1279px) {
   .about1-padding {
-    padding: 40px 0 20px;
+    padding: 40px 0 30px;
   }
 }
 

@@ -24,7 +24,7 @@ export default function AboutSection() {
                                 <div className="section-title mb-0">
                                     <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">About Our Gaming Zone</h6>
                                     <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
-                                        More Than Just Gaming — We Build Performance That Wins
+                                        More Than Just Gaming - We Build Performance That Wins
                                     </h2>
                                 </div>
                                 <p className="about-text wow fadeInUp" data-wow-delay=".5s">
