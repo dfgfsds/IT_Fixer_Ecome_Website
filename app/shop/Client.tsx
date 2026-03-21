@@ -135,7 +135,7 @@ export default function ShopPage() {
                 </div>
 
                 {/* Content */}
-                <div className="container py-5">
+                <div className="container" style={{ paddingTop: '120px', paddingBottom: '120px' }}>
                     <div className="row gx-5">
 
                         {/* Sidebar */}

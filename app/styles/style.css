@@ -1067,12 +1067,6 @@
     margin-top: 30px;
 }
 
-/* RELATED */
-.section-title {
-    margin: 80px 0 30px;
-    text-transform: uppercase;
-}
-
 .related-card {
     text-align: center;
 }
@@ -2111,6 +2105,31 @@
     margin: 80px 0 30px;
     text-transform: uppercase;
 }
+
+@media (max-width: 1439px) {
+    .section-title {
+        margin: 70px 0 30px;
+    }
+}
+
+@media (max-width:1279px) {
+    .section-title {
+        margin: 60px 0 30px;
+    }
+}
+
+@media (max-width:991px) {
+    .section-title {
+        margin: 50px 0 30px;
+    }
+}
+
+@media (max-width:767px) {
+    .section-title {
+        margin: 35px 0 30px;
+    }
+}
+
 
 .game-title {
     margin: 60px 0 30px !important;
@@ -3166,5 +3185,15 @@
     .info-label,
     .info-value {
         font-size: 12px;
+    }
+}
+
+.leader-sec {
+    padding-top: 14px;
+}
+
+@media (max-width: 991px) {
+    .leader-sec {
+        padding-top: 6px;
     }
 }
