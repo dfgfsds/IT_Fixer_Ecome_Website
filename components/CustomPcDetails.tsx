@@ -147,6 +147,7 @@ export default function CustomPcDetails() {
                     .cpc-faq-item { padding: 20px 16px; }
                     .cpc-faq-q { font-size: 16px; }
                     .cpc-brand-pill { flex-direction: row; flex-wrap: wrap; }
+                    .cpc-compare-table { min-width: 700px; }
                 }
             `}} />
 
@@ -292,7 +293,7 @@ export default function CustomPcDetails() {
                         <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">Custom PC vs <span>Branded Desktop</span> - Which is Better?</h2>
                         <p className="about-text wow fadeInUp mt-3" data-wow-delay=".5s">A custom desktop computer in Chennai offers better flexibility, performance, and long-term value compared to any off-the-shelf branded desktop.</p>
                     </div>
-                    <div style={{ background: 'transparent', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '0px', overflow: 'hidden' }} className="table-responsive">
+                    <div style={{ background: 'transparent', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '0px', overflowX: 'auto' }} className="table-responsive">
                         <table className="cpc-compare-table">
                             <thead>
                                 <tr>
