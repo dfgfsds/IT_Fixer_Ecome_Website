@@ -26,6 +26,24 @@ export default function Header() {
         setCartCount(total);
     }, [cartItem]);
 
+    // Manage body scroll lock based on search state
+    useEffect(() => {
+        if (isSearchActive) {
+            document.body.classList.add("locked"); // Ensure 'locked' class is added
+            document.body.style.overflow = "hidden";
+            document.documentElement.style.overflow = "hidden";
+        } else {
+            document.body.classList.remove("locked");
+            document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
+        }
+        return () => {
+            document.body.classList.remove("locked");
+            document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
+        };
+    }, [isSearchActive]);
+
     const products = apiData?.data || [];
     const filteredProducts = searchQuery.trim()
         ? products.filter((p: any) => p.name.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 8)
@@ -38,12 +56,8 @@ export default function Header() {
             const isActive = popup.classList.toggle("active");
             setIsSearchActive(isActive);
             if (isActive) {
-                document.body.style.overflow = "hidden";
-                document.documentElement.style.overflow = "hidden";
                 setTimeout(() => searchInputRef.current?.focus(), 100);
             } else {
-                document.body.style.overflow = "";
-                document.documentElement.style.overflow = "";
                 setSearchQuery("");
             }
         }
@@ -53,8 +67,8 @@ export default function Header() {
         const popup = document.querySelector(".search-popup");
         if (popup) {
             popup.classList.remove("active");
-            document.body.classList.remove("locked");
         }
+        setIsSearchActive(false); // Update state to trigger scroll lock release
         setSearchQuery("");
         router.push(`/shop/${productId}`);
     };
