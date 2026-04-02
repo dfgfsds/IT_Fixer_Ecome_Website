@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next'
 import { slugify } from '@/lib/slugify'
 
+export const dynamic = 'force-dynamic'; // ✅ முக்கியம்
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const baseUrl = 'https://www.itfixer.in'
@@ -32,7 +34,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const res = await fetch(categoriesApiUrl, { cache: 'no-store' })
         if (res.ok) {
             const categoriesData = await res.json()
-            // Some APIs wrap in 'data', some don't. Check both.
             const categories = categoriesData.data || (Array.isArray(categoriesData) ? categoriesData : [])
             categoryUrls = categories.map((cat: any) => ({
                 url: `${baseUrl}/categories/${cat.slug || slugify(cat.name || cat.id.toString())}`,

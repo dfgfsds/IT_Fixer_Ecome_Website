@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Home, Heart, CheckCircle, BadgeCheck, ChevronRight, ChevronsLeft, ChevronsRight, Minus, Plus, Loader2 } from "lucide-react";
 import { useProducts } from "@/context/ProductsContext";
 import ShopWithSideCart from "@/components/ShopWithSideCart";
 import { useCategories } from "@/context/CategoriesContext";
 import { useUser } from "@/context/UserContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { getProductVariantCartItemUpdate } from "@/api-endpoints/products";
 import { updateCartitemsApi, deleteCartitemsApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
@@ -21,6 +21,8 @@ import CategoryFilter from "@/components/CategoryFilter";
 export default function ShopPage() {
     const { isAuthenticated } = useUser();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
     const { products: apiData, isLoading }: any = useProducts();
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { categories: catData }: any = useCategories();
@@ -28,7 +30,25 @@ export default function ShopPage() {
     const [sortOrder, setSortOrder] = useState("default");
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(200000);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
+
+    useEffect(() => {
+        const page = Number(searchParams.get("page")) || 1;
+        if (page !== currentPage) {
+            setCurrentPage(page);
+        }
+    }, [searchParams]);
+
+    const updateUrl = (page: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (page <= 1) {
+            params.delete("page");
+        } else {
+            params.set("page", page.toString());
+        }
+        const query = params.toString() ? `?${params.toString()}` : "";
+        router.push(`${pathname}${query}`, { scroll: false });
+    };
     const itemsPerPage = 12;
 
     const queryClient = useQueryClient();
@@ -90,7 +110,7 @@ export default function ShopPage() {
 
     const handlePageChange = (page: any) => {
         if (page === "...") return;
-        setCurrentPage(page);
+        updateUrl(page);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
@@ -143,7 +163,7 @@ export default function ShopPage() {
                             <CategoryFilter
                                 categories={catData?.data}
                                 selectedCategory={selectedCategory}
-                                onSelectCategory={(id) => { setSelectedCategory(id); setCurrentPage(1); }}
+                                onSelectCategory={(id) => { setSelectedCategory(id); updateUrl(1); }}
                                 products={apiData?.data}
                             />
 
@@ -157,7 +177,7 @@ export default function ShopPage() {
                                         min={0}
                                         max={200000}
                                         value={minPrice}
-                                        onChange={(e) => { setMinPrice(Number(e.target.value)); setCurrentPage(1); }}
+                                        onChange={(e) => { setMinPrice(Number(e.target.value)); updateUrl(1); }}
                                         className="w-100"
                                         style={{ accentColor: '#a6d719', cursor: 'pointer' }}
                                     />
@@ -166,7 +186,7 @@ export default function ShopPage() {
                                         min={0}
                                         max={200000}
                                         value={maxPrice}
-                                        onChange={(e) => { setMaxPrice(Number(e.target.value)); setCurrentPage(1); }}
+                                        onChange={(e) => { setMaxPrice(Number(e.target.value)); updateUrl(1); }}
                                         className="w-100"
                                         style={{ accentColor: '#a6d719', cursor: 'pointer' }}
                                     />
@@ -178,7 +198,7 @@ export default function ShopPage() {
                                     </span>
                                     <button
                                         className="filter-btn text-uppercase"
-                                        onClick={() => { setMinPrice(0); setMaxPrice(200000); setCurrentPage(1); }}
+                                        onClick={() => { setMinPrice(0); setMaxPrice(200000); updateUrl(1); }}
                                     >
                                         Reset
                                     </button>
@@ -235,7 +255,7 @@ export default function ShopPage() {
                                     <select
                                         className="form-select bg-transparent text-white border-secondary small text-uppercase"
                                         value={sortOrder}
-                                        onChange={(e) => { setSortOrder(e.target.value); setCurrentPage(1); }}
+                                        onChange={(e) => { setSortOrder(e.target.value); updateUrl(1); }}
                                     >
                                         <option value="default">Default Sorting</option>
                                         <option value="price-asc">Price: Low to High</option>
