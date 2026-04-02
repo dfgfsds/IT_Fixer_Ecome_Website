@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import ShopPage from "./Client";
 import Script from "next/script";
+import { Suspense } from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -69,7 +70,15 @@ export default function Page() {
                 }}
             />
 
-            <ShopPage />
+            <Suspense fallback={
+                <div className="col-12 d-flex align-items-center justify-content-center" style={{ minHeight: '60vh' }}>
+                    <div className="spinner-border" role="status" style={{ color: '#a6d719', width: '3.5rem', height: '3.5rem' }}>
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }>
+                <ShopPage />
+            </Suspense>
         </>
     );
 }
