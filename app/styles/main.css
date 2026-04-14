@@ -8401,7 +8401,7 @@ span {
   position: relative;
   list-style: none;
   display: inline-block;
-  margin-inline-end: 50px;
+  margin-inline-end: 30px;
 }
 
 .header-main .main-menu ul li:last-child {
@@ -8820,12 +8820,12 @@ span {
 .header-2 .header-main .header-right .header-right-icon {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 40px;
 }
 
 @media (max-width: 1600px) {
   .header-2 .header-main .header-right .header-right-icon {
-    gap: 30px;
+    gap: 20px;
   }
 }
 
