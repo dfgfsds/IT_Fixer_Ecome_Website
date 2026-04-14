@@ -24,6 +24,7 @@ import Providers from './providers';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import FloatingCallButton from '@/components/FloatingCallButton';
 import ScrollToTop from '@/components/ScrollToTop';
+import StickyRepairBar from '@/components/StickyRepairBar';
 
 export const metadata: Metadata = {
 
@@ -64,6 +65,7 @@ export default function RootLayout({
           <FloatingCallButton />
           <Header />
           <main>{children}</main>
+          <StickyRepairBar />
           <FooterPage />
           <Scripts />
         </Providers>
