@@ -139,7 +139,7 @@ export default function Header() {
                                 </div>
                                 <div className="offcanvas__close">
                                     <button className="sidebar__toggle">
-                                        <X size={20} color="white" />
+                                        <X size={20} color="black" />
                                     </button>
                                 </div>
                             </div>
@@ -147,6 +147,18 @@ export default function Header() {
                                 ITFixer is the Best Gaming & Editing PC Shop in Chennai, offering custom Gaming PCs, Editing Workstations, and high-performance Laptops with expert support and unbeatable prices.
                             </p>
                             <div className="mobile-menu fix mb-3"></div>
+
+                            <div className="sidebar-venom-btn-wrapper">
+                                <a
+                                    href="https://www.itfixer199.com/"
+                                    className="header-venom-btn"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <i className="fa-solid fa-screwdriver-wrench"></i>
+                                    Book Repair Now
+                                </a>
+                            </div>
                             <div className="sideber-image">
                                 <img src="https://acemagic.com/cdn/shop/collections/TANK_03-_2.jpg?v=1725597557" alt="img" />
                             </div>
@@ -234,9 +246,9 @@ export default function Header() {
                                                 <li className={pathname === "/categories" ? "active" : ""}>
                                                     <Link href="/categories" style={{ color: pathname === "/categories" ? "#CBFE1C" : "#ffffff" }}>Categories</Link>
                                                 </li>
-                                                <li className={pathname === "/custom-pc-build" ? "active" : ""}>
+                                                {/* <li className={pathname === "/custom-pc-build" ? "active" : ""}>
                                                     <Link href="/custom-pc-build" style={{ color: pathname === "/custom-pc-build" ? "#CBFE1C" : "#ffffff" }}>Custom PC</Link>
-                                                </li>
+                                                </li> */}
 
 
                                                 <li className={`has-dropdown ${pathname === "/shop" ? "active" : ""}`}>
@@ -256,7 +268,8 @@ export default function Header() {
                                         </nav>
                                     </div>
                                 </div>
-                                <div className="header-right-icon bg-red-900">
+
+                                <div className="header-right-icon">
                                     <button onClick={handleSearchToggle} className="main-header__search ms-3 bg-transparent border-0 p-0">
                                         <Search size={20} className="text-white cursor-pointer" />
                                     </button>
@@ -270,6 +283,18 @@ export default function Header() {
                                                 </span>
                                             )}
                                         </Link>
+                                    </div>
+
+                                    <div className="header-button header-venom-btn-wrapper pe-3 d-flex align-items-center">
+                                        <a
+                                            href="https://www.itfixer199.com/"
+                                            className="header-venom-btn"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <i className="fa-solid fa-screwdriver-wrench"></i>
+                                            Book Repair Now
+                                        </a>
                                     </div>
 
                                     {/* Login/Profile button */}
