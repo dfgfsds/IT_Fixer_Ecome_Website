@@ -43,7 +43,7 @@ export default function Footer() {
                                         <p>
                                             ITFixer offers premium Gaming and Editing PCs & Laptops, engineered for extreme performance, seamless multitasking, and professional-grade results — available at competitive prices.
                                         </p>
-                                        <div className="gt-social-icon d-flex align-items-center flex-wrap gap-2">
+                                        <div className="gt-social-icon d-flex align-items-center flex-wrap ">
 
                                             <a href="https://www.instagram.com/it__fixer/" target="_blank" rel="noopener noreferrer">
                                                 <Instagram size={18} />

@@ -13,6 +13,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import SponsorSection from "@/components/SponsorSection";
 import TeamMemberSection from "@/components/TeamMemberSection";
 import NewsSection from "@/components/NewsSection";
+import RepairBannerSection from "@/components/RepairBannerSection";
 
 /* ================= META ================= */
 export async function generateMetadata(): Promise<Metadata> {
@@ -218,6 +219,7 @@ export default function Home() {
                 {/* <SponsorSection /> */}
                 {/* <TeamMemberSection /> */}
                 <NewsSection />
+                {/* <RepairBannerSection /> */}
             </div>
 
         </div>

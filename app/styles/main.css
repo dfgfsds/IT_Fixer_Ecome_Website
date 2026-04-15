@@ -4974,7 +4974,7 @@ span {
 }
 
 .gt-footer-widget-wrapper .gt-footer-widget-items .gt-footer-content .gt-social-icon {
-  gap: 15px;
+  /* gap: 15px; */
   margin-top: 40px;
 }
 
@@ -4985,7 +4985,7 @@ span {
   line-height: 40px;
   text-align: center;
   background-color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
   background: #1C1D20;
   color: #fff;
   transition: all 0.4s ease-in-out;
