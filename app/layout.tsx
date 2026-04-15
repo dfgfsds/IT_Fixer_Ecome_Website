@@ -65,7 +65,7 @@ export default function RootLayout({
           <FloatingCallButton />
           <Header />
           <main>{children}</main>
-          <StickyRepairBar />
+          {/* <StickyRepairBar /> */}
           <FooterPage />
           <Scripts />
         </Providers>
