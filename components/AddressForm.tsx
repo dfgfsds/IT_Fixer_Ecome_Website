@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
 import { postAddressCreateApi, updateAddressApi } from "@/api-endpoints/CartsApi";
 
 interface AddressFormProps {
@@ -68,6 +69,11 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
             if (onlyNums.length <= 10) {
                 setForm({ ...form, [name]: onlyNums });
             }
+        } else if (name === "postal_code") {
+            const onlyNums = value.replace(/[^0-9]/g, "");
+            if (onlyNums.length <= 6) {
+                setForm({ ...form, [name]: onlyNums });
+            }
         } else {
             setForm({ ...form, [name]: value });
         }
@@ -76,7 +82,11 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (form.contact_number.length !== 10) {
-            toast.error("Phone number must be exactly 10 digits.");
+            toast.error("Please enter a valid 10-digit phone number.");
+            return;
+        }
+        if (form.postal_code.length !== 6) {
+            toast.error("Please enter a valid 6-digit pincode.");
             return;
         }
         setSaving(true);
@@ -88,15 +98,15 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
             };
             if (isEdit) {
                 await updateAddressApi(`${editData.id}/`, payload);
-                toast.success("Address updated!");
+                toast.success("Address updated successfully!");
             } else {
                 await postAddressCreateApi("", payload);
-                toast.success("Address added!");
+                toast.success("Address added successfully!");
             }
             onSuccess();
             onClose();
-        } catch {
-            toast.error("Failed to save address.");
+        } catch (error: any) {
+            toast.error(handleApiError(error));
         } finally {
             setSaving(false);
         }
@@ -172,55 +182,55 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
                         {/* Name */}
                         <div>
                             <label style={labelStyle}>Full Name</label>
-                            <input name="customer_name" value={form.customer_name} onChange={handleChange} required placeholder="John Doe" style={inputStyle} />
+                            <input name="customer_name" value={form.customer_name} onChange={handleChange} required placeholder="Enter your full name" style={inputStyle} />
                         </div>
 
                         {/* Phone */}
                         <div>
                             <label style={labelStyle}>Phone Number</label>
-                            <input name="contact_number" value={form.contact_number} onChange={handleChange} required placeholder="10-digit number" pattern="[0-9]{10}" title="Ten digits code" style={inputStyle} />
+                            <input name="contact_number" value={form.contact_number} onChange={handleChange} required placeholder="Enter your phone number" pattern="[0-9]{10}" title="Ten digits code" style={inputStyle} />
                         </div>
 
                         {/* Email */}
                         <div style={{ gridColumn: "1 / -1" }}>
                             <label style={labelStyle}>Email Address</label>
-                            <input name="email_address" value={form.email_address} onChange={handleChange} type="email" placeholder="john@example.com" style={inputStyle} />
+                            <input name="email_address" value={form.email_address} onChange={handleChange} type="email" required placeholder="Enter your email address" style={inputStyle} />
                         </div>
 
                         {/* Address Line 1 */}
                         <div style={{ gridColumn: "1 / -1" }}>
                             <label style={labelStyle}>Address Line 1</label>
-                            <input name="address_line1" value={form.address_line1} onChange={handleChange} required placeholder="Street address, apartment, etc." style={inputStyle} />
+                            <input name="address_line1" value={form.address_line1} onChange={handleChange} required placeholder="Enter your address line 1" style={inputStyle} />
                         </div>
 
                         {/* Address Line 2 */}
                         <div style={{ gridColumn: "1 / -1" }}>
                             <label style={labelStyle}>Address Line 2 <span style={{ opacity: 0.5 }}>(optional)</span></label>
-                            <input name="address_line2" value={form.address_line2} onChange={handleChange} placeholder="Landmark, area, etc." style={inputStyle} />
+                            <input name="address_line2" value={form.address_line2} onChange={handleChange} placeholder="Enter your address line 2" style={inputStyle} />
                         </div>
 
                         {/* City */}
                         <div>
                             <label style={labelStyle}>City</label>
-                            <input name="city" value={form.city} onChange={handleChange} required placeholder="City" style={inputStyle} />
+                            <input name="city" value={form.city} onChange={handleChange} required placeholder="Enter your city" style={inputStyle} />
                         </div>
 
                         {/* State */}
                         <div>
                             <label style={labelStyle}>State</label>
-                            <input name="state" value={form.state} onChange={handleChange} required placeholder="State" style={inputStyle} />
+                            <input name="state" value={form.state} onChange={handleChange} required placeholder="Enter your state" style={inputStyle} />
                         </div>
 
                         {/* Postal Code */}
                         <div>
-                            <label style={labelStyle}>Postal Code</label>
-                            <input name="postal_code" value={form.postal_code} onChange={handleChange} required placeholder="000000" style={inputStyle} />
+                            <label style={labelStyle}>Pincode</label>
+                            <input name="postal_code" value={form.postal_code} onChange={handleChange} required placeholder="Enter your pincode" maxLength={6} pattern="[0-9]{6}" style={inputStyle} />
                         </div>
 
                         {/* Country */}
                         <div>
                             <label style={labelStyle}>Country</label>
-                            <input name="country" value={form.country} onChange={handleChange} required placeholder="Country" style={inputStyle} />
+                            <input name="country" value={form.country} onChange={handleChange} required placeholder="Enter your country" style={inputStyle} />
                         </div>
                     </div>
 

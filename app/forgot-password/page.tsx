@@ -3,9 +3,11 @@ import { getCheckEmailApi, postSendOtpAPi, postSendOtpVerifyAPi, updateUserAPi }
 import { useVendor } from "@/context/VendorContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Home, Loader2, Eye, EyeOff } from "lucide-react";
+import { Home, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
+import { Loader } from "lucide-react";
 
 export default function ForgotPassword() {
     const [phase, setPhase] = useState<'EMAIL' | 'OTP' | 'RESET'>('EMAIL');
@@ -46,13 +48,13 @@ export default function ForgotPassword() {
                     setPhase('OTP');
                     toast.success('OTP sent to your email.');
                 } else {
-                    toast.error(otpResponse.data?.message || 'Failed to send OTP. Please try again.');
+                    toast.error(handleApiError(otpResponse));
                 }
             } else {
                 toast.warning("You're not a registered user, please create an account.");
             }
         } catch (err: any) {
-            toast.error(err.response?.data?.message || "You're not a registered user, please create an account.");
+            toast.error(handleApiError(err));
         } finally {
             setLoading(false);
         }
@@ -79,10 +81,10 @@ export default function ForgotPassword() {
                 setPhase('RESET');
                 toast.success('OTP verified!');
             } else {
-                toast.error(response.data?.message || 'Invalid OTP. Please try again.');
+                toast.error(handleApiError(response));
             }
         } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Error verifying OTP. Please try again.');
+            toast.error(handleApiError(err));
         } finally {
             setLoading(false);
         }
@@ -112,10 +114,10 @@ export default function ForgotPassword() {
                 toast.success('Password reset successfully!');
                 router.push('/login');
             } else {
-                toast.error(response.data?.message || 'Failed to reset password.');
+                toast.error(handleApiError(response));
             }
         } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Error updating password. Please try again.');
+            toast.error(handleApiError(err));
         } finally {
             setLoading(false);
         }
@@ -176,13 +178,9 @@ export default function ForgotPassword() {
                                         disabled={loading}
                                     />
                                 </div>
-                                <button type="submit" className="vs-btn cart-animation-item w-100" disabled={loading}>
-                                    {loading ? (
-                                        <div className="d-flex align-items-center gap-2">
-                                            <Loader2 size={18} className="animate-spin" />
-                                            Checking...
-                                        </div>
-                                    ) : 'Send OTP'}
+                                <button type="submit" className="vs-btn w-100" disabled={loading} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                                    {loading && <Loader size={18} className="animate-spin" />}
+                                    {loading ? 'CHECKING...' : 'SEND OTP'}
                                 </button>
                                 <p className="auth-other">
                                     Back to <Link href="/login" className="auth-link">Login</Link>
@@ -207,13 +205,9 @@ export default function ForgotPassword() {
                                         disabled={loading}
                                     />
                                 </div>
-                                <button type="submit" className="vs-btn cart-animation-item w-100" disabled={loading}>
-                                    {loading ? (
-                                        <div className="d-flex align-items-center gap-2">
-                                            <Loader2 size={18} className="animate-spin" />
-                                            Verifying...
-                                        </div>
-                                    ) : 'Verify OTP'}
+                                <button type="submit" className="vs-btn w-100" disabled={loading} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                                    {loading && <Loader size={18} className="animate-spin" />}
+                                    {loading ? 'VERIFYING...' : 'VERIFY OTP'}
                                 </button>
                                 <p className="auth-other">
                                     Wrong email? <button type="button" className="auth-link border-0 bg-transparent p-0" onClick={() => setPhase('EMAIL')}>Change</button>
@@ -263,13 +257,9 @@ export default function ForgotPassword() {
                                         {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                     </button>
                                 </div>
-                                <button type="submit" className="vs-btn cart-animation-item w-100" disabled={loading}>
-                                    {loading ? (
-                                        <div className="d-flex align-items-center gap-2">
-                                            <Loader2 size={18} className="animate-spin" />
-                                            Updating...
-                                        </div>
-                                    ) : 'Reset Password'}
+                                <button type="submit" className="vs-btn w-100" disabled={loading} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                                    {loading && <Loader size={18} className="animate-spin" />}
+                                    {loading ? 'UPDATING...' : 'RESET PASSWORD'}
                                 </button>
                             </form>
                         </>

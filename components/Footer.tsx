@@ -41,7 +41,7 @@ export default function Footer() {
                                     </div>
                                     <div className="gt-footer-content">
                                         <p>
-                                            ITFixer offers premium Gaming and Editing PCs & Laptops, engineered for extreme performance, seamless multitasking, and professional-grade results — available at competitive prices.
+                                            ITFixer offers premium Gaming and Editing PCs & Laptops, engineered for extreme performance, seamless multitasking, and professional-grade results - available at competitive prices.
                                         </p>
                                         <div className="gt-social-icon d-flex align-items-center flex-wrap ">
 

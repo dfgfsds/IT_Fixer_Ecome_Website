@@ -20,8 +20,8 @@ export default function ContactTriggerSection() {
                             <h3>call us</h3>
                             <p><a href="tel:+918585858768">+91 8585858768</a></p>
                         </div>
-                        <Link href="/contact" className="theme-btn">
-                            get started
+                        <Link href="/shop" className="theme-btn">
+                            EXPLORE PRODUCTS
                         </Link>
                     </div>
                 </div>

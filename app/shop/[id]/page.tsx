@@ -12,12 +12,14 @@ import { useVendor } from "@/context/VendorContext";
 import { useCartItem } from "@/context/CartItemContext";
 import { useQuery, useQueryClient, InvalidateQueryFilters } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
 import { getProductWithVariantSizeApi } from "@/api-endpoints/products";
 
 export default function ProductDetails() {
     const { isAuthenticated } = useUser();
     const router = useRouter();
     const { id } = useParams();
+    const FALLBACK_IMAGE = "/assets/img/placeholder-image.jpg";
     const { products: apiData, isLoading }: any = useProducts();
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { vendorId } = useVendor();
@@ -116,7 +118,7 @@ export default function ProductDetails() {
             setIsCartOpen(true);
             toast.success("Added to cart");
         } catch (e) {
-            toast.error("Error adding to cart");
+            toast.error(handleApiError(e));
         }
     };
 
@@ -131,8 +133,7 @@ export default function ProductDetails() {
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
         } catch (e) {
-            toast.error("Failed to update quantity");
-            console.error(e);
+            toast.error(handleApiError(e));
         }
     };
 
@@ -201,7 +202,13 @@ export default function ProductDetails() {
                         {/* Image Gallery */}
                         <div className="col-lg-6">
                             <div className="product-image-box-dark">
-                                <img src={images[activeImgIndex] || '/assets/img/offcanvas-image.png'} alt={product.name} />
+                                <img
+                                    src={images[activeImgIndex] || FALLBACK_IMAGE}
+                                    alt={product.name}
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                                    }}
+                                />
                             </div>
 
                             <div className="product-thumbs-dark">
@@ -212,7 +219,13 @@ export default function ProductDetails() {
                                         onClick={() => setActiveImgIndex(idx)}
                                         style={{ cursor: 'pointer' }}
                                     >
-                                        <img src={img} alt={`thumb-${idx}`} />
+                                        <img
+                                            src={img || FALLBACK_IMAGE}
+                                            alt={`thumb-${idx}`}
+                                            onError={(e) => {
+                                                (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                                            }}
+                                        />
                                     </div>
                                 ))}
                             </div>
@@ -251,10 +264,15 @@ export default function ProductDetails() {
                                                     onClick={() => {
                                                         setSelectedVariant(v);
                                                         setSelectedSize(null);
-                                                        // Optional: If variant has its own gallery, you'd update index here
                                                     }}
                                                 >
-                                                    <img src={v.product_variant_image_urls?.[0] || images[0]} alt={v.product_variant_title} />
+                                                    <img
+                                                        src={v.product_variant_image_urls?.[0] || images[0] || FALLBACK_IMAGE}
+                                                        alt={v.product_variant_title}
+                                                        onError={(e) => {
+                                                            (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                                                        }}
+                                                    />
                                                     <span title={v.product_variant_title}>{v.product_variant_title}</span>
                                                 </div>
                                             ))}

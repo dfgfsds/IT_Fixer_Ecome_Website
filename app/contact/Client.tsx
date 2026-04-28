@@ -1,7 +1,7 @@
 import ContactHeroSection from "@/components/ContactHeroSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import ContactMapSection from "@/components/ContactMapSection";
-import TriggerSection from "@/components/TriggerSection";
+import ContactTriggerSection from "@/components/ContactTriggerSection";
 
 export default function ContactPage() {
     return (
@@ -10,7 +10,7 @@ export default function ContactPage() {
                 <ContactHeroSection />
                 <ContactFormSection />
                 <ContactMapSection />
-                <TriggerSection />
+                <ContactTriggerSection />
             </div>
         </div>
     );
