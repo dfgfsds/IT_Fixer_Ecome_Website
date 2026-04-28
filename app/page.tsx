@@ -211,7 +211,6 @@ export default function Home() {
                 <HeroSection />
                 <BrandSection />
                 <AboutSection />
-
                 {/* <VideoSection /> */}
                 <BestGameSection />
                 <TrendingSection />

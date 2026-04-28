@@ -21,7 +21,7 @@ export default function BlogStickySidebar() {
             end: () =>
                 "+=" + (left.scrollHeight - sidebar.offsetHeight),
             pin: sidebar,
-            pinSpacing: true,   // ✅ VERY IMPORTANT
+            pinSpacing: true,
             scrub: 0.4,
             anticipatePin: 1,
             invalidateOnRefresh: true,

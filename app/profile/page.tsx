@@ -10,7 +10,8 @@ import { useVendor } from "@/context/VendorContext";
 import { toast } from "sonner";
 import Link from "next/link";
 import AddressForm from "@/components/AddressForm";
-import { formatPrice } from "@/lib/utils";
+import { formatDate, formatPrice } from "@/lib/utils";
+import { handleApiError } from "@/lib/error-handler";
 import { Suspense } from "react";
 
 function ProfileContent() {
@@ -20,6 +21,7 @@ function ProfileContent() {
     const { vendorId } = useVendor();
     const queryClient = useQueryClient();
     const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
+    const [updating, setUpdating] = useState(false);
 
     useEffect(() => {
         setSearchParams(new URLSearchParams(window.location.search));
@@ -52,6 +54,12 @@ function ProfileContent() {
     }, [user]);
 
     const handleUpdate = async () => {
+        if (formData.contact_number && formData.contact_number.length !== 10) {
+            toast.error("Please enter a valid phone number.");
+            return;
+        }
+
+        setUpdating(true);
         try {
             const res = await updateUserAPi(`/${user?.data?.id}`, {
                 ...formData,
@@ -60,12 +68,13 @@ function ProfileContent() {
                 vendor: vendorId
             });
             if (res) {
-                toast.success('Profile updated!');
+                toast.success('Profile updated successfully!');
                 queryClient.invalidateQueries({ queryKey: ["gerUserData"] });
             }
-        } catch (err) {
-            console.error(err);
-            toast.error('Failed to update profile');
+        } catch (error: any) {
+            toast.error(handleApiError(error));
+        } finally {
+            setUpdating(false);
         }
     };
 
@@ -126,11 +135,11 @@ function ProfileContent() {
         try {
             await deleteAddressApi(deleteId, { deleted_by: "user" });
             queryClient.invalidateQueries(["getAddressData"] as InvalidateQueryFilters);
-            toast.success("Address deleted.");
+            toast.success("Address deleted successfully!");
             setDeleteModal(false);
             setDeleteId(null);
-        } catch {
-            toast.error("Failed to delete address.");
+        } catch (error: any) {
+            toast.error(handleApiError(error));
         } finally {
             setDeleting(false);
         }
@@ -205,15 +214,38 @@ function ProfileContent() {
                                             <input type="email" className="form-control" value={formData.email}
                                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                                 readOnly={!!user?.data?.email}
-                                                style={{ backgroundColor: "#0b0e13", border: "1px solid #2a2d3a", color: "#fff", padding: "12px" }} />
+                                                style={{
+                                                    backgroundColor: "#0b0e13",
+                                                    border: "1px solid #2a2d3a",
+                                                    color: "#fff",
+                                                    padding: "12px",
+                                                    cursor: !!user?.data?.email ? "not-allowed" : "text",
+                                                    opacity: !!user?.data?.email ? 0.7 : 1
+                                                }} />
                                         </div>
                                         <div className="mb-4">
                                             <label className="form-label text-white">Phone Number</label>
                                             <input type="text" className="form-control" value={formData.contact_number}
                                                 onChange={(e) => setFormData({ ...formData, contact_number: e.target.value })}
-                                                readOnly style={{ backgroundColor: "#0b0e13", border: "1px solid #2a2d3a", color: "#fff", padding: "12px" }} />
+                                                readOnly={!!user?.data?.contact_number}
+                                                style={{
+                                                    backgroundColor: "#0b0e13",
+                                                    border: "1px solid #2a2d3a",
+                                                    color: "#fff",
+                                                    padding: "12px",
+                                                    cursor: !!user?.data?.contact_number ? "not-allowed" : "text",
+                                                    opacity: !!user?.data?.contact_number ? 0.7 : 1
+                                                }} />
                                         </div>
-                                        <button onClick={handleUpdate} className="vs-btn cart-animation-item mt-2">Save Changes</button>
+                                        <button
+                                            onClick={handleUpdate}
+                                            disabled={updating}
+                                            className="vs-btn cart-animation-item mt-2"
+                                            style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                                        >
+                                            {updating && <Loader size={16} className="animate-spin" />}
+                                            {updating ? "Saving..." : "Save Changes"}
+                                        </button>
                                     </div>
                                 </div>
                             )}
@@ -229,7 +261,7 @@ function ProfileContent() {
                                     </div>
                                     {ordersLoading ? (
                                         <div className="text-center py-5">
-                                            <div className="spinner-border text-primary" role="status"><span className="visually-hidden">Loading...</span></div>
+                                            <div className="spinner-border" style={{ color: "#a6d719" }} role="status"><span className="visually-hidden">Loading...</span></div>
                                         </div>
                                     ) : orders.length > 0 ? (
                                         <div className="orders-scroll-container px-2" style={{ maxHeight: "350px", overflowY: "auto" }}>
@@ -244,11 +276,14 @@ function ProfileContent() {
                                                                 </div>
                                                                 <div className="col-md-3 col-6 mb-2 mb-md-0 text-center">
                                                                     <div className="small text-white mb-1">Date</div>
-                                                                    <div className="text-white">{new Date(order.created_at).toLocaleDateString()}</div>
+                                                                    <div className="text-white">{order.created_at ? formatDate(order.created_at) : "N/A"}</div>
                                                                 </div>
                                                                 <div className="col-md-2 col-6 mb-2 mb-md-0 text-center">
                                                                     <div className="small text-white mb-1">Status</div>
-                                                                    <span className={`badge ${order.status === 'Delivered' ? 'bg-success' : ['Processing', 'Pending'].includes(order.status) ? 'bg-warning text-dark' : 'bg-danger'}`}>
+                                                                    <span className={`badge ${['delivered', 'completed'].includes(order.status?.toLowerCase()) ? 'bg-success' :
+                                                                            ['processing', 'pending', 'confirmed', 'shipped', 'out for delivery'].includes(order.status?.toLowerCase()) ? 'bg-warning text-dark' :
+                                                                                'bg-danger'
+                                                                        }`}>
                                                                         {order.status}
                                                                     </span>
                                                                 </div>

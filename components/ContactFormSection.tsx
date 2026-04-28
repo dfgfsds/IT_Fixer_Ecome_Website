@@ -3,6 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import ApiUrls from "@/api-endpoints/ApiUrls";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
+import { Loader } from "lucide-react";
 import { useVendor } from "@/context/VendorContext";
 import ContactStickySidebar from "./ContactStickySidebar";
 
@@ -40,7 +42,7 @@ export default function ContactFormSection() {
             toast.success("Message sent successfully");
             setForm({ name: "", email: "", contact_number: "", description: "" });
         } catch (err: any) {
-            toast.error(err?.response?.data?.message || "Something went wrong, try again later");
+            toast.error(handleApiError(err));
         } finally {
             setLoading(false);
         }
@@ -53,6 +55,15 @@ export default function ContactFormSection() {
                     <div className="row g-4">
                         <div className="col-lg-8 contact-left-content">
                             <div className="gt-comment-form-wrap">
+                                <style>{`
+                                    .form-clt input, .form-clt textarea {
+                                        color: #ffffff !important;
+                                        caret-color: #ffffff !important;
+                                    }
+                                    .form-clt input::placeholder, .form-clt textarea::placeholder {
+                                        color: rgba(255, 255, 255, 0.5) !important;
+                                    }
+                                `}</style>
                                 <h4>We're Here to Help!</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
                                 <form id="contact-form" onSubmit={handleSubmit}>
@@ -114,10 +125,12 @@ export default function ContactFormSection() {
                                         <div className="col-lg-12">
                                             <button
                                                 type="submit"
-                                                className="vs-btn cart-animation-item"
+                                                className="vs-btn w-100"
                                                 disabled={loading}
+                                                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
                                             >
-                                                {loading ? "Sending..." : "Send Message"}
+                                                {loading && <Loader size={18} className="animate-spin" />}
+                                                {loading ? "SENDING..." : "SEND MESSAGE"}
                                             </button>
                                         </div>
                                     </div>

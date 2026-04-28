@@ -4,10 +4,11 @@ import { getCartApi, postCartCreateApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
 import { useUser } from "@/context/UserContext";
 import Link from "next/link";
-import { Home, Eye, EyeOff } from "lucide-react";
+import { Home, Eye, EyeOff, Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
 
 export default function Login() {
     const [loginMethod, setLoginMethod] = useState<'email' | 'mobile'>('mobile');
@@ -75,10 +76,10 @@ export default function Login() {
                     toast.error('User ID not found in response.');
                 }
             } else {
-                toast.error(response.data?.message || 'Invalid email or password. Please try again.');
+                toast.error(handleApiError(response));
             }
-        } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Error logging in. Please try again.');
+        } catch (error: any) {
+            toast.error(handleApiError(error));
         } finally {
             setLoading(false);
         }
@@ -100,10 +101,10 @@ export default function Login() {
                 setStep('OTP_INPUT');
                 toast.success('OTP sent successfully!');
             } else {
-                toast.error(response.data?.message || 'Failed to send OTP. Please try again.');
+                toast.error(handleApiError(response));
             }
-        } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Error sending OTP. Please try again.');
+        } catch (error: any) {
+            toast.error(handleApiError(error));
         } finally {
             setLoading(false);
         }
@@ -150,10 +151,10 @@ export default function Login() {
                     toast.error('User ID not found in response.');
                 }
             } else {
-                toast.error(response.data?.message || 'Invalid OTP. Please try again.');
+                toast.error(handleApiError(response));
             }
-        } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Error verifying OTP. Please try again.');
+        } catch (error: any) {
+            toast.error(handleApiError(error));
         } finally {
             setLoading(false);
         }
@@ -261,10 +262,12 @@ export default function Login() {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="vs-btn cart-animation-item w-100"
+                                    className="vs-btn w-100"
                                     disabled={loading}
+                                    style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
                                 >
-                                    {loading ? 'Logging in...' : 'Login'}
+                                    {loading && <Loader size={18} className="animate-spin" />}
+                                    {loading ? 'LOGGING IN...' : 'LOGIN'}
                                 </button>
                             </>
                         ) : (
@@ -317,20 +320,24 @@ export default function Login() {
                                 {step === 'PHONE_INPUT' ? (
                                     <button
                                         type="button"
-                                        className="vs-btn cart-animation-item w-100"
+                                        className="vs-btn w-100"
                                         onClick={handleSendOtp}
                                         disabled={loading}
+                                        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
                                     >
-                                        {loading ? 'Sending...' : 'Get OTP'}
+                                        {loading && <Loader size={18} className="animate-spin" />}
+                                        {loading ? 'SENDING...' : 'SEND OTP'}
                                     </button>
                                 ) : (
                                     <button
                                         type="button"
-                                        className="vs-btn cart-animation-item w-100"
+                                        className="vs-btn w-100"
                                         onClick={handleVerifyOtp}
                                         disabled={loading}
+                                        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
                                     >
-                                        {loading ? 'Verifying...' : 'Verify OTP'}
+                                        {loading && <Loader size={18} className="animate-spin" />}
+                                        {loading ? 'VERIFYING...' : 'VERIFY OTP'}
                                     </button>
                                 )}
                             </>

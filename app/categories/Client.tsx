@@ -7,6 +7,7 @@ import { slugify } from "@/lib/slugify";
 
 export default function Categories() {
     const { categories: catData, isLoading }: any = useCategories();
+    const FALLBACK_IMAGE = "/assets/img/placeholder-image.jpg";
 
     const categories = catData?.data || [];
 
@@ -60,8 +61,11 @@ export default function Categories() {
                                             <div className="gt-gaming-card-item-5 mt-0">
                                                 <div className="gt-gaming-image">
                                                     <img
-                                                        src={cat.image || `/assets/img/home-2/game/game-0${(index % 5) + 1}.jpg`}
+                                                        src={cat.image || FALLBACK_IMAGE}
                                                         alt={cat.name}
+                                                        onError={(e) => {
+                                                            (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                                                        }}
                                                         style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                                                     />
                                                     <div className="icon icon-permanent"><i className="fa-solid fa-arrow-right"></i></div>

@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import ApiUrls from "@/api-endpoints/ApiUrls";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
+import { Loader } from "lucide-react";
 
 interface BlogQuoteFormProps {
     vendorId: string | null;
@@ -42,7 +44,7 @@ export default function BlogQuoteForm({ vendorId }: BlogQuoteFormProps) {
             toast.success("Message sent successfully");
             setForm({ name: "", email: "", contact_number: "", description: "" });
         } catch (err: any) {
-            toast.error(err?.response?.data?.message || "Something went wrong, try again later");
+            toast.error(handleApiError(err));
         } finally {
             setLoading(false);
         }
@@ -50,6 +52,15 @@ export default function BlogQuoteForm({ vendorId }: BlogQuoteFormProps) {
 
     return (
         <div className="gt-comment-form-wrap mt-5">
+            <style>{`
+                .form-clt input, .form-clt textarea {
+                    color: #ffffff !important;
+                    caret-color: #ffffff !important;
+                }
+                .form-clt input::placeholder, .form-clt textarea::placeholder {
+                    color: rgba(255, 255, 255, 0.5) !important;
+                }
+            `}</style>
             <h4>Leave a comments</h4>
             <p>Your email address will not be published. Required fields are marked *</p>
             <form id="contact-form" onSubmit={handleSubmit}>
@@ -63,7 +74,6 @@ export default function BlogQuoteForm({ vendorId }: BlogQuoteFormProps) {
                                 placeholder="Your Name"
                                 value={form.name}
                                 onChange={handleChange}
-                                required
                             />
                         </div>
                     </div>
@@ -76,7 +86,6 @@ export default function BlogQuoteForm({ vendorId }: BlogQuoteFormProps) {
                                 placeholder="Your Email"
                                 value={form.email}
                                 onChange={handleChange}
-                                required
                             />
                         </div>
                     </div>
@@ -92,7 +101,6 @@ export default function BlogQuoteForm({ vendorId }: BlogQuoteFormProps) {
                                 maxLength={10}
                                 inputMode="numeric"
                                 pattern="[0-9]{10}"
-                                required
                             />
                         </div>
                     </div>
@@ -104,13 +112,18 @@ export default function BlogQuoteForm({ vendorId }: BlogQuoteFormProps) {
                                 placeholder="Type your message"
                                 value={form.description}
                                 onChange={handleChange}
-                                required
                             ></textarea>
                         </div>
                     </div>
                     <div className="col-lg-12">
-                        <button type="submit" className="vs-btn cart-animation-item" disabled={loading}>
-                            {loading ? "Sending..." : "Send Message"}
+                        <button
+                            type="submit"
+                            className="vs-btn w-100"
+                            disabled={loading}
+                            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
+                        >
+                            {loading && <Loader size={18} className="animate-spin" />}
+                            {loading ? "SENDING..." : "SEND MESSAGE"}
                         </button>
                     </div>
                 </div>
