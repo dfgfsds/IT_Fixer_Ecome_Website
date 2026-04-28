@@ -10,6 +10,7 @@ import { useVendor } from "@/context/VendorContext";
 import { useCartItem } from "@/context/CartItemContext";
 import { InvalidateQueryFilters, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
 import { formatPrice } from "@/lib/utils";
 import ShopWithSideCart from "@/components/ShopWithSideCart";
 import { getProductVariantCartItemUpdate } from "@/api-endpoints/products";
@@ -18,6 +19,7 @@ import { slugify } from "@/lib/slugify";
 
 export default function CategoryDetailPage() {
     const { id } = useParams();
+    const FALLBACK_IMAGE = "/assets/img/placeholder-image.jpg";
     const router = useRouter();
     const { products: apiData, isLoading: productsLoading }: any = useProducts();
     const { categories: catData, isLoading: categoriesLoading }: any = useCategories();
@@ -32,8 +34,8 @@ export default function CategoryDetailPage() {
 
     // Find category by slug OR Name Slug OR ID
     const currentCategory = catData?.data?.find((cat: any) =>
-        (cat.slug && cat.slug === pathId) || 
-        slugify(cat.name) === pathId || 
+        (cat.slug && cat.slug === pathId) ||
+        slugify(cat.name) === pathId ||
         cat.id.toString() === pathId
     );
 
@@ -64,7 +66,7 @@ export default function CategoryDetailPage() {
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
             setIsCartOpen(true);
         } catch (e) {
-            toast.error("Error adding to cart");
+            toast.error(handleApiError(e));
         }
     };
 
@@ -77,8 +79,10 @@ export default function CategoryDetailPage() {
             }
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
+            queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
+            queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
         } catch (e) {
-            console.error(e);
+            toast.error(handleApiError(e));
         }
     };
 
@@ -126,8 +130,11 @@ export default function CategoryDetailPage() {
                                             <div className="gt-gaming-card-item-5 mt-0">
                                                 <div className="gt-gaming-image">
                                                     <img
-                                                        src={sub.image || "https://via.placeholder.com/300"}
+                                                        src={sub.image || FALLBACK_IMAGE}
                                                         alt={sub.name}
+                                                        onError={(e) => {
+                                                            (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                                                        }}
                                                         style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                                                     />
                                                     <div className="icon icon-permanent"><i className="fa-solid fa-arrow-right"></i></div>
@@ -172,8 +179,11 @@ export default function CategoryDetailPage() {
                                             <div className="product-card d-flex flex-column h-100 w-100">
                                                 <div className="img-wrapper">
                                                     <img
-                                                        src={item.image_urls?.[0] || 'https://via.placeholder.com/300'}
+                                                        src={item.image_urls?.[0] || FALLBACK_IMAGE}
                                                         alt={item.name}
+                                                        onError={(e) => {
+                                                            (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                                                        }}
                                                         onClick={() => router.push(`/shop/${item.id}`)}
                                                         style={{ cursor: 'pointer' }}
                                                     />

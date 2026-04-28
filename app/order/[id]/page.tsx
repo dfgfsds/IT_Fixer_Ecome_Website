@@ -6,6 +6,8 @@ import { ArrowLeft, Package, Image as ImageIcon } from "lucide-react";
 import { getOrderItemApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
 import { formatDate, formatPrice } from "@/lib/utils";
+import { handleApiError } from "@/lib/error-handler";
+import { toast } from "sonner";
 
 export default function OrderDetailsPage() {
     const params = useParams();
@@ -18,17 +20,23 @@ export default function OrderDetailsPage() {
         return null;
     });
     const { vendorId: contextVendorId } = useVendor();
-    const vendorId = contextVendorId || '157'; // Fallback to '157' if context hasn't initialized yet
+    const vendorId = contextVendorId || '157';
 
 
-    const { data: orderResponse, isLoading } = useQuery({
+    const { data: orderResponse, isLoading, isError, error } = useQuery({
         queryKey: ['getOrderSingle', vendorId, userId, id],
         queryFn: () => getOrderItemApi(`?user_id=${userId}&vendor_id=${vendorId}&order_id=${id}`),
         enabled: Boolean(userId && vendorId && id),
         refetchOnWindowFocus: false
     });
 
-    const order = orderResponse?.data?.data || orderResponse?.data || [];
+    useEffect(() => {
+        if (isError) {
+            toast.error(handleApiError(error));
+        }
+    }, [isError, error]);
+
+    const order = orderResponse?.data?.data || orderResponse?.data || null;
 
     if (isLoading || !userId || !vendorId) {
         return (
@@ -39,6 +47,24 @@ export default function OrderDetailsPage() {
             </div>
         );
     }
+
+    if (!order && !isLoading) {
+        return (
+            <div style={{ backgroundColor: "#0b0e13", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", paddingTop: "120px" }}>
+                <Package size={64} color="#a6d719" className="mb-4" />
+                <h3 className="mb-2">Order Not Found</h3>
+                <p className="mb-4 text-secondary">We couldn't find the details for this order.</p>
+                <button onClick={() => router.push('/profile?tab=orders')} className="vs-btn btn-sm">Back to Orders</button>
+            </div>
+        );
+    }
+
+    const getStatusClass = (status: string) => {
+        const s = status?.toLowerCase();
+        if (s === 'delivered' || s === 'completed') return 'bg-success';
+        if (['processing', 'pending', 'confirmed', 'shipped', 'out for delivery'].includes(s)) return 'bg-warning text-dark';
+        return 'bg-danger';
+    };
 
     return (
         <div style={{ backgroundColor: "#0b0e13", minHeight: "100vh", color: "#fff", paddingTop: "120px", paddingBottom: "80px" }}>
@@ -88,10 +114,7 @@ export default function OrderDetailsPage() {
                                         </div>
                                         <div className="d-flex align-items-center">
                                             <span className="text-primary text-uppercase fw-bold me-2" style={{ fontSize: "14px" }}>Current Status :</span>
-                                            <span className={`badge rounded-pill px-3 py-1 fw-bold text-uppercase 
-                                                ${order?.status === 'completed' ? ' bg-opacity-10 text-success border border-success border-opacity-25' :
-                                                    order?.status === 'pending' ? ' bg-opacity-10 text-warning border border-warning border-opacity-25' :
-                                                        'bg-opacity-10 text-danger border border-danger border-opacity-25'}`}
+                                            <span className={`badge rounded-pill px-3 py-1 fw-bold text-uppercase ${getStatusClass(order?.status)}`}
                                                 style={{ fontSize: "12px", letterSpacing: "1px" }}>
                                                 {order?.status || 'Unknown'}
                                             </span>

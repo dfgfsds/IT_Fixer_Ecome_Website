@@ -13,6 +13,7 @@ import { updateCartitemsApi, deleteCartitemsApi, postApplyCouponApi, getAppliedC
 import { getDeliveryChargeApi, patchUserSelectAddressAPi } from "@/api-endpoints/authendication";
 import { useQueryClient, InvalidateQueryFilters, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
 import OrderSuccessModal from "@/components/OrderSuccessModal";
 import { formatPrice } from "@/lib/utils";
 
@@ -66,7 +67,7 @@ export default function CartPage() {
             queryClient.invalidateQueries(["getAddressData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getDeliveryCharge"] as InvalidateQueryFilters);
             toast.success("Shipping address updated");
-        } catch { toast.error("Failed to select address"); }
+        } catch (e) { toast.error(handleApiError(e)); }
     };
 
     const { data: deliveryResponseRaw, isLoading: isBreakdownLoading } = useQuery({
@@ -121,7 +122,7 @@ export default function CartPage() {
             queryClient.invalidateQueries({ queryKey: ["getCartitemsData"] });
             queryClient.invalidateQueries({ queryKey: ["getCartItemsDetailed"] });
         } catch (e: any) {
-            toast.error(e.response?.data?.message || "Failed to apply coupon");
+            toast.error(handleApiError(e));
         }
     };
 
@@ -139,7 +140,7 @@ export default function CartPage() {
             queryClient.invalidateQueries({ queryKey: ["getCartitemsData"] });
             queryClient.invalidateQueries({ queryKey: ["getCartItemsDetailed"] });
         } catch (e) {
-            toast.error("Failed to remove coupon");
+            toast.error(handleApiError(e));
         }
     };
 
@@ -154,8 +155,7 @@ export default function CartPage() {
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
         } catch (e) {
-            toast.error("Failed to update quantity");
-            console.error(e);
+            toast.error(handleApiError(e));
         }
     };
 
@@ -165,7 +165,7 @@ export default function CartPage() {
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
             toast.success("Item removed from cart");
-        } catch (e) { toast.error("Failed to remove item"); }
+        } catch (e) { toast.error(handleApiError(e)); }
     };
 
     const handleCheckout = async () => {
@@ -226,7 +226,7 @@ export default function CartPage() {
                     queryClient.invalidateQueries({ queryKey: ["getDeliveryCharge"] });
                 }
             }
-        } catch (error: any) { toast.error(error.response?.data?.message || "Checkout failed"); }
+        } catch (error: any) { toast.error(handleApiError(error)); }
         finally { setIsProcessing(false); }
     };
     if (isCartLoading) {

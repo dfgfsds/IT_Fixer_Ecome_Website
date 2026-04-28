@@ -13,13 +13,13 @@ import { useVendor } from "@/context/VendorContext";
 import { useCartItem } from "@/context/CartItemContext";
 import { InvalidateQueryFilters, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { handleApiError } from "@/lib/error-handler";
 import { formatPrice } from "@/lib/utils";
 import CategoryFilter from "@/components/CategoryFilter";
 
-
-
 export default function ShopPage() {
     const { isAuthenticated } = useUser();
+    const FALLBACK_IMAGE = "/assets/img/placeholder-image.jpg";
     const router = useRouter();
     const searchParams = useSearchParams();
     const pathname = usePathname();
@@ -29,8 +29,32 @@ export default function ShopPage() {
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [sortOrder, setSortOrder] = useState("default");
     const [minPrice, setMinPrice] = useState(0);
-    const [maxPrice, setMaxPrice] = useState(200000);
+    const [maxPrice, setMaxPrice] = useState(2000000);
+    const [absoluteMax, setAbsoluteMax] = useState(2000000);
     const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
+
+    useEffect(() => {
+        if (apiData?.data && apiData.data.length > 0) {
+            const prices = apiData.data.map((p: any) => Number(p.price || 0));
+            const rawMax = Math.max(...prices);
+            // Round up to nearest 1000
+            const max = Math.ceil(rawMax / 1000) * 1000;
+            setAbsoluteMax(max);
+
+            // Only set maxPrice if it's still at the default initialization value
+            if (maxPrice === 2000000) {
+                setMaxPrice(max);
+            }
+        }
+    }, [apiData]);
+
+    // Debounced URL update for better performance
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            updateUrl(1);
+        }, 400); // 400ms delay after user stops sliding
+        return () => clearTimeout(timer);
+    }, [minPrice, maxPrice]);
 
     useEffect(() => {
         const page = Number(searchParams.get("page")) || 1;
@@ -71,7 +95,7 @@ export default function ShopPage() {
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
             setIsCartOpen(true);
             toast.success("Added to cart");
-        } catch (e) { toast.error("Error adding to cart"); }
+        } catch (e) { toast.error(handleApiError(e)); }
     };
 
     const handleUpdateQty = async (cartId: any, type: 'increase' | 'decrease', currentQty: number) => {
@@ -85,8 +109,7 @@ export default function ShopPage() {
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
         } catch (e) {
-            toast.error("Failed to update quantity");
-            console.error(e);
+            toast.error(handleApiError(e));
         }
     };
 
@@ -175,18 +198,18 @@ export default function ShopPage() {
                                     <input
                                         type="range"
                                         min={0}
-                                        max={200000}
+                                        max={absoluteMax}
                                         value={minPrice}
-                                        onChange={(e) => { setMinPrice(Number(e.target.value)); updateUrl(1); }}
+                                        onChange={(e) => setMinPrice(Number(e.target.value))}
                                         className="w-100"
                                         style={{ accentColor: '#a6d719', cursor: 'pointer' }}
                                     />
                                     <input
                                         type="range"
                                         min={0}
-                                        max={200000}
+                                        max={absoluteMax}
                                         value={maxPrice}
-                                        onChange={(e) => { setMaxPrice(Number(e.target.value)); updateUrl(1); }}
+                                        onChange={(e) => setMaxPrice(Number(e.target.value))}
                                         className="w-100"
                                         style={{ accentColor: '#a6d719', cursor: 'pointer' }}
                                     />
@@ -198,7 +221,7 @@ export default function ShopPage() {
                                     </span>
                                     <button
                                         className="filter-btn text-uppercase"
-                                        onClick={() => { setMinPrice(0); setMaxPrice(200000); updateUrl(1); }}
+                                        onClick={() => { setMinPrice(0); setMaxPrice(absoluteMax); }}
                                     >
                                         Reset
                                     </button>
@@ -288,8 +311,11 @@ export default function ShopPage() {
                                                 <div className="product-card d-flex flex-column h-100 w-100">
                                                     <div className="img-wrapper">
                                                         <img
-                                                            src={item.image_urls?.[0] || 'https://via.placeholder.com/300'}
+                                                            src={item.image_urls?.[0] || FALLBACK_IMAGE}
                                                             alt={item.name}
+                                                            onError={(e) => {
+                                                                (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                                                            }}
                                                             onClick={() => router.push(`/shop/${item.id}`)}
                                                             style={{ cursor: 'pointer' }}
                                                         />

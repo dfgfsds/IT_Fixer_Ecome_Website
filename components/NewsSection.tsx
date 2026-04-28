@@ -230,7 +230,7 @@ export default function NewsSection() {
                 </div>
             </section>
 
-            <section className="gt-newsletter-section fix">
+            {/* <section className="gt-newsletter-section fix">
                 <div className="container">
                     <div className="gt-newsletter-wrapper bg-cover" style={{ backgroundImage: "url(assets/img/home-2/newsletter-bg.jpg)" }}>
                         <h4 className="wow fadeInUp" data-wow-delay=".3s">
@@ -248,7 +248,7 @@ export default function NewsSection() {
                         </form>
                     </div>
                 </div>
-            </section>
+            </section> */}
         </>
     )
 }

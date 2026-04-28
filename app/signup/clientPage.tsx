@@ -2,9 +2,11 @@
 import { postCreateUserAPi } from "@/api-endpoints/authendication";
 import { postCartCreateApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
+import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Home, Eye, EyeOff } from "lucide-react";
+import { Home, Eye, EyeOff, Loader } from "lucide-react";
+import { handleApiError } from "@/lib/error-handler";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -17,6 +19,7 @@ export default function Signup() {
     const [showPassword, setShowPassword] = useState(false);
 
     const { vendorId } = useVendor();
+    const { refreshUser } = useUser();
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -57,16 +60,17 @@ export default function Signup() {
                         localStorage.setItem('cartId', cartResponse.data.id);
                     }
                 } catch (cartErr) {
-                    console.error("Failed to create cart:", cartErr);
+                    console.warn("Soft Error: Failed to create cart:", cartErr);
                 }
 
+                refreshUser();
                 toast.success('Account created successfully!');
                 router.push('/');
             } else {
-                toast.error(userResponse.data?.message || 'Failed to create account. Please try again.');
+                toast.error(handleApiError(userResponse));
             }
         } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Error creating account. Please check your details.');
+            toast.error(handleApiError(err));
         } finally {
             setLoading(false);
         }
@@ -170,10 +174,12 @@ export default function Signup() {
 
                         <button
                             type="submit"
-                            className="vs-btn cart-animation-item w-100"
+                            className="vs-btn w-100"
                             disabled={loading}
+                            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
                         >
-                            {loading ? 'Creating Account...' : 'Create Account'}
+                            {loading && <Loader size={18} className="animate-spin" />}
+                            {loading ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
                         </button>
 
                         <p className="mt-4">
