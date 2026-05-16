@@ -217,7 +217,7 @@ export default function Footer() {
                     </div >
                     <div className="footer-bottom wow fadeInUp" data-wow-delay=".3s">
                         <div className="footer-wrapper">
-                            <p> © 2026 FTDS. All rights reserved.</p>
+                            <p> © {new Date().getFullYear()} <Link href="https://ftdigitalsolutions.in/" target="_blank" className="text-gray-700 font-semibold">FT Digital Solutions</Link>. All rights reserved.</p>
 
                         </div>
                     </div>
