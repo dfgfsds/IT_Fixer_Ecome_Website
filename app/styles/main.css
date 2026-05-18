@@ -5077,7 +5077,7 @@ span {
 .footer-bottom .footer-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 @media (max-width: 1199px) {
