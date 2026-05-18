@@ -105,10 +105,15 @@ export default function ShippingPolicyPage() {
                                     <p>If you have any questions regarding shipping or delivery, please contact us:</p>
                                     <div className="contact-details">
                                         <p>
+                                            <strong>IT Fixer</strong>
+                                            <br />
+                                            Operated by Sigmah Enterprises
+                                            <br />
+                                            <br />
                                             Email: <a href="mailto:info@itfixer.in">info@itfixer.in</a><br />
                                             Phone: <a href="tel:+918585858768" >+91 8585858768</a><br />
                                             Address: <span>
-                                                New No 29, Old No 31 &amp; 32, Anjugam Nagar<br />
+                                                New No.29, Old No.31 &amp; 32, Anjugam Nagar<br />
                                                 1st Street, Jafferkhanpet (Opp to Kasi Theatre)<br />
                                                 Ashok Nagar, Chennai – 600083<br />
                                                 Tamil Nadu, India

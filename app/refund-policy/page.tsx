@@ -55,6 +55,54 @@ export default function RefundPolicyPage() {
                                     <h3>Exchange Policy</h3>
                                     <p>Exchanges are allowed only for damaged or defective items.</p>
                                 </div>
+
+                                <div
+                                    className="policy-group wow fadeInUp"
+                                    data-wow-delay="1.3s"
+                                >
+                                    <h3>Contact Us</h3>
+
+                                    <p>
+                                        If you have any questions, concerns, or
+                                        requests regarding this Refund & Cancellation Policy,
+                                        please contact:
+                                    </p>
+
+                                    <div className="contact-details">
+                                        <p>
+                                            <strong>IT Fixer</strong>
+                                            <br />
+                                            Operated by Sigmah Enterprises
+                                            <br />
+                                            <br />
+                                            Email:{" "}
+                                            <a href="mailto:info@itfixer.in">
+                                                info@itfixer.in
+                                            </a>
+                                            <br />
+                                            Phone:{" "}
+                                            <a href="tel:+918585858768">
+                                                +91 8585858768
+                                            </a>
+                                            <br />
+                                            <br />
+                                            Address:
+                                            <br />
+                                            <span>
+                                                New No.29, Old No.31 &amp; 32,
+                                                <br />
+                                                Anjugam Nagar, 1st Street,
+                                                <br />
+                                                Jafferkhanpet (Opp. Kasi
+                                                Theatre),
+                                                <br />
+                                                Ashok Nagar, Chennai – 600083,
+                                                <br />
+                                                Tamil Nadu, India
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

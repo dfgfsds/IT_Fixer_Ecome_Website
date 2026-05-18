@@ -16,14 +16,18 @@ export default function GamingZoneSection() {
                                     </h2>
                                 </div>
                                 <p className="about-text wow fadeInUp" data-wow-delay=".5s">
-                                    IT Fixer is a next-generation technology brand built for serious gamers, content creators, and performance-driven users. We are not just a PC provider — we are an immersive experience center designed to help customers make the right choice before investing in high-performance systems.
+                                    IT Fixer, a brand by FTDS India Pvt Ltd, is a trusted technology and PC solutions company built for gamers, creators, professionals, and performance-focused users. We specialize in delivering high-performance gaming PCs, custom workstation builds, laptop solutions, and reliable IT services designed to meet modern computing demands.
+
                                 </p>
                                 <p className=" mt-3 wow fadeInUp" data-wow-delay=".5s">
-                                    At IT Fixer, customers can experience gaming and editing PCs in real-time before purchase — a concept that brings clarity, confidence, and trust to every buying decision. This unique approach allows users to understand performance, speed, and capability firsthand, making IT Fixer one of the first experience-driven PC solution providers in India.
+                                    At IT Fixer, we believe customers should experience performance before making a decision. Our experience-driven approach allows users to explore gaming setups, editing systems, and high-end PCs in real time, helping them choose the right configuration with complete confidence.
+
                                 </p>
                                 <p className=" mt-3 wow fadeInUp" data-wow-delay=".5s">
-                                    Our systems are crafted using premium hardware components, ensuring power, speed, and long-term reliability. Whether you are a competitive gamer, streamer, or professional video editor, we deliver custom-built PCs tailored to your performance needs.
+                                    We use premium-quality components and the latest technology to build systems that offer speed, stability, and long-term reliability. Whether you are a competitive gamer, streamer, designer, editor, or business user, our expert team delivers customized solutions tailored to your exact requirements.
+
                                 </p>
+                                <p className=" mt-3 wow fadeInUp" data-wow-delay=".5s">With a strong focus on customer satisfaction, technical expertise, and transparent service, IT Fixer continues to grow as a reliable destination for gaming PCs, custom builds, laptop sales, repairs, upgrades, and IT support across India.</p>
                                 <div className="counter-wrap-2">
                                     <div className="counter-item-2 wow fadeInUp" data-wow-delay=".2s">
                                         <h2>
