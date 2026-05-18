@@ -41,7 +41,8 @@ export default function Footer() {
                                     </div>
                                     <div className="gt-footer-content">
                                         <p>
-                                            ITFixer offers premium Gaming and Editing PCs & Laptops, engineered for extreme performance, seamless multitasking, and professional-grade results - available at competitive prices.
+                                            IT Fixer, powered by Sigmah Enterprises, delivers premium Gaming PCs, Editing Workstations, High-Performance Laptops, and Custom Builds designed for gamers, creators, professionals, and businesses. We combine powerful hardware, expert support, and reliable service to provide the perfect performance-driven computing experience at competitive prices.
+
                                         </p>
                                         <div className="gt-social-icon d-flex align-items-center flex-wrap ">
 
@@ -216,8 +217,9 @@ export default function Footer() {
                         </div>
                     </div >
                     <div className="footer-bottom wow fadeInUp" data-wow-delay=".3s">
-                        <div className="footer-wrapper">
-                            <p> © {new Date().getFullYear()} <Link href="https://ftdigitalsolutions.in/" target="_blank" className="text-gray-700 font-semibold">FT Digital Solutions</Link>. All rights reserved.</p>
+                        <div className="footer-wrapper flex flex-col md:flex-row justify-between items-center gap-3">
+                            <p className="text-gray-700 font-semibold"> © {new Date().getFullYear()} Sigmah Enterprises. All rights reserved.</p>
+                            <p>Developed by <Link href="https://ftdigitalsolutions.in/" target="_blank" rel="noopener noreferrer" className="text-gray-700 font-semibold">FT Digital Solutions</Link></p>
 
                         </div>
                     </div>
