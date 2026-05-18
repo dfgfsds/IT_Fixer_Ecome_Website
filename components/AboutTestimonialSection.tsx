@@ -89,7 +89,7 @@ export default function AboutTestimonialSection() {
                         <div className="col-lg-6">
                             <div className="gt-testimonial-image">
                                 <img src="/assets/img/home-3/testimonial-image.png" alt="img" />
-                                <a href="https://www.youtube.com/watch?v=Cn4G2lZ_g2I" className="video-btn ripple video-popup">
+                                <a href="https://youtube.com/shorts/ulrbBkhrHIM?si=zxdKzVQ0T-R4DU2q" className="video-btn ripple video-popup">
                                     <Play size={20} fill="currentColor" />
                                 </a>
                                 <div className="gt-ratting-content">
