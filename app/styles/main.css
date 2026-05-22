@@ -19048,7 +19048,7 @@ span {
 
 .testimonial-box-items-2 .testimonial-box-slider p {
   color: #ABABAB;
-  font-size: 24px;
+  font-size: 18px;
   font-style: italic;
   font-weight: 600;
   line-height: 138%;
@@ -19058,19 +19058,19 @@ span {
 
 @media (max-width: 1399px) {
   .testimonial-box-items-2 .testimonial-box-slider p {
-    font-size: 21px;
+    font-size: 16px;
   }
 }
 
 @media (max-width: 991px) {
   .testimonial-box-items-2 .testimonial-box-slider p {
-    font-size: 19px;
+    font-size: 16px;
   }
 }
 
 @media (max-width: 575px) {
   .testimonial-box-items-2 .testimonial-box-slider p {
-    font-size: 17px;
+    font-size: 16px;
   }
 }
 
