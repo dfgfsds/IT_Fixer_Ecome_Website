@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Facebook, Twitter, Instagram, Linkedin, Star, Check, Minus, Plus, ShoppingBag } from "lucide-react";
+import { Home, Facebook, X, Instagram, Linkedin, Star, Check, Minus, Plus, ShoppingBag } from "lucide-react";
+import { FaWhatsapp } from 'react-icons/fa';
 import { useProducts } from "@/context/ProductsContext";
 import ShopWithSideCart from "@/components/ShopWithSideCart";
 import { useUser } from "@/context/UserContext";
@@ -31,6 +32,8 @@ export default function ProductDetails() {
     const [activeImgIndex, setActiveImgIndex] = useState(0);
     const [activeTab, setActiveTab] = useState<"description" | "additional" | "reviews">("description");
     const [saveInfo, setSaveInfo] = useState(false);
+    const pathname = usePathname();
+    const [shareUrl, setShareUrl] = useState("");
 
     const { data: singleProductData, isLoading: isProductLoading } = useQuery({
         queryKey: ['getProductDetails', id],
@@ -43,6 +46,46 @@ export default function ProductDetails() {
 
     const hasVariants = product?.variants?.length > 0;
     const hasSizes = selectedVariant?.sizes?.length > 0;
+
+    useEffect(() => {
+        if (!pathname) return;
+        setShareUrl(`${window.location.origin}${pathname}`);
+    }, [pathname]);
+
+    const productShareText = product?.name
+        ? `Check out ${product.name} on IT Fixer!`
+        : "Check out this product on IT Fixer!";
+    const encodedShareUrl = encodeURIComponent(shareUrl);
+    const encodedShareText = encodeURIComponent(productShareText);
+
+    const facebookShareUrl = shareUrl
+        ? `https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`
+        : "#";
+    const twitterShareUrl = shareUrl
+        ? `https://x.com/intent/tweet?url=${encodedShareUrl}&text=${encodedShareText}`
+        : "#";
+    const whatsappShareUrl = shareUrl
+        ? `https://wa.me/?text=${encodedShareText}%20${encodedShareUrl}`
+        : "#";
+    const linkedinShareUrl = shareUrl
+        ? `https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}`
+        : "#";
+    const instagramShareUrl = "https://www.instagram.com/";
+
+    const handleInstagramShare = async (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        if (!shareUrl) {
+            toast.error("Unable to copy share link right now.");
+            return;
+        }
+
+        try {
+            await navigator.clipboard.writeText(shareUrl);
+            toast.success("Product link copied! Paste it into Instagram.");
+        } catch (error) {
+            toast.error("Copy failed. Please try again.");
+        }
+    };
 
     const isSelectionComplete = () => {
         if (hasVariants && !selectedVariant) return false;
@@ -341,10 +384,45 @@ export default function ProductDetails() {
                             <div className="product-footer-dark">
                                 <div className="share-icons">
                                     <span>SHARE :</span>
-                                    <a href="#"><Facebook size={18} /></a>
-                                    <a href="#"><Twitter size={18} /></a>
-                                    <a href="#"><Instagram size={18} /></a>
-                                    <a href="#"><Linkedin size={18} /></a>
+                                    <a
+                                        href={facebookShareUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Share on Facebook"
+                                    >
+                                        <Facebook size={18} />
+                                    </a>
+                                    <a
+                                        href={twitterShareUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Share on X"
+                                    >
+                                        <X size={18} />
+                                    </a>
+                                    <a
+                                        href={whatsappShareUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Share on WhatsApp"
+                                    >
+                                        <FaWhatsapp size={18} />
+                                    </a>
+                                    <a
+                                        href={instagramShareUrl}
+                                        onClick={handleInstagramShare}
+                                        aria-label="Copy product link for Instagram"
+                                    >
+                                        <Instagram size={18} />
+                                    </a>
+                                    <a
+                                        href={linkedinShareUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Share on LinkedIn"
+                                    >
+                                        <Linkedin size={18} />
+                                    </a>
                                 </div>
                             </div>
                         </div>
