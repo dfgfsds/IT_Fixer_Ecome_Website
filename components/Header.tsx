@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { useProducts } from "@/context/ProductsContext";
 import { formatPrice } from "@/lib/utils";
+import { slugify } from "@/lib/slugify";
 
 export default function Header() {
     const { user, isAuthenticated } = useUser();
@@ -369,7 +370,7 @@ export default function Header() {
                                             <div
                                                 key={p.id}
                                                 className="search-result-item d-flex align-items-center gap-3 p-3 border-bottom cursor-pointer hover-bg-light transition"
-                                                onMouseEnter={() => router.prefetch(`/shop/${p.id}`)}
+                                                onMouseEnter={() => router.prefetch(`/shop/${slugify(p.name)}`)}
                                                 onClick={() => handleProductClick(p.id)}
                                             >
                                                 <div className="product-thumb bg-light rounded overflow-hidden" style={{ width: '60px', height: '60px', minWidth: '60px' }}>

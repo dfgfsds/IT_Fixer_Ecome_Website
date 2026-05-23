@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { handleApiError } from "@/lib/error-handler";
 import { formatPrice } from "@/lib/utils";
 import CategoryFilter from "@/components/CategoryFilter";
+import { slugify } from "@/lib/slugify";
 
 export default function ShopPage() {
     const { isAuthenticated } = useUser();
@@ -316,7 +317,7 @@ export default function ShopPage() {
                                                             onError={(e) => {
                                                                 (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
                                                             }}
-                                                            onClick={() => router.push(`/shop/${item.id}`)}
+                                                            onClick={() => router.push(`/shop/${slugify(item.name)}`)}
                                                             style={{ cursor: 'pointer' }}
                                                         />
 
@@ -341,7 +342,7 @@ export default function ShopPage() {
                                                         )}
                                                     </div>
 
-                                                    <div className="product-info d-flex flex-column flex-grow-1" onClick={() => router.push(`/shop/${item.id}`)} style={{ cursor: 'pointer' }}>
+                                                    <div className="product-info d-flex flex-column flex-grow-1" onClick={() => router.push(`/shop/${slugify(item.name)}`)} style={{ cursor: 'pointer' }}>
                                                         <h3 className="product-name d-flex align-items-center justify-content-between mb-1">
                                                             <span className="line-clamp-2" title={item.name}>{item.name}</span>
                                                             {/* <Heart size={18} className="wishlist-btn mt-[1px]" /> */}

@@ -184,7 +184,7 @@ export default function CategoryDetailPage() {
                                                         onError={(e) => {
                                                             (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
                                                         }}
-                                                        onClick={() => router.push(`/shop/${item.id}`)}
+                                                        onClick={() => router.push(`/shop/${slugify(item.name)}`)}
                                                         style={{ cursor: 'pointer' }}
                                                     />
 
@@ -209,7 +209,7 @@ export default function CategoryDetailPage() {
                                                     )}
                                                 </div>
 
-                                                <div className="product-info d-flex flex-column flex-grow-1" onClick={() => router.push(`/shop/${item.id}`)} style={{ cursor: 'pointer' }}>
+                                                <div className="product-info d-flex flex-column flex-grow-1" onClick={() => router.push(`/shop/${slugify(item.name)}`)} style={{ cursor: 'pointer' }}>
                                                     <h3 className="product-name d-flex align-items-center justify-content-between mb-1">
                                                         <span className="line-clamp-2" title={item.name}>{item.name}</span>
                                                     </h3>
