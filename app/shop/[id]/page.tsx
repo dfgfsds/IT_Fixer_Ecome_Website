@@ -15,6 +15,7 @@ import { useQuery, useQueryClient, InvalidateQueryFilters } from "@tanstack/reac
 import { toast } from "sonner";
 import { handleApiError } from "@/lib/error-handler";
 import { getProductWithVariantSizeApi } from "@/api-endpoints/products";
+import { slugify } from "@/lib/slugify";
 
 export default function ProductDetails() {
     const { isAuthenticated } = useUser();
@@ -35,13 +36,8 @@ export default function ProductDetails() {
     const pathname = usePathname();
     const [shareUrl, setShareUrl] = useState("");
 
-    const { data: singleProductData, isLoading: isProductLoading } = useQuery({
-        queryKey: ['getProductDetails', id],
-        queryFn: () => getProductWithVariantSizeApi(`${id}/`),
-        enabled: !!id
-    });
 
-    const product = singleProductData?.data;
+    const product = apiData?.data?.find((p: any) => slugify(p.name) === slugify(id)) || null;
     const images = product?.image_urls || [];
 
     const hasVariants = product?.variants?.length > 0;
@@ -180,7 +176,7 @@ export default function ProductDetails() {
         }
     };
 
-    if (isLoading || isProductLoading) {
+    if (isLoading) {
         return (
             <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh', backgroundColor: '#0b0e13' }}>
                 <div className="spinner-border" role="status" style={{ color: '#a6d719', width: '3.5rem', height: '3.5rem', borderWidth: '0.3em' }}>
@@ -377,7 +373,7 @@ export default function ProductDetails() {
 
                             <div className="meta-dark mt-4 border-top border-secondary pt-4">
                                 <p><span>SKU</span> {product.product_code || `PRD-${product.id}`}</p>
-                                <p><span>CATEGORY</span> {product.category_name.toUpperCase()}</p>
+                                <p><span>CATEGORY</span> {product.category_name?.toUpperCase()}</p>
                                 <p><span>STOCK</span> {product.stock_quantity > 0 ? 'IN STOCK' : 'OUT OF STOCK'}</p>
                             </div>
 

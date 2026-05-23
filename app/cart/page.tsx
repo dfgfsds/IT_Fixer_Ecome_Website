@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { handleApiError } from "@/lib/error-handler";
 import OrderSuccessModal from "@/components/OrderSuccessModal";
 import { formatPrice } from "@/lib/utils";
+import { slugify } from "@/lib/slugify";
 
 export default function CartPage() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -37,6 +38,7 @@ export default function CartPage() {
         enabled: !!userId && !!vendorId,
     });
     const cartData = detailedCartResponse?.data?.cart_items || [];
+    console.log("Detailed Cart Data:", cartData);
 
     const subtotal = cartData.reduce((acc: number, item: any) =>
         acc + (Number(item?.product_details?.price || 0) * item.quantity), 0
@@ -281,7 +283,7 @@ export default function CartPage() {
                                                 </div>
                                             </td>
                                             <td className="text-start ps-4">
-                                                <Link href={`/shop/${item.product}`} className="cart-productname text-decoration-none text-uppercase fw-bold d-block">
+                                                <Link href={`/shop/${slugify(item?.product_details?.name)}`} className="cart-productname text-decoration-none text-uppercase fw-bold d-block">
                                                     {item?.product_details?.name}
                                                 </Link>
 

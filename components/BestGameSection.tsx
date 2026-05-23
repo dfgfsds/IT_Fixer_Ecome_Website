@@ -14,6 +14,7 @@ import { getProductVariantCartItemUpdate } from "@/api-endpoints/products";
 import { updateCartitemsApi, deleteCartitemsApi } from "@/api-endpoints/CartsApi";
 import { toast } from "sonner";
 import { formatPrice } from "@/lib/utils";
+import { slugify } from "@/lib/slugify";
 
 export default function BestGameSection() {
     const { isAuthenticated } = useUser();
@@ -135,7 +136,7 @@ export default function BestGameSection() {
                                 return (
                                     <div className="swiper-slide d-flex" key={item.id}>
                                         <Link
-                                            href={`/shop/${item.id}`}
+                                            href={`/shop/${slugify(item.name)}`}
                                             className="d-flex flex-column h-100 w-100"
                                             style={{ textDecoration: "none", color: "inherit" }}
                                         >
