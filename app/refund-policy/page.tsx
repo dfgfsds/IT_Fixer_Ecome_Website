@@ -1,11 +1,89 @@
 import PolicyHero from "@/components/PolicyHero";
 import PolicyContent from "@/components/PolicyContent";
+import { Metadata } from "next";
+import Script from "next/script";
+
+export const metadata: Metadata = {
+    title: "Refund Policy – ITFixer | Gaming PC Shop & Custom Builds Chennai",
+    description:
+        "Read the Refund Policy of ITFixer – gaming PCs, repairs, custom builds & services. Learn about returns, refunds, timeframes, and conditions.",
+    keywords:
+        "ITFixer Refund Policy, refund terms Chennai, PC shop refunds, custom PC returns, gaming PC refund policy, ITFixer policies",
+    alternates: {
+        canonical: "https://www.itfixer.in/refund-policy",
+    },
+    robots: "index, follow",
+    openGraph: {
+        title: "Refund Policy – ITFixer | Returns & Refund Terms",
+        description:
+            "Know ITFixer’s refund and return policy for products & services including gaming PCs, custom builds, repairs, and accessories.",
+        type: "website",
+        url: "https://www.itfixer.in/refund-policy",
+        siteName: "ITFixer",
+        images: [
+            {
+                url: "https://www.itfixer.in/assets/img/logo.png",
+                width: 1200,
+                height: 630,
+                alt: "ITFixer Refund Policy",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Refund Policy – ITFixer | PC Refund & Return Info",
+        description:
+            "ITFixer refund policy details—returns, timelines, conditions for gaming PCs, custom builds, repairs & accessories.",
+        images: ["https://www.itfixer.in/assets/img/logo.png"],
+        site: "@itfixer7",
+    },
+    other: {
+        image_src: "https://www.itfixer.in/assets/img/logo.png",
+    },
+};
 
 export default function RefundPolicyPage() {
     return (
         <div>
+            <Script
+                id="schema-organization"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        "name": "ITFixer",
+                        "url": "https://www.itfixer.in",
+                        "logo": "https://www.itfixer.in/assets/img/logo.png",
+                        "contactPoint": [
+                            {
+                                "@type": "ContactPoint",
+                                "telephone": "+91 8585858768",
+                                "contactType": "customer support",
+                                "areaServed": "IN",
+                            },
+                        ],
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress":
+                                "New No.29, Old No.31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp. Kasi Theatre), Ashok Nagar",
+                            "addressLocality": "Chennai",
+                            "postalCode": "600083",
+                            "addressRegion": "Tamil Nadu",
+                            "addressCountry": "IN",
+                        },
+                        "sameAs": [
+                            "https://www.facebook.com/itfixer7",
+                            "https://www.instagram.com/it__fixer/",
+                            "https://www.youtube.com/@Itfixer_fix-it-fast",
+                            "https://www.linkedin.com/company/it-fixer-gaming/",
+                            "https://x.com/itfixer7",
+                        ],
+                    }),
+                }}
+            />
             <div id="smooth-content">
-                <PolicyHero title="Refund & Cancellation Policy" date="March 11, 2025" />
+                <PolicyHero title="ITFixer Refund Policy | Returns & Warranty Terms for Gaming PCs in Chennai" date="March 11, 2025" />
                 <section className="policy-section fix">
                     <div className="container">
                         <div className="privacy-policy-wrapper">

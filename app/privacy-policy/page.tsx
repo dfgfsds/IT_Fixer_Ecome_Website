@@ -1,10 +1,15 @@
 import PolicyHero from "@/components/PolicyHero";
+import Script from "next/script";
 
 export async function generateMetadata() {
     return {
-        title: "Privacy Policy | IT Fixer",
+        title: "Privacy Policy | ITFixer – Secure Data Protection & User Privacy",
         description:
-            "Read how IT Fixer protects your personal data and ensures secure transactions.",
+            "Read ITFixer’s Privacy Policy to understand how we protect your data, ensure secure transactions, and maintain complete user confidentiality.",
+
+        robots: "index, follow",
+        keywords:
+            "ITFixer privacy policy, data protection, user privacy, secure browsing, gaming pc shop privacy, Chennai IT privacy policy",
 
         alternates: {
             canonical: "https://www.itfixer.in/privacy-policy",
@@ -38,8 +43,41 @@ export async function generateMetadata() {
 export default function PrivacyPolicyPage() {
     return (
         <div>
+            <Script
+                id="schema-organization"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        "name": "ITFixer",
+                        "url": "https://www.itfixer.in",
+                        "logo": "https://www.itfixer.in/assets/img/logo.png",
+                        "description":
+                            "ITFixer is Chennai’s trusted gaming PC store providing custom PC builds, high-performance desktops, repairs and expert tech support.",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress":
+                                "New No.29, Old No.31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp. Kasi Theatre), Ashok Nagar",
+                            "addressLocality": "Chennai",
+                            "postalCode": "600083",
+                            "addressRegion": "Tamil Nadu",
+                            "addressCountry": "IN",
+                        },
+                        "telephone": "+91 8585858768",
+                        "email": "info@itfixer.in",
+                        "sameAs": [
+                            "https://www.facebook.com/itfixer7",
+                            "https://www.instagram.com/it__fixer/",
+                            "https://www.youtube.com/@Itfixer_fix-it-fast",
+                            "https://www.linkedin.com/company/it-fixer-gaming/about/",
+                            "https://x.com/itfixer7",
+                        ],
+                    }),
+                }}
+            />
             <div id="smooth-content">
-                <PolicyHero title="Privacy Policy" date="May 18, 2026" />
+                <PolicyHero title="Privacy Policy  –  ITFixer" date="May 18, 2026" />
 
                 <section className="policy-section fix">
                     <div className="container">
