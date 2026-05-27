@@ -48,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
             locale: "en_IN",
             images: [
                 {
-                    url: "https://www.itfixer.in/assets/img/home-2/about/line-shape.png",
+                    url: "https://www.itfixer.in/assets/img/logo.png",
                     width: 1200,
                     height: 630,
                     alt: "IT Fixer Gaming PCs",
@@ -61,7 +61,7 @@ export async function generateMetadata(): Promise<Metadata> {
             title: "Gaming PCs Online | IT Fixer Chennai",
             description:
                 "Shop gaming, editing & streaming PCs with best deals in India.",
-            images: ["https://www.itfixer.in/assets/img/home-2/about/line-shape.png"],
+            images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
     };
 }
@@ -102,7 +102,7 @@ export default function Home() {
                                 "@type": "ComputerStore",
                                 "@id": "https://www.itfixer.in/#store",
                                 name: "IT FIXER",
-                                image: "https://www.itfixer.in/logo.png",
+                                image: "https://www.itfixer.in/img/logo.png",
                                 url: "https://www.itfixer.in/",
                                 telephone: "+91 8585858768",
                                 email: "info@itfixer.in",
