@@ -8,7 +8,9 @@ export async function generateMetadata(): Promise<Metadata> {
         title: "Shop Gaming PC Parts & Accessories Online | IT Fixer",
 
         description:
-            "Buy gaming PC parts, accessories, and custom builds online. Best deals on GPUs, CPUs, RAM, SSDs for gaming and editing.",
+            "Shop high-performance gaming PCs, custom builds, PC components, and accessories at ITFixer Chennai. Quality parts, expert builds, fast delivery.",
+
+        robots: "index, follow",
 
         keywords: [
             "buy pc parts online India",
@@ -16,6 +18,12 @@ export async function generateMetadata(): Promise<Metadata> {
             "GPU deals India",
             "PC shop Chennai",
             "IT Fixer store",
+            "gaming PC shop Chennai",
+            "custom PC builds Chennai",
+            "ITFixer shop",
+            "gaming desktops Chennai",
+            "PC components Chennai",
+            "buy gaming PC online"
         ],
 
         alternates: {
@@ -57,15 +65,33 @@ export default function Page() {
             <Script
                 id="shop-schema"
                 type="application/ld+json"
-                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "Store",
-                        name: "IT Fixer Shop",
-                        url: "https://www.itfixer.in/shop",
-                        description:
-                            "Buy gaming PC parts, accessories, GPUs, CPUs, RAM and SSDs online in India.",
+                        "name": "ITFixer",
+                        "url": "https://www.itfixer.in/shop",
+                        "image": "https://www.itfixer.in/assets/img/logo.png",
+                        "description":
+                            "ITFixer offers gaming PCs, custom PC builds, components and accessories with expert assembly and fast delivery in Chennai.",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress":
+                                "New No.29, Old No.31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp. Kasi Theatre), Ashok Nagar",
+                            "addressLocality": "Chennai",
+                            "addressRegion": "Tamil Nadu",
+                            "postalCode": "600083",
+                            "addressCountry": "IN",
+                        },
+                        "telephone": "+91 8585858768",
+                        "email": "info@itfixer.in",
+                        "sameAs": [
+                            "https://www.facebook.com/itfixer7",
+                            "https://www.instagram.com/it__fixer/",
+                            "https://www.youtube.com/@Itfixer_fix-it-fast",
+                            "https://www.linkedin.com/company/it-fixer-gaming/about/",
+                            "https://x.com/itfixer7",
+                        ],
                     }),
                 }}
             />

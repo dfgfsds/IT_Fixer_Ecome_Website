@@ -1,12 +1,18 @@
 import PolicyHero from "@/components/PolicyHero";
 import PolicyContent from "@/components/PolicyContent";
 import { Metadata } from "next";
+import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Shipping Policy | IT Fixer",
+        title: "Shipping Policy | ITFixer – Fast & Secure Delivery for Gaming PCs",
         description:
-            "Learn about IT Fixer shipping timelines, delivery process, and service areas across India.",
+            "Read ITFixer’s Shipping Policy for fast delivery, safe packaging, and reliable dispatch of gaming PCs, custom builds, and PC components across India.",
+
+        robots: "index, follow",
+        keywords:
+            "ITFixer shipping policy, delivery policy, gaming PC delivery, custom PC shipping Chennai, PC components shipping India, fast dispatch",
+
         alternates: {
             canonical: "https://www.itfixer.in/shipping-policy",
         },
@@ -34,6 +40,9 @@ export async function generateMetadata(): Promise<Metadata> {
                 "Check delivery timelines, shipping process, and service availability across India.",
             images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
+        other: {
+            image_src: "https://www.itfixer.in/assets/img/logo.png",
+        },
     };
 }
 
@@ -41,8 +50,41 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function ShippingPolicyPage() {
     return (
         <div>
+            <Script
+                id="schema-organization"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        "name": "ITFixer",
+                        "url": "https://www.itfixer.in",
+                        "logo": "https://www.itfixer.in/assets/img/logo.png",
+                        "description":
+                            "ITFixer is Chennai’s trusted gaming PC store specializing in custom PC builds, high-performance desktops, repairs, and technical support.",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress":
+                                "New No.29, Old No.31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp. Kasi Theatre), Ashok Nagar",
+                            "addressLocality": "Chennai",
+                            "postalCode": "600083",
+                            "addressRegion": "Tamil Nadu",
+                            "addressCountry": "IN",
+                        },
+                        "telephone": "+91 8585858768",
+                        "email": "info@itfixer.in",
+                        "sameAs": [
+                            "https://www.facebook.com/itfixer7",
+                            "https://www.instagram.com/it__fixer/",
+                            "https://www.youtube.com/@Itfixer_fix-it-fast",
+                            "https://www.linkedin.com/company/it-fixer-gaming/about/",
+                            "https://x.com/itfixer7",
+                        ],
+                    }),
+                }}
+            />
             <div id="smooth-content">
-                <PolicyHero title="Shipping and Delivery Policy" date="March 11, 2025" />
+                <PolicyHero title="Shipping & Delivery Policy – ITFixer" date="March 11, 2025" />
                 <section className="policy-section fix">
                     <div className="container">
                         <div className="privacy-policy-wrapper">

@@ -1,11 +1,13 @@
 import PolicyHero from "@/components/PolicyHero";
 import { Metadata } from "next";
+import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Terms & Conditions | IT Fixer",
+        title: "Terms & Conditions – ITFixer | PC Sales, Custom Builds & Services",
         description:
-            "Read the Terms & Conditions for using IT Fixer website, products, and services.",
+            "Read the Terms & Conditions for ITFixer, Chennai’s trusted gaming & custom PC shop. Policies on orders, payments, delivery, warranties & user conduct.",
+        robots: "index, follow",
         alternates: {
             canonical: "https://www.itfixer.in/terms-and-conditions",
         },
@@ -33,12 +35,54 @@ export async function generateMetadata(): Promise<Metadata> {
                 "Read IT Fixer terms and conditions for products, services, orders, and website usage.",
             images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
+        other: {
+            image_src: "https://www.itfixer.in/assets/img/logo.png",
+        },
     };
 }
 
 export default function TermsAndConditionsPage() {
     return (
         <div>
+            <Script
+                id="schema-organization"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        "name": "ITFixer",
+                        "url": "https://www.itfixer.in",
+                        "logo": "https://www.itfixer.in/assets/img/logo.png",
+                        "description":
+                            "ITFixer is Chennai’s trusted gaming PC store offering next-gen custom gaming PCs, high-performance desktops, upgrades and PC repair services.",
+                        "contactPoint": [
+                            {
+                                "@type": "ContactPoint",
+                                "telephone": "+91 8585858768",
+                                "contactType": "customer service",
+                                "areaServed": "IN",
+                            },
+                        ],
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress":
+                                "New No.29, Old No.31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp. Kasi Theatre), Ashok Nagar",
+                            "addressLocality": "Chennai",
+                            "postalCode": "600083",
+                            "addressRegion": "Tamil Nadu",
+                            "addressCountry": "IN",
+                        },
+                        "sameAs": [
+                            "https://www.facebook.com/itfixer7",
+                            "https://www.instagram.com/it__fixer/",
+                            "https://www.youtube.com/@Itfixer_fix-it-fast",
+                            "https://www.linkedin.com/company/it-fixer-gaming/",
+                            "https://x.com/itfixer7",
+                        ],
+                    }),
+                }}
+            />
             <div id="smooth-content">
                 <PolicyHero
                     title="Terms & Conditions"
