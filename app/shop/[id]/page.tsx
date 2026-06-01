@@ -54,34 +54,34 @@ export default function ProductDetails() {
     const encodedShareUrl = encodeURIComponent(shareUrl);
     const encodedShareText = encodeURIComponent(productShareText);
 
-    const facebookShareUrl = shareUrl
-        ? `https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`
-        : "#";
-    const twitterShareUrl = shareUrl
-        ? `https://x.com/intent/tweet?url=${encodedShareUrl}&text=${encodedShareText}`
-        : "#";
-    const whatsappShareUrl = shareUrl
-        ? `https://wa.me/?text=${encodedShareText}%20${encodedShareUrl}`
-        : "#";
-    const linkedinShareUrl = shareUrl
-        ? `https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}`
-        : "#";
-    const instagramShareUrl = "https://www.instagram.com/";
+    // const facebookShareUrl = shareUrl
+    //     ? `https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`
+    //     : "#";
+    // const twitterShareUrl = shareUrl
+    //     ? `https://x.com/intent/tweet?url=${encodedShareUrl}&text=${encodedShareText}`
+    //     : "#";
+    // const whatsappShareUrl = shareUrl
+    //     ? `https://wa.me/?text=${encodedShareText}%20${encodedShareUrl}`
+    //     : "#";
+    // const linkedinShareUrl = shareUrl
+    //     ? `https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}`
+    //     : "#";
+    // const instagramShareUrl = "https://www.instagram.com/";
 
-    const handleInstagramShare = async (event: React.MouseEvent<HTMLAnchorElement>) => {
-        event.preventDefault();
-        if (!shareUrl) {
-            toast.error("Unable to copy share link right now.");
-            return;
-        }
+    // const handleInstagramShare = async (event: React.MouseEvent<HTMLAnchorElement>) => {
+    //     event.preventDefault();
+    //     if (!shareUrl) {
+    //         toast.error("Unable to copy share link right now.");
+    //         return;
+    //     }
 
-        try {
-            await navigator.clipboard.writeText(shareUrl);
-            toast.success("Product link copied! Paste it into Instagram.");
-        } catch (error) {
-            toast.error("Copy failed. Please try again.");
-        }
-    };
+    //     try {
+    //         await navigator.clipboard.writeText(shareUrl);
+    //         toast.success("Product link copied! Paste it into Instagram.");
+    //     } catch (error) {
+    //         toast.error("Copy failed. Please try again.");
+    //     }
+    // };
 
     const isSelectionComplete = () => {
         if (hasVariants && !selectedVariant) return false;
@@ -174,6 +174,44 @@ export default function ProductDetails() {
         } catch (e) {
             toast.error(handleApiError(e));
         }
+    };
+
+    const currentUrl =
+        typeof window !== "undefined"
+            ? window.location.href
+            : "";
+
+    const facebookShareUrl =
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+
+    const twitterShareUrl =
+        `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}`;
+
+    const whatsappShareUrl =
+        `https://wa.me/?text=${encodeURIComponent(currentUrl)}`;
+
+    const linkedinShareUrl =
+        `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+
+    const handleInstagramShare = (
+        e: React.MouseEvent
+    ) => {
+
+        e.preventDefault();
+
+        const currentUrl =
+            window.location.href;
+
+        navigator.clipboard.writeText(
+            currentUrl
+        );
+
+        window.location.href =
+            "instagram://app";
+
+        toast.success(
+            "Link copied! Paste it in Instagram."
+        );
     };
 
     if (isLoading) {
@@ -405,7 +443,7 @@ export default function ProductDetails() {
                                         <FaWhatsapp size={18} />
                                     </a>
                                     <a
-                                        href={instagramShareUrl}
+                                        href="#"
                                         onClick={handleInstagramShare}
                                         aria-label="Copy product link for Instagram"
                                     >
@@ -428,8 +466,8 @@ export default function ProductDetails() {
                     <div className="product-tabs-dark mt-5">
                         <div className="tab-head-dark">
                             <button className={`tab-btn-dark ${activeTab === "description" ? "active" : ""}`} onClick={() => setActiveTab("description")}>DESCRIPTION</button>
-                            <button className={`tab-btn-dark ${activeTab === "additional" ? "active" : ""}`} onClick={() => setActiveTab("additional")}>ADDITIONAL INFO</button>
-                            <button className={`tab-btn-dark ${activeTab === "reviews" ? "active" : ""}`} onClick={() => setActiveTab("reviews")}>REVIEWS</button>
+                            {/* <button className={`tab-btn-dark ${activeTab === "additional" ? "active" : ""}`} onClick={() => setActiveTab("additional")}>ADDITIONAL INFO</button> */}
+                            {/* <button className={`tab-btn-dark ${activeTab === "reviews" ? "active" : ""}`} onClick={() => setActiveTab("reviews")}>REVIEWS</button> */}
                         </div>
 
                         <div className="tab-body-dark">
