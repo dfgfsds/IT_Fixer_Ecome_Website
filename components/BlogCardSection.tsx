@@ -30,6 +30,9 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
         return html?.replace(/<[^>]*>?/gm, "") || "";
     };
 
+    console.log(currentBlogs,"currentBlogs");
+    
+
     return (
         <section className="gt-news-section section-padding fix">
             <div className="container">
@@ -65,7 +68,7 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
                                         </ul>
                                         <h4 className="line-clamp-2">
                                             <Link className="text-uppercase" href={`/blog/${slugify(post.title || post.subtitle)}`}>
-                                                {post.subtitle || post.title}
+                                                {post.title}
                                             </Link>
                                         </h4>
                                         <p className="flex-grow-1">
