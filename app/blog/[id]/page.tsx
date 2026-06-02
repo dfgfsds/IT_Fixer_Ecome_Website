@@ -5,7 +5,8 @@ import { getBlogsApi } from "@/api-endpoints/authendication";
 import { formatDate } from "@/lib/utils";
 import BlogQuoteForm from "@/components/BlogQuoteForm";
 import { slugify } from "@/lib/slugify";
-import { Metadata } from 'next';
+import { Metadata } from "next";
+import Script from "next/script";
 import BlogStickySidebar from "@/components/BlogStickySidebar";
 
 type Props = {
@@ -15,25 +16,76 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id: pathId } = await params;
     const vendorId = "157";
-    
-    // Fetch all blogs to find the one matching the slug
+
     const allBlogsResponse = await getBlogsApi(`?vendor_id=${vendorId}`);
     const allBlogs = allBlogsResponse?.data?.blogs || [];
-    
-    const blogMatch = allBlogs.find((b: any) => 
-        slugify(b.title || b.subtitle) === pathId || String(b.id) === pathId
+
+    const blogMatch = allBlogs.find(
+        (b: any) =>
+            slugify(b.title || b.subtitle) === pathId ||
+            String(b.id) === pathId
     );
-    
+
     if (!blogMatch) {
-        return { title: "Blog Not Found" };
+        return {
+            title: "Blog Not Found",
+        };
     }
 
     const response = await getBlogsApi(blogMatch.id);
     const post = response?.data?.blog;
 
+    const title =
+        post?.meta_title ||
+        post?.title ||
+        post?.subtitle ||
+        "IT Fixer Blog";
+
+    const description =
+        post?.subtitle ||
+        "Read our latest blog";
+
+    const keywords = post?.meta_keywords || "";
+
+    const image =
+        post?.banner_url ||
+        "https://www.itfixer.in/assets/default-blog.jpg";
+
+    const url = `https://www.itfixer.in/blog/${pathId}`;
+
     return {
-        title: post?.subtitle || post?.title || "Blog Details",
-        description: post?.subtitle || post?.content?.slice(0, 160) || "Read our latest blog post.",
+        title,
+        description,
+        keywords,
+
+        robots: "index, follow, max-image-preview:large",
+
+        alternates: {
+            canonical: url,
+        },
+
+        openGraph: {
+            title,
+            description,
+            url,
+            siteName: "IT Fixer",
+            type: "article",
+            images: [
+                {
+                    url: image,
+                    alt: title,
+                },
+            ],
+            locale: "en_IN",
+        },
+
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: [image],
+            creator: "@itfixer7",
+        },
     };
 }
 
@@ -44,7 +96,7 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
     const allBlogsResponse = await getBlogsApi(`?vendor_id=${vendorId}`);
     const allBlogs = allBlogsResponse?.data?.blogs || [];
 
-    const blogMatch = allBlogs.find((b: any) => 
+    const blogMatch = allBlogs.find((b: any) =>
         slugify(b.title || b.subtitle) === pathId || String(b.id) === pathId
     );
 
@@ -60,9 +112,48 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
         .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
         .slice(0, 3);
 
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post?.title,
+        "description": post?.subtitle || post?.content?.slice(0, 160),
+        "image": post?.banner_url,
+        "author": {
+            "@type": "Organization",
+            "name": "IT Fixer",
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "IT Fixer",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.itfixer.in/images/logo.png",
+            },
+        },
+        "url": `https://www.itfixer.in/blog/${pathId}`,
+        "mainEntityOfPage": `https://www.itfixer.in/blog/${pathId}`,
+        "datePublished": post?.created_at,
+        "inLanguage": "en-IN",
+    };
+
     return (
-        <div>
-            <div id="smooth-content">
+        <>
+            {/* ================= IMAGE SRC LINK ================= */}
+            <link
+                rel="image_src"
+                href={post?.banner_url || "https://www.itfixer.in/assets/default-blog.jpg"}
+            />
+
+            {/* ================= SCHEMA ================= */}
+            <Script
+                type="application/ld+json"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(schemaData),
+                }}
+            />
+
+            <div>
                 <BlogStickySidebar />
                 <div className="gt-breadcrumb-wrapper bg-cover" style={{ backgroundImage: "url('/assets/img/breadcrumb.png')" }}>
                     <div className="gt-left-shape">
@@ -77,7 +168,7 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                     <div className="container">
                         <div className="gt-page-heading">
                             <div className="gt-breadcrumb-sub-title">
-                                <h1 className="wow fadeInUp" style={{ lineHeight: "1.1" }} data-wow-delay=".3s">{post.subtitle}</h1>
+                                <h1 className="wow fadeInUp" style={{ lineHeight: "1.1" }} data-wow-delay=".3s">{post.title}</h1>
                             </div>
                             <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                                 <li>
@@ -227,6 +318,6 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                     </div>
                 </section>
             </div>
-        </div>
+        </>
     );
 }

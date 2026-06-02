@@ -55,6 +55,8 @@ export async function generateMetadata(): Promise<Metadata> {
                 "Gaming PCs, workstation builds & budget desktops in Chennai with warranty.",
             images: ["https://www.itfixer.in/assets/img/pc-build.webp"],
         },
+
+        robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
     };
 }
 
@@ -62,6 +64,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Page() {
     return (
         <>
+            {/* ================= IMAGE SRC LINK ================= */}
+            <link
+                rel="image_src"
+                href="https://www.itfixer.in/assets/img/pc-build.webp"
+            />
+
             {/* ================= FAQ SCHEMA ================= */}
             <Script
                 type="application/ld+json"
@@ -131,24 +139,45 @@ export default function Page() {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
-                        "@type": "ComputerStore",
-                        name: "IT Fixer",
-                        url: "https://www.itfixer.in",
-                        logo: "https://www.itfixer.in/assets/img/logo.png",
-                        image: "https://www.itfixer.in/assets/img/pc-build.webp",
-                        description:
-                            "Custom PC builder in Chennai offering gaming PCs, workstation builds, and desktop computers.",
-                        address: {
-                            "@type": "PostalAddress",
-                            addressLocality: "Chennai",
-                            addressRegion: "Tamil Nadu",
-                            addressCountry: "India",
+                        "@type": "Service",
+                        name: "Custom PC Build in Chennai",
+                        serviceType: "Custom Gaming PC Build, High-Performance PC Assembly, Workstation PC Build",
+                        provider: {
+                            "@type": "LocalBusiness",
+                            name: "IT Fixer",
+                            url: "https://www.itfixer.in",
+                            logo: "https://www.itfixer.in/images/logo.png",
+                            image: "https://www.itfixer.in/assets/img/pc-build.webp",
+                            description:
+                                "IT Fixer is the best gaming PC shop in Chennai offering custom gaming PC builds, workstation PCs, 4K gaming desktops, RGB builds, and high-performance computer setups.",
+                            address: {
+                                "@type": "PostalAddress",
+                                streetAddress: "New No.29, Old No.31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp. Kasi Theatre), Ashok Nagar",
+                                addressLocality: "Chennai",
+                                addressRegion: "Tamil Nadu",
+                                postalCode: "600083",
+                                addressCountry: "IN",
+                            },
+                            telephone: "+918585858768",
+                            email: "info@itfixer.in",
+                            sameAs: [
+                                "https://www.facebook.com/itfixer7",
+                                "https://www.instagram.com/it__fixer/",
+                                "https://www.youtube.com/@Itfixer_fix-it-fast",
+                                "https://www.linkedin.com/company/it-fixer-gaming/about/",
+                                "https://x.com/itfixer7",
+                            ],
                         },
-                        areaServed: "Chennai",
-                        sameAs: [
-                            "https://www.instagram.com/it__fixer/",
-                            "https://www.youtube.com/@Itfixer_fix-it-fast",
-                        ],
+                        areaServed: ["Chennai", "Tamil Nadu", "India"],
+                        url: "https://www.itfixer.in/custom-pc-build",
+                        description:
+                            "Build your dream gaming PC in Chennai with IT Fixer — Custom gaming PCs, RGB builds, workstation PCs, streaming setups, and high-performance desktops tailored to your needs.",
+                        offers: {
+                            "@type": "Offer",
+                            priceCurrency: "INR",
+                            availability: "https://schema.org/InStock",
+                            price: "Request Quote",
+                        },
                     }),
                 }}
             />
