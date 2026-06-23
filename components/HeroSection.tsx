@@ -36,15 +36,18 @@ export default function HeroSection() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="hero-content">
-                            <span className="sub-title subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">BEST GAMING & EDITING PC SHOP IN CHENNAI</span>
+                            <span className="sub-title subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">Best Gaming, Streaming & Editing PC Shop in Chennai
+                            </span>
                             <h1 className="hero_title tv_hero_title hero_title_1">
                                 <span style={{ display: "block", color: "#cbfe1c" }}>GAMING &amp; EDITING</span>
-                                <span style={{ display: "block" }}>HIGH-PERFORMANCE</span>
-                                <span style={{ display: "block" }}>PCs &amp; LAPTOPS</span>
+                                <span style={{ display: "block" }}>High-Performance</span>
+                                <span style={{ display: "block" }}> Gaming PCs &amp; Streaming Setups &amp; Editing Workstations
+                                </span>
                             </h1>
                             <div className="hero-sub-content">
                                 <p className="wow fadeInUp" data-wow-delay=".5s">
-                                    ITFixer is the Best Gaming & Editing PC Shop in Chennai, offering custom Gaming PCs, Editing Workstations, and high-performance Laptops with expert support and unbeatable prices.
+                                    IT Fixer is the leading Gaming Shop in Chennai specializing in Custom Gaming PCs, Streaming PCs, Gaming Laptops, Editing Workstations and High-Performance Computers for gamers, streamers, content creators, video editors and esports professionals.
+
                                 </p>
                                 <Link href="/contact" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
                                     <span className="left-line"></span>
