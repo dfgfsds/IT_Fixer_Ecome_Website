@@ -10852,44 +10852,44 @@ span {
   line-height: 100%;
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  font-size: 74px !important;
+  font-size: 58px !important;
   color: #CBFE1C;
 }
 
 @media (max-width: 1600px) {
   .hero-2 .hero-content h1 {
-    font-size: 68px !important;
+    font-size: 58px !important;
   }
 }
 
 @media (max-width: 1399px) {
   .hero-2 .hero-content h1 {
-    font-size: 68px !important;
+    font-size: 58px !important;
   }
 }
 
 @media (max-width: 1199px) {
   .hero-2 .hero-content h1 {
     line-height: 130%;
-    font-size: 68px !important;
+    font-size: 58px !important;
   }
 }
 
 @media (max-width: 991px) {
   .hero-2 .hero-content h1 {
-    font-size: 60px !important;
+    font-size: 48px !important;
   }
 }
 
 @media (max-width: 767px) {
   .hero-2 .hero-content h1 {
-    font-size: 69px !important;
+    font-size: 48px !important;
   }
 }
 
 @media (max-width: 575px) {
   .hero-2 .hero-content h1 {
-    font-size: 44px !important;
+    font-size: 48px !important;
   }
 }
 
