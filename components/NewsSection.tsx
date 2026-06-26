@@ -230,6 +230,7 @@ export default function NewsSection() {
                 </div>
             </section>
 
+
             {/* <section className="gt-newsletter-section fix">
                 <div className="container">
                     <div className="gt-newsletter-wrapper bg-cover" style={{ backgroundImage: "url(assets/img/home-2/newsletter-bg.jpg)" }}>
