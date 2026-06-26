@@ -41,8 +41,9 @@ export default function HeroSection() {
                             <h1 className="hero_title tv_hero_title hero_title_1">
                                 <span style={{ display: "block", color: "#cbfe1c" }}>GAMING &amp; EDITING</span>
                                 <span style={{ display: "block" }}>High-Performance</span>
-                                <span style={{ display: "block" }}> Gaming PCs &amp; Streaming Setups &amp; Editing Workstations
-                                </span>
+                                <span style={{ display: "block" }}> Gaming PCs</span>
+                                <span style={{ display: "block" }}> Streaming Setups</span>
+
                             </h1>
                             <div className="hero-sub-content">
                                 <p className="wow fadeInUp" data-wow-delay=".5s">
