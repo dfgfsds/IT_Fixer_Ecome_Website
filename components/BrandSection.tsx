@@ -85,4 +85,4 @@ export default function BrandSection() {
             </div>
         </div>
     )
-}
+}
