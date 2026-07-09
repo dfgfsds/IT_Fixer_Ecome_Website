@@ -955,7 +955,7 @@ export default function WhyChooseITFixer() {
             <div className="row g-4 mb-5">
               <div className="col-12 col-md-6">
                 <div className="feature-card highlight-panel d-flex flex-column h-100">
-                  <div className="badge-tech mb-3">ABOUT</div>
+                  <div className="badge-tech mb-3 text-white bg-dark">ABOUT</div>
                   <h2 className="seo-h2 mt-0">About IT Fixer</h2>
                   <p className="seo-p">
                     IT Fixer, powered by Sigmah Enterprises, has been helping Chennai's gaming and creator community with performance driven computer solutions. Over the years, we've assembled systems for competitive gamers, full time streamers, freelance editors and studios each with different priorities.
@@ -973,7 +973,7 @@ export default function WhyChooseITFixer() {
                   <p className="seo-p">
                     Our technicians guide you through processors, graphics cards, ram, SSD storage, cooling systems, cabinets and power supplies before finalising any build.
                   </p>
-                  <p className="seo-p mb-0 mt-auto border-top border-secondary border-opacity-10 pt-3 text-warning text-opacity-75">
+                  <p className="seo-p mb-0 mt-auto border-top border-secondary border-opacity-10 pt-3  text-opacity-75">
                     Our hands-on approach makes sure you avoid wrong configurations, overspending or performance bottlenecks. These are the same mistakes we see a lot when people buy PCs online without proper guidance.
                   </p>
                 </div>
@@ -990,13 +990,13 @@ export default function WhyChooseITFixer() {
               <div className="mb-4">
                 <p className="seo-p fw-bold text-white mb-2">IT Fixer specializes in gaming PCs and gaming for:</p>
                 <div className="tag-cloud">
-                  <span className="tag-item">Esports</span>
-                  <span className="tag-item">AAA titles</span>
-                  <span className="tag-item">High refresh gaming</span>
-                  <span className="tag-item">1080p</span>
-                  <span className="tag-item">1440p</span>
-                  <span className="tag-item">4K gaming</span>
-                  <span className="tag-item">VR ready setups.</span>
+                  <span className="tag-item border-brand">Esports</span>
+                  <span className="tag-item border-brand">AAA titles</span>
+                  <span className="tag-item border-brand">High refresh gaming</span>
+                  <span className="tag-item border-brand">1080p</span>
+                  <span className="tag-item border-brand">1440p</span>
+                  <span className="tag-item border-brand">4K gaming</span>
+                  <span className="tag-item border-brand">VR ready setups.</span>
                 </div>
               </div>
 
@@ -1005,10 +1005,10 @@ export default function WhyChooseITFixer() {
                 <div className="tag-cloud">
                   <span className="tag-item border-brand">NVIDIA RTX</span>
                   <span className="tag-item border-brand">AMD Radeon graphics card</span>
-                  <span className="tag-item">Fast RAM</span>
-                  <span className="tag-item">NVMe SSDs</span>
-                  <span className="tag-item">Optimal cooling</span>
-                  <span className="tag-item">Power supply</span>
+                  <span className="tag-item border-brand">Fast RAM</span>
+                  <span className="tag-item border-brand">NVMe SSDs</span>
+                  <span className="tag-item border-brand">Optimal cooling</span>
+                  <span className="tag-item border-brand">Power supply</span>
                 </div>
               </div>
 
