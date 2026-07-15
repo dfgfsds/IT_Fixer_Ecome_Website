@@ -940,3 +940,85 @@ input:autofill:active {
     /* Only hide the one in the main header */
   }
 }
+
+/* Premium Tech UI Styles for SEO Content Section */
+.seo-html-wrapper {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #cbd5e1; /* Smooth grey-white text */
+    line-height: 1.75;
+    font-size: 1rem;
+}
+
+/* Main H1 - Heavy Typography */
+.seo-html-wrapper h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+    background: linear-gradient(to right, #ffffff, #a6d719);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Sub-headings (H2, H3) */
+.seo-html-wrapper h2, 
+.seo-html-wrapper h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #a6d719; /* Accent color line from your theme */
+    padding-left: 0.75rem;
+    letter-spacing: -0.01em;
+}
+
+/* Paragraph Blocks - Soft casing, no aggressive uppercase */
+.seo-html-wrapper p {
+    font-size: 1.05rem;
+    color: #94a3b8;
+    margin-bottom: 1.25rem;
+    text-transform: none; /* Forces standard sentence case if raw text is capital */
+}
+
+/* Modern Dynamic Card Lists */
+.seo-html-wrapper ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Individual List Items turned into clean Tech Badges/Cards */
+.seo-html-wrapper ul li {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 0.85rem 1.2rem;
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    text-transform: none;
+}
+
+/* Tech Bullet pointer effect */
+.seo-html-wrapper ul li::before {
+    content: "•";
+    color: #a6d719;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.seo-html-wrapper ul li:hover {
+    background: rgba(166, 215, 25, 0.05);
+    border-color: rgba(166, 215, 25, 0.3);
+    transform: translateY(-2px);
+}
