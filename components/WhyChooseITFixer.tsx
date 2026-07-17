@@ -937,12 +937,7 @@ export default function WhyChooseITFixer() {
           </div>
         </div> */}
 
-
-
-        {isExpanded && (
-          <div className="seo-content-wrapper mt-4 p-4 p-md-5 rounded-4 animate-fade-in">
-            {/* Main SEO Header */}
-            <div className="seo-hero-box mb-5 p-4 rounded-4 border border-secondary border-opacity-10 text-center">
+   <div className="seo-hero-box mb-5 p-4 rounded-4 border border-secondary border-opacity-10 text-center">
               <h1 className="seo-h1 fw-bold tracking-tight mb-3">
                 Top Gaming PC Builder in Chennai for Gaming, Streaming & Editing
               </h1>
@@ -950,6 +945,18 @@ export default function WhyChooseITFixer() {
                 Whether you're building your first gaming PC, upgrading to an RTX graphics card, buying a gaming laptop, setting up a YouTube streaming PC or planning a professional video editing pc, IT Fixer provides expert guidance, genuine components & reliable after sales support right here in Chennai.
               </p>
             </div>
+
+        {isExpanded && (
+          <div className="seo-content-wrapper mt-4 p-4 p-md-5 rounded-4 animate-fade-in">
+            {/* Main SEO Header */}
+            {/* <div className="seo-hero-box mb-5 p-4 rounded-4 border border-secondary border-opacity-10 text-center">
+              <h1 className="seo-h1 fw-bold tracking-tight mb-3">
+                Top Gaming PC Builder in Chennai for Gaming, Streaming & Editing
+              </h1>
+              <p className="seo-p subtitle-lead mx-auto mb-0" style={{ maxWidth: "850px" }}>
+                Whether you're building your first gaming PC, upgrading to an RTX graphics card, buying a gaming laptop, setting up a YouTube streaming PC or planning a professional video editing pc, IT Fixer provides expert guidance, genuine components & reliable after sales support right here in Chennai.
+              </p>
+            </div> */}
 
             {/* Section 1: About & Expert Guidance Grid */}
             <div className="row g-4 mb-5">
