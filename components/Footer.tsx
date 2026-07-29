@@ -83,6 +83,16 @@ export default function Footer() {
                                             </a>
 
                                         </div>
+                                        <div style={{ marginTop: '20px' }}>
+                                            <h6 style={{ color: '#fff', marginBottom: '10px', fontSize: '16px' }}>Download Our App</h6>
+                                            <a href="https://play.google.com/store/apps/details?id=in.itfixer.app&hl=en_IN" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', transition: 'transform 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                                                <img 
+                                                    src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" 
+                                                    alt="Get it on Google Play" 
+                                                    style={{ height: '50px', width: 'auto' }}
+                                                />
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
