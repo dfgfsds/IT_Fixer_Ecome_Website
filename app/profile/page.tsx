@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import { User, ShoppingBag, LogOut, Package, ShoppingCart, ExternalLink, MapPin, Plus, Pencil, Trash, Loader } from "lucide-react";
 import { useQueryClient, useQuery, InvalidateQueryFilters } from "@tanstack/react-query";
-import { updateUserAPi, patchUserSelectAddressAPi } from "@/api-endpoints/authendication";
+import { updateUserAPi, patchUserSelectAddressAPi, postDeviceLogoutApi } from "@/api-endpoints/authendication";
+import { getDeviceId } from "@/lib/device";
 import { getOrdersAndOrdersItemsApi, getAddressApi, deleteAddressApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
 import { toast } from "sonner";
@@ -15,7 +16,7 @@ import { handleApiError } from "@/lib/error-handler";
 import { Suspense } from "react";
 
 function ProfileContent() {
-    const { user } = useUser();
+    const { user, logout } = useUser();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState("profile");
     const { vendorId } = useVendor();
@@ -85,11 +86,24 @@ function ProfileContent() {
         }
     }, [router]);
 
-    const handleLogout = () => {
-        localStorage.removeItem("userId");
-        localStorage.removeItem("userName");
-        localStorage.removeItem("email");
-        localStorage.removeItem("cartId");
+    const handleLogout = async () => {
+        try {
+            const deviceId = getDeviceId();
+            if (user?.data?.id && vendorId && deviceId) {
+                try {
+                    await postDeviceLogoutApi({
+                        vendor_id: vendorId,
+                        device_id: deviceId,
+                        user_id: user.data.id
+                    });
+                } catch (apiError) {
+                    console.error("Device logout API failed", apiError);
+                }
+            }
+            await logout(vendorId);
+        } catch (e) {
+            console.error("Logout error", e);
+        }
         toast.success('Logged out successfully!');
         window.location.href = "/";
     };
@@ -281,8 +295,8 @@ function ProfileContent() {
                                                                 <div className="col-md-2 col-6 mb-2 mb-md-0 text-center">
                                                                     <div className="small text-white mb-1">Status</div>
                                                                     <span className={`badge ${['delivered', 'completed'].includes(order.status?.toLowerCase()) ? 'bg-success' :
-                                                                            ['processing', 'pending', 'confirmed', 'shipped', 'out for delivery'].includes(order.status?.toLowerCase()) ? 'bg-warning text-dark' :
-                                                                                'bg-danger'
+                                                                        ['processing', 'pending', 'confirmed', 'shipped', 'out for delivery'].includes(order.status?.toLowerCase()) ? 'bg-warning text-dark' :
+                                                                            'bg-danger'
                                                                         }`}>
                                                                         {order.status}
                                                                     </span>
