@@ -1,7 +1,9 @@
 "use client";
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getUserAPi } from "@/api-endpoints/authendication";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getUserAPi, postDeviceLogoutApi } from "@/api-endpoints/authendication";
+import { getDeviceId } from "@/lib/device";
+import { auth } from "@/lib/firebase";
 
 interface UserContextType {
   user: any;
@@ -9,12 +11,14 @@ interface UserContextType {
   isLoading: boolean;
   error: any;
   refreshUser: () => void;
+  logout: (vendorId?: any) => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [userId, setUserId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
   const refreshUser = () => {
     const storedUserId = localStorage.getItem('userId');
@@ -38,6 +42,38 @@ export function UserProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const logout = async (vendorIdParam?: any) => {
+    const currentUserId = userId || (typeof window !== 'undefined' ? localStorage.getItem('userId') : null);
+    const deviceId = getDeviceId();
+    const vendorId = vendorIdParam || 157;
+    try {
+      if (currentUserId) {
+        await postDeviceLogoutApi({
+          vendor_id: Number(vendorId) || vendorId,
+          device_id: deviceId,
+          user_id: Number(currentUserId) || currentUserId
+        });
+      }
+      try {
+        await auth.signOut();
+      } catch (e) {
+        console.warn("Firebase signout error", e);
+      }
+    } catch (err) {
+      console.error("Device logout error:", err);
+    } finally {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('email');
+        localStorage.removeItem('cartId');
+        localStorage.removeItem('token');
+      }
+      setUserId(null);
+      queryClient.removeQueries({ queryKey: ["gerUserData"] });
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -45,7 +81,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
         isAuthenticated: !!data,
         isLoading,
         error,
-        refreshUser
+        refreshUser,
+        logout
       }}
     >
       {children}
@@ -60,3 +97,4 @@ export function useUser() {
   }
   return context;
 }
+
