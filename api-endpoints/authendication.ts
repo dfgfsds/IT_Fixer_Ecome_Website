@@ -104,4 +104,14 @@ export const getPaymentDeliveryPartnerApi = async (query: any) => {
   return axios.get(
     `${ApiUrls.paymentDeliveryPartner}${formattedQuery}`
   );
-}
+};
+
+// LOGIN WITH GOOGLE API
+export const postGoogleLoginApi = async (payload: { id_token: string; vendor_id: any }) => {
+  return axios.post(ApiUrls.loginWithGoogle, payload);
+};
+
+// DEVICE LOGOUT API
+export const postDeviceLogoutApi = async (payload: { vendor_id: any; device_id: string; user_id: any }) => {
+  return axios.post(ApiUrls.deviceLogout, payload);
+};
