@@ -165,8 +165,24 @@ export default function Login() {
 
     const handleGoogleLogin = async () => {
         setGoogleLoading(true);
+
+        let isPopupResolved = false;
+
+        // Workaround for Firebase delay: reset loading when window regains focus
+        const handleFocus = () => {
+            window.removeEventListener('focus', handleFocus);
+            setTimeout(() => {
+                if (!isPopupResolved) {
+                    setGoogleLoading(false);
+                }
+            }, 1500);
+        };
+        window.addEventListener('focus', handleFocus);
+
         try {
             const result = await signInWithPopup(auth, googleProvider);
+            isPopupResolved = true;
+            window.removeEventListener('focus', handleFocus);
             const idToken = await result.user.getIdToken();
 
             const response = await postGoogleLoginApi({
@@ -181,6 +197,13 @@ export default function Login() {
                     if (response.data?.token) {
                         localStorage.setItem('token', response.data.token);
                     }
+                    if (response.data?.name || response.data?.user?.name) {
+                        localStorage.setItem('userName', response.data?.name || response.data?.user?.name);
+                    }
+                    if (response.data?.email || response.data?.user?.email) {
+                        localStorage.setItem('email', response.data?.email || response.data?.user?.email);
+                    }
+
                     try {
                         // 1. Fetch the user's existing cart from server
                         const cartRes = await getCartApi(`user/${userId}/`);
@@ -212,10 +235,12 @@ export default function Login() {
                 toast.error(handleApiError(response));
             }
         } catch (error: any) {
-            if (error?.code === 'auth/popup-closed-by-user') {
+            console.error("Google login error:", error);
+            if (error?.code === 'auth/popup-closed-by-user' || error?.code === 'auth/cancelled-popup-request') {
+                // Silently handle popup close without showing error to the user
                 return;
             }
-            toast.error(handleApiError(error));
+            toast.error(error?.response?.data?.error || error?.response?.data?.message || error?.message || 'Failed to sign in with Google');
         } finally {
             setGoogleLoading(false);
         }
