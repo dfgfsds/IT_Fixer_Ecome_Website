@@ -55,8 +55,8 @@ function ProfileContent() {
     }, [user]);
 
     const handleUpdate = async () => {
-        if (formData.contact_number && formData.contact_number.length !== 10) {
-            toast.error("Please enter a valid phone number.");
+        if (!formData.contact_number || formData.contact_number.length !== 10) {
+            toast.error("Please enter a valid 10-digit phone number.");
             return;
         }
 
@@ -227,29 +227,31 @@ function ProfileContent() {
                                             <label className="form-label text-white">Email Address</label>
                                             <input type="email" className="form-control" value={formData.email}
                                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                readOnly={!!user?.data?.email}
                                                 style={{
                                                     backgroundColor: "#0b0e13",
                                                     border: "1px solid #2a2d3a",
                                                     color: "#fff",
-                                                    padding: "12px",
-                                                    cursor: !!user?.data?.email ? "not-allowed" : "text",
-                                                    opacity: !!user?.data?.email ? 0.7 : 1
+                                                    padding: "12px"
                                                 }} />
                                         </div>
                                         <div className="mb-4">
                                             <label className="form-label text-white">Phone Number</label>
                                             <input type="text" className="form-control" value={formData.contact_number}
-                                                onChange={(e) => setFormData({ ...formData, contact_number: e.target.value })}
-                                                readOnly={!!user?.data?.contact_number}
+                                                onChange={(e) => {
+                                                    const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                                    setFormData({ ...formData, contact_number: val });
+                                                }}
                                                 style={{
                                                     backgroundColor: "#0b0e13",
-                                                    border: "1px solid #2a2d3a",
+                                                    border: formData.contact_number?.length === 10 ? "1px solid #2a2d3a" : "1px solid #ef4444",
                                                     color: "#fff",
-                                                    padding: "12px",
-                                                    cursor: !!user?.data?.contact_number ? "not-allowed" : "text",
-                                                    opacity: !!user?.data?.contact_number ? 0.7 : 1
+                                                    padding: "12px"
                                                 }} />
+                                            {formData.contact_number?.length > 0 && formData.contact_number?.length !== 10 && (
+                                                <p style={{ color: "#ef4444", fontSize: "12px", marginTop: "4px", marginBottom: "0" }}>
+                                                    Please enter a valid 10-digit phone number
+                                                </p>
+                                            )}
                                         </div>
                                         <button
                                             onClick={handleUpdate}
