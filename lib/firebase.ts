@@ -4,7 +4,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDGB9tsMWcng-2LY0rCqAIcQ4Jp_nIeLyE",
-  authDomain: "neural-ripple-504906-f6.firebaseapp.com",
+  authDomain: "auth.itfixer.in",
   projectId: "neural-ripple-504906-f6",
   storageBucket: "neural-ripple-504906-f6.firebasestorage.app",
   messagingSenderId: "537746754440",
