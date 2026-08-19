@@ -164,13 +164,13 @@ export default function ConnectPage() {
     const socialLinks = [
         { name: 'Website', url: 'http://www.itfixer.in', icon: <Monitor size={32} /> },
         { name: 'Facebook', url: 'https://www.facebook.com/itfixer7/', icon: <Facebook size={32} color="#1877F2" /> },
-        { name: 'Instagram', url: 'https://www.instagram.com/brilliant_memory_computers/', icon: <Instagram size={32} color="#E4405F" /> },
+        { name: 'Instagram', url: 'https://www.instagram.com/it__fixer/ ', icon: <Instagram size={32} color="#E4405F" /> },
         { name: 'X (Twitter)', url: 'https://x.com/itfixer7', icon: <FaXTwitter size={32} /> },
         { name: 'YouTube', url: 'https://www.youtube.com/@Itfixer_fix-it-fast', icon: <Youtube size={32} color="#FF0000" /> },
         { name: 'Reddit', url: 'https://www.reddit.com/user/Itfixer_fix-it-fast/', icon: <FaRedditAlien size={32} color="#FF4500" /> },
         { name: 'Quora', url: 'https://www.quora.com/profile/It-Fixer-3', icon: <FaQuora size={32} color="#B92B27" /> },
         { name: 'Threads', url: 'https://www.threads.com/@it__fixer', icon: <FaThreads size={32} /> },
-        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/it-fixer-/', icon: <Linkedin size={32} color="#0A66C2" /> },
+        // { name: 'LinkedIn', url: 'https://www.linkedin.com/in/it-fixer-/', icon: <Linkedin size={32} color="#0A66C2" /> },
         { name: 'Pinterest', url: 'https://in.pinterest.com/itfixer7/', icon: <FaPinterestP size={32} color="#E60023" /> },
     ];
 
@@ -306,7 +306,7 @@ export default function ConnectPage() {
             <section className="py-5" style={{ backgroundColor: '#111', borderTop: '1px solid #222' }} id="store">
                 <div className="container py-4">
                     <div className="row g-4 justify-content-center">
-                        
+
                         {/* Store Info */}
                         <div className="col-md-6 col-lg-6 col-xl-3">
                             <div className="p-4 rounded h-100 d-flex flex-column" style={{ backgroundColor: '#1a1a1a', border: '1px solid #333' }}>
@@ -316,8 +316,8 @@ export default function ConnectPage() {
                                 <h3 className="fs-5 fw-bold mb-3" style={{ textTransform: 'capitalize' }}>Visit Our Store</h3>
                                 <h4 className="fs-6 fw-semibold text-white mb-2" style={{ textTransform: 'capitalize' }}>IT Fixer Computers</h4>
                                 <p className="text-secondary mb-4 flex-grow-1" style={{ lineHeight: '1.6', fontSize: '0.95rem', textTransform: 'none' }}>
-                                    New No 29, Old No 31 & 32, Anjugam Nagar, 1st Street,<br/>
-                                    Jafferkhanpet (Opp to Kasi Theatre),<br/>
+                                    New No 29, Old No 31 & 32, Anjugam Nagar, 1st Street,<br />
+                                    Jafferkhanpet (Opp to Kasi Theatre),<br />
                                     Ashok Nagar, Chennai 600083
                                 </p>
                                 <a href="https://maps.app.goo.gl/D5jwzbv3wDTbaUFr5" target="_blank" rel="noopener noreferrer" className="fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 mt-auto" style={{ color: '#CBFE1C', textTransform: 'uppercase', fontSize: '0.9rem' }}>
@@ -382,9 +382,9 @@ export default function ConnectPage() {
                                 <p className="text-secondary mb-4 flex-grow-1" style={{ fontSize: '0.9rem', textTransform: 'none', lineHeight: '1.6' }}>
                                     Your feedback helps us grow and serve you better. If you have purchased from us or visited our store, please share your experience!
                                 </p>
-                                <a 
-                                    href="https://maps.app.goo.gl/D5jwzbv3wDTbaUFr5" 
-                                    target="_blank" 
+                                <a
+                                    href="https://maps.app.goo.gl/D5jwzbv3wDTbaUFr5"
+                                    target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn fw-bold w-100 d-block mt-auto"
                                     style={{ backgroundColor: '#fff', color: '#000', padding: '12px', textTransform: 'uppercase', fontSize: '0.9rem' }}
