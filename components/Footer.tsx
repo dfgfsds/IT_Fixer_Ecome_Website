@@ -123,6 +123,11 @@ export default function Footer() {
                                                 Contact Us
                                             </Link>
                                         </li>
+                                        <li>
+                                            <Link href="/connect" style={pathname === "/connect" ? { color: "#CBFE1C" } : {}}>
+                                                Connect
+                                            </Link>
+                                        </li>
 
                                     </ul>
                                 </div>
