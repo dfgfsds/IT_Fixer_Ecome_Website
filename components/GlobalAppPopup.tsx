@@ -42,11 +42,11 @@ export default function GlobalAppPopup() {
 
   return (
     <div
-      className="fixed z-[9995] transition-all duration-300 ease-in-out right-0"
+      className="fixed z-[9995] transition-all duration-300 ease-in-out left-0"
       style={{
         position: "fixed",
         zIndex: 9995,
-        right: 0,
+        left: 0,
         top: isMobile ? "120px" : "140px",
         bottom: "auto",
         transform: "none",
@@ -58,29 +58,24 @@ export default function GlobalAppPopup() {
         {!isOpen && (
           <button
             onClick={toggleOpen}
-            className="group flex items-center gap-1.5 bg-[#141622] hover:bg-[#1c2033] text-white border-2 border-r-0 border-[#a6d719] shadow-2xl py-2 px-2.5 rounded-l-xl cursor-pointer transition-all duration-300 hover:scale-105"
+            className="group flex items-center gap-1.5 bg-[#141622] hover:bg-[#1c2033] text-white border-2 border-l-0 border-[#a6d719] shadow-2xl py-2 px-2.5 rounded-r-xl cursor-pointer transition-all duration-300 hover:scale-105"
             style={{
               backgroundColor: "#141622",
               color: "#ffffff",
               border: "1.5px solid #a6d719",
-              borderRight: "none",
-              borderTopLeftRadius: "12px",
-              borderBottomLeftRadius: "12px",
+              borderLeft: "none",
+              borderTopRightRadius: "12px",
+              borderBottomRightRadius: "12px",
               padding: "8px 10px",
               display: "flex",
               alignItems: "center",
               gap: "6px",
               cursor: "pointer",
-              boxShadow: "-4px 4px 15px rgba(0,0,0,0.35), 0 0 10px rgba(166, 215, 25, 0.2)",
+              boxShadow: "4px 4px 15px rgba(0,0,0,0.35), 0 0 10px rgba(166, 215, 25, 0.2)",
             }}
             title="Open App QR"
             aria-label="Open App QR"
           >
-            <ChevronLeft
-              size={18}
-              className="text-[#a6d719] animate-pulse"
-              style={{ color: "#a6d719" }}
-            />
             <div
               style={{
                 writingMode: isMobile ? "horizontal-tb" : "vertical-rl",
@@ -98,23 +93,28 @@ export default function GlobalAppPopup() {
               <QrCode size={14} style={{ color: "#a6d719", transform: isMobile ? "none" : "rotate(90deg)" }} />
               <span>APP QR</span>
             </div>
+            <ChevronRight
+              size={18}
+              className="text-[#a6d719] animate-pulse"
+              style={{ color: "#a6d719" }}
+            />
           </button>
         )}
 
         {/* Expanded State Card (Visible when open) */}
         {isOpen && (
           <div
-            className="flex items-stretch bg-white text-gray-900 rounded-l-2xl shadow-2xl overflow-hidden border border-r-0 border-gray-200"
+            className="flex items-stretch bg-white text-gray-900 rounded-r-2xl shadow-2xl overflow-hidden border border-l-0 border-gray-200"
             style={{
               display: "flex",
               alignItems: "stretch",
               backgroundColor: "#ffffff",
-              borderTopLeftRadius: "16px",
-              borderBottomLeftRadius: "16px",
+              borderTopRightRadius: "16px",
+              borderBottomRightRadius: "16px",
               border: "1px solid #e5e7eb",
-              borderRight: "none",
-              boxShadow: "-8px 8px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(166, 215, 25, 0.15)",
-              animation: "slideInRight 0.3s ease-out",
+              borderLeft: "none",
+              boxShadow: "8px 8px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(166, 215, 25, 0.15)",
+              animation: "slideInLeft 0.3s ease-out",
             }}
           >
             {/* QR Content Area */}
@@ -253,7 +253,7 @@ export default function GlobalAppPopup() {
               title="Close QR tab"
               aria-label="Close QR tab"
             >
-              <ChevronRight size={18} strokeWidth={2.5} />
+              <ChevronLeft size={18} strokeWidth={2.5} />
               <div
                 style={{
                   writingMode: "vertical-rl",
@@ -274,9 +274,9 @@ export default function GlobalAppPopup() {
       </div>
 
       <style jsx global>{`
-        @keyframes slideInRight {
+        @keyframes slideInLeft {
           from {
-            transform: translateX(100%);
+            transform: translateX(-100%);
             opacity: 0;
           }
           to {
