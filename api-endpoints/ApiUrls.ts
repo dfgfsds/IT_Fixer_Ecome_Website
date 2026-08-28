@@ -50,6 +50,7 @@ const loginWithGoogle = `${baseUrl}/login-with-google/`;
 const deviceLogout = `${baseUrl}/device/logout/`;
 
 export default {
+  baseUrl,
   cartCreate,
   createUsers,
   addresses,
