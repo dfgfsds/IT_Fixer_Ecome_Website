@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { slugify } from '@/lib/slugify'
+import ApiUrls from '@/api-endpoints/ApiUrls'
 
 export const dynamic = 'force-dynamic'; // ✅ முக்கியம்
 
@@ -7,15 +8,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const baseUrl = 'https://www.itfixer.in'
     const vendorId = '157'
-    const blogApiUrl = `https://test-ecomapi.justvy.in/blog/?vendor_id=${vendorId}`
-    const categoriesApiUrl = `https://test-ecomapi.justvy.in/api/categories/?vendor_id=${vendorId}`
+    const blogApiUrl = `${ApiUrls.blog}?vendor_id=${vendorId}`
+    const categoriesApiUrl = `${ApiUrls.categories}?vendor_id=${vendorId}`
+    const productsApiUrl = `${ApiUrls.product}?vendor_id=${vendorId}`
 
     let blogUrls: any[] = []
     let categoryUrls: any[] = []
+    let productUrls: any[] = []
 
     // Fetch Blogs
     try {
-        const res = await fetch(blogApiUrl, { cache: 'no-store' })
+        const res = await fetch(blogApiUrl, {
+            cache: 'no-store',
+            headers: {
+                'Origin': baseUrl
+            }
+        })
         if (res.ok) {
             const blogsData = await res.json()
             const blogs = blogsData.blogs || (Array.isArray(blogsData) ? blogsData : [])
@@ -31,7 +39,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Fetch Categories
     try {
-        const res = await fetch(categoriesApiUrl, { cache: 'no-store' })
+        const res = await fetch(categoriesApiUrl, {
+            cache: 'no-store',
+            headers: {
+                'Origin': baseUrl
+            }
+        })
         if (res.ok) {
             const categoriesData = await res.json()
             const categories = categoriesData.data || (Array.isArray(categoriesData) ? categoriesData : [])
@@ -43,6 +56,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
     } catch (error) {
         console.error('Sitemap category fetch error:', error)
+    }
+
+    // Fetch Products
+    try {
+        const res = await fetch(productsApiUrl, {
+            cache: 'no-store',
+            headers: {
+                'Origin': baseUrl
+            }
+        })
+        if (res.ok) {
+            const productsData = await res.json()
+            const products = productsData.data || (Array.isArray(productsData) ? productsData : [])
+            productUrls = products.map((product: any) => ({
+                url: `${baseUrl}/shop/${slugify(product.name || product.id.toString())}`,
+                lastModified: new Date(product.updatedAt || product.createdAt || new Date()),
+                priority: 0.8,
+            }))
+        }
+    } catch (error) {
+        console.error('Sitemap product fetch error:', error)
     }
 
     const staticUrls = [
@@ -64,6 +98,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: route === '/' ? 1.0 : 0.8,
     }))
 
-    return [...staticUrls, ...categoryUrls, ...blogUrls]
+    return [...staticUrls, ...categoryUrls, ...blogUrls, ...productUrls]
 }
 
