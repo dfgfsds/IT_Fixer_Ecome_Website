@@ -62,20 +62,45 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
 
     if (!open) return null;
 
+    const fetchPincodeDetails = async (pincode: string) => {
+        try {
+            const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+            const data = await response.json();
+            if (data && data[0] && data[0].Status === "Success") {
+                const details = data[0].PostOffice[0];
+                setForm(prev => ({
+                    ...prev,
+                    city: details.District || details.Name || "",
+                    state: details.State || "",
+                    country: details.Country || "India"
+                }));
+                toast.success("Location fetched successfully!");
+            } else {
+                toast.error("Invalid Pincode.");
+            }
+        } catch (error) {
+            console.error("Error fetching pincode:", error);
+            toast.error("Failed to fetch location details.");
+        }
+    };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         if (name === "contact_number") {
             const onlyNums = value.replace(/[^0-9]/g, "");
             if (onlyNums.length <= 10) {
-                setForm({ ...form, [name]: onlyNums });
+                setForm(prev => ({ ...prev, [name]: onlyNums }));
             }
         } else if (name === "postal_code") {
             const onlyNums = value.replace(/[^0-9]/g, "");
             if (onlyNums.length <= 6) {
-                setForm({ ...form, [name]: onlyNums });
+                setForm(prev => ({ ...prev, [name]: onlyNums }));
+                if (onlyNums.length === 6) {
+                    fetchPincodeDetails(onlyNums);
+                }
             }
         } else {
-            setForm({ ...form, [name]: value });
+            setForm(prev => ({ ...prev, [name]: value }));
         }
     };
 
@@ -209,28 +234,35 @@ export default function AddressForm({ open, onClose, editData, userId, userName,
                             <input name="address_line2" value={form.address_line2} onChange={handleChange} placeholder="Enter your address line 2" style={inputStyle} />
                         </div>
 
+                        {/* Postal Code */}
+                        <div>
+                            <label style={labelStyle}>Pincode</label>
+                            <input name="postal_code" value={form.postal_code} onChange={handleChange} required placeholder="Enter your pincode" maxLength={6} pattern="[0-9]{6}" style={{ ...inputStyle, border: form.postal_code?.length > 0 && form.postal_code?.length !== 6 ? "1px solid #ef4444" : "1px solid #2a2d3a" }} />
+                            {form.postal_code?.length > 0 && form.postal_code?.length !== 6 && (
+                                <p style={{ color: "#ef4444", fontSize: "12px", marginTop: "4px", marginBottom: "0" }}>
+                                    Please enter a valid 6-digit pincode
+                                </p>
+                            )}
+                        </div>
+
+
                         {/* City */}
                         <div>
                             <label style={labelStyle}>City</label>
-                            <input name="city" value={form.city} onChange={handleChange} required placeholder="Enter your city" style={inputStyle} />
+                            <input name="city" value={form.city} readOnly placeholder="Auto-filled from pincode" style={{ ...inputStyle, backgroundColor: "#1e2538", cursor: "not-allowed", color: "#9ca3af" }} />
                         </div>
 
                         {/* State */}
                         <div>
                             <label style={labelStyle}>State</label>
-                            <input name="state" value={form.state} onChange={handleChange} required placeholder="Enter your state" style={inputStyle} />
+                            <input name="state" value={form.state} readOnly placeholder="Auto-filled from pincode" style={{ ...inputStyle, backgroundColor: "#1e2538", cursor: "not-allowed", color: "#9ca3af" }} />
                         </div>
 
-                        {/* Postal Code */}
-                        <div>
-                            <label style={labelStyle}>Pincode</label>
-                            <input name="postal_code" value={form.postal_code} onChange={handleChange} required placeholder="Enter your pincode" maxLength={6} pattern="[0-9]{6}" style={inputStyle} />
-                        </div>
 
                         {/* Country */}
                         <div>
                             <label style={labelStyle}>Country</label>
-                            <input name="country" value={form.country} onChange={handleChange} required placeholder="Enter your country" style={inputStyle} />
+                            <input name="country" value={form.country} readOnly placeholder="Auto-filled from pincode" style={{ ...inputStyle, backgroundColor: "#1e2538", cursor: "not-allowed", color: "#9ca3af" }} />
                         </div>
                     </div>
 

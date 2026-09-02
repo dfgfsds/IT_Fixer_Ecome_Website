@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import { User, ShoppingBag, LogOut, Package, ShoppingCart, ExternalLink, MapPin, Plus, Pencil, Trash, Loader } from "lucide-react";
 import { useQueryClient, useQuery, InvalidateQueryFilters } from "@tanstack/react-query";
-import { updateUserAPi, patchUserSelectAddressAPi } from "@/api-endpoints/authendication";
+import { updateUserAPi, patchUserSelectAddressAPi, postDeviceLogoutApi } from "@/api-endpoints/authendication";
+import { getDeviceId } from "@/lib/device";
 import { getOrdersAndOrdersItemsApi, getAddressApi, deleteAddressApi } from "@/api-endpoints/CartsApi";
 import { useVendor } from "@/context/VendorContext";
 import { toast } from "sonner";
@@ -15,7 +16,7 @@ import { handleApiError } from "@/lib/error-handler";
 import { Suspense } from "react";
 
 function ProfileContent() {
-    const { user } = useUser();
+    const { user, logout } = useUser();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState("profile");
     const { vendorId } = useVendor();
@@ -54,8 +55,8 @@ function ProfileContent() {
     }, [user]);
 
     const handleUpdate = async () => {
-        if (formData.contact_number && formData.contact_number.length !== 10) {
-            toast.error("Please enter a valid phone number.");
+        if (!formData.contact_number || formData.contact_number.length !== 10) {
+            toast.error("Please enter a valid 10-digit phone number.");
             return;
         }
 
@@ -85,11 +86,24 @@ function ProfileContent() {
         }
     }, [router]);
 
-    const handleLogout = () => {
-        localStorage.removeItem("userId");
-        localStorage.removeItem("userName");
-        localStorage.removeItem("email");
-        localStorage.removeItem("cartId");
+    const handleLogout = async () => {
+        try {
+            const deviceId = getDeviceId();
+            if (user?.data?.id && vendorId && deviceId) {
+                try {
+                    await postDeviceLogoutApi({
+                        vendor_id: vendorId,
+                        device_id: deviceId,
+                        user_id: user.data.id
+                    });
+                } catch (apiError) {
+                    console.error("Device logout API failed", apiError);
+                }
+            }
+            await logout(vendorId);
+        } catch (e) {
+            console.error("Logout error", e);
+        }
         toast.success('Logged out successfully!');
         window.location.href = "/";
     };
@@ -213,29 +227,31 @@ function ProfileContent() {
                                             <label className="form-label text-white">Email Address</label>
                                             <input type="email" className="form-control" value={formData.email}
                                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                readOnly={!!user?.data?.email}
                                                 style={{
                                                     backgroundColor: "#0b0e13",
                                                     border: "1px solid #2a2d3a",
                                                     color: "#fff",
-                                                    padding: "12px",
-                                                    cursor: !!user?.data?.email ? "not-allowed" : "text",
-                                                    opacity: !!user?.data?.email ? 0.7 : 1
+                                                    padding: "12px"
                                                 }} />
                                         </div>
                                         <div className="mb-4">
                                             <label className="form-label text-white">Phone Number</label>
                                             <input type="text" className="form-control" value={formData.contact_number}
-                                                onChange={(e) => setFormData({ ...formData, contact_number: e.target.value })}
-                                                readOnly={!!user?.data?.contact_number}
+                                                onChange={(e) => {
+                                                    const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                                    setFormData({ ...formData, contact_number: val });
+                                                }}
                                                 style={{
                                                     backgroundColor: "#0b0e13",
-                                                    border: "1px solid #2a2d3a",
+                                                    border: formData.contact_number?.length === 10 ? "1px solid #2a2d3a" : "1px solid #ef4444",
                                                     color: "#fff",
-                                                    padding: "12px",
-                                                    cursor: !!user?.data?.contact_number ? "not-allowed" : "text",
-                                                    opacity: !!user?.data?.contact_number ? 0.7 : 1
+                                                    padding: "12px"
                                                 }} />
+                                            {formData.contact_number?.length > 0 && formData.contact_number?.length !== 10 && (
+                                                <p style={{ color: "#ef4444", fontSize: "12px", marginTop: "4px", marginBottom: "0" }}>
+                                                    Please enter a valid 10-digit phone number
+                                                </p>
+                                            )}
                                         </div>
                                         <button
                                             onClick={handleUpdate}
@@ -281,8 +297,8 @@ function ProfileContent() {
                                                                 <div className="col-md-2 col-6 mb-2 mb-md-0 text-center">
                                                                     <div className="small text-white mb-1">Status</div>
                                                                     <span className={`badge ${['delivered', 'completed'].includes(order.status?.toLowerCase()) ? 'bg-success' :
-                                                                            ['processing', 'pending', 'confirmed', 'shipped', 'out for delivery'].includes(order.status?.toLowerCase()) ? 'bg-warning text-dark' :
-                                                                                'bg-danger'
+                                                                        ['processing', 'pending', 'confirmed', 'shipped', 'out for delivery'].includes(order.status?.toLowerCase()) ? 'bg-warning text-dark' :
+                                                                            'bg-danger'
                                                                         }`}>
                                                                         {order.status}
                                                                     </span>

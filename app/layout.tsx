@@ -23,8 +23,10 @@ import FooterPage from '@/components/Footer';
 import Providers from './providers';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import FloatingCallButton from '@/components/FloatingCallButton';
+import FloatingBuildPCButton from '@/components/FloatingBuildPCButton';
 import ScrollToTop from '@/components/ScrollToTop';
 import StickyRepairBar from '@/components/StickyRepairBar';
+import GlobalAppPopup from '@/components/GlobalAppPopup';
 
 export const metadata: Metadata = {
 
@@ -60,9 +62,11 @@ export default function RootLayout({
       <body>
         <Providers>
           <ScrollToTop />
+          <GlobalAppPopup />
           <BootstrapClient />
           <FloatingWhatsApp />
           <FloatingCallButton />
+          <FloatingBuildPCButton />
           <Header />
           <main>{children}</main>
           {/* <StickyRepairBar /> */}
