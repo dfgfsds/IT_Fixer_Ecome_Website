@@ -7,7 +7,7 @@ const Scripts = () => {
             {/* jQuery (FIRST) */}
             <Script
                 src="/js/jquery-3.7.1.min.js"
-                strategy="beforeInteractive"
+                strategy="afterInteractive"
             />
 
             {/* Viewport */}

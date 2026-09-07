@@ -108,10 +108,10 @@ export default function HeroSection() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="hero-content">
-                            <h2 className="sub-title subtitle tz-sub-tilte tz-sub-anim text-uppercase tx-subTitle">
+                            <h2 className="sub-title subtitle text-uppercase tx-subTitle">
                                 Best Gaming, Streaming & Editing PC Shop in Chennai
                             </h2>
-                            <h2 className="hero_title tv_hero_title hero_title_1" style={{ lineHeight: "1" }}>
+                            <h2 className="hero_title" style={{ lineHeight: "1" }}>
                                 <span style={{ display: "block", color: "#cbfe1c", fontSize: "4.5rem", marginBottom: "0.1rem" }}>
                                     High Performance
                                 </span>
@@ -123,10 +123,10 @@ export default function HeroSection() {
                                 </span>
                             </h2>
                             <div className="hero-sub-content">
-                                <p className="wow fadeInUp" data-wow-delay=".5s">
+                                <p className="">
                                     IT Fixer is a trusted gaming pc builder in Chennai for gamers, streamers, video editors, content creators and professionals who need powerful systems built for real performance. As a dedicated PC Solution in Chennai, we help customers choose, assemble and upgrade systems that match their exact usage, budget and future needs.
                                 </p>
-                                <Link href="/contact" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
+                                <Link href="/contact" className="theme-btn style-2 ">
                                     <span className="left-line"></span>
                                     know more
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -138,7 +138,7 @@ export default function HeroSection() {
                     </div>
                 </div>
             </div>
-            <div className="hero-image wow bounceInRight" data-wow-delay="700ms" data-wow-duration="1000ms">
+            <div className="hero-image ">
                 <img src="/assets/img/home-2/hero/heroman.webp" alt="img" />
             </div>
         </section>

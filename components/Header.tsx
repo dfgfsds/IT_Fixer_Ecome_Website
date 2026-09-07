@@ -124,8 +124,6 @@ export default function Header() {
             </button>
 
 
-            <div className="mouseCursor cursor-outer"></div>
-            <div className="mouseCursor cursor-inner"></div>
 
             <div className="fix-area">
                 <div className="info-bar-overlay" onClick={handleSearchToggle}></div>
