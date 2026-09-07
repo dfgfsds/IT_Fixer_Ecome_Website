@@ -208,12 +208,12 @@ export default function NewsSection() {
                             <div className="col-xl-6">
                                 <div className="news-right-items">
                                     <div className="section-title mb-0">
-                                        <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">From Our Blog</h6>
-                                        <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
+                                        <h6 className="subtitle tz-sub-tilte  text-uppercase tx-subTitle">From Our Blog</h6>
+                                        <h2 className="tx-title sec_title  tz-itm-title ">
                                             Expert Tips, Repair Guides & Tech Insights
                                         </h2>
                                     </div>
-                                    <p className="news-text wow fadeInUp" data-wow-delay=".5s">
+                                    <p className="news-text ">
                                         Stay updated with the latest in PC repair, gaming laptop upgrades, SSD & RAM optimization, and pro-level custom build guides — straight from the IT Fixer team.
                                     </p>
                                     <Link href="/blog" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".7s">
