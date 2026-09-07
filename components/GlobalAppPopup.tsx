@@ -47,8 +47,8 @@ export default function GlobalAppPopup() {
         position: "fixed",
         zIndex: 9995,
         left: 0,
-        top: isMobile ? "120px" : "140px",
-        bottom: "auto",
+        top: "auto",
+        bottom: isMobile ? "100px" : "100px",
         transform: "none",
         transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
       }}

@@ -50,7 +50,8 @@
             }
         });
 
-        // Cursor movement
+        // Cursor movement removed as per request
+        /*
         const cursor = document.createElement('div');
         cursor.classList.add('custom-cursor');
         document.body.appendChild(cursor);
@@ -59,6 +60,7 @@
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
+        */
 
         //>> Video Popup Start <<//
         $(".img-popup").magnificPopup({
@@ -1249,6 +1251,8 @@
         let lastTime = 0;
         const throttleDelay = 16;
 
+        // Smoke trail mouse hover animation removed
+        /*
         window.addEventListener('mousemove', e => {
             const now = Date.now();
             // This line will now work correctly
@@ -1269,6 +1273,7 @@
                 smoke.remove();
             });
         });
+        */
 
 
         // GSAP & ScrollTrigger Register

@@ -9,12 +9,12 @@ export default function AboutSection() {
                 <div className="about-wrapper-2">
                     <div className="row g-lg-4 align-items-center">
                         <div className="col-lg-6">
-                            <div className="about-iamge wow fadeInUp" data-wow-delay=".3s">
+                            <div className="about-iamge">
                                 <img src="assets/img/home-2/about/aout-01.jpg" alt="img" />
                                 <div className="line-shape">
                                     <img src="assets/img/home-2/about/line-shape.png" alt="img" />
                                 </div>
-                                <div className="text-shape float-bob-y">
+                                <div className="text-shape">
                                     <img src="assets/img/home-2/about/text-shape.png" alt="img" />
                                 </div>
                             </div>
@@ -22,47 +22,47 @@ export default function AboutSection() {
                         <div className="col-lg-6">
                             <div className="about-content">
                                 <div className="section-title mb-0">
-                                    <h6 className="subtitle tz-sub-tilte tz-sub-anim  text-uppercase tx-subTitle">About Our Gaming Zone</h6>
-                                    <h2 className="tx-title sec_title  tz-itm-title tz-itm-anim">
+                                    <h6 className="subtitle text-uppercase tx-subTitle">About Our Gaming Zone</h6>
+                                    <h2 className="tx-title sec_title">
                                         High-Performance Gaming PCs, Streaming PCs & Editing PCs
                                     </h2>
                                 </div>
-                                <p className="about-text wow fadeInUp" data-wow-delay=".5s">
+                                <p className="about-text">
                                     IT Fixer is a leading Gaming PC Shop in Chennai, specializing in Custom Gaming PCs, Streaming PCs, Editing PCs, Gaming Laptops, Creator PCs, and High-Performance Computer Systems. Whether you're a competitive gamer, YouTuber, live streamer, content creator, video editor or creative professional, we build powerful systems that deliver exceptional speed, stability and performance.
 
                                 </p>
-                                <p className=" mt-2 wow fadeInUp" data-wow-delay=".5s">
+                                <p className=" mt-2">
                                     Our expert team helps you choose or customize the perfect PC based on your gaming, streaming, editing and content creation requirements while ensuring maximum value for your budget.
                                 </p>
 
 
                                 <div className="counter-wrap-2">
-                                    <div className="counter-item-2 wow fadeInUp" data-wow-delay=".2s">
+                                    <div className="counter-item-2">
                                         <h2>
                                             <span className="gt-count">500</span> +
                                         </h2>
                                         <p> Builds</p>
                                     </div>
-                                    <div className="counter-item-2 wow fadeInUp" data-wow-delay=".4s">
+                                    <div className="counter-item-2">
                                         <h2>
                                             <span className="gt-count">320</span> +
                                         </h2>
                                         <p>Systems</p>
                                     </div>
-                                    <div className="counter-item-2 wow fadeInUp" data-wow-delay=".6s">
+                                    <div className="counter-item-2">
                                         <h2>
                                             <span className="gt-count">150</span> +
                                         </h2>
                                         <p>Gamers </p>
                                     </div>
-                                    <div className="counter-item-2 style-2 wow fadeInUp" data-wow-delay=".8s">
+                                    <div className="counter-item-2 style-2">
                                         <h2>
                                             <span className="gt-count">99</span> %
                                         </h2>
                                         <p> Satisfaction</p>
                                     </div>
                                 </div>
-                                <Link href="/about" className="theme-btn style-2 wow fadeInUp" data-wow-delay=".9s">
+                                <Link href="/about" className="theme-btn style-2">
                                     <span className="left-line"></span>
                                     About More Us
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
