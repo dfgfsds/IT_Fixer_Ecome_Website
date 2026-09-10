@@ -3,23 +3,23 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Login to IT Fixer Account | Secure Access",
+        title: "Best Gaming Store in Chennai | Login",
         description:
-            "Login to your IT Fixer account to manage orders, track purchases, and explore gaming PC deals.",
+            "Login to your account at the best gaming store in Chennai. Manage orders, track purchases, view your wishlist, and access your account with ease.",
         keywords: [
             "login IT Fixer",
             "user login pc store",
             "account login India",
         ],
         alternates: {
-            canonical: "https://www.itfixer.in/login",
+            canonical: "https://www.itfixer.in/profile",
         },
         openGraph: {
             type: "website",
-            title: "Login | IT Fixer Account Access",
+            title: "Best Gaming Store in Chennai | Login",
             description:
-                "Secure login to your IT Fixer account to manage orders and explore deals.",
-            url: "https://www.itfixer.in/login",
+                "Login to your account at the best gaming store in Chennai. Manage orders, track purchases, view your wishlist, and access your account with ease.",
+            url: "https://www.itfixer.in/profile",
             siteName: "IT Fixer",
             images: [
                 {
@@ -33,9 +33,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
         twitter: {
             card: "summary_large_image",
-            title: "Login to IT Fixer",
+            title: "Best Gaming Store in Chennai | Login",
             description:
-                "Access your account to track orders and manage purchases.",
+                "Login to your account at the best gaming store in Chennai. Manage orders, track purchases, view your wishlist, and access your account with ease.",
             images: ["https://www.itfixer.in/public/assets/img/logo.png"],
         },
     };

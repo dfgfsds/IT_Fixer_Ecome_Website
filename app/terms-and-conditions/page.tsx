@@ -4,18 +4,18 @@ import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Terms & Conditions – ITFixer | PC Sales, Custom Builds & Services",
+        title: "Gaming PC Builder Chennai | Terms & Conditions",
         description:
-            "Read the Terms & Conditions for ITFixer, Chennai’s trusted gaming & custom PC shop. Policies on orders, payments, delivery, warranties & user conduct.",
+            "Review the terms and conditions for our gaming PC builder services in Chennai, covering orders, payments, custom builds, warranties, returns, and usage.",
         robots: "index, follow",
         alternates: {
             canonical: "https://www.itfixer.in/terms-and-conditions",
         },
         openGraph: {
             type: "website",
-            title: "Terms & Conditions | IT Fixer",
+            title: "Gaming PC Builder Chennai | Terms & Conditions",
             description:
-                "Read the Terms & Conditions for using IT Fixer website, products, and services.",
+                "Review the terms and conditions for our gaming PC builder services in Chennai, covering orders, payments, custom builds, warranties, returns, and usage.",
             url: "https://www.itfixer.in/terms-and-conditions",
             siteName: "IT Fixer",
             images: [
@@ -30,9 +30,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
         twitter: {
             card: "summary_large_image",
-            title: "Terms & Conditions | IT Fixer",
+            title: "Gaming PC Builder Chennai | Terms & Conditions",
             description:
-                "Read IT Fixer terms and conditions for products, services, orders, and website usage.",
+                "Review the terms and conditions for our gaming PC builder services in Chennai, covering orders, payments, custom builds, warranties, returns, and usage.",
             images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
         other: {

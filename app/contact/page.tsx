@@ -4,10 +4,10 @@ import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Contact IT Fixer | Gaming PC Experts in Chennai",
+        title: "Gaming Computer Shop Chennai | Contact Us",
 
         description:
-            "Get in touch with IT Fixer for custom PC builds, support, and product inquiries. Visit our Chennai store or contact online.",
+            "Contact our gaming computer shop in Chennai for gaming PCs, laptops, components, and accessories. Get expert help, product details, and pricing.",
 
         keywords: [
             "contact IT Fixer",
@@ -21,9 +21,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
         openGraph: {
             type: "website",
-            title: "Contact IT Fixer | PC Experts Chennai",
+            title: "Gaming Computer Shop Chennai | Contact Us",
             description:
-                "Reach IT Fixer for custom PC builds, support, and product inquiries in Chennai.",
+                "Contact our gaming computer shop in Chennai for gaming PCs, laptops, components, and accessories. Get expert help, product details, and pricing.",
             url: "https://www.itfixer.in/contact",
             siteName: "IT Fixer",
             locale: "en_IN",
@@ -39,9 +39,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
         twitter: {
             card: "summary_large_image",
-            title: "Contact IT Fixer",
+            title: "Gaming Computer Shop Chennai | Contact Us",
             description:
-                "Get support and expert guidance for gaming PC builds.",
+                "Contact our gaming computer shop in Chennai for gaming PCs, laptops, components, and accessories. Get expert help, product details, and pricing.",
             images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
     };

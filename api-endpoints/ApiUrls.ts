@@ -1,6 +1,6 @@
-export const baseUrl = 'https://ecomapi.ftdigitalsolutions.org';
+// export const baseUrl = 'https://ecomapi.ftdigitalsolutions.org';
 // const baseUrl ='http://82.29.161.36'
-// export const baseUrl = 'https://test-ecomapi.ftdigitalsolutions.org'
+export const baseUrl = 'https://test-ecomapi.ftdigitalsolutions.org'
 
 
 const cartCreate = `${baseUrl}/api/carts/`;

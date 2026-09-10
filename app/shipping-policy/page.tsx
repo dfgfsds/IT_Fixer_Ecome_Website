@@ -5,9 +5,9 @@ import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Shipping Policy | ITFixer – Fast & Secure Delivery for Gaming PCs",
+        title: "Best PC Build in Chennai | Shipping Policy",
         description:
-            "Read ITFixer’s Shipping Policy for fast delivery, safe packaging, and reliable dispatch of gaming PCs, custom builds, and PC components across India.",
+            "Learn about our shipping policy for the best PC builds in Chennai, including delivery timelines, charges, service areas, order tracking, and terms.",
 
         robots: "index, follow",
         keywords:
@@ -18,9 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
         openGraph: {
             type: "website",
-            title: "Shipping Policy | IT Fixer India",
+            title: "Best PC Build in Chennai | Shipping Policy",
             description:
-                "Learn about IT Fixer shipping timelines, delivery process, and service areas across India.",
+                "Learn about our shipping policy for the best PC builds in Chennai, including delivery timelines, charges, service areas, order tracking, and terms.",
             url: "https://www.itfixer.in/shipping-policy",
             siteName: "IT Fixer",
             images: [
@@ -35,9 +35,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
         twitter: {
             card: "summary_large_image",
-            title: "Shipping Policy | IT Fixer",
+            title: "Best PC Build in Chennai | Shipping Policy",
             description:
-                "Check delivery timelines, shipping process, and service availability across India.",
+                "Learn about our shipping policy for the best PC builds in Chennai, including delivery timelines, charges, service areas, order tracking, and terms.",
             images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
         other: {
