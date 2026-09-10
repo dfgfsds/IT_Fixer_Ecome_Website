@@ -3,9 +3,9 @@ import Script from "next/script";
 
 export async function generateMetadata() {
     return {
-        title: "Privacy Policy | ITFixer – Secure Data Protection & User Privacy",
+        title: "PC Builder in Chennai | Privacy Policy",
         description:
-            "Read ITFixer’s Privacy Policy to understand how we protect your data, ensure secure transactions, and maintain complete user confidentiality.",
+            "Read our privacy policy to learn how your personal information is collected, used, protected, and managed when you use our PC builder in Chennai.",
 
         robots: "index, follow",
         keywords:
@@ -18,9 +18,9 @@ export async function generateMetadata() {
         openGraph: {
             type: "website",
             url: "https://www.itfixer.in/privacy-policy",
-            title: "Privacy Policy | IT Fixer Secure Shopping",
+            title: "PC Builder in Chennai | Privacy Policy",
             description:
-                "Learn how IT Fixer protects your personal data and ensures secure online transactions.",
+                "Read our privacy policy to learn how your personal information is collected, used, protected, and managed when you use our PC builder in Chennai.",
             siteName: "IT Fixer",
             locale: "en_IN",
             images: [
@@ -32,9 +32,9 @@ export async function generateMetadata() {
 
         twitter: {
             card: "summary_large_image",
-            title: "Privacy Policy | IT Fixer",
+            title: "PC Builder in Chennai | Privacy Policy",
             description:
-                "Understand how your data is protected and securely handled by IT Fixer.",
+                "Read our privacy policy to learn how your personal information is collected, used, protected, and managed when you use our PC builder in Chennai.",
             images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
     };

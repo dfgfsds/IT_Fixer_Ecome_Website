@@ -4,10 +4,10 @@ import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "About IT Fixer | Trusted Gaming PC Store in Chennai",
+        title: "Trusted Gaming PC Store in Chennai | About Us",
 
         description:
-            "Learn about ITFixer, Chennai’s trusted gaming PC shop specializing in custom PC builds, high-performance desktops, repairs, and expert tech support.",
+            "Learn about our gaming PC store in Chennai, offering quality gaming PCs, laptops, components, and accessories for gamers and performance enthusiasts.",
 
         robots: "index, follow",
 
@@ -30,9 +30,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
         openGraph: {
             type: "website",
-            title: "About IT Fixer | Gaming PC Store Chennai",
+            title: "Trusted Gaming PC Store in Chennai | About Us",
             description:
-                "Learn about ITFixer, Chennai’s trusted gaming PC shop specializing in custom PC builds, high-performance desktops, repairs, and expert tech support.",
+                "Learn about our gaming PC store in Chennai, offering quality gaming PCs, laptops, components, and accessories for gamers and performance enthusiasts.",
             url: "https://www.itfixer.in/about",
             siteName: "IT Fixer",
             locale: "en_IN",
@@ -48,9 +48,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
         twitter: {
             card: "summary_large_image",
-            title: "About IT Fixer Chennai",
+            title: "Trusted Gaming PC Store in Chennai | About Us",
             description:
-                "Trusted gaming PC and computer components store in Chennai.",
+                "Learn about our gaming PC store in Chennai, offering quality gaming PCs, laptops, components, and accessories for gamers and performance enthusiasts.",
             images: ["https://www.itfixer.in/assets/img/home-3/top-feature.png"],
         },
     };

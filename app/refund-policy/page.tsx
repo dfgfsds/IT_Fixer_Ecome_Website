@@ -4,9 +4,9 @@ import { Metadata } from "next";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-    title: "Refund Policy – ITFixer | Gaming PC Shop & Custom Builds Chennai",
+    title: "Best Gaming PC Store Chennai | Refund Policy",
     description:
-        "Read the Refund Policy of ITFixer – gaming PCs, repairs, custom builds & services. Learn about returns, refunds, timeframes, and conditions.",
+        "Review our refund policy for purchases from our gaming PC store in Chennai. Learn about refund eligibility, returns, cancellations, timelines, and terms.",
     keywords:
         "ITFixer Refund Policy, refund terms Chennai, PC shop refunds, custom PC returns, gaming PC refund policy, ITFixer policies",
     alternates: {
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
     },
     robots: "index, follow",
     openGraph: {
-        title: "Refund Policy – ITFixer | Returns & Refund Terms",
+        title: "Best Gaming PC Store Chennai | Refund Policy",
         description:
-            "Know ITFixer’s refund and return policy for products & services including gaming PCs, custom builds, repairs, and accessories.",
+            "Review our refund policy for purchases from our gaming PC store in Chennai. Learn about refund eligibility, returns, cancellations, timelines, and terms.",
         type: "website",
         url: "https://www.itfixer.in/refund-policy",
         siteName: "ITFixer",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Refund Policy – ITFixer | PC Refund & Return Info",
+        title: "Best Gaming PC Store Chennai | Refund Policy",
         description:
-            "ITFixer refund policy details—returns, timelines, conditions for gaming PCs, custom builds, repairs & accessories.",
+            "Review our refund policy for purchases from our gaming PC store in Chennai. Learn about refund eligibility, returns, cancellations, timelines, and terms.",
         images: ["https://www.itfixer.in/assets/img/logo.png"],
         site: "@itfixer7",
     },

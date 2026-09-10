@@ -10,9 +10,9 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Gaming PC Tips, Custom PC Guides & Tech Blogs | IT Fixer Chennai",
+        title: "Gaming PC Shop Chennai | Gaming Guides & Tips",
         description:
-            "Explore gaming PC tips, custom PC build guides, troubleshooting blogs, tech news, and performance upgrades from IT Fixer, Chennai’s trusted PC experts.",
+            "Explore our blog for gaming PC guides, reviews, buying tips, upgrades and expert advice to help you choose the right gaming PC shop in Chennai.",
         keywords: [
             "gaming PC blog",
             "custom PC build tips",
@@ -28,9 +28,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
         openGraph: {
             type: "website",
-            title: "Gaming & PC Build Blog | IT Fixer",
+            title: "Gaming PC Shop Chennai | Gaming Guides & Tips",
             description:
-                "Explore gaming PC builds, editing setups, and streaming guides with IT Fixer experts.",
+                "Explore our blog for gaming PC guides, reviews, buying tips, upgrades and expert advice to help you choose the right gaming PC shop in Chennai.",
             url: "https://www.itfixer.in/blog",
             siteName: "IT Fixer",
             images: [
@@ -45,9 +45,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
         twitter: {
             card: "summary_large_image",
-            title: "IT Fixer Blog | PC Build Guides",
+            title: "Gaming PC Shop Chennai | Gaming Guides & Tips",
             description:
-                "Learn gaming, editing, and streaming PC setups from experts.",
+                "Explore our blog for gaming PC guides, reviews, buying tips, upgrades and expert advice to help you choose the right gaming PC shop in Chennai.",
             images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
 

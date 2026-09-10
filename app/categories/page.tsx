@@ -4,10 +4,10 @@ import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Explore PC Components & Gaming Categories | IT Fixer",
+        title: "Gaming Store in Chennai | Gaming PCs & Accessories",
 
         description:
-            "Browse categories like gaming PCs, processors, GPUs, RAM, SSDs and more. Build powerful setups for gaming, editing & streaming.",
+            "Explore our gaming store in Chennai for gaming PCs, laptops, components, and accessories. Find quality products to build and upgrade your gaming setup.",
 
         keywords: [
             "pc components Chennai",
@@ -24,9 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
         openGraph: {
             type: "website",
-            title: "PC Components & Gaming Categories | IT Fixer",
+            title: "Gaming Store in Chennai | Gaming PCs & Accessories",
             description:
-                "Browse gaming PCs, GPUs, processors, RAM, SSDs and more. Build powerful setups.",
+                "Explore our gaming store in Chennai for gaming PCs, laptops, components, and accessories. Find quality products to build and upgrade your gaming setup.",
             url: "https://www.itfixer.in/categories",
             siteName: "IT Fixer",
             locale: "en_IN",
@@ -42,9 +42,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
         twitter: {
             card: "summary_large_image",
-            title: "Gaming PC Categories | IT Fixer",
+            title: "Gaming Store in Chennai | Gaming PCs & Accessories",
             description:
-                "Explore GPUs, CPUs, RAM, SSDs and more for gaming and editing builds.",
+                "Explore our gaming store in Chennai for gaming PCs, laptops, components, and accessories. Find quality products to build and upgrade your gaming setup.",
             images: ["https://www.itfixer.in/images/categories.jpg"],
         },
     };
