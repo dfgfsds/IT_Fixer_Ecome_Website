@@ -11,10 +11,21 @@ import {
 } from 'react-icons/fa6';
 
 export const metadata: Metadata = {
-    title: 'IT Fixer Computers | High-Performance Gaming, Editing & Laptop Solutions in Chennai',
-    description: 'Connect with IT Fixer Computers across social media, leave a Google review, visit our Chennai store, and explore gaming PCs, editing PCs, gaming laptops, and high-performance laptops.',
+    title: 'Custom PC Shop Chennai | Contact Us',
+    description: 'Contact our custom PC shop in Chennai for gaming PCs, custom builds, components, upgrades, pricing, and expert assistance for your PC needs.',
     alternates: {
         canonical: 'https://www.itfixer.in/connect',
+    },
+    openGraph: {
+        title: 'Custom PC Shop Chennai | Contact Us',
+        description: 'Contact our custom PC shop in Chennai for gaming PCs, custom builds, components, upgrades, pricing, and expert assistance for your PC needs.',
+        url: 'https://www.itfixer.in/connect',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Custom PC Shop Chennai | Contact Us',
+        description: 'Contact our custom PC shop in Chennai for gaming PCs, custom builds, components, upgrades, pricing, and expert assistance for your PC needs.',
     }
 };
 

@@ -5,10 +5,10 @@ import { Suspense } from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: "Shop Gaming PC Parts & Accessories Online | IT Fixer",
+        title: "Gaming PC Builder in Chennai | Custom PCs & Components",
 
         description:
-            "Shop high-performance gaming PCs, custom builds, PC components, and accessories at ITFixer Chennai. Quality parts, expert builds, fast delivery.",
+            "Choose a trusted PC Builder in Chennai for custom gaming, work & high-performance PCs. Explore quality components and create a setup built for your needs.",
 
         robots: "index, follow",
 
@@ -32,9 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
         openGraph: {
             type: "website",
-            title: "Shop Gaming PC Parts Online | IT Fixer",
+            title: "Gaming PC Builder in Chennai | Custom PCs & Components",
             description:
-                "Buy gaming PC parts, accessories, GPUs, CPUs, RAM and SSDs at best prices in India.",
+                "Choose a trusted PC Builder in Chennai for custom gaming, work & high-performance PCs. Explore quality components and create a setup built for your needs.",
             url: "https://www.itfixer.in/shop",
             siteName: "IT Fixer",
             locale: "en_IN",
@@ -50,9 +50,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
         twitter: {
             card: "summary_large_image",
-            title: "Buy PC Parts Online | IT Fixer",
+            title: "Gaming PC Builder in Chennai | Custom PCs & Components",
             description:
-                "Best deals on gaming PC components and accessories in India.",
+                "Choose a trusted PC Builder in Chennai for custom gaming, work & high-performance PCs. Explore quality components and create a setup built for your needs.",
             images: ["https://www.itfixer.in/assets/img/logo.png"],
         },
     };
