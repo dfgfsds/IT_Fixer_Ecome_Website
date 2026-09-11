@@ -37,6 +37,7 @@ export default function robots(): MetadataRoute.Robots {
     const commonAllows = [
         '/',
         '/connect',
+        '/build-your-pc',
         '/assets/',
         '/images/',
         '/_next/',
