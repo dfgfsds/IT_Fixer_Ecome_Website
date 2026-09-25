@@ -14,6 +14,7 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 9;
 
+    console.log(blogs)
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -30,8 +31,8 @@ export default function BlogCardSection({ blogs = [] }: BlogCardSectionProps) {
         return html?.replace(/<[^>]*>?/gm, "") || "";
     };
 
-    console.log(currentBlogs,"currentBlogs");
-    
+    console.log(currentBlogs, "currentBlogs");
+
 
     return (
         <section className="gt-news-section section-padding fix">
