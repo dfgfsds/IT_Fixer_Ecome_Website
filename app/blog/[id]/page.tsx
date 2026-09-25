@@ -6,12 +6,69 @@ import { formatDate } from "@/lib/utils";
 import BlogQuoteForm from "@/components/BlogQuoteForm";
 import { slugify } from "@/lib/slugify";
 import { Metadata } from "next";
-import Script from "next/script";
 import BlogStickySidebar from "@/components/BlogStickySidebar";
 
 type Props = {
     params: Promise<{ id: string }>;
 };
+
+// Helper function to process and clean dynamic schema from API
+function getBlogSchema(post: any, currentUrl: string) {
+    if (post?.schema && typeof post.schema === "string" && post.schema.trim().length > 0) {
+        // Strip any surrounding <script>...</script> tags from API response
+        let rawSchema = post.schema
+            .replace(/<script[^>]*>/gi, "")
+            .replace(/<\/script>/gi, "")
+            .trim();
+
+        // Replace BLOG-ARTICLE-URL placeholder with actual dynamic blog URL
+        rawSchema = rawSchema.replace(/BLOG-ARTICLE-URL/g, currentUrl);
+
+        try {
+            const parsed = JSON.parse(rawSchema);
+            return JSON.stringify(parsed);
+        } catch {
+            return rawSchema;
+        }
+    }
+
+    // Dynamic Fallback Schema if post.schema is not provided
+    const fallbackSchema = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": currentUrl,
+        },
+        "headline": post?.title || post?.subtitle,
+        "description":
+            post?.meta_description ||
+            post?.subtitle ||
+            post?.description?.replace(/<[^>]*>/g, "").trim().slice(0, 160) ||
+            "Read our latest blog post from IT Fixer Chennai.",
+        "image": post?.banner_url || "https://www.itfixer.in/assets/default-blog.jpg",
+        "author": {
+            "@type": "Organization",
+            "name": post?.author || "IT Fixer",
+            "url": "https://www.itfixer.in/",
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "IT Fixer",
+            "url": "https://www.itfixer.in/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.itfixer.in/images/logo.png",
+            },
+        },
+        "url": currentUrl,
+        "datePublished": post?.created_at,
+        "dateModified": post?.updated_at || post?.created_at,
+        "inLanguage": "en-IN",
+    };
+
+    return JSON.stringify(fallbackSchema);
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id: pathId } = await params;
@@ -28,48 +85,64 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (!blogMatch) {
         return {
-            title: "Blog Not Found",
+            title: "Blog Not Found | IT Fixer",
         };
     }
 
     const response = await getBlogsApi(blogMatch.id);
     const post = response?.data?.blog;
 
+    const currentUrl = `https://www.itfixer.in/blog/${pathId}`;
+
     const title =
-        post?.meta_title ||
-        post?.title ||
-        post?.subtitle ||
+        post?.meta_title?.trim() ||
+        post?.title?.trim() ||
+        post?.subtitle?.trim() ||
         "IT Fixer Blog";
 
+    const cleanDescription = post?.description ? post.description.replace(/<[^>]*>/g, "").trim() : "";
     const description =
-        post?.subtitle ||
-        "Read our latest blog";
+        post?.meta_description?.trim() ||
+        post?.subtitle?.trim() ||
+        (cleanDescription ? cleanDescription.slice(0, 160) : "") ||
+        "Read our latest blog at IT Fixer Chennai.";
 
-    const keywords = post?.meta_keywords || "";
+    // Format keywords from meta_keywords or meta_tags (handling array or string)
+    let keywords = "";
+    if (Array.isArray(post?.meta_keywords) && post.meta_keywords.length > 0) {
+        keywords = post.meta_keywords.join(", ");
+    } else if (typeof post?.meta_keywords === "string" && post.meta_keywords.trim().length > 0) {
+        keywords = post.meta_keywords;
+    } else if (Array.isArray(post?.meta_tags) && post.meta_tags.length > 0) {
+        keywords = post.meta_tags.join(", ");
+    } else if (typeof post?.meta_tags === "string" && post.meta_tags.trim().length > 0) {
+        keywords = post.meta_tags;
+    }
+
+    const canonicalUrl = post?.canonical_tag?.trim() || currentUrl;
+    const robots = post?.robots_tag?.trim() || "index, follow, max-image-preview:large";
 
     const image =
         post?.banner_url ||
         "https://www.itfixer.in/assets/default-blog.jpg";
 
-    const url = `https://www.itfixer.in/blog/${pathId}`;
-
     return {
         title,
         description,
-        keywords,
-
-        robots: "index, follow, max-image-preview:large",
-
+        ...(keywords ? { keywords } : {}),
+        robots,
         alternates: {
-            canonical: url,
+            canonical: canonicalUrl,
         },
-
         openGraph: {
             title,
             description,
-            url,
+            url: currentUrl,
             siteName: "IT Fixer",
             type: "article",
+            publishedTime: post?.created_at,
+            modifiedTime: post?.updated_at || post?.created_at,
+            authors: [post?.author || "IT Fixer"],
             images: [
                 {
                     url: image,
@@ -78,7 +151,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             ],
             locale: "en_IN",
         },
-
         twitter: {
             card: "summary_large_image",
             title,
@@ -112,29 +184,8 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
         .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
         .slice(0, 3);
 
-    const schemaData = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": post?.title,
-        "description": post?.subtitle || post?.content?.slice(0, 160),
-        "image": post?.banner_url,
-        "author": {
-            "@type": "Organization",
-            "name": "IT Fixer",
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "IT Fixer",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.itfixer.in/images/logo.png",
-            },
-        },
-        "url": `https://www.itfixer.in/blog/${pathId}`,
-        "mainEntityOfPage": `https://www.itfixer.in/blog/${pathId}`,
-        "datePublished": post?.created_at,
-        "inLanguage": "en-IN",
-    };
+    const currentUrl = `https://www.itfixer.in/blog/${pathId}`;
+    const schemaString = getBlogSchema(post, currentUrl);
 
     return (
         <>
@@ -144,12 +195,11 @@ export default async function BlogDetailsPage({ params: paramsPromise }: Props) 
                 href={post?.banner_url || "https://www.itfixer.in/assets/default-blog.jpg"}
             />
 
-            {/* ================= SCHEMA ================= */}
-            <Script
+            {/* ================= SSR SCHEMA (JSON-LD) ================= */}
+            <script
                 type="application/ld+json"
-                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(schemaData),
+                    __html: schemaString,
                 }}
             />
 
