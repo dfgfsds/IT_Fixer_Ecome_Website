@@ -69,7 +69,7 @@ const nextConfig: NextConfig = {
         destination: 'https://www.itfixer.in/',
         permanent: true,
       },
-      // 3. auth subdomain (except /__/auth) -> Home
+
       {
         source: '/((?!__/auth).*)',
         has: [
