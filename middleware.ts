@@ -9,54 +9,6 @@ const OLD_SHOP_IDS = new Set([
   '20718', '21227', '21184', '20756', '20301', '20089',
 ]);
 
-const OLD_CHUNKS = new Set([
-  'ade17bf0898c3c10.js',
-  'ff1a16fafef87110.js',
-  '4318deed234a6e25.js',
-  'ff794059697f26e2.js',
-  'd9334c2ddda80207.css',
-  '43b9aaf3de4c8d3b.js',
-  'd2be314c3ece3fbe.js',
-  '3a8befc856e436ec.js',
-  'd43ab978ac5b76ce.css',
-  '1298b3b3964e2e42.css',
-  '383f655aa9b6751d.js',
-  'f3e16f38b140e6c8.js',
-  '77b05d7166096fba.js',
-  '079636f4a46c3785.css',
-  'c9122760476e2b9b.css',
-  '31452da097d680bf.js',
-  '28703e4cfc303965.css',
-  '2ea9dc69037568ac.js',
-  '7e62287be6ffbcb3.css',
-  'ace6c6a5f87696cf.css',
-  '993135f31a74fd88.js',
-  '6aab79ebbd4c8676.js',
-  '0bd03417962664b7.css',
-  '9022b411cc00422e.js',
-  '41538ea294fb8f78.js',
-  '8aca3f3ea559a05a.js',
-  '26436a9ce65921a9.js',
-  '38b7735b81a948f1.js',
-  '3baa143acd78cbf7.js',
-  '87355c8a11257913.js',
-  'eb4777717689e3c9.js',
-  'c80e544b946df376.js',
-  '2da683ad7d51dcdd.js',
-  'b88f293b0629eba9.js',
-  'eab2a7343187df04.js',
-  'bb1616c6d80bf8a1.js',
-  '1486c28750e4ee54.js',
-  'da5bb0cb802fa7be.js',
-  '549945ce8bdd5700.js',
-  'c638f8abb228110b.js',
-  'b1d43d190945c86d.js',
-  'f2457654c5f036c3.css',
-  'c6ac20f9023dc56d.js',
-  '74602c97407491bb.js',
-  '8abaeba327c1a7e3.js',
-]);
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const host = request.headers.get('host') || '';
@@ -79,22 +31,19 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 4. Old Static Chunks from previous deployments -> Redirect to home
-  if (pathname.startsWith('/_next/static/chunks/')) {
-    const filename = pathname.split('/').pop() || '';
-    if (OLD_CHUNKS.has(filename)) {
-      return NextResponse.redirect(new URL('/', request.url), 301);
-    }
-  }
-
   return NextResponse.next();
 }
 
 export const config = {
   matcher: [
+    /*
+     * Match specific routes only:
+     * - shop subpaths
+     * - root path
+     * Never match _next/static, _next/image, css, js, or assets
+     */
     '/shop/:path*',
-    '/_next/static/chunks/:path*',
     '/',
-    '/((?!api|_next/image|assets|images|favicon\\.ico|.*\\.(?:jpg|jpeg|png|gif|svg|webp|ico|woff|woff2|ttf)).*)',
+    '/((?!api|_next/static|_next/image|assets|images|favicon\\.ico|.*\\.(?:jpg|jpeg|png|gif|svg|webp|ico|woff|woff2|ttf|css|js)).*)',
   ],
 };
