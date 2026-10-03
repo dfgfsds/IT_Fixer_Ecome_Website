@@ -133,7 +133,7 @@ export default function Login() {
                 if (userId) {
                     localStorage.setItem('userId', userId);
                     try {
-                        // 1. Fetch the user's existing cart from server
+
                         const cartRes = await getCartApi(`user/${userId}/`);
 
                         // 2. Extract the ID (handles different API response shapes)
