@@ -82,12 +82,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // 4. Old static chunk files from previous builds -> Home
-      ...OLD_CHUNKS.map((file) => ({
-        source: `/_next/static/chunks/${file}`,
-        destination: '/',
-        permanent: true,
-        basePath: false,
-      })),
+      // ...OLD_CHUNKS.map((file) => ({
+      //   source: `/_next/static/chunks/${file}`,
+      //   destination: '/',
+      //   permanent: true,
+      //   basePath: false,
+      // })),
     ];
   },
 };
