@@ -22,17 +22,16 @@ export default function AboutSection() {
                         <div className="col-lg-6">
                             <div className="about-content">
                                 <div className="section-title mb-0">
-                                    <h6 className="subtitle text-uppercase tx-subTitle">About Our Gaming Zone</h6>
+                                    <h5 className="subtitle text-uppercase tx-subTitle">Build Your Dream Gaming PC In Chennai</h5>
                                     <h2 className="tx-title sec_title">
                                         High-Performance Gaming PCs, Streaming PCs & Editing PCs
                                     </h2>
                                 </div>
                                 <p className="about-text">
-                                    IT Fixer is a leading Gaming PC Shop in Chennai, specializing in Custom Gaming PCs, Streaming PCs, Editing PCs, Gaming Laptops, Creator PCs, and High-Performance Computer Systems. Whether you're a competitive gamer, YouTuber, live streamer, content creator, video editor or creative professional, we build powerful systems that deliver exceptional speed, stability and performance.
-
+                                    IT Fixer is a leading Gaming PC Shop in Chennai, offering Custom Gaming PCs, Streaming PCs, Editing PCs, Gaming Laptops, Creator PCs and High-Performance Computer Systems. Whether you're a competitive gamer, YouTuber, live streamer, content creator, video editor or creative professional, we help you find the right system for smooth performance and reliable everyday use.
                                 </p>
                                 <p className=" mt-2">
-                                    Our expert team helps you choose or customize the perfect PC based on your gaming, streaming, editing and content creation requirements while ensuring maximum value for your budget.
+                                    Our expert team helps you choose or customize a PC that matches your gaming, streaming, editing and content creation needs while making the most of your budget.
                                 </p>
 
 

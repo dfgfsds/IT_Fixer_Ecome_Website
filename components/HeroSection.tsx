@@ -124,7 +124,7 @@ export default function HeroSection() {
                             </h2>
                             <div className="hero-sub-content">
                                 <p className="">
-                                    IT Fixer is a trusted gaming pc builder in Chennai for gamers, streamers, video editors, content creators and professionals who need powerful systems built for real performance. As a dedicated PC Solution in Chennai, we help customers choose, assemble and upgrade systems that match their exact usage, budget and future needs.
+                                    IT Fixer is a trusted gaming PC builder in Chennai, serving gamers, streamers, video editors, content creators and professionals who need reliable performance. As a dedicated PC Solution in Chennai, we help you choose, assemble and upgrade custom systems to suit your usage, budget and future requirements.
                                 </p>
                                 <Link href="/contact" className="theme-btn style-2 ">
                                     <span className="left-line"></span>
