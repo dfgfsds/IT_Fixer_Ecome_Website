@@ -1,200 +1,3 @@
-// "use client";
-// import { postCreateUserAPi } from "@/api-endpoints/authendication";
-// import { postCartCreateApi } from "@/api-endpoints/CartsApi";
-// import { useVendor } from "@/context/VendorContext";
-// import { useUser } from "@/context/UserContext";
-// import { useRouter } from "next/navigation";
-// import Link from "next/link";
-// import { Home, Eye, EyeOff, Loader } from "lucide-react";
-// import { handleApiError } from "@/lib/error-handler";
-// import { useState } from "react";
-// import { toast } from "sonner";
-
-// export default function Signup() {
-//     const [name, setName] = useState('');
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [mobile, setMobile] = useState('');
-//     const [loading, setLoading] = useState(false);
-//     const [showPassword, setShowPassword] = useState(false);
-
-//     const { vendorId } = useVendor();
-//     const { refreshUser } = useUser();
-//     const router = useRouter();
-
-//     const handleSubmit = async (e: React.FormEvent) => {
-//         e.preventDefault();
-//         if (!name || !email || !password || !mobile) {
-//             toast.error('Please fill in all fields.');
-//             return;
-//         }
-
-//         if (mobile.length !== 10) {
-//             toast.error('Mobile number must be exactly 10 digits.');
-//             return;
-//         }
-
-//         setLoading(true);
-
-//         try {
-//             const userResponse = await postCreateUserAPi({
-//                 name,
-//                 email,
-//                 password,
-//                 contact_number: mobile,
-//                 vendor: vendorId,
-//                 created_by: name
-//             });
-
-//             if (userResponse.data?.user?.id || userResponse.data?.id || userResponse.data?.user_id) {
-//                 const userId = userResponse.data?.user?.id || userResponse.data.id || userResponse.data.user_id;
-//                 localStorage.setItem('userId', userId);
-
-//                 try {
-//                     const cartResponse = await postCartCreateApi('', {
-//                         user: userId,
-//                         vendor: vendorId,
-//                         created_by: name
-//                     });
-//                     if (cartResponse.data?.id) {
-//                         localStorage.setItem('cartId', cartResponse.data.id);
-//                     }
-//                 } catch (cartErr) {
-//                     console.warn("Soft Error: Failed to create cart:", cartErr);
-//                 }
-
-//                 refreshUser();
-//                 toast.success('Account created successfully!');
-//                 router.push('/');
-//             } else {
-//                 toast.error(handleApiError(userResponse));
-//             }
-//         } catch (err: any) {
-//             toast.error(handleApiError(err));
-//         } finally {
-//             setLoading(false);
-//         }
-//     };
-
-//     return (
-//         <div id="smooth-content">
-//             <div
-//                 className="gt-breadcrumb-wrapper bg-cover"
-//                 style={{ backgroundImage: "url('assets/img/breadcrumb.png')" }}
-//             >
-//                 <div className="gt-left-shape">
-//                     <img src="assets/img/shape-1.png" alt="img" />
-//                 </div>
-//                 <div className="gt-right-shape">
-//                     <img src="assets/img/shape-2.png" alt="img" />
-//                 </div>
-//                 <div className="gt-blur-shape">
-//                     <img src="assets/img/breadcrumb-shape.png" alt="img" />
-//                 </div>
-
-//                 <div className="container">
-//                     <div className="gt-page-heading">
-//                         <div className="gt-breadcrumb-sub-title">
-//                             <h1 className="wow fadeInUp" data-wow-delay=".3s">SIGNUP</h1>
-//                         </div>
-
-//                         <ul className="gt-breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
-//                             <li>
-//                                 <Link
-//                                     href="/"
-//                                     className="d-inline-flex align-items-center gap-1"
-//                                 >
-//                                     <Home size={16} className="mb-[1px]" />
-//                                     home :
-//                                 </Link>
-//                             </li>
-//                             <li className="color">Signup</li>
-//                         </ul>
-//                     </div>
-//                 </div>
-//             </div>
-//             <div className="auth-wrapper">
-//                 <div className="auth-card">
-
-//                     <h1 className="text-uppercase">Create Account</h1>
-//                     <p>Join with us today</p>
-
-//                     <form className="auth-form" onSubmit={handleSubmit}>
-
-//                         <div className="mb-3">
-//                             <input
-//                                 className="form-control"
-//                                 placeholder="Full Name"
-//                                 value={name}
-//                                 onChange={(e) => setName(e.target.value)}
-//                                 disabled={loading}
-//                             />
-//                         </div>
-
-//                         <div className="mb-3">
-//                             <input
-//                                 className="form-control"
-//                                 placeholder="Email"
-//                                 value={email}
-//                                 onChange={(e) => setEmail(e.target.value)}
-//                                 disabled={loading}
-//                             />
-//                         </div>
-
-//                         <div className="mb-3">
-//                             <input
-//                                 className="form-control"
-//                                 placeholder="Mobile Number"
-//                                 value={mobile}
-//                                 onChange={(e) => {
-//                                     const val = e.target.value.replace(/\D/g, '');
-//                                     if (val.length <= 10) setMobile(val);
-//                                 }}
-//                                 disabled={loading}
-//                             />
-//                         </div>
-
-//                         <div className="mb-3 position-relative">
-//                             <input
-//                                 type={showPassword ? "text" : "password"}
-//                                 className="form-control"
-//                                 placeholder="Password"
-//                                 value={password}
-//                                 onChange={(e) => setPassword(e.target.value)}
-//                                 disabled={loading}
-//                             />
-//                             <button
-//                                 type="button"
-//                                 className="position-absolute border-0 bg-transparent p-0"
-//                                 style={{ right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#fff', zIndex: 10 }}
-//                                 onClick={() => setShowPassword(!showPassword)}
-//                             >
-//                                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-//                             </button>
-//                         </div>
-
-//                         <button
-//                             type="submit"
-//                             className="vs-btn w-100"
-//                             disabled={loading}
-//                             style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
-//                         >
-//                             {loading && <Loader size={18} className="animate-spin" />}
-//                             {loading ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
-//                         </button>
-
-//                         <p className="mt-4">
-//                             Already have account?{" "}
-//                             <Link href="/login" className="auth-link">Login</Link>
-//                         </p>
-//                     </form>
-
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-
 "use client";
 import { postCreateUserAPi, postGoogleLoginApi } from "@/api-endpoints/authendication";
 import { getCartApi, postCartCreateApi } from "@/api-endpoints/CartsApi";
@@ -202,12 +5,13 @@ import { useVendor } from "@/context/VendorContext";
 import { useUser } from "@/context/UserContext";
 import { auth, googleProvider } from "@/lib/firebase";
 import { signInWithPopup } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Home, Eye, EyeOff, Loader } from "lucide-react";
 import { handleApiError } from "@/lib/error-handler";
 import { useState } from "react";
 import { toast } from "sonner";
+import { syncGuestCartToApi, hasGuestCartItems } from "@/lib/cartUtils";
 
 export default function Signup() {
     const [name, setName] = useState('');
@@ -217,13 +21,15 @@ export default function Signup() {
     const [loading, setLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    
+
     // Password error state-kkaga idhu 👇
     const [passwordError, setPasswordError] = useState('');
 
     const { vendorId } = useVendor();
     const { refreshUser } = useUser();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirectParam = searchParams.get('redirect');
 
     // Password-ah realtime-ah validate panna indha function
     const validatePassword = (value: string) => {
@@ -232,7 +38,7 @@ export default function Signup() {
             setPasswordError('');
             return;
         }
-        
+
         // RegEx for 8 chars, 1 letter, and 1 special character
         const hasLetter = /[a-zA-Z]/.test(value);
         const hasSpecialChar = /[@$!%*?&]/.test(value);
@@ -267,6 +73,7 @@ export default function Signup() {
                     if (response.data?.token) {
                         localStorage.setItem('token', response.data.token);
                     }
+                    let activeCartId: string | number | null = null;
                     try {
                         // 1. Fetch the user's existing cart from server
                         const cartRes = await getCartApi(`user/${userId}/`);
@@ -275,6 +82,7 @@ export default function Signup() {
                         const carts = cartRes?.data?.data || cartRes?.data;
                         const existingCartId = Array.isArray(carts) ? carts[0]?.id : carts?.id;
                         if (existingCartId) {
+                            activeCartId = existingCartId;
                             localStorage.setItem('cartId', String(existingCartId));
                         } else {
                             // 3. Create a cart if they don't have one yet
@@ -283,14 +91,20 @@ export default function Signup() {
                                 vendor: vendorId || 63,
                                 created_by: result.user.displayName || result.user.email || 'user'
                             });
-                            if (newCart?.data?.id) localStorage.setItem('cartId', String(newCart.data.id));
+                            if (newCart?.data?.id) {
+                                activeCartId = newCart.data.id;
+                                localStorage.setItem('cartId', String(newCart.data.id));
+                            }
+                        }
+                        if (activeCartId && hasGuestCartItems()) {
+                            await syncGuestCartToApi(String(activeCartId), String(userId), vendorId);
                         }
                     } catch (e) {
                         console.error("Identity restore failed", e);
                     }
                     refreshUser();
                     toast.success('Logged in with Google successfully!');
-                    router.push('/shop');
+                    router.push(redirectParam || (hasGuestCartItems() ? '/cart' : '/shop'));
                 } else {
                     toast.error('User ID not found in response.');
                 }
@@ -349,6 +163,9 @@ export default function Signup() {
                     });
                     if (cartResponse.data?.id) {
                         localStorage.setItem('cartId', cartResponse.data.id);
+                        if (hasGuestCartItems()) {
+                            await syncGuestCartToApi(String(cartResponse.data.id), String(userId), vendorId);
+                        }
                     }
                 } catch (cartErr) {
                     console.warn("Soft Error: Failed to create cart:", cartErr);
@@ -356,7 +173,7 @@ export default function Signup() {
 
                 refreshUser();
                 toast.success('Account created successfully!');
-                router.push('/');
+                router.push(redirectParam || (hasGuestCartItems() ? '/cart' : '/'));
             } else {
                 toast.error(handleApiError(userResponse));
             }
@@ -502,7 +319,7 @@ export default function Signup() {
                             >
                                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>
-                            
+
                             {passwordError && (
                                 <div className="text-danger small mt-1 text-left" style={{ fontSize: "12px", color: "#dc3545" }}>
                                     {passwordError}
@@ -522,7 +339,7 @@ export default function Signup() {
 
                         <p className="mt-4">
                             Already have account?{" "}
-                            <Link href="/login" className="auth-link">Login</Link>
+                            <Link href={redirectParam ? `/login?redirect=${encodeURIComponent(redirectParam)}` : "/login"} className="auth-link">Login</Link>
                         </p>
                     </form>
 

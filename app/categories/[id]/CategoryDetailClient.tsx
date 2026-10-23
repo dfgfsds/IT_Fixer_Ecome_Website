@@ -282,6 +282,7 @@ import { getProductVariantCartItemUpdate } from "@/api-endpoints/products";
 import { updateCartitemsApi, deleteCartitemsApi } from "@/api-endpoints/CartsApi";
 import { slugify } from "@/lib/slugify";
 import Script from "next/script";
+import { addToGuestCart, updateGuestCartQty } from "@/lib/cartUtils";
 
 export default function CategoryDetailClient({ id, seo }: { id: string; seo: any }) {
     const FALLBACK_IMAGE = "/assets/img/placeholder-image.jpg";
@@ -322,7 +323,23 @@ export default function CategoryDetailClient({ id, seo }: { id: string; seo: any
     const displayedProducts = showAll ? filteredProducts : filteredProducts.slice(0, 8);
 
     const handleAddToCart = async (productId: number) => {
-        if (!isAuthenticated) return router.push("/login");
+        if (!isAuthenticated) {
+            const prod = (apiData?.data || []).find((p: any) => Number(p.id) === Number(productId));
+            addToGuestCart({
+                product: productId,
+                quantity: 1,
+                product_details: {
+                    id: productId,
+                    name: prod?.name || "Product",
+                    price: prod?.price || 0,
+                    discount: prod?.discount || 0,
+                    image_urls: prod?.image_urls || [FALLBACK_IMAGE],
+                }
+            });
+            setIsCartOpen(true);
+            toast.success("Added to cart");
+            return;
+        }
 
         const cartId = typeof window !== 'undefined' ? localStorage.getItem('cartId') : null;
         const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
@@ -340,12 +357,20 @@ export default function CategoryDetailClient({ id, seo }: { id: string; seo: any
             queryClient.invalidateQueries(["getCartitemsData"] as InvalidateQueryFilters);
             queryClient.invalidateQueries(["getCartItemsDetailed"] as InvalidateQueryFilters);
             setIsCartOpen(true);
+            toast.success("Added to cart");
         } catch (e) {
             toast.error(handleApiError(e));
         }
     };
 
     const handleUpdateQty = async (cartId: any, type: 'increase' | 'decrease', currentQty: number) => {
+        if (!isAuthenticated || String(cartId).startsWith('guest_')) {
+            updateGuestCartQty(cartId, type, currentQty);
+            if (type === 'decrease' && currentQty === 1) {
+                toast.success("Item removed from cart");
+            }
+            return;
+        }
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${cartId}`);

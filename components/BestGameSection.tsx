@@ -15,6 +15,7 @@ import { updateCartitemsApi, deleteCartitemsApi } from "@/api-endpoints/CartsApi
 import { toast } from "sonner";
 import { formatPrice } from "@/lib/utils";
 import { slugify } from "@/lib/slugify";
+import { addToGuestCart, updateGuestCartQty } from "@/lib/cartUtils";
 
 export default function BestGameSection() {
     const { isAuthenticated } = useUser();
@@ -26,7 +27,23 @@ export default function BestGameSection() {
     const queryClient = useQueryClient();
 
     const handleAddToCart = async (productId: number) => {
-        if (!isAuthenticated) return router.push("/login");
+        if (!isAuthenticated) {
+            const prod = products?.data?.find((p: any) => Number(p.id) === Number(productId));
+            addToGuestCart({
+                product: productId,
+                quantity: 1,
+                product_details: {
+                    id: productId,
+                    name: prod?.name || "Product",
+                    price: prod?.price || 0,
+                    discount: prod?.discount || 0,
+                    image_urls: prod?.image_urls || ['https://via.placeholder.com/300'],
+                }
+            });
+            setIsCartOpen(true);
+            toast.success("Added to cart");
+            return;
+        }
         const payload = {
             product: productId,
             cart: localStorage.getItem('cartId'),
@@ -44,6 +61,13 @@ export default function BestGameSection() {
     };
 
     const handleUpdateQty = async (cartId: any, type: 'increase' | 'decrease', currentQty: number) => {
+        if (!isAuthenticated || String(cartId).startsWith('guest_')) {
+            updateGuestCartQty(cartId, type, currentQty);
+            if (type === 'decrease' && currentQty === 1) {
+                toast.success("Item removed from cart");
+            }
+            return;
+        }
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${cartId}/`);

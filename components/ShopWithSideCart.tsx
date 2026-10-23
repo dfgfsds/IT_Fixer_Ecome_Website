@@ -8,14 +8,25 @@ import { InvalidateQueryFilters, useQuery, useQueryClient } from "@tanstack/reac
 import { useVendor } from "@/context/VendorContext";
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
+import { getGuestCart, updateGuestCartQty, GUEST_CART_EVENT } from "@/lib/cartUtils";
 
 export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
     const queryClient = useQueryClient();
     const { vendorId } = useVendor();
     const [userId, setUserId] = useState<string | null>(null);
+    const [guestCart, setGuestCart] = useState<any[]>([]);
 
     useEffect(() => {
         setUserId(localStorage.getItem('userId'));
+        setGuestCart(getGuestCart());
+
+        const syncGuest = () => setGuestCart(getGuestCart());
+        window.addEventListener('storage', syncGuest);
+        window.addEventListener(GUEST_CART_EVENT, syncGuest);
+        return () => {
+            window.removeEventListener('storage', syncGuest);
+            window.removeEventListener(GUEST_CART_EVENT, syncGuest);
+        };
     }, []);
 
     const { data: detailedCart, isLoading: isCartLoading } = useQuery({
@@ -24,7 +35,7 @@ export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
         enabled: !!userId && !!vendorId && isCartOpen,
     });
 
-    const cartData = detailedCart?.data?.cart_items || [];
+    const cartData = userId ? (detailedCart?.data?.cart_items || []) : guestCart;
 
     const totalQuantity = cartData.reduce((acc: number, item: any) => acc + (item.quantity || 0), 0);
 
@@ -33,6 +44,13 @@ export default function ShopWithSideCart({ isCartOpen, setIsCartOpen }: any) {
     }, 0);
 
     const handleUpdateQuantity = async (cartId: any, type: 'increase' | 'decrease', currentQty: number) => {
+        if (!userId || String(cartId).startsWith('guest_')) {
+            updateGuestCartQty(cartId, type, currentQty);
+            if (type === 'decrease' && currentQty === 1) {
+                toast.success("Item removed from cart");
+            }
+            return;
+        }
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${cartId}/`);
