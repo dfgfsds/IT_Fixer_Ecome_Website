@@ -202,12 +202,13 @@ import { useVendor } from "@/context/VendorContext";
 import { useUser } from "@/context/UserContext";
 import { auth, googleProvider } from "@/lib/firebase";
 import { signInWithPopup } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Home, Eye, EyeOff, Loader } from "lucide-react";
 import { handleApiError } from "@/lib/error-handler";
 import { useState } from "react";
 import { toast } from "sonner";
+import { syncGuestCartToApi, hasGuestCartItems } from "@/lib/cartUtils";
 
 export default function Signup() {
     const [name, setName] = useState('');
@@ -224,6 +225,8 @@ export default function Signup() {
     const { vendorId } = useVendor();
     const { refreshUser } = useUser();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirectParam = searchParams.get('redirect');
 
     // Password-ah realtime-ah validate panna indha function
     const validatePassword = (value: string) => {
@@ -267,6 +270,7 @@ export default function Signup() {
                     if (response.data?.token) {
                         localStorage.setItem('token', response.data.token);
                     }
+                    let activeCartId: string | number | null = null;
                     try {
                         // 1. Fetch the user's existing cart from server
                         const cartRes = await getCartApi(`user/${userId}/`);
@@ -275,6 +279,7 @@ export default function Signup() {
                         const carts = cartRes?.data?.data || cartRes?.data;
                         const existingCartId = Array.isArray(carts) ? carts[0]?.id : carts?.id;
                         if (existingCartId) {
+                            activeCartId = existingCartId;
                             localStorage.setItem('cartId', String(existingCartId));
                         } else {
                             // 3. Create a cart if they don't have one yet
@@ -283,14 +288,20 @@ export default function Signup() {
                                 vendor: vendorId || 63,
                                 created_by: result.user.displayName || result.user.email || 'user'
                             });
-                            if (newCart?.data?.id) localStorage.setItem('cartId', String(newCart.data.id));
+                            if (newCart?.data?.id) {
+                                activeCartId = newCart.data.id;
+                                localStorage.setItem('cartId', String(newCart.data.id));
+                            }
+                        }
+                        if (activeCartId && hasGuestCartItems()) {
+                            await syncGuestCartToApi(String(activeCartId), String(userId), vendorId);
                         }
                     } catch (e) {
                         console.error("Identity restore failed", e);
                     }
                     refreshUser();
                     toast.success('Logged in with Google successfully!');
-                    router.push('/shop');
+                    router.push(redirectParam || (hasGuestCartItems() ? '/cart' : '/shop'));
                 } else {
                     toast.error('User ID not found in response.');
                 }
@@ -349,6 +360,9 @@ export default function Signup() {
                     });
                     if (cartResponse.data?.id) {
                         localStorage.setItem('cartId', cartResponse.data.id);
+                        if (hasGuestCartItems()) {
+                            await syncGuestCartToApi(String(cartResponse.data.id), String(userId), vendorId);
+                        }
                     }
                 } catch (cartErr) {
                     console.warn("Soft Error: Failed to create cart:", cartErr);
@@ -356,7 +370,7 @@ export default function Signup() {
 
                 refreshUser();
                 toast.success('Account created successfully!');
-                router.push('/');
+                router.push(redirectParam || (hasGuestCartItems() ? '/cart' : '/'));
             } else {
                 toast.error(handleApiError(userResponse));
             }
@@ -522,7 +536,7 @@ export default function Signup() {
 
                         <p className="mt-4">
                             Already have account?{" "}
-                            <Link href="/login" className="auth-link">Login</Link>
+                            <Link href={redirectParam ? `/login?redirect=${encodeURIComponent(redirectParam)}` : "/login"} className="auth-link">Login</Link>
                         </p>
                     </form>
 

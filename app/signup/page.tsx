@@ -1,4 +1,5 @@
 
+import { Suspense } from "react";
 import { Metadata } from "next";
 import Signup from "./clientPage";
 
@@ -42,5 +43,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function SignupPage() {
-    return <Signup />
+    return (
+        <Suspense fallback={null}>
+            <Signup />
+        </Suspense>
+    );
 }

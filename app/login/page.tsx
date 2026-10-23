@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Login from "./clientLogin";
 import { Metadata } from "next";
 
@@ -42,5 +43,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function LoginPage() {
-    return <Login />;
+    return (
+        <Suspense fallback={null}>
+            <Login />
+        </Suspense>
+    );
 }
