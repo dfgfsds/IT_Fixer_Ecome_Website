@@ -5,15 +5,33 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'test-ecomapi.ftdigitalsolutions.org',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'test-ecomapi.ftdigitalsolutions.org',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'ecomapi.ftdigitalsolutions.org',
         port: '',
-        pathname: '/media/**',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'test-ecomapi.justvy.in',
         port: '',
-        pathname: '/media/**',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ecomapi.justvy.in',
+        port: '',
+        pathname: '/**',
       },
     ],
   },

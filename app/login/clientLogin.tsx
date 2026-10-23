@@ -7,10 +7,11 @@ import { auth, googleProvider } from "@/lib/firebase";
 import { signInWithPopup } from "firebase/auth";
 import Link from "next/link";
 import { Home, Eye, EyeOff, Loader } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { handleApiError } from "@/lib/error-handler";
+import { syncGuestCartToApi, hasGuestCartItems } from "@/lib/cartUtils";
 
 export default function Login() {
     const [loginMethod, setLoginMethod] = useState<'email' | 'mobile'>('mobile');
@@ -26,6 +27,8 @@ export default function Login() {
 
     const { vendorId } = useVendor();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirectParam = searchParams.get('redirect');
     const { refreshUser } = useUser();
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, action: () => void) => {
@@ -57,6 +60,7 @@ export default function Login() {
                 const userId = response.data.user_id || response.data.id;
                 if (userId) {
                     localStorage.setItem('userId', userId);
+                    let activeCartId: string | null = null;
                     try {
                         // 1. Fetch the user's existing cart from server
                         const cartRes = await getCartApi(`user/${userId}/`);
@@ -65,16 +69,31 @@ export default function Login() {
                         const carts = cartRes?.data?.data || cartRes?.data;
                         const existingCartId = Array.isArray(carts) ? carts[0]?.id : carts?.id;
                         if (existingCartId) {
-                            localStorage.setItem('cartId', String(existingCartId));
+                            activeCartId = String(existingCartId);
+                            localStorage.setItem('cartId', activeCartId);
                         } else {
                             // 3. Create a cart if they don't have one yet
                             const newCart = await postCartCreateApi('', { user: userId, vendor: vendorId, created_by: 'user' });
-                            if (newCart?.data?.id) localStorage.setItem('cartId', String(newCart.data.id));
+                            if (newCart?.data?.id) {
+                                activeCartId = String(newCart.data.id);
+                                localStorage.setItem('cartId', activeCartId);
+                            }
                         }
                     } catch (e) { console.error("Identity restore failed", e); }
+
+                    // Sync guest cart to API if items exist
+                    if (activeCartId) {
+                        try {
+                            await syncGuestCartToApi(activeCartId, userId, vendorId || 157);
+                        } catch (syncErr) {
+                            console.error("Guest cart sync failed:", syncErr);
+                        }
+                    }
+
                     refreshUser();
                     toast.success('Logged in successfully!');
-                    router.push('/shop');
+                    const target = redirectParam || (hasGuestCartItems() ? '/cart' : '/shop');
+                    router.push(target);
                 } else {
                     toast.error('User ID not found in response.');
                 }
@@ -132,6 +151,7 @@ export default function Login() {
                 const userId = response.data.user_id || response.data.id;
                 if (userId) {
                     localStorage.setItem('userId', userId);
+                    let activeCartId: string | null = null;
                     try {
 
                         const cartRes = await getCartApi(`user/${userId}/`);
@@ -140,16 +160,31 @@ export default function Login() {
                         const carts = cartRes?.data?.data || cartRes?.data;
                         const existingCartId = Array.isArray(carts) ? carts[0]?.id : carts?.id;
                         if (existingCartId) {
-                            localStorage.setItem('cartId', String(existingCartId));
+                            activeCartId = String(existingCartId);
+                            localStorage.setItem('cartId', activeCartId);
                         } else {
                             // 3. Create a cart if they don't have one yet
                             const newCart = await postCartCreateApi('', { user: userId, vendor: vendorId, created_by: 'user' });
-                            if (newCart?.data?.id) localStorage.setItem('cartId', String(newCart.data.id));
+                            if (newCart?.data?.id) {
+                                activeCartId = String(newCart.data.id);
+                                localStorage.setItem('cartId', activeCartId);
+                            }
                         }
                     } catch (e) { console.error("Identity restore failed", e); }
+
+                    // Sync guest cart to API if items exist
+                    if (activeCartId) {
+                        try {
+                            await syncGuestCartToApi(activeCartId, userId, vendorId || 157);
+                        } catch (syncErr) {
+                            console.error("Guest cart sync failed:", syncErr);
+                        }
+                    }
+
                     refreshUser();
                     toast.success('Verification successful!');
-                    router.push('/shop');
+                    const target = redirectParam || (hasGuestCartItems() ? '/cart' : '/shop');
+                    router.push(target);
                 } else {
                     toast.error('User ID not found in response.');
                 }
@@ -204,6 +239,7 @@ export default function Login() {
                         localStorage.setItem('email', response.data?.email || response.data?.user?.email);
                     }
 
+                    let activeCartId: string | null = null;
                     try {
                         // 1. Fetch the user's existing cart from server
                         const cartRes = await getCartApi(`user/${userId}/`);
@@ -212,22 +248,37 @@ export default function Login() {
                         const carts = cartRes?.data?.data || cartRes?.data;
                         const existingCartId = Array.isArray(carts) ? carts[0]?.id : carts?.id;
                         if (existingCartId) {
-                            localStorage.setItem('cartId', String(existingCartId));
+                            activeCartId = String(existingCartId);
+                            localStorage.setItem('cartId', activeCartId);
                         } else {
                             // 3. Create a cart if they don't have one yet
                             const newCart = await postCartCreateApi('', {
                                 user: userId,
-                                vendor: vendorId || 63,
+                                vendor: vendorId || 157,
                                 created_by: result.user.displayName || result.user.email || 'user'
                             });
-                            if (newCart?.data?.id) localStorage.setItem('cartId', String(newCart.data.id));
+                            if (newCart?.data?.id) {
+                                activeCartId = String(newCart.data.id);
+                                localStorage.setItem('cartId', activeCartId);
+                            }
                         }
                     } catch (e) {
                         console.error("Identity restore failed", e);
                     }
+
+                    // Sync guest cart to API if items exist
+                    if (activeCartId) {
+                        try {
+                            await syncGuestCartToApi(activeCartId, userId, vendorId || 157);
+                        } catch (syncErr) {
+                            console.error("Guest cart sync failed:", syncErr);
+                        }
+                    }
+
                     refreshUser();
                     toast.success('Logged in with Google successfully!');
-                    router.push('/shop');
+                    const target = redirectParam || (hasGuestCartItems() ? '/cart' : '/shop');
+                    router.push(target);
                 } else {
                     toast.error('User ID not found in response.');
                 }

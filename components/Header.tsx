@@ -274,7 +274,7 @@ export default function Header() {
                                     </button>
 
                                     <div className="header-button header-cart-btn ms-2 me-2 me-sm-3" style={{ position: 'relative' }}>
-                                        <Link href={isAuthenticated ? "/cart" : "/login"} className="text-white d-inline-flex position-relative">
+                                        <Link href="/cart" className="text-white d-inline-flex position-relative">
                                             <ShoppingCart size={20} />
                                             {cartCount > 0 && (
                                                 <span

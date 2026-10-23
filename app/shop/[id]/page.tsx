@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { handleApiError } from "@/lib/error-handler";
 import { getProductWithVariantSizeApi } from "@/api-endpoints/products";
 import { slugify } from "@/lib/slugify";
+import { addToGuestCart, updateGuestCartQty } from "@/lib/cartUtils";
 
 export default function ProductDetails() {
     const { isAuthenticated } = useUser();
@@ -130,7 +131,26 @@ export default function ProductDetails() {
     const cartId = matchedCartItem?.id || null;
 
     const handleAddToCart = async () => {
-        if (!isAuthenticated) return router.push("/login");
+        if (!isAuthenticated) {
+            addToGuestCart({
+                product: Number(product?.id || id),
+                product_variant: selectedVariant?.id || null,
+                product_size: selectedSize?.id || null,
+                quantity: 1,
+                product_details: {
+                    id: product?.id || id,
+                    name: product?.name,
+                    price: price,
+                    discount: discount,
+                    image_urls: (images && images.length > 0) ? images : [FALLBACK_IMAGE],
+                    product_variant_title: selectedVariant?.product_variant_title || selectedVariant?.title || selectedVariant?.name || null,
+                    product_size: selectedSize?.product_size || selectedSize?.size || null,
+                }
+            });
+            setIsCartOpen(true);
+            toast.success("Added to cart");
+            return;
+        }
 
         let productPayload = {};
         if (selectedSize?.id) {
@@ -162,6 +182,13 @@ export default function ProductDetails() {
     };
 
     const handleUpdateQty = async (id: any, type: 'increase' | 'decrease', currentQty: number) => {
+        if (!isAuthenticated || String(id).startsWith('guest_')) {
+            updateGuestCartQty(id, type, currentQty);
+            if (type === 'decrease' && currentQty === 1) {
+                toast.success("Item removed from cart");
+            }
+            return;
+        }
         try {
             if (type === 'decrease' && currentQty === 1) {
                 await deleteCartitemsApi(`${id}/`);
