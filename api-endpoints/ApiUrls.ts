@@ -1,7 +1,7 @@
 export const baseUrl = 'https://ecomapi.ftdigitalsolutions.org';
 // const baseUrl ='http://82.29.161.36'
 // export const baseUrl = 'https://test-ecomapi.ftdigitalsolutions.org'
-
+export const BlogUrl = 'https://test-ecomapi.ftdigitalsolutions.org';
 
 const cartCreate = `${baseUrl}/api/carts/`;
 const createUsers = `${baseUrl}/create_users/`;
@@ -37,7 +37,7 @@ const coupons = `${baseUrl}/coupons/`;
 const orderAndOrderId = `${baseUrl}/order-with-order-items-by-order-id/`;
 const checkDtdcCharge = `${baseUrl}/Check-Dtdc-Courier-Serviceability-delivery-charge/`
 const codPay = `${baseUrl}/cod-pay-now/`;
-const blog = `${baseUrl}/blog/`;
+const blog = `${BlogUrl}/blog/`;
 const sendSmsOtpUser = `${baseUrl}/send-sms-opt-user/`;
 const otpVerify = `${baseUrl}/verify-sms-opt-return-user/`;
 const paymentDeliveryPartner = `${baseUrl}/vendor-site-payment-delivery-partner-details/`;
