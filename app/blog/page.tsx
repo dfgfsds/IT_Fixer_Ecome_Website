@@ -59,7 +59,7 @@ export default async function BlogPage() {
     const vendorId = "157";
     const response = await getBlogsApi(`?vendor_id=${vendorId}`);
     const blogs = response?.data?.blogs ?? [];
-
+    console.log(response)
     return (
         <>
             {/* ================= IMAGE SRC LINK ================= */}

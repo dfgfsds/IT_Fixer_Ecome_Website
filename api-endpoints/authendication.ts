@@ -73,8 +73,8 @@ export const getBlogsApi = async (query: any) => {
   try {
     const queryStr = String(query);
     const formattedQuery = queryStr.endsWith('/') ? queryStr : `${queryStr}`;
-    // const response = await fetch(`${ApiUrls.blog}${formattedQuery}`);
-    const response = await fetch(` https://test-ecomapi.justvy.in/blog/${formattedQuery}`);
+    const response = await fetch(`${ApiUrls.blog}${formattedQuery}`);
+    // const response = await fetch(` https://test-ecomapi.justvy.in/blog/${formattedQuery}`);
 
     if (!response.ok) {
       console.error(`Failed to fetch blogs: ${response.status} ${response.statusText}`);
@@ -114,4 +114,4 @@ export const postGoogleLoginApi = async (payload: { id_token: string; vendor_id:
 // DEVICE LOGOUT API
 export const postDeviceLogoutApi = async (payload: { vendor_id: any; device_id: string; user_id: any }) => {
   return axios.post(ApiUrls.deviceLogout, payload);
-};
+};

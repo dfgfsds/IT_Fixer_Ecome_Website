@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { Home, Minus, Plus, Trash2, Loader2, X, CreditCard, Banknote, MapPin, Check, Phone } from "lucide-react";
 import ShopWithSideCart from "@/components/ShopWithSideCart";
@@ -11,7 +12,7 @@ import { useProducts } from "@/context/ProductsContext";
 import { useVendor } from "@/context/VendorContext";
 import { useUser } from "@/context/UserContext";
 import { updateCartitemsApi, deleteCartitemsApi, postApplyCouponApi, getAppliedCouponDataApi, deleteCouponApi, getAllCouponsApi, getAddressApi, postPaymentApi, postCODPaymentApi, getCartItemsProductSizesWithVariantsApi } from "@/api-endpoints/CartsApi";
-import { getDeliveryChargeApi, patchUserSelectAddressAPi, updateUserAPi } from "@/api-endpoints/authendication";
+import { getDeliveryChargeApi, getVendorDeliveryDetailsApi, patchUserSelectAddressAPi, updateUserAPi } from "@/api-endpoints/authendication";
 import { useQueryClient, InvalidateQueryFilters, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { handleApiError } from "@/lib/error-handler";
@@ -19,6 +20,34 @@ import OrderSuccessModal from "@/components/OrderSuccessModal";
 import { formatPrice } from "@/lib/utils";
 import { slugify } from "@/lib/slugify";
 import { getGuestCart, updateGuestCartQty, removeFromGuestCart, GUEST_CART_EVENT } from "@/lib/cartUtils";
+
+const loadRazorpayScript = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+        if (typeof window === "undefined") {
+            resolve(false);
+            return;
+        }
+        if ((window as any).Razorpay) {
+            resolve(true);
+            return;
+        }
+        const existingScript = document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]');
+        if (existingScript) {
+            existingScript.addEventListener("load", () => resolve(true));
+            existingScript.addEventListener("error", () => resolve(false));
+            if ((window as any).Razorpay) {
+                resolve(true);
+                return;
+            }
+        }
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+    });
+};
 
 export default function CartPage() {
     const router = useRouter();
@@ -56,7 +85,7 @@ export default function CartPage() {
         enabled: !!userId && !!vendorId,
     });
     const cartData = userId ? (detailedCartResponse?.data?.cart_items || []) : guestCart;
-    console.log("Detailed Cart Data:", cartData);
+    // console.log("Detailed Cart Data:", cartData);
 
     const subtotal = cartData.reduce((acc: number, item: any) =>
         acc + (Number(item?.product_details?.price || 0) * item.quantity), 0
@@ -200,6 +229,37 @@ export default function CartPage() {
         } catch (e) { toast.error(handleApiError(e)); }
     };
 
+    const getVendorDeliveryDetailsData: any =
+        useQuery({
+
+            queryKey: [
+                "getVendorDeliveryDetailsData",
+                vendorId,
+            ],
+
+            queryFn: () =>
+                getVendorDeliveryDetailsApi(
+                    `${vendorId}`
+                ),
+
+            enabled:
+                !!vendorId,
+        });
+
+
+    const RazorPayKey =
+        (getVendorDeliveryDetailsData?.data as any)
+            ?.data
+            ?.vendor_site_details
+            ?.payment_gateway_client_id ||
+        (getVendorDeliveryDetailsData?.data as any)
+            ?.vendor_site_details
+            ?.payment_gateway_client_id ||
+        (getVendorDeliveryDetailsData?.data as any)
+            ?.data
+            ?.payment_gateway_client_id ||
+        "rzp_live_T54l4Qqr3YEnsC";
+
     const handleCheckout = async (overridePhone?: string | React.MouseEvent) => {
         if (cartData.length === 0) return toast.error("Your cart is empty");
         if (!selectedAddressId) return toast.error("Please select a shipping address");
@@ -217,6 +277,14 @@ export default function CartPage() {
         setIsProcessing(true);
         try {
             if (paymentMethod === "PAY ON") {
+                // Ensure Razorpay SDK is loaded
+                const isLoaded = await loadRazorpayScript();
+                if (!isLoaded || typeof (window as any).Razorpay !== "function") {
+                    toast.error("Failed to load Razorpay payment gateway. Please check your internet connection.");
+                    setIsProcessing(false);
+                    return;
+                }
+
                 // Razorpay Flow
                 const res = await postPaymentApi("", {
                     user_id: userId,
@@ -228,25 +296,37 @@ export default function CartPage() {
                     payment_mode: "Prepaid",
                     total_amount: subtotal
                 });
-                const data = res.data?.data || res.data;
+                const data = res.data;
                 const options = {
-                    key: data.razorpay_key,
-                    amount: data.amount,
-                    currency: data.currency,
+                    key: RazorPayKey,
+                    amount: data?.order_details?.amount || Math.round(Number(data?.final_price || subtotal) * 100),
+                    currency: data?.order_details?.currency || "INR",
                     name: "FIXER SHOP",
-                    order_id: data.razorpay_order_id,
+                    description: `Order #${data?.payment_order_id || data?.payment_id || ""}`,
+                    order_id: data?.payment_order_id,
                     handler: function (response: any) {
-                        setOrderId(data.order_id);
-                        setPaymentSuccess(true);
+                        setOrderId(data?.order_id || data?.payment_id || data?.payment_order_id || data?.order_details?.id);
                         queryClient.invalidateQueries({ queryKey: ["getCartitemsData"] });
                         queryClient.invalidateQueries({ queryKey: ["getCartItemsDetailed"] });
                         queryClient.invalidateQueries({ queryKey: ["getAppliedCouponDataData"] });
                         queryClient.invalidateQueries({ queryKey: ["getDeliveryCharge"] });
+                        setTimeout(() => {
+                            setPaymentSuccess(true);
+                        }, 5000);
                     },
                     prefill: { name: user?.data?.name, email: user?.data?.email, contact: phoneToUse },
                     theme: { color: "#a6d719" },
+                    modal: {
+                        ondismiss: function () {
+                            setIsProcessing(false);
+                        }
+                    }
                 };
                 const paymentObject = new (window as any).Razorpay(options);
+                paymentObject.on("payment.failed", function (response: any) {
+                    setIsProcessing(false);
+                    toast.error(response?.error?.description || "Payment failed. Please try again.");
+                });
                 paymentObject.open();
             } else {
                 const res = await postCODPaymentApi("", {
@@ -330,6 +410,10 @@ export default function CartPage() {
     }
     return (
         <>
+            <Script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                strategy="lazyOnload"
+            />
             <ShopWithSideCart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
             <section className="vs-cart-wrapper py-5">
                 <div className="gt-breadcrumb-wrapper bg-cover" style={{ backgroundImage: "url('assets/img/breadcrumb.png')" }}>
