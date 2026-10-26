@@ -5,58 +5,60 @@ import Script from "next/script";
 /* ================= META (SEO) ================= */
 export async function generateMetadata(): Promise<Metadata> {
     return {
-        title:
-            "Custom PC Build in Chennai | Gaming & Workstation PCs | IT Fixer",
+        title: "Custom Gaming & Workstation PC Build in Chennai | IT Fixer",
 
         description:
-            "Looking for Custom PC Build in Chennai? Get gaming PCs, workstation builds & budget desktop systems with warranty at IT Fixer.",
+            "Build a custom PC in Chennai with IT Fixer. Explore gaming PCs, workstations and budget desktop builds with component choices and warranty support.",
 
         keywords: [
-            "Custom PC build in Chennai",
-            "gaming PC build Chennai",
-            "workstation PC build Chennai",
-            "budget gaming PC Chennai",
+            "custom PC builder Chennai",
             "custom desktop computer Chennai",
-            "IT Fixer custom PC",
-            "PC builder in Chennai",
-            "Intel AMD gaming PC Chennai",
-            "NVIDIA graphics PC Chennai",
-            "video editing workstation Chennai",
-            "RGB gaming PC Chennai",
-            "affordable gaming PC Chennai",
-            "Tamil Nadu PC delivery",
+            "gaming PC build Chennai",
+            "workstation PC Chennai",
+            "PC assembly Chennai",
+            "budget gaming PC Chennai",
+            "video editing PC Chennai",
+            "3D rendering PC Chennai",
+            "custom computer configuration",
+            "IT Fixer",
         ],
 
         alternates: {
             canonical: "https://www.itfixer.in/custom-pc-build",
         },
 
+        robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+
         openGraph: {
-            title:
-                "Custom PC Build in Chennai | Gaming & Workstation PCs | IT Fixer",
-            description:
-                "Build your dream gaming or workstation PC in Chennai with IT Fixer. High performance, genuine components & warranty.",
-            url: "https://www.itfixer.in/custom-pc-build",
             type: "website",
+            locale: "en_IN",
+            siteName: "IT Fixer",
+            title: "Custom Gaming & Workstation PC Build in Chennai | IT Fixer",
+            description:
+                "Build a custom PC in Chennai with IT Fixer. Explore gaming PCs, workstations and budget desktop builds with component choices and warranty support.",
+            url: "https://www.itfixer.in/custom-pc-build-in-chennai",
             images: [
                 {
                     url: "https://www.itfixer.in/assets/img/pc-build.webp",
                     width: 1200,
                     height: 630,
-                    alt: "Custom PC Build Chennai",
+                    alt: "Custom gaming PC and workstation builds by IT Fixer in Chennai",
                 },
             ],
         },
 
         twitter: {
             card: "summary_large_image",
-            title: "Custom PC Build in Chennai | IT Fixer",
+            title: "Custom Gaming & Workstation PC Build in Chennai | IT Fixer",
             description:
-                "Gaming PCs, workstation builds & budget desktops in Chennai with warranty.",
-            images: ["https://www.itfixer.in/assets/img/pc-build.webp"],
+                "Explore custom gaming PCs, workstations and budget desktop builds in Chennai with IT Fixer.",
+            images: [
+                {
+                    url: "https://www.itfixer.in/assets/img/pc-build.webp",
+                    alt: "Custom PC builds for gaming and professional workloads by IT Fixer",
+                },
+            ],
         },
-
-        robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
     };
 }
 
@@ -72,6 +74,7 @@ export default function Page() {
 
             {/* ================= FAQ SCHEMA ================= */}
             <Script
+                id="faq-schema"
                 type="application/ld+json"
                 strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
@@ -84,23 +87,23 @@ export default function Page() {
                                 name: "Why choose IT Fixer for custom PC build in Chennai?",
                                 acceptedAnswer: {
                                     "@type": "Answer",
-                                    text: "IT Fixer offers expert guidance, genuine components, professional assembly, stress testing, and reliable after-sales support in Chennai.",
+                                    text: "IT Fixer offers expert guidance, genuine components, professional assembly, and local support.",
                                 },
                             },
                             {
                                 "@type": "Question",
-                                name: "Can I customize my PC components?",
+                                name: "Can I choose my own components?",
                                 acceptedAnswer: {
                                     "@type": "Answer",
-                                    text: "Yes, you can choose processor, motherboard, RAM, storage, GPU, cooling system, cabinet, and power supply based on your requirements.",
+                                    text: "Yes, you can customize every component to suit your needs and budget.",
                                 },
                             },
                             {
                                 "@type": "Question",
-                                name: "How long does it take to build a custom PC?",
+                                name: "How long does it take to build a PC?",
                                 acceptedAnswer: {
                                     "@type": "Answer",
-                                    text: "Most custom PC builds are completed within 1 to 3 business days depending on configuration.",
+                                    text: "Most builds are completed within 1–3 days, depending on component availability and configuration.",
                                 },
                             },
                             {
@@ -108,7 +111,7 @@ export default function Page() {
                                 name: "Are custom PCs upgradeable?",
                                 acceptedAnswer: {
                                     "@type": "Answer",
-                                    text: "Yes, all custom-built PCs are fully upgradeable and future-ready.",
+                                    text: "Yes, upgrades are possible depending on component compatibility.",
                                 },
                             },
                             {
@@ -116,15 +119,15 @@ export default function Page() {
                                 name: "Do you provide warranty?",
                                 acceptedAnswer: {
                                     "@type": "Answer",
-                                    text: "Yes, all components come with manufacturer warranty and support.",
+                                    text: "Yes, components are covered by their respective manufacturer warranties.",
                                 },
                             },
                             {
                                 "@type": "Question",
-                                name: "Do you offer budget gaming PC builds?",
+                                name: "Can you build budget gaming PCs?",
                                 acceptedAnswer: {
                                     "@type": "Answer",
-                                    text: "Yes, IT Fixer offers affordable gaming PC builds optimized for performance.",
+                                    text: "Yes, we offer budget gaming PCs configured for your performance needs.",
                                 },
                             },
                         ],
@@ -132,8 +135,113 @@ export default function Page() {
                 }}
             />
 
-            {/* ================= LOCAL BUSINESS SCHEMA ================= */}
+            {/* ================= 1. COLLECTIONPAGE SCHEMA ================= */}
             <Script
+                id="collection-page-schema"
+                type="application/ld+json"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "CollectionPage",
+                        "@id": "https://www.itfixer.in/custom-pc-build#collection",
+                        url: "https://www.itfixer.in/custom-pc-build",
+                        name: "Custom PC Build Services in Chennai",
+                        description:
+                            "Explore custom gaming PCs, video editing PCs, streaming PCs, office PCs and workstation builds from IT Fixer in Chennai.",
+                        inLanguage: "en-IN",
+                        isPartOf: {
+                            "@type": "WebSite",
+                            name: "IT Fixer",
+                            url: "https://www.itfixer.in/",
+                        },
+                        about: {
+                            "@type": "Thing",
+                            name: "Custom PC Building",
+                        },
+                        mainEntity: {
+                            "@id": "https://www.itfixer.in/custom-pc-build#itemlist",
+                        },
+                    }),
+                }}
+            />
+
+            {/* ================= 2. ITEMLIST SCHEMA ================= */}
+            <Script
+                id="itemlist-schema"
+                type="application/ld+json"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "ItemList",
+                        "@id": "https://www.itfixer.in/custom-pc-build#itemlist",
+                        name: "Custom PC Build Options in Chennai",
+                        description:
+                            "Custom computer configurations for gaming, creative work, streaming and business use.",
+                        numberOfItems: 5,
+                        itemListElement: [
+                            {
+                                "@type": "ListItem",
+                                position: 1,
+                                name: "Gaming PC Build",
+                            },
+                            {
+                                "@type": "ListItem",
+                                position: 2,
+                                name: "Video Editing PC",
+                            },
+                            {
+                                "@type": "ListItem",
+                                position: 3,
+                                name: "Streaming PC",
+                            },
+                            {
+                                "@type": "ListItem",
+                                position: 4,
+                                name: "Office PC",
+                            },
+                            {
+                                "@type": "ListItem",
+                                position: 5,
+                                name: "3D Rendering PC",
+                            },
+                        ],
+                    }),
+                }}
+            />
+
+            {/* ================= 3. BREADCRUMB SCHEMA ================= */}
+            <Script
+                id="breadcrumb-schema"
+                type="application/ld+json"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BreadcrumbList",
+                        "@id": "https://www.itfixer.in/custom-pc-build#breadcrumb",
+                        itemListElement: [
+                            {
+                                "@type": "ListItem",
+                                position: 1,
+                                name: "Home",
+                                item: "https://www.itfixer.in/",
+                            },
+                            {
+                                "@type": "ListItem",
+                                position: 2,
+                                name: "Custom PC Build in Chennai",
+                                item: "https://www.itfixer.in/custom-pc-build",
+                            },
+                        ],
+                    }),
+                }}
+            />
+
+            {/* ================= LOCAL BUSINESS / SERVICE SCHEMA ================= */}
+            <Script
+                id="service-schema"
                 type="application/ld+json"
                 strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
@@ -141,7 +249,8 @@ export default function Page() {
                         "@context": "https://schema.org",
                         "@type": "Service",
                         name: "Custom PC Build in Chennai",
-                        serviceType: "Custom Gaming PC Build, High-Performance PC Assembly, Workstation PC Build",
+                        serviceType:
+                            "Custom Gaming PC Build, High-Performance PC Assembly, Workstation PC Build",
                         provider: {
                             "@type": "LocalBusiness",
                             name: "IT Fixer",
@@ -152,7 +261,8 @@ export default function Page() {
                                 "IT Fixer is the best gaming PC shop in Chennai offering custom gaming PC builds, workstation PCs, 4K gaming desktops, RGB builds, and high-performance computer setups.",
                             address: {
                                 "@type": "PostalAddress",
-                                streetAddress: "New No.29, Old No.31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp. Kasi Theatre), Ashok Nagar",
+                                streetAddress:
+                                    "New No.29, Old No.31 & 32, Anjugam Nagar, 1st Street, Jafferkhanpet (Opp. Kasi Theatre), Ashok Nagar",
                                 addressLocality: "Chennai",
                                 addressRegion: "Tamil Nadu",
                                 postalCode: "600083",
