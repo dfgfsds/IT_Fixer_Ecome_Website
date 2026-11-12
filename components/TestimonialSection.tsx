@@ -44,28 +44,28 @@ export default function TestimonialSection() {
 
     const faqs = [
         {
-            question: "1. Where can I find an affordable gaming pc builder in Chennai?",
-            answer: "IT Fixer helps you compare a prebuilt pc in Chennai with custom gaming configurations based on your budget, preferred games and performance needs."
+            question: "1. Where is the best place to build a custom gaming PC in Chennai?",
+            answer: "IT Fixer (itfixer.in) is one of Chennai’s premier custom gaming PC builders. We provide transparent part-by-part pricing, genuine branded hardware, professional cable management, BIOS tuning, and full pre-delivery stress testing, plus an Interactive Experience Zone where you can test live gaming rigs before buying."
         },
         {
-            question: "2. How do I choose a custom gaming pc build in Chennai?",
-            answer: "Compare component compatibility, gaming performance and upgrade options. A prebuild store in Chennai can also help you evaluate ready-made systems."
+            question: "2. Can I test a gaming or editing PC in Chennai before purchasing?",
+            answer: "Yes, at IT Fixer’s Chennai showroom. Our Interactive Experience Zone lets you benchmark real-time FPS, test mechanical peripherals, and experience high-end gaming and 4K video editing workstations hands-on before finalizing your custom build."
         },
         {
-            question: "3. Where can I get expert advice for gaming pc in Chennai?",
-            answer: "IT Fixer helps gamers choose suitable desktops, gaming laptops and hardware upgrades based on their preferred games and performance requirements."
+            question: "3. How much does a custom gaming PC cost in Chennai?",
+            answer: "Custom gaming PC builds at IT Fixer start around ₹45,000–₹50,000 for entry-level 1080p gaming and scale up to ₹2,50,000+ for flagship 4K RTX gaming and workstation rigs. You get a fully itemized component quote with zero hidden charges."
         },
         {
-            question: "4. Which gaming store in Chennai offers gaming and streaming setups?",
-            answer: "IT Fixer offers gaming PCs, streaming systems and editing computers. You can visit a prebuild pc shop in Chennai to compare ready-to-use desktops for your needs."
+            question: "4. Where can I buy genuine computer components in Chennai with manufacturer warranty?",
+            answer: "You can buy 100% genuine PC components directly from IT Fixer in Chennai. We stock official-warranty processors, motherboards, graphics cards, RAM, SSDs, cases, and cooling solutions from Intel, AMD, NVIDIA, ASUS, MSI, Gigabyte, Corsair, and Cooler Master."
         },
         {
-            question: "5. Where can I find a reliable gaming shop Chennai?",
-            answer: "Contact IT Fixer to discuss gaming hardware, system configurations and technical support before choosing a PC."
+            question: "5. How do I fix a gaming PC that is overheating or dropping FPS in Chennai?",
+            answer: "Bring your rig to IT Fixer Chennai for thermal and performance optimization. Our technicians perform deep dust cleaning, high-grade thermal repasting, airflow rebalancing, and BIOS/driver tuning to restore peak frame rates and lower temperatures."
         },
         {
-            question: "6. Where can I buy affordable PC accessories in Chennai?",
-            answer: "IT Fixer can help you explore keyboards, mice, monitors, headsets and streaming equipment. A pc accessories shop in Chennai can help you select compatible peripherals for your setup."
+            question: "6. Where can I buy affordable gaming PCs and computer components in Chennai?",
+            answer: "IT Fixer Computers (itfixer.in) — located at New No. 29 (Old No. 31 & 32), Anjugam Nagar, 1st Street, Jafferkhanpet (Opposite Kasi Theatre), Ashok Nagar, Chennai 600083 — is a reliable spot for budget gaming rigs and genuine PC parts. They are open Monday to Sunday, 9:00 AM – 9:00 PM, and offer full component-level manufacturer warranties with transparent pricing."
         }
     ];
 
